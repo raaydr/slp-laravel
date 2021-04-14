@@ -114,7 +114,7 @@
               <div class="carousel-content">
                 <h2>Mau Jadi Penulis Terkenal ?</h2>
                 
-                <a href="#featured-services" class="btn-get-started scrollto">Mau dong tulisannya</a>
+                
               </div>
             </div>
           </div>
@@ -305,7 +305,7 @@
 
         <header class="section-header">
           <h3>Facts</h3>
-          <p>Jumlah Pendaftar pada Beasiswa Batch Pertama kemarin</p>
+          <p>Jumlah Pendaftar pada Beasiswa Batch Pertama</p>
         </header>
 
         <div class="row counters">
@@ -585,7 +585,7 @@
 
           <div class="testimonial-item">
             <img src="{{asset('develop')}}/img/tes3.png" class="testimonial-img" alt="">
-            <h3>Sarah Muthiah Wildad</h3>
+            <h3>Sarah Muthiah Widad</h3>
             <h4>Founder Komunitas Aksi Kebaikan #SmokeFreeCampus UIN Jakarta</h4>
             <p>
               <img src="{{asset('develop')}}/img/quote-sign-left.png" class="quote-sign-left" alt="">
@@ -622,7 +622,6 @@
 
         <div class="section-header">
           <h3>Contact Us</h3>
-          <p>Maaf Kalau ada kesalahan ini masih nyoba2 cuma buat hiburan, karena klo gk dibuat hiburan males ngerjainnya</p>
         </div>
 
         <div class="row contact-info">
