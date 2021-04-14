@@ -36,7 +36,7 @@ class PendaftarController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         $biodata = DB::table('biodata')->where('user_id', $id)->first();
 
-        return view('user\dashboard', compact('title', 'user', 'biodata'));
+        return view('user.dashboard', compact('title', 'user', 'biodata'));
     }
 
     public function eliminasi()
@@ -46,7 +46,7 @@ class PendaftarController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         $biodata = DB::table('biodata')->where('user_id', $id)->first();
 
-        return view('user\gugur', compact('title', 'user', 'biodata'));
+        return view('user.gugur', compact('title', 'user', 'biodata'));
     }
     public function seleksi1()
     {
@@ -55,7 +55,7 @@ class PendaftarController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         $biodata = DB::table('biodata')->where('user_id', $id)->first();
 
-        return view('user\seleksi1', compact('title', 'user', 'biodata'));
+        return view('user.seleksi1', compact('title', 'user', 'biodata'));
     }
 
     public function seleksiPertama(Request $request){
@@ -98,7 +98,7 @@ class PendaftarController extends Controller
         $seleksi_1->save();
      
 
-        return redirect('/pendaftar/seleksi-pertama')->with('pesan', 'Upload Berhasil');
+        return redirect('pendaftar.seleksi-pertama')->with('pesan', 'Upload Berhasil');
     }
 }
     

@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/home', function () {
+Route::get('/awal', function () {
     return view('compro');
 });
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/a', [App\Http\Controllers\AdminController::class, 'coba']);
 Route::get('/b', [App\Http\Controllers\PendaftarController::class, 'insertSeleksi1']);
@@ -33,17 +33,17 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/coba', 'AdminController@coba');
+	Route::get('/coba', 'AdminController@coba')->name('admin.coba');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/dashboard/userProfile/{user_id}', 'AdminController@userProfile');
+	Route::get('/dashboard/userProfile/{user_id}', 'AdminController@userProfile')->name('admin.userprofile');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/seleksi-pertama', 'AdminController@seleksi1');
+	Route::get('/seleksi-pertama', 'AdminController@seleksi1')->name('admin.seleksi1');
     });
 });
 

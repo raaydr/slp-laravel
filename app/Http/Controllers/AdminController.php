@@ -27,7 +27,7 @@ class AdminController extends Controller
         $title = 'coba Admin';
         $users = User::where('level', 1)->get();
 
-        return view('admin\coba', compact('title', 'users'));
+        return view('admin.coba', compact('title', 'users'));
     }
 
     public function index()
@@ -35,7 +35,7 @@ class AdminController extends Controller
         $title = 'Dashboard Admin';
         $users = User::where('level', 1)->get();
 
-        return view('admin\dashboard', compact('title', 'users'));
+        return view('admin.dashboard', compact('title', 'users'));
     }
 
     public function seleksi1()
@@ -44,7 +44,7 @@ class AdminController extends Controller
         $seleksiPertama = seleksiPertama::all();
         $users = User::where('level', 2)->get();
 
-        return view('admin\seleksi1', compact('title', 'users'));
+        return view('admin.seleksi1', compact('title', 'users'));
     }
     public function seleksi2()
     {
@@ -52,7 +52,7 @@ class AdminController extends Controller
         $seleksiPertama = seleksiPertama::all();
         $users = User::where('level', 1)->get();
 
-        return view('admin\seleksi2', compact('title', 'users'));
+        return view('admin.seleksi2', compact('title', 'users'));
     }
 
     public function userProfile($user_id)
@@ -64,7 +64,7 @@ class AdminController extends Controller
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
 
-        return view('admin\userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
     }
 
     public function seleksi1_lulus($user_id)
@@ -76,7 +76,7 @@ class AdminController extends Controller
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
-        return view('admin\userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
         //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
     }
 
@@ -90,7 +90,7 @@ class AdminController extends Controller
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
-        return view('admin\userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
         //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
     }
 
@@ -103,7 +103,7 @@ class AdminController extends Controller
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
-        return view('admin\userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
         //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
     }
 
@@ -117,7 +117,7 @@ class AdminController extends Controller
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
-        return view('admin\userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
         //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
     }
 }
