@@ -272,7 +272,10 @@
                           <h3 class="timeline-header"><a href="#">Pembukaan Pendaftaran</a></h3>
 
                           <div class="timeline-body">
-                            Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu coba login dan join link WA kita !!!
+                            Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu coba <b>LOGIN</b>  dan <b>join link grup WA kita</b> !!!
+                            <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ"><b>Join disini</b></a>
+                            <br>Kalau Grup WA nya sudah penuh masih ada Grup WA lainnya <a href="https://chat.whatsapp.com/ElhCuc6irdn2HtGNnoJAMf"><b>Disini</b></a> dan <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct"><b>Disini</b></a>
+                            Cukup Join salah satu grup WA saja dari ketiga grup tersebut
                           </div>
                         </div>
                       </div>
