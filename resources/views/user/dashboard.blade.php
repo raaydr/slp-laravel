@@ -298,7 +298,7 @@
                           <h3 class="timeline-header border-0"><a href="#">Seleksi Pertama</a>
                           </h3>
                           <div class="timeline-body">
-                            Selanjutnya bagi yang lulus dari seleksi pendaftaran(Pengungumannya dapat di check saat login di web ini) akan masuk ke tahap selanjutnya yaitu melakukan semua challenge yang diberikan. Challenge tersebut merupakan writing,bussines dan video.
+                            Selanjutnya bagi yang lulus dari seleksi pendaftaran(Pengungumannya dapat di check saat login di web ini) akan masuk ke tahap selanjutnya yaitu melakukan semua challenge yang diberikan. Challenge tersebut merupakan writing, bussines dan video.
                           </div>
                         </div>
                       </div>
@@ -321,7 +321,7 @@
                           <h3 class="timeline-header"><a href="#">Pengisian Form Challenge</a></h3>
 
                           <div class="timeline-body">
-                            Jangan lupa untuk mengisi form sebagai laporan kamu menyelasaikan challenge sebelumnnya.
+                            Jangan lupa untuk mengisi form sebagai laporan kamu menyelasaikan challenge sebelumnya.
                           </div>
                         </div>
                       </div>
