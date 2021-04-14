@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class userPDF extends Model
 {
    use HasFactory;
-   protected $table = 'userpdf';
+   protected $table = 'userPDF';
     public function User()
 	{
 		return $this->belongsTo('App\Models\User');
