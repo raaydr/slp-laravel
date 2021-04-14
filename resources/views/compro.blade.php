@@ -58,7 +58,7 @@
           <li><a href="#services">Pendaftaran</a></li>
           <li><a href="#portfolio">News</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="/login">Login</a></li>
+          <li><a href="/">Login</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
