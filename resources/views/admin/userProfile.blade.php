@@ -491,23 +491,6 @@
                       <div class="user-block">
                         
                         <span class="username">
-                          <a href="#">Apa yang kamu pahami tentang "Leadership" ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->organisasi}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
                           <a href="#">Pernahkan kamu aktif terlibat dalam sebuah organisasi ? </a>
                         
                         </span>
