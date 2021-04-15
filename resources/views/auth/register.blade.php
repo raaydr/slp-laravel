@@ -193,10 +193,6 @@
                                     <input type="radio" id="customRadioInline15" name="minatprogram" class="custom-control-input" value="Creative Writing">
                                     <label class="custom-control-label" for="customRadioInline15">Creative Writing</label>
                                 </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline16" name="minatprogram" class="custom-control-input" value="Yang lain">
-                                    <label class="custom-control-label" for="customRadioInline16">Yang lain</label>
-                                </div>
                             </div>
                         </div>
 

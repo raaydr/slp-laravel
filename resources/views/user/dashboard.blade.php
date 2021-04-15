@@ -272,10 +272,10 @@
                           <h3 class="timeline-header"><a href="#">Pembukaan Pendaftaran</a></h3>
 
                           <div class="timeline-body">
-                            Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu coba <b>LOGIN</b>  dan <b>join link grup WA kita</b> !!!
+                            Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu <b>LOGIN</b> dan <b>join link grup WA</b>
                             <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ"><b>Join disini</b></a>
                             <br>Kalau Grup WA nya sudah penuh masih ada Grup WA lainnya <a href="https://chat.whatsapp.com/ElhCuc6irdn2HtGNnoJAMf"><b>Disini</b></a> dan <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct"><b>Disini</b></a>
-                            Cukup Join salah satu grup WA saja dari ketiga grup tersebut
+                            <br>Cukup Join salah satu grup WA saja dari ketiga grup tersebut
                           </div>
                         </div>
                       </div>
@@ -298,7 +298,7 @@
                           <h3 class="timeline-header border-0"><a href="#">Seleksi Pertama</a>
                           </h3>
                           <div class="timeline-body">
-                            Selanjutnya bagi yang lulus dari seleksi pendaftaran(Pengungumannya dapat di check saat login di web ini) akan masuk ke tahap selanjutnya yaitu melakukan semua challenge yang diberikan. Challenge tersebut merupakan writing, bussines dan video.
+                          Selanjutnya bagi yang lulus dari seleksi pendaftaran, akan masuk ke tahap selanjutnya yaitu melakukan semua challenge yang diberikan. Writing, Bussines, dan Video Challenge. (Pengumuman dapat di check saat login di web ini).
                           </div>
                         </div>
                       </div>
@@ -321,7 +321,7 @@
                           <h3 class="timeline-header"><a href="#">Pengisian Form Challenge</a></h3>
 
                           <div class="timeline-body">
-                            Jangan lupa untuk mengisi form sebagai laporan kamu menyelasaikan challenge sebelumnya.
+                          Jangan lupa untuk mengisi form sebagai laporan kamu telah menyelesaikan challenge sebelumnya.
                           </div>
                         </div>
                       </div>
@@ -342,7 +342,7 @@
                           <h3 class="timeline-header"><a href="#">In Depth Interview</a></h3>
 
                           <div class="timeline-body">
-                            Bagi yang lulus pada tahap challenge akan lanjut ke tahap interview secara offline
+                          Bagi yang lulus pada tahap challenge akan lanjut ke tahap interview yang dilaksanakan secara offline.
                           </div>
                         </div>
                       </div>
@@ -373,7 +373,7 @@
                           <h3 class="timeline-header"><a href="#">Pengunguman Tahap Akhir</a></h3>
 
                           <div class="timeline-body">
-                            Setelah melewati semua tahap seleksi akan diumumkan apakah kamu lulus pada tahap ini, Semoga Mendapatkan yang terbaik
+                          Setelah melewati semua tahapan seleksi akan diumumkan hasil akhir penerima beasiswa SLP, Semoga mendapatkan hasil yang terbaik!
                           </div>
                         </div>
                       </div>
