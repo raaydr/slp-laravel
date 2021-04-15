@@ -258,27 +258,27 @@
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-paper-outline"></i></div>
             <h4 class="title"><a href="">Langkah Kedua</a></h4>
-            <p class="description">Bila Lolos maka akan lanjut ke Seleksi Tahap Pertama tanggal 22-25 April 2021 </p>
+            <p class="description">Bila Lolos maka akan lanjut ke Seleksi Tahap Pertama tanggal 22-25 April 2021. </p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-people-outline"></i></div>
             <h4 class="title"><a href="">Langkah Ketiga </a></h4>
-            <p class="description">Jangan lupa mengisi form Seleksi Tahap Pertama, 25 april-2 Mei</p>
+            <p class="description">Jangan lupa mengisi form Seleksi Tahap Pertama, tanggal 25 april-2 Mei 2021.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-body-outline"></i></div>
             <h4 class="title"><a href="">Langkah Keempat</a></h4>
-            <p class="description">Selanjutnya jika lolos akan masuk ke Seleksi Tahap Kedua yaitu in depth Interview. Pada tanggal 22-23 mei</p>
+            <p class="description">Selanjutnya jika lolos akan masuk ke Seleksi Tahap Kedua yaitu in depth Interview. Pada tanggal 22-23 Mei 2021.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-heart-outline"></i></div>
             <h4 class="title"><a href="">Langkah Kelima</a></h4>
-            <p class="description">Pengunguman akhir 28 mei</p>
+            <p class="description">Pengumuman akhir tanggal 28 Mei 2021.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-circle-outline"></i></div>
             <h4 class="title"><a href="">Langkah Terakhir</a></h4>
-            <p class="description">Stadium General 5 Juni.</p>
+            <p class="description">Stadium General tanggal 5 Juni 2021.</p>
           </div>
 
         </div>
@@ -292,8 +292,8 @@
     <section id="call-to-action" class="wow fadeIn">
       <div class="container text-center">
         <h3>Gabung di Smart Leader Preneur</h3>
-        <p> Langsung daftar Kuy!!!!.</p>
-        <a class="cta-btn" href="/register" target="_blank">Meluncur Gan !!!</a>
+        <p> Langsung daftar yuk!</p>
+        <a class="cta-btn" href="/register" target="_blank">Daftar Sekarang</a>
       </div>
     </section><!-- #call-to-action -->
 
@@ -561,7 +561,7 @@
           <div class="testimonial-item">
             <img src="{{asset('develop')}}/img/tes1.png" class="testimonial-img" alt="">
             <h3>Hanifah Khoirunisa</h3>
-            <h4>founder komunitas @grubooks.id</h4>
+            <h4>Founder komunitas @grubooks.id</h4>
             <p>
               <img src="{{asset('develop')}}/img/quote-sign-left.png" class="quote-sign-left" alt="">
               Menjadi bagian dari keluarga SLP adalah nikmat terbesar yang membuatku bisa bertemu dengan orang-orang hebat dan keren!<br>
@@ -574,10 +574,10 @@
           <div class="testimonial-item">
             <img src="{{asset('develop')}}/img/tes2.png" class="testimonial-img" alt="">
             <h3>Krisna Priyanto</h3>
-            <h4>founder @grubooks.id dan @ngajisantaiyuk.id</h4>
+            <h4>Founder @grubooks.id dan @ngajisantaiyuk.id</h4>
             <p>
               <img src="{{asset('develop')}}/img/quote-sign-left.png" class="quote-sign-left" alt="">
-              6 bulan mengikuti SLP Alhamdulillah banget!N<br>
+              6 bulan mengikuti SLP Alhamdulillah banget!<br>
               Nggak cuma teori, tapi langsung action buat mencapai target ditemani kakak fasil yang kece dan temen-temen yang menginsiprasi
               <img src="{{asset('develop')}}/img/quote-sign-right.png" class="quote-sign-right" alt="">
             </p>
@@ -598,7 +598,7 @@
           <div class="testimonial-item">
             <img src="{{asset('develop')}}/img/tes4.png" class="testimonial-img" alt="">
             <h3>Adzkia</h3>
-            <h4>Penemu @mosafeer</h4>
+            <h4>Founder @mosafeer</h4>
             <p>
               <img src="{{asset('develop')}}/img/quote-sign-left.png" class="quote-sign-left" alt="">
               Kondisi pandemi membuat mayoritas pelajar tidak tahu cara mengisi waktu luang.<br>
@@ -646,7 +646,7 @@
             <div class="contact-email">
               <i class="ion-ios-email-outline"></i>
               <h3>Email</h3>
-              <p><a href="#">slpindonesia@gmail.com</a></p>
+              <p><a href="#">slpyouthcareid@gmail.com</a></p>
             </div>
           </div>
 
