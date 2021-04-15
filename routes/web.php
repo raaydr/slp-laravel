@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/awal', function () {
+Route::get('/program-beasiswa', function () {
     return view('compro');
 });
 

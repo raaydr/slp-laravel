@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('develop')}}/img/slp.png" rel="icon">
 </head>
 <body>
     <div id="app">

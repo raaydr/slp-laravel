@@ -9,7 +9,7 @@
 
   <!-- Favicons -->
   
-  <link href="{{asset('develop')}}/img/a.png" rel="icon">
+  <link href="{{asset('develop')}}/img/slp.png" rel="icon">
   <link href="{{asset('develop')}}/img/logo.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -123,7 +123,7 @@
             <div class="carousel-background"><img src="{{asset('develop')}}/img/intro-carousel/5.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2>Mau Jadi Entrepreneur ?</h2>
+                <h2>Mau Jadi Seorang Entrepreneur ?</h2>
                 
                 
               </div>
@@ -170,11 +170,11 @@
           <div class="col-md-4 wow fadeInUp" >
             <div class="about-col">
               <div class="img">
-                <img src="{{asset('develop')}}/img/about-vision.jpg" alt="" class="img-fluid">
+                <img src="{{asset('develop')}}/img/visi.jpg" alt="" class="img-fluid">
                 <div class="icon"><i class="ion-ios-eye-outline"></i></div>
               </div>
               <h2 class="title"><a href="#">Visi Kami</a></h2>
-              <p>
+              <p class="text-justify">
                 <b>Terbentuknya generasi muda yang mandiri, produktif, dan berdaya guna.</b>
               </p>
             </div>
@@ -193,11 +193,11 @@
           <div class="col-md-4 wow fadeInUp">
             <div class="about-col">
               <div class="img">
-                <img src="{{asset('develop')}}/img/yk.jpg" alt="" class="img-fluid">
+                <img src="{{asset('develop')}}/img/misi.jpg" alt="" class="img-fluid">
                 <div class="icon"><i class="ion-ios-list-outline"></i></div>
               </div>
               <h2 class="title"><a href="#">Misi Kami</a></h2>
-              <p>
+              <p class="text-justify">
                 <b>Mengedukasi setiap pemuda tentang pentingnya berwirausaha agar memiliki jiwa entrepreneur sehingga tercipta generasi yang mandiri.</b>
               </p>
             </div>
@@ -206,11 +206,11 @@
           <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="about-col">
               <div class="img">
-                <img src="{{asset('develop')}}/img/ykk.jpg" alt="" class="img-fluid">
+                <img src="{{asset('develop')}}/img/misi2.jpg" alt="" class="img-fluid">
                 <div class="icon"><i class="ion-ios-list-outline"></i></div>
               </div>
               <h2 class="title"><a href="#">Misi Kami</a></h2>
-              <p>
+              <p class="text-justify">
                 <b>Melakukan pendampingan dan pengarahan terkait potensi setiap pemuda terutama di bidang public speaking, kewirausahaan, dan kepenulisan.⁣</b>
               </p>
             </div>
@@ -219,12 +219,12 @@
           <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
             <div class="about-col">
               <div class="img">
-                <img src="{{asset('develop')}}/img/ykkk.jpg" alt="" class="img-fluid">
+                <img src="{{asset('develop')}}/img/misi3.jpg" alt="" class="img-fluid">
                 <div class="icon"><i class="ion-ios-list-outline"></i></div>
               </div>
               <h2 class="title"><a href="#">Misi Kami</a></h2>
-              <p>
-                <b>Membimbing setiap pemuda untuk menghasilkan karya sesuai potensinya seperti merilis buku, melakukan roadshow training motivasi di berbagai ekolah atau instansi, dan mengikuti education trip ke luar negeri. ⁣</b>
+              <p class="text-justify">
+                <b>Membimbing setiap pemuda untuk menghasilkan karya sesuai potensinya seperti merilis buku, melakukan roadshow training motivasi di berbagai sekolah atau instansi, dan mengikuti education trip ke luar negeri. ⁣</b>
               </p>
             </div>
           </div>
