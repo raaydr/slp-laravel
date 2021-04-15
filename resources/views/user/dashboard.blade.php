@@ -273,9 +273,9 @@
 
                           <div class="timeline-body">
                             Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu <b>LOGIN</b> dan <b>join link grup WA</b>
-                            <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ"><b>Join disini</b></a>
-                            <br>Kalau Grup WA nya sudah penuh masih ada Grup WA lainnya <a href="https://chat.whatsapp.com/ElhCuc6irdn2HtGNnoJAMf"><b>Disini</b></a> dan <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct"><b>Disini</b></a>
-                            <br>Cukup Join salah satu grup WA saja dari ketiga grup tersebut
+                            <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ" target=”_blank”><b>Join disini</b></a>
+                            <br>Jika Grup WA sudah penuh, join Grup WA lainnya <a href="https://chat.whatsapp.com/ElhCuc6irdn2HtGNnoJAMf" target=”_blank”><b>Disini</b></a> dan <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct" target=”_blank”><b>Disini</b></a>
+                            <br>Cukup join salah satu grup WA saja dari ketiga grup tersebut
                           </div>
                         </div>
                       </div>
@@ -342,7 +342,7 @@
                           <h3 class="timeline-header"><a href="#">In Depth Interview</a></h3>
 
                           <div class="timeline-body">
-                          Bagi yang lulus pada tahap challenge akan lanjut ke tahap interview yang dilaksanakan secara offline.
+                          Bagi yang lulus pada tahap challenge, akan lanjut ke tahap interview yang dilaksanakan secara offline.
                           </div>
                         </div>
                       </div>
@@ -370,10 +370,10 @@
                         <div class="timeline-item">
                           
 
-                          <h3 class="timeline-header"><a href="#">Pengunguman Tahap Akhir</a></h3>
+                          <h3 class="timeline-header"><a href="#">Pengumuman Tahap Akhir</a></h3>
 
                           <div class="timeline-body">
-                          Setelah melewati semua tahapan seleksi akan diumumkan hasil akhir penerima beasiswa SLP, Semoga mendapatkan hasil yang terbaik!
+                          Setelah melewati semua tahapan seleksi, akan diumumkan hasil akhir penerima beasiswa SLP. Semoga mendapatkan hasil yang terbaik!
                           </div>
                         </div>
                       </div>

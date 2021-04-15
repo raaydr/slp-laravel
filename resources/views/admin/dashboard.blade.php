@@ -183,6 +183,7 @@
                                                 <th>Nama</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Domisili</th>
+                                                <th>Alamat Lengkap</th>
                                                 <th>Seleksi Berkas</th>
                                                 <th>Seleksi Challenge</th>
                                                 <th>Seleksi Interview</th>
@@ -198,6 +199,7 @@
                                                 <td>{{ $user->Biodata->nama }}</td>
                                                 <td>{{ $user->Biodata->tanggal_lahir }}</td>
                                                 <td>{{ $user->Biodata->domisili }}</td>
+                                                <td>{{ $user->Biodata->alamat_domisili }}</td>
                                                 <td>{{ $user->Biodata->seleksi_berkas }}</td>
                                                 <td>{{ $user->Biodata->seleksi_pertama }}</td>
                                                 <td>{{ $user->Biodata->seleksi_kedua }}</td>
@@ -217,6 +219,7 @@
                                                 <th>Nama</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Domisili</th>
+                                                <th>Alamat Lengkap</th>
                                                 <th>Seleksi Berkas</th>
                                                 <th>Seleksi Challenge</th>
                                                 <th>Seleksi Interview</th>

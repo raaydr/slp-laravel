@@ -43,7 +43,7 @@ class HomeController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         $biodata = DB::table('biodata')->where('user_id', $id)->first();
 
-        return view('user\gugur', compact('title', 'user', 'biodata'));
+        return view('user.gugur', compact('title', 'user', 'biodata'));
                 
                 break;   
                 default:
