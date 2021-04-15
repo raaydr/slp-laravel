@@ -705,7 +705,7 @@
             Kec. Sukmajaya, Kota Depok,<br>
             Jawa Barat 16417 <br>
               <strong>Phone:</strong> +62 812-2015-8656<br>
-              <strong>Email:</strong> slpindonesia@gmail.com<br>
+              <strong>Email:</strong> slpyouthcareid@gmail.com<br>
             </p>
 
             <div class="social-links">
@@ -725,7 +725,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>2021</strong>. 
+        &copy; <strong>SLP 2021</strong>. 
       </div>
       <div class="credits">
         <!--
