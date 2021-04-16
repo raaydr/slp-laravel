@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'tanggal_lahir' => 'required',
             'domisili' => 'required',
             'alamat_domisili' => 'required|string',
-            'phonenumber' => 'required|string|max:12',
+            'phonenumber' => 'required|string|max:13',
             
             'aktivitas' => 'required',
             'minatprogram' => 'required',

@@ -256,17 +256,17 @@
             <p class="description"> Pendaftaran dan seleksi pemberkasan dimulai dari tanggal 15-22 April 2021. Akses Link pendaftaran <a href="/register" target="_blank"><b>disini</b></a>.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
-            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
+            <div class="icon"><i class="ion-ios-body-outline"></i></div>
             <h4 class="title"><a href="">Langkah Kedua</a></h4>
             <p class="description">Bila Lolos maka akan lanjut ke Seleksi Tahap Pertama tanggal 22-25 April 2021. </p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
-            <div class="icon"><i class="ion-ios-people-outline"></i></div>
+            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
             <h4 class="title"><a href="">Langkah Ketiga </a></h4>
             <p class="description">Jangan lupa mengisi form Seleksi Tahap Pertama, tanggal 25 april-2 Mei 2021.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div class="icon"><i class="ion-ios-body-outline"></i></div>
+            <div class="icon"><i class="ion-ios-people-outline"></i></div>
             <h4 class="title"><a href="">Langkah Keempat</a></h4>
             <p class="description">Selanjutnya jika lolos akan masuk ke Seleksi Tahap Kedua yaitu in depth Interview. Pada tanggal 22-23 Mei 2021.</p>
           </div>
@@ -280,6 +280,34 @@
             <h4 class="title"><a href="">Langkah Terakhir</a></h4>
             <p class="description">Stadium General tanggal 5 Juni 2021.</p>
           </div>
+          <div class="col-lg-2 col-md-2 box wow bounceInUp" data-wow-delay="0.6s" data-wow-duration="1.4s">
+            
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.6s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-albums-outline"></i></div>
+            <h4 class="title"><a href="">Persyaratan</a></h4>
+            <p class="description ion-ios-albums"> <b>Muslim/Muslimah</b></p>
+            <p class="description ion-ios-albums"> <b>Domisili Jabodetabek</b></p>
+            <p class="description ion-ios-albums"> <b>Usia 17-22 tahun</b></p>
+            <p class="description ion-ios-albums"> <b>Aktif Bersosial</b></p>
+            <p class="description ion-ios-albums"> <b>Belum menikah</b></p>
+            <p class="description ion-ios-albums"> <b>Bersedia mengikuti seleksi</b></p>
+              
+            
+          </div>
+          <div class="col-lg-6 col-md-6 box wow bounceInUp" data-wow-delay="0.6s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-plus-outline"></i></div>
+            <h4 class="title"><a href="">Benefit</a></h4>
+                <p class="description ion-ios-plus"> <b>Pembinaan selama 6 bulan</b></p>
+                <p class="description ion-ios-plus"> <b>Education Trip Malaysia-Singapore</b></p>
+                <p class="description ion-ios-plus"> <b>Dibimbing 11 Mentor Berpengalaman</b></p>
+                <p class="description ion-ios-plus"> <b>Coaching Materi Self-Development, Creative Writing, Public Speaking, dan Digital Marketing</b></p>
+                <p class="description ion-ios-plus"> <b>Pengalaman Merilis Buku</b></p>
+              
+            
+          </div>
+          
+          
 
         </div>
 
