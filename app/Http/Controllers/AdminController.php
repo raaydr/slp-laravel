@@ -48,9 +48,9 @@ class AdminController extends Controller
     }
     public function seleksi2()
     {
-        $title = 'Seleksi Pertama Admin';
+        $title = 'Gagal Login';
         $seleksiPertama = seleksiPertama::all();
-        $users = User::where('level', 1)->get();
+        $users = User::where('level', 3)->get();
 
         return view('admin.seleksi2', compact('title', 'users'));
     }

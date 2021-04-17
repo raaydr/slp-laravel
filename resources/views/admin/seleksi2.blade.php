@@ -180,15 +180,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>status</th>
-                                                <th>Seleksi 1</th>
-                                                <th>Seleksi 2</th>
-                                                <th>Seleksi 3</th>
-                                                <th>Seleksi 4</th>
-                                                <th>Seleksi 5</th>
-                                                <th>Seleksi 6</th>
-                                                <th>foto</th>
+                                                <th>email</th>
+                                                <th>create</th>
+                                                <th>update</th>
+                                                
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -197,32 +193,23 @@
                                             <?php $i++ ;?>
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $user->Biodata->nama }}</td>
-                                                <td>{{ $user->Biodata->status }}</td>
-                                                <td>{{ $user->Biodata->seleksi_1 }}</td>
-                                                <td>{{ $user->Biodata->seleksi_2 }}</td>
-                                                <td>{{ $user->Biodata->seleksi_3 }}</td>
-                                                <td>{{ $user->Biodata->seleksi_4 }}</td>
-                                                <td>{{ $user->Biodata->seleksi_5 }}</td>
-                                                <td>{{ $user->Biodata->seleksi_6 }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $user->updated_at }}</td>
                                                 <td>
-                                                    <img src="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" class="img-fluid" alt="Cinque Terre" />
+                                                    
                                                 </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>status</th>
-                                                <th>Seleksi 1</th>
-                                                <th>Seleksi 2</th>
-                                                <th>Seleksi 3</th>
-                                                <th>Seleksi 4</th>
-                                                <th>Seleksi 5</th>
-                                                <th>Seleksi 6</th>
-                                                <th>foto</th>
+                                            <th>No</th>
+                                                <th>email</th>
+                                                <th>create</th>
+                                                <th>update</th>
+                                                
+                                                <th></th>
                                             </tr>
                                         </tfoot>
                                     </table>

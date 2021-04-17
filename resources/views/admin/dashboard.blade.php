@@ -124,7 +124,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="\admin\gagal-daftar" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap 2</p>
                                         </a>

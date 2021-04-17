@@ -22,6 +22,12 @@ Route::get('/program-beasiswa', function () {
     return view('compro');
 });
 
+
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::post('/daftar-ulang', 'PendaftarController@daftarUlang')->name('register.ulang');
+
+	});
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/a', [App\Http\Controllers\AdminController::class, 'coba']);
 Route::get('/b', [App\Http\Controllers\PendaftarController::class, 'insertSeleksi1']);
@@ -46,6 +52,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/seleksi-pertama', 'AdminController@seleksi1')->name('admin.seleksi1');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/gagal-daftar', 'AdminController@seleksi2')->name('admin.seleksi2');
+    });
+});
+
 
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
@@ -91,3 +103,4 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
 	});
 });
+
