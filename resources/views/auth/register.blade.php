@@ -65,6 +65,11 @@
 
                             <div class="col-md-5">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -80,13 +85,23 @@
                                     <label class="custom-control-label" for="customRadioInline2">Wanita</label>
                                 </div>
                             </div>
+
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>tolong diisi</strong>
+                                    </span>
                         </div>
 
                         <div class="form-group row">
                             <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                             <div class="col-md-4">
-                                <input id="tanggal_lahir" type="text" class="form-control{{ $errors->has('tanggal_lahir') ? ' is-invalid' : '' }}" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required autofocus>
+                            <div class="input-group date">
+    <div class="input-group-addon">
+           <span class="glyphicon glyphicon-th"></span>
+       </div>
+       <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir">
+   </div>
+  </div>
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  Format: YYYY-MM-DD, contoh 1990-11-29.
                                 </small>                                
@@ -239,7 +254,9 @@
                             <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
                             <div class="col-md-7">
                                 <input id="url_foto" type="file" class="form-control{{ $errors->has('url_foto') ? ' is-invalid' : '' }}" name="url_foto" value="{{ old('url_foto') }}" required autofocus>
-
+                                <small id="passwordHelpBlock" class="form-text text-sucess">
+                                 Format harus jpg,png,jpeg dan ukuran 2 mb
+                                </small>                       
                                 @if ($errors->has('url_foto'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('url_foto') }}</strong>

@@ -72,7 +72,7 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         User::where('id', $user_id)->update(['level' => '1']);
-        Biodata::where('id', $user_id)->update(['seleksi_berkas' => 'LULUS']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_berkas' => 'LULUS']);
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
@@ -85,7 +85,7 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         User::where('id', $user_id)->update(['level' => '2']);
-        Biodata::where('id', $user_id)->update(['seleksi_berkas' => 'GAGAL']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_berkas' => 'GAGAL']);
 
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
@@ -99,7 +99,7 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         User::where('id', $user_id)->update(['level' => '1']);
-        Biodata::where('id', $user_id)->update(['seleksi_pertama' => 'LULUS']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LULUS']);
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
@@ -112,7 +112,7 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         User::where('id', $user_id)->update(['level' => '2']);
-        Biodata::where('id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
 
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;

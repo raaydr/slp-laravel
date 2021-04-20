@@ -329,13 +329,16 @@
                       </div>
                       <!-- /.user-block -->
                     <label for="exampleInputEmail1">Link Video Challenge :</label>
-                    <a type="text"  name="id" >{{$seleksiPertama->url_video}}</a>
+                    <a type="text"  href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
                     <br>
                     <label for="exampleInputEmail1">Link Writing Challenge :</label>
-                    <a type="text"  name="id" >{{$seleksiPertama->url_writing}}</a>
+                    <a type="text"  href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
                     <br>
                     <label for="exampleInputEmail1">Link Bussines Challenge :</label>
-                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_writing}}" target="_blank">foto</a>
+                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
+                    <br>
+                    <label for="exampleInputEmail1">User CV :</label>
+                    <a class="btn btn-primary" href="{{asset('cvPDF')}}/{{$seleksiPertama->url_cv}}" target="_blank">Lihat</a>
                     <br>
                     </div>
                     <!-- /.post -->
@@ -499,7 +502,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                      {{$seleksiPertama->aktif_organisasi}}
+                      {{$seleksiPertama->organisasi}}
                       </p>
                     </div>
                     <!-- /.post -->
@@ -516,7 +519,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                      {{$seleksiPertama->question5}}
+                      {{$seleksiPertama->aktif_organisasi}}
                       </p>
                     </div>
                     <!-- /.post -->
@@ -533,7 +536,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                      {{$seleksiPertama->question6}}
+                      {{$seleksiPertama->question5}}
                       </p>
                     </div>
                     <!-- /.post -->
@@ -550,7 +553,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                      {{$seleksiPertama->question7}}
+                      {{$seleksiPertama->question6}}
                       </p>
                     </div>
                     <!-- /.post -->

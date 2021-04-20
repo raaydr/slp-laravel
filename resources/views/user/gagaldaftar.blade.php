@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
         <link href="{{asset('develop')}}/img/slp.png" rel="icon">
     </head>
     <body class="hold-transition sidebar-mini">
@@ -182,7 +183,13 @@
                             <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                             <div class="col-md-4">
-                                <input id="tanggal_lahir" type="text" class="form-control{{ $errors->has('tanggal_lahir') ? ' is-invalid' : '' }}" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required autofocus>
+                            <div class="input-group date">
+    <div class="input-group-addon">
+           <span class="glyphicon glyphicon-th"></span>
+       </div>
+       <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir">
+   </div>
+  </div>
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  Format: YYYY-MM-DD, contoh 1990-11-29.
                                 </small>                                
@@ -413,6 +420,17 @@
         <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="{{asset('template')}}/dist/js/demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+  $(".datepicker").datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true,
+      todayHighlight: true,
+  });
+ });
+</script>
         <script>
             $(function () {
                 $("#example1")

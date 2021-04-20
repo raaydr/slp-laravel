@@ -37,7 +37,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -189,8 +189,8 @@ class RegisterController extends Controller
             $biodata->url_foto = $fileName ;
         }
         $biodata->save();
-     
-
+        
+        
         return redirect('/login')->with('success', 'Registrasi Anda telah berhasil!. Silakan login dengan menggunakan email dan password Anda.');
     }
     
