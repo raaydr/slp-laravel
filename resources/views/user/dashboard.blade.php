@@ -198,6 +198,16 @@
                   <li class="list-group-item">
                     <b>Kode Unik</b> <a class="float-right">{{$biodata->user_id}}</a>
                   </li>
+                  @if (!empty($biodata->seleksi_berkas))
+                  <li class="list-group-item">
+                    <b>Tahap Pemberkasan</b> <a class="float-right"><strong>{{$biodata->seleksi_berkas}}</strong></a>
+                  </li>
+                  @endif
+                  @if (!empty($biodata->seleksi_pertama))
+                  <li class="list-group-item">
+                    <b>Tahap Pertama</b> <a class="float-right"><strong>{{$biodata->seleksi_pertama}}</strong></a>
+                  </li>
+                  @endif
                 </ul>
 
                 
@@ -281,8 +291,6 @@
                         </div>
                       </div>
                       <!-- END timeline item -->
-                      
-                      
                       <!-- timeline time label -->
                       <div class="time-label">
                         <span class="bg-success">
