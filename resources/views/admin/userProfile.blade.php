@@ -208,6 +208,13 @@
                   <li class="list-group-item">
                     <b>Tanggal Lahir</b> <a class="float-right">{{$users->tanggal_lahir}}</a>
                   </li>
+                  <li class="list-group-item">
+                    <b>Seleksi Berkas</b> <a class="float-right">{{$users->seleksi_berkas}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Seleksi Pertama</b> <a class="float-right">{{$users->seleksi_pertama}}</a>
+                  </li>
+
                 </ul>
               </div>
               <!-- /.card-body -->
@@ -310,12 +317,54 @@
                     </div>
                     <!-- /.post -->
                     <div class="input-group-append">
-
-                    <a href="{{ route('admin.seleksi1.lulus', $users->user_id) }}" class="btn btn-primary m-2">Lulus</a>
-                    <a href="{{ route('admin.seleksi1.gagal', $users->user_id) }}" class="btn btn-danger m-2">Gagal</a>
+                    <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
+                    <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
                     
                           </div>
-                    
+                          <div class="modal fade" id="modal-primary">
+        <div class="modal-dialog">
+          <div class="modal-content bg-primary">
+            <div class="modal-header">
+              <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin ingin meloloskan peserta ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="{{ route('admin.seleksi1.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-danger">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin ingin mengeliminasi peserta ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="{{ route('admin.seleksi1.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
                   </div>
                   <!-- /.tab-pane -->
                   <div class=" tab-pane" id="Kedua">
@@ -643,11 +692,54 @@
                     </div>
                     <!-- /.post -->
                     <div class="input-group-append">
-
-                    <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" class="btn btn-primary m-2">Lulus</a>
-                    <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" class="btn btn-danger m-2">Gagal</a>
+                    <a data-toggle="modal" data-target="#modal-primary1" class="btn btn-primary m-2">Lulus</a>
+                    <a data-toggle="modal" data-target="#modal-danger1" class="btn btn-danger m-2">Gagal</a>
                     
                           </div>
+                          <div class="modal fade" id="modal-primary1">
+        <div class="modal-dialog">
+          <div class="modal-content bg-primary">
+            <div class="modal-header">
+              <h4 class="modal-title">Tahap Seleksi Pertama</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin ingin meloloskan peserta ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-danger1">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">Tahap Seleksi Pertama</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin ingin mengeliminasi peserta ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
                   </div>
                   <!-- /.tab-pane -->
 
@@ -715,7 +807,6 @@
     <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block"></div>
                 <strong>Copyright &copy; 2014-2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
