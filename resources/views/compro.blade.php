@@ -36,7 +36,7 @@
   ======================================================= -->
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
   <!--==========================
     Header
@@ -58,7 +58,7 @@
           <li><a href="#services">Pendaftaran</a></li>
           <li><a href="#portfolio">News</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="/">Login</a></li>
+          <li><a href="https://slpindonesia.com/">Login</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -253,17 +253,17 @@
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
             <h4 class="title"><a href="">Langkah Pertama</a></h4>
-            <p class="description"> Pendaftaran dan seleksi pemberkasan dimulai dari tanggal 15-22 April 2021. Akses Link pendaftaran <a href="/register" target="_blank"><b>disini</b></a>.</p>
+            <p class="description"> Pendaftaran dan seleksi pemberkasan dimulai dari tanggal 15-25 April 2021. Akses Link pendaftaran <a href="/register" target="_blank"><b>disini</b></a>.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-body-outline"></i></div>
             <h4 class="title"><a href="">Langkah Kedua</a></h4>
-            <p class="description">Bila Lolos maka akan lanjut ke Seleksi Tahap Pertama tanggal 22-25 April 2021. </p>
+            <p class="description">Bila Lolos maka akan lanjut ke Seleksi Tahap Pertama tanggal 25 April 2021. </p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-paper-outline"></i></div>
             <h4 class="title"><a href="">Langkah Ketiga </a></h4>
-            <p class="description">Jangan lupa mengisi form Seleksi Tahap Pertama, tanggal 25 april-2 Mei 2021.</p>
+            <p class="description">Jangan lupa mengisi form Seleksi Tahap Pertama, batas akhir pengisian tanggal 2 Mei 2021.</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-people-outline"></i></div>
@@ -321,7 +321,7 @@
       <div class="container text-center">
         <h3>Gabung di Smart Leader Preneur</h3>
         <p> Langsung daftar yuk!</p>
-        <a class="cta-btn" href="/register" target="_blank">Daftar Sekarang</a>
+        <a class="cta-btn" href="https://slpindonesia.com/register" target="_blank">Daftar Sekarang</a>
       </div>
     </section><!-- #call-to-action -->
 

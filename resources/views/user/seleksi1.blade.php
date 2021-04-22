@@ -336,7 +336,7 @@
 
 
                   <div class="form-group row">
-                            <label for="url_Business" class="col-md-4 col-form-label text-md-right">{{ __('Upload Bukti Pembelian Tahap Business Challenge ') }}</label>
+                            <label for="url_Business" class="col-md-4 col-form-label text-md-right">{{ __('Upload Bukti Transfer Pembelian ') }}</label>
                             <div class="col-md-7">
                                 <input id="url_Business" type="file" class="form-control{{ $errors->has('url_Business') ? ' is-invalid' : '' }}" name="url_Business" value="{{ old('url_Business') }}" required autofocus>
                                 <small id="passwordHelpBlock" class="form-text text-sucess">

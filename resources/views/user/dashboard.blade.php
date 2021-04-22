@@ -294,7 +294,7 @@
                       <!-- timeline time label -->
                       <div class="time-label">
                         <span class="bg-success">
-                          22 April 2021
+                          25 April 2021
                         </span>
                       </div>
                       <!-- /.timeline-label -->

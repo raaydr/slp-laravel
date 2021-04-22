@@ -99,7 +99,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pengumuman</h1>
+            <h1>Terima kasih telah berpartisipasi</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -110,11 +110,15 @@
       <div class="error-page">
 
         <div class="error-content">
-          <h3><i class="fas fa-exclamation-triangle text-danger"></i> Kamu Tereliminasi.</h3>
+          <h3><i class="fas fa-info-circle text-danger"></i> Kamu Tereliminasi.</h3>
 
           <p>
-            Terima kasih telah mencoba, jangan menyerah tahun depan masih ada
-            Jangan lupa selalu check website kita <a href="https://slpindonesia.com/">SLP Indonesia</a> 
+          Tetap semangat dan terus produktif lahirkan karya-karya positifmu di manapun kamu berada.
+          <br>
+          Jangan lupa untuk selalu cek <a href="https://www.instagram.com/slp.indonesia/" target="_blank">IG</a> dan website <a href="https://slpindonesia.com/"target="_blank">SLP Indonesia</a> buat update program-program kami selanjutnya ya. Kami tunggu partisipasi kamu berikutnya.
+          <br>
+            <strong>Cheers!</strong>
+            
           </p>
 
           
