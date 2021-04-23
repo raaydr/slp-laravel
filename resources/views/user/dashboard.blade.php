@@ -117,7 +117,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('pendaftar.seleksi1') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap 1</p>
                                         </a>
@@ -256,6 +256,9 @@
                                             </li>
                                             @endif
                                         </ul>
+                                        <div class="text-center">
+                                                    <a href="{{ route('pendaftar.edit.biodata') }}" class="btn btn-primary m-2">Ubah Biodata</a>
+                                                </div>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -287,8 +290,9 @@
                                         <p class="text-muted">
                                             <span class="tag tag-danger"> {{$biodata->minatprogram}}</span>
                                         </p>
-
+                                            
                                         <hr />
+                                        
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -488,9 +492,7 @@
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
-                                                <div class="input-group-append">
-                                                    <a href="{{ route('pendaftar.edit.biodata') }}" class="btn btn-primary m-2">Ubah Biodata</a>
-                                                </div>
+                                                
                                             </div>
                                             <!-- /.tab-pane -->
                                         </div>

@@ -77,7 +77,7 @@ class PendaftarController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'url_cv' => 'required|mimes:pdf',
+                'url_cv' => 'required|mimes:pdf|max:10240',
                 'url_writing' => 'required|string',
                 'url_video' => 'required|string',
                 'url_Business' => 'required|mimes:jpeg,png,jpg|max:2048',
@@ -102,6 +102,7 @@ class PendaftarController extends Controller
             $messages = [
                 'url_cv.required' => 'Upload CV anda !',
                 'url_cv.image' => 'Format file tidak mendukung! Gunakan pdf.',
+                'url_cv.max' => 'Ukuran file terlalu besar, maksimal file 10Mb !',
                 'url_writing.required' => 'tolong lengkapi !',
                 'url_vide.required' => 'tolong lengkapi !',
                 'url_Business.required' => 'foto tidak boleh kosong!',
