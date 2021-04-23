@@ -53,6 +53,25 @@
                                 </div>
                             </div>
                         </div>
+                        
+
+    
+
+                        @if ($displayCaptcha)
+    <div class="form-group row">
+        <div class="col-md-6 offset-md-4">
+            {!! NoCaptcha::renderJs() !!}
+            {!! NoCaptcha::display() !!}
+
+            @error('g-recaptcha-response')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+@endif
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

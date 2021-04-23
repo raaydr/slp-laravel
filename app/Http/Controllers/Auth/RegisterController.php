@@ -89,6 +89,7 @@ class RegisterController extends Controller
             'five_pros' => 'required|string',
             'five_cons' => 'required|string',
             'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+            'g-recaptcha-response' => 'required|captcha'
 
         ],
 

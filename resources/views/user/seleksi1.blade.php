@@ -314,10 +314,11 @@
                     </div>
                     <div class="form-group row">
                             <label for="url_video" class="col-md-4 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
-
                             <div class="col-md-6">
                                 <input id="url_video" type="text" class="form-control" name="url_video" value="{{ old('url_video') }}" required autofocus>
-
+                                <small id="passwordHelpBlock" class="form-text text-sucess">
+                                 contoh : https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                                </small>
                                 <div class="valid-feedback"></div>
       <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
@@ -328,7 +329,9 @@
 
                             <div class="col-md-6">
                                 <input id="url_writing" type="text" class="form-control" name="url_writing" value="{{ old('url_writing') }}" required autofocus>
-
+                                <small id="passwordHelpBlock" class="form-text text-sucess">
+                                 contoh : https://www.instagram.com/p/CN8v_Wesjud/
+                                </small> 
                                 <div class="valid-feedback"></div>
       <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
