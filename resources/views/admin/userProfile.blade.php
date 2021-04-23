@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
-        <link href="{{asset('develop')}}/img/slp.png" rel="icon">
+        <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
     </head>
     <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
@@ -53,7 +53,6 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            
                             <a
                                 class="dropdown-item"
                                 href="{{ route('logout') }}"
@@ -151,660 +150,587 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Profile</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User Profile</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3">
-          @if(!empty($Lulus))
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Success</h4>
-            {{session('lulus')}}.
-        </div>
-      @endif
-      @if(!empty($Gagal))
-        <div class="alert alert-danger alert-dismissable">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Success</h4>
-            {{session('gagal')}}.
-        </div>
-      @endif
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-              <div class="card-body box-profile">
-                <div class="text-center">
-                  <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$users->url_foto}}" target="_blank">
-                  <img class="profile-user-img img-fluid"
-                  src="{{asset('imgdaftar')}}/{{$users->url_foto}}" class="img-fluid" alt="Cinque Terre"></a>
-                </div>
-
-                <h3 class="profile-username text-center" >{{$users->nama}}</h3>
-
-                <p class="text-muted text-center">{{$users->aktivitas}}</p>
-
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Domisili</b> <a class="float-right">{{$users->domisili}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Jenis Kelamin</b> <a class="float-right">{{$users->jenis_kelamin}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Tanggal Lahir</b> <a class="float-right">{{$users->tanggal_lahir}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Seleksi Berkas</b> <a class="float-right">{{$users->seleksi_berkas}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Seleksi Pertama</b> <a class="float-right">{{$users->seleksi_pertama}}</a>
-                  </li>
-
-                </ul>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">About Me</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
-
-                <p class="text-muted">
-                {{$users->phonenumber}}
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
-
-                <p class="text-muted">{{$users->alamat_domisili}}</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger"> {{$users->minatprogram}}</span>
-                </p>
-
-                <hr>
-
-                
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-9">
-            <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active " href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
-                  <li class="nav-item"><a class="nav-link " href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#Ketiga" data-toggle="tab">Seleksi Kedua</a></li>
-                </ul>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="active tab-pane" id="Pertama">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <span class="username">
-                          <a href="#">Alasan Beasiswa</a>
-                        </span>
-
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$users->alasanbeasiswa}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">5 Kelebihan</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$users->five_pros}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">5 Kekurangan</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$users->five_cons}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <div class="input-group-append">
-                    <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
-                    <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
-                    
-                          </div>
-                          <div class="modal fade" id="modal-primary">
-        <div class="modal-dialog">
-          <div class="modal-content bg-primary">
-            <div class="modal-header">
-              <h4 class="modal-title">Tahap Seleksi Berkas</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Anda yakin ingin meloloskan peserta ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-              <a href="{{ route('admin.seleksi1.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-      <div class="modal fade" id="modal-danger">
-        <div class="modal-dialog">
-          <div class="modal-content bg-danger">
-            <div class="modal-header">
-              <h4 class="modal-title">Tahap Seleksi Berkas</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Anda yakin ingin mengeliminasi peserta ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-              <a href="{{ route('admin.seleksi1.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-                  </div>
-                  <!-- /.tab-pane -->
-                  <div class=" tab-pane" id="Kedua">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <span class="username">
-                          <a href="#">Challenge</a>
-                        </span>
-
-                      </div>
-                      <!-- /.user-block -->
-                    <label for="exampleInputEmail1">Link Video Challenge :</label>
-                    <a type="text"  href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
-                    <br>
-                    <label for="exampleInputEmail1">Link Writing Challenge :</label>
-                    <a type="text"  href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
-                    <br>
-                    <label for="exampleInputEmail1">Link Bussines Challenge :</label>
-                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
-                    <br>
-                    <label for="exampleInputEmail1">User CV :</label>
-                    <a class="btn btn-primary" href="{{asset('cvPDF')}}/{{$seleksiPertama->url_cv}}" target="_blank">Lihat</a>
-                    <br>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <span class="username">
-                          <a href="#">Apakah kamu pernah mengikuti kegiatan mentoring keagamaan atau halaqoh?</a>
-                        </span>
-
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->mentoring}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Jika "Ya", seberapa sering kamu mengikuti kegiatan mentoring tersebut ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->mentoring_rutin}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apa yang kamu lakukan ketika sedang futur (ketika malas beribadah dan melakukan kebaikan) ?</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->futur}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apa yang kamu pahami tentang "Faith" (Keyakinan) ?</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->faith}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apa yang kamu pahami tentang "ethic" (etika) ?</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->ethic}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Bagaimana tanggapanmu jika melihat atau mengenal orang yang memiliki kemampuan lebih baik dibandingkan dirimu ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question1}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Menurutmu apa perbedaan antara etika, moral, dan akhlak ?</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question2}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Bagaimana caramu agar dapat konsisten beretika dan berakhlak baik ? Berikan contohnya !</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question3}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apa yang kamu pahami tentang "Leadership" ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question4}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Pernahkan kamu aktif terlibat dalam sebuah organisasi ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->organisasi}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Jika "Pernah", apa peranmu dalam organisasi tersebut ? Jelaskan aktivitas organisasi tersebut !</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->aktif_organisasi}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Sebagai seorang pemimpin, apa yang kamu lakukan jika anggota kelompokmu melakukan kesalahan ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question5}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Sebagai seorang anggota, apa yang kamu lakukan jika mengetahui pemimpinmu melakukan kesalahan?</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->question6}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apa yang kamu pahami tentang "Entrepreneurship" ?Jelaskan ! </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->entrepreneurship}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Kenapa kamu ingin berwirausaha? Jelaskan alasan terbesarmu ! </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->alasan_wirausaha}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Apakah kamu pernah berdagang atau berbisnis ? (selain challenge dari SLP) </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->pernah_wirausaha}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Jika pernah berdagang atau berbisnis, jelaskan pengalamanmu ! (selain challenge dari SLP)</a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->exp_wirausaha}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        
-                        <span class="username">
-                          <a href="#">Berapa omset terbesar yang pernah kamu raih dalam berwirausaha ? </a>
-                        
-                        </span>
-                        
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                      {{$seleksiPertama->omset}}
-                      </p>
-                    </div>
-                    <!-- /.post -->
-                    <div class="input-group-append">
-                    <a data-toggle="modal" data-target="#modal-primary1" class="btn btn-primary m-2">Lulus</a>
-                    <a data-toggle="modal" data-target="#modal-danger1" class="btn btn-danger m-2">Gagal</a>
-                    
-                          </div>
-                          <div class="modal fade" id="modal-primary1">
-        <div class="modal-dialog">
-          <div class="modal-content bg-primary">
-            <div class="modal-header">
-              <h4 class="modal-title">Tahap Seleksi Pertama</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Anda yakin ingin meloloskan peserta ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-              <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-      <div class="modal fade" id="modal-danger1">
-        <div class="modal-dialog">
-          <div class="modal-content bg-danger">
-            <div class="modal-header">
-              <h4 class="modal-title">Tahap Seleksi Pertama</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Anda yakin ingin mengeliminasi peserta ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-              <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-                  </div>
-                  <!-- /.tab-pane -->
-
-                  <div class="tab-pane" id="Ketiga">
-                    <form class="form-horizontal">
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Profile</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">User Profile</li>
+                                </ol>
+                            </div>
                         </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                @if(!empty($Lulus))
+                                <div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <h4><i class="icon fa fa-check"></i>Success</h4>
+                                    {{session('lulus')}}.
+                                </div>
+                                @endif @if(!empty($Gagal))
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <h4><i class="icon fa fa-check"></i>Success</h4>
+                                    {{session('gagal')}}.
+                                </div>
+                                @endif
+                                <!-- Profile Image -->
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body box-profile">
+                                        <div class="text-center">
+                                            <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$users->url_foto}}" target="_blank">
+                                                <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$users->url_foto}}" class="img-fluid" alt="Cinque Terre" />
+                                            </a>
+                                        </div>
+
+                                        <h3 class="profile-username text-center">{{$users->nama}}</h3>
+
+                                        <p class="text-muted text-center">{{$users->aktivitas}}</p>
+
+                                        <ul class="list-group list-group-unbordered mb-3">
+                                            <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$users->domisili}}</a></li>
+                                            <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$users->jenis_kelamin}}</a></li>
+                                            <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$users->tanggal_lahir}}</a></li>
+                                            <li class="list-group-item"><b>Seleksi Berkas</b> <a class="float-right">{{$users->seleksi_berkas}}</a></li>
+                                            <li class="list-group-item"><b>Seleksi Pertama</b> <a class="float-right">{{$users->seleksi_pertama}}</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+
+                                <!-- About Me Box -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">About Me</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
+
+                                        <p class="text-muted">
+                                            {{$users->phonenumber}}
+                                        </p>
+
+                                        <hr />
+
+                                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
+
+                                        <p class="text-muted">{{$users->alamat_domisili}}</p>
+
+                                        <hr />
+
+                                        <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
+
+                                        <p class="text-muted">
+                                            <span class="tag tag-danger"> {{$users->minatprogram}}</span>
+                                        </p>
+
+                                        <hr />
+                                        
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div class="card-header p-2">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#Ketiga" data-toggle="tab">Seleksi Kedua</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="active tab-pane" id="Pertama">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Alasan Beasiswa</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$users->alasanbeasiswa}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">5 Kelebihan</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$users->five_pros}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">5 Kekurangan</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$users->five_cons}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <div class="input-group-append">
+                                                    <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
+                                                    <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
+                                                </div>
+                                                <div class="modal fade" id="modal-primary">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin meloloskan peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi1.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <div class="modal fade" id="modal-danger">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi1.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                            <div class="tab-pane" id="Kedua">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Challenge</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <label for="exampleInputEmail1">Link Video Challenge :</label>
+                                                    <a type="text" href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">Link Writing Challenge :</label>
+                                                    <a type="text" href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">Link Bussines Challenge :</label>
+                                                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">User CV :</label>
+                                                    <a class="btn btn-primary" href="{{asset('cvPDF')}}/{{$seleksiPertama->url_cv}}" target="_blank">Lihat</a>
+                                                    <br />
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apakah kamu pernah mengikuti kegiatan mentoring keagamaan atau halaqoh?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->mentoring}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika "Ya", seberapa sering kamu mengikuti kegiatan mentoring tersebut ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->mentoring_rutin}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu lakukan ketika sedang futur (ketika malas beribadah dan melakukan kebaikan) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->futur}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Faith" (Keyakinan) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->faith}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "ethic" (etika) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->ethic}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Bagaimana tanggapanmu jika melihat atau mengenal orang yang memiliki kemampuan lebih baik dibandingkan dirimu ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question1}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Menurutmu apa perbedaan antara etika, moral, dan akhlak ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question2}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Bagaimana caramu agar dapat konsisten beretika dan berakhlak baik ? Berikan contohnya !</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question3}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Leadership" ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question4}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Pernahkan kamu aktif terlibat dalam sebuah organisasi ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->organisasi}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika "Pernah", apa peranmu dalam organisasi tersebut ? Jelaskan aktivitas organisasi tersebut !</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->aktif_organisasi}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Sebagai seorang pemimpin, apa yang kamu lakukan jika anggota kelompokmu melakukan kesalahan ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question5}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Sebagai seorang anggota, apa yang kamu lakukan jika mengetahui pemimpinmu melakukan kesalahan?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question6}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Entrepreneurship" ?Jelaskan ! </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->entrepreneurship}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Kenapa kamu ingin berwirausaha? Jelaskan alasan terbesarmu ! </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->alasan_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apakah kamu pernah berdagang atau berbisnis ? (selain challenge dari SLP) </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->pernah_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika pernah berdagang atau berbisnis, jelaskan pengalamanmu ! (selain challenge dari SLP)</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->exp_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Berapa omset terbesar yang pernah kamu raih dalam berwirausaha ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->omset}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <div class="input-group-append">
+                                                    <a data-toggle="modal" data-target="#modal-primary1" class="btn btn-primary m-2">Lulus</a>
+                                                    <a data-toggle="modal" data-target="#modal-danger1" class="btn btn-danger m-2">Gagal</a>
+                                                </div>
+                                                <div class="modal fade" id="modal-primary1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin meloloskan peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <div class="modal fade" id="modal-danger1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                            </div>
+                                            <!-- /.tab-pane -->
+
+                                            <div class="tab-pane" id="Ketiga">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group row">
+                                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="inputName" placeholder="Name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="inputName2" placeholder="Name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                                                        <div class="col-sm-10">
+                                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                            <div class="checkbox">
+                                                                <label> <input type="checkbox" /> I agree to the <a href="#">terms and conditions</a> </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+
+                            <!-- /.col -->
                         </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">

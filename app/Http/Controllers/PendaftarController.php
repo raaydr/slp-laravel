@@ -151,6 +151,14 @@ class PendaftarController extends Controller
             
         }
         $id = Input::get('id');
+        $cvpdf = DB::table('seleksiPertama')
+            ->where('user_id', $id)
+            ->value('url_cv');
+        File::delete('cvPDF/'.$cvpdf);
+        $fotobukti = DB::table('seleksiPertama')
+            ->where('user_id', $id)
+            ->value('url_Business');
+        File::delete('imgPembelian/'.$fotobukti);
         
         DB::table('seleksiPertama')->where('user_id',$id)->update([
             'url_cv'=> $PDFName,
@@ -265,5 +273,135 @@ class PendaftarController extends Controller
             ->first();
 
         return view('user.dashboard', compact('title', 'user', 'biodata'));
+    }
+    public function editfoto(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+                
+
+            ],
+
+            $messages = [
+                'url_foto.required' => 'foto tidak boleh kosong!',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+                
+
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $id = Auth::user()->id;
+        //Table seleksi_1
+        if ($gambar = $request->hasFile('url_foto')) {
+            $gambar = $request->file('url_foto');
+            $GambarName = $id . '_' . $gambar->getClientOriginalName();
+            $tujuanPath = public_path() . '/imgdaftar/';
+            $gambar->move($tujuanPath, $GambarName);
+            
+        }
+        
+        $foto = DB::table('biodata')
+            ->where('user_id', $id)
+            ->value('url_foto');
+        File::delete('imgdaftar/'.$foto);
+        DB::table('biodata')->where('user_id',$id)->update([            
+            'url_foto'=> $GambarName,
+                    
+        ]);
+        
+
+        return redirect('pendaftar/dashboard')->with('pesan','Berhasil update foto');  
+    }
+
+    public function updatebiodata(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => 'required|string|max:255',
+
+                'jenis_kelamin' => 'required',
+                'tanggal_lahir' => 'required',
+                'domisili' => 'required',
+                'alamat_domisili' => 'required|string',
+                'phonenumber' => 'required|string|max:13',
+
+                'aktivitas' => 'required',
+                'minatprogram' => 'required',
+                'alasanBeasiswa' => 'required|string',
+                'five_pros' => 'required|string',
+                'five_cons' => 'required|string',
+            ],
+
+            $messages = [
+                'nama.required' => 'Nama tidak boleh kosong!',
+                'jenis_kelamin.required' => 'jenis kelamin harus dipilih!',
+                'tanggal_lahir.required' => 'tanggal lahir tidak boleh kosong!',
+
+                'domisili.required' => 'Domisili harus dipilih!',
+                'alamat_domisili.required' => 'alamat tidak boleh kosong!',
+                'phonenumber.required' => 'Nomor telpon tidak boleh kosong!',
+                'aktivitas.required' => 'Aktivitas harus dipilih!',
+                'alasanBeasiswa.required' => 'Alasan Beasiswa tidak boleh kosong!',
+                'five_pros.required' => '5 kelebihan tidak boleh kosong!!',
+                'five_cons.required' => '5 kekurangan tidak boleh kosong!!',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $title = 'Dashboard Calon Siswa';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+
+            DB::table('biodata')->where('user_id',$id)->update([
+                'nama'=> $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'domisili' => $request->domisili,
+                'alamat_domisili' => $request->alamat_domisili,
+                'aktivitas' => $request->aktivitas,
+                'minatprogram' => $request->minatprogram,
+                'alasanbeasiswa' => $request->alasanBeasiswa,
+                'five_pros' => $request->five_pros,
+                'five_cons' => $request->five_cons,
+                
+                
+            ]);
+
+
+
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
+
+        return view('user.dashboard', compact('title', 'user', 'biodata')); 
+    }
+
+    public function editbiodata(Request $request)
+    {
+        $title = 'Ubah Biodata';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
+
+        return view('user.editbiodata', compact('title', 'user', 'biodata'));
     }
 }

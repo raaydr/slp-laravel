@@ -104,3 +104,21 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 	});
 });
 
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::post('/edit-foto', 'PendaftarController@editfoto')->name('pendaftar.edit.foto');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::get('/edit-biodata', 'PendaftarController@editbiodata')->name('pendaftar.edit.biodata');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::post('/update-biodata', 'PendaftarController@updatebiodata')->name('pendaftar.update.biodata');
+
+    });
+});
