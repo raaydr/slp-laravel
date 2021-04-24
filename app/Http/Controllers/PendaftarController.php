@@ -66,8 +66,11 @@ class PendaftarController extends Controller
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
             ->first();
+        $seleksi = DB::table('seleksiPertama')
+            ->where('user_id', $id)
+            ->value('checked');
 
-        return view('user.seleksi1', compact('title', 'user', 'biodata'));
+        return view('user.seleksi1', compact('title','biodata', 'user', 'seleksi'));
     }
 
     public function seleksiPertama(Request $request)
@@ -134,23 +137,6 @@ class PendaftarController extends Controller
         }
 
         //Table seleksi_1
-
-        if ($pdf = $request->hasFile('url_cv')) {
-            $namaPdf = Input::get('nama');
-            $pdf = $request->file('url_cv');
-            $PDFName = $namaPdf . '_' . $pdf->getClientOriginalName();
-            $lokasiPath = public_path() . '/cvPDF/';
-            $pdf->move($lokasiPath, $PDFName);
-            
-        }
-        if ($gambar = $request->hasFile('url_Business')) {
-            $namaGambar = Input::get('nama');
-            $gambar = $request->file('url_Business');
-            $GambarName = $namaGambar . '_' . $gambar->getClientOriginalName();
-            $tujuanPath = public_path() . '/imgPembelian/';
-            $gambar->move($tujuanPath, $GambarName);
-            
-        }
         $id = Input::get('id');
         $cvpdf = DB::table('seleksiPertama')
             ->where('user_id', $id)
@@ -160,6 +146,24 @@ class PendaftarController extends Controller
             ->where('user_id', $id)
             ->value('url_Business');
         File::delete('imgPembelian/'.$fotobukti);
+
+        if ($pdf = $request->hasFile('url_cv')) {
+            $namaPdf = Input::get('nama');
+            $pdf = $request->file('url_cv');
+            $PDFName = $namaPdf .'_'.time().'.'. $pdf->getClientOriginalName();
+            $lokasiPath = public_path() . '/cvPDF/';
+            $pdf->move($lokasiPath, $PDFName);
+            
+        }
+        if ($gambar = $request->hasFile('url_Business')) {
+            $namaGambar = Input::get('nama');
+            $gambar = $request->file('url_Business');
+            $GambarName = $namaGambar.'_'.time().'.'. $gambar->getClientOriginalName();
+            $tujuanPath = public_path() . '/imgPembelian/';
+            $gambar->move($tujuanPath, $GambarName);
+            
+        }
+        
         
         DB::table('seleksiPertama')->where('user_id',$id)->update([
             'url_cv'=> $PDFName,
@@ -184,6 +188,7 @@ class PendaftarController extends Controller
             'pernah_wirausaha' => $request->pernah_wirausaha,
             'exp_wirausaha' => $request->exp_wirausaha,
             'omset' => $request->omset,
+            'checked'=> '1',
             
             
         ]);

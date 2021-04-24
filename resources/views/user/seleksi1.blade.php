@@ -285,13 +285,6 @@
         </div>
           <!-- left column -->
           <div class="col-md-12">
-          @if(session('pesan'))
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Success</h4>
-            {{session('pesan')}}.
-        </div>
-      @endif
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -562,7 +555,9 @@
 
                 <div class="card-footer">
                 <div class="text-center">
+                
                   <button type="submit" class="btn btn-primary">Submit</button>
+                  
                   </div>
                 </div>
               </form>
