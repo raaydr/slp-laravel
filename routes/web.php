@@ -90,6 +90,14 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
 	});
 });
+
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::get('/pengumuman', 'PendaftarController@pengumuman')->name('pendaftar.pengumuman');
+
+	});
+});
+
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/seleksi-pertama', 'PendaftarController@seleksi1')->name('pendaftar.seleksi1');

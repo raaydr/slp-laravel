@@ -100,7 +100,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                             <li class="nav-item">
-                                <a href="\pendaftar\dashboard" class="nav-link ">
+                                <a href="{{ route('pendaftar.dashboard') }}" class="nav-link ">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -117,7 +117,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="\pendaftar\seleksi-pertama" class="nav-link active">
+                                        <a href="{{ route('pendaftar.seleksi1') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap 1</p>
                                         </a>
@@ -132,7 +132,7 @@
                             </li>
                             
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('pendaftar.pengumuman') }}" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>
                                         Pengumuman                                        
@@ -194,16 +194,16 @@
                             <ol>
                                 <li>Setiap peserta wajib menulis sebuah tulisan dengan judul "Kontribusiku untuk Negeri" di upload ke instagram menggunakan foto pribadi.</li>
                                 <li>Jumlah kata pada tulisan minimal 200 kata.</li>
-                                <li>Tag   akun   instagram   @slpreneur.id   dan   gunakan hashtag   #SmartLeaderPreneur, #WritingChallenge, dan #(kode unik) di postingan kalian.</li>
+                                <li>3.	Tag akun instagram @slp.indonesia dan gunakan hashtag #SmartLeaderPreneur, #WritingChallenge, dan #(kode unik) di postingan kalian.</li>
                                 <li>Akun instagram dilarang di <b>private.</b> Agar memudahkan kami dalam proses penilaian karya tulis yang kamu buat.</li>
                                 <li>Poin penilaian dari challenge ini dinilai dari jumlah kata, keaslian karya, dan kualitas isi.</li>
                             </ol>
-                            <a>Periode challenge ini yaitu 29-31 Desember 2019. Mengerjakan lebih cepat lebih baik.</a>
+                            <a>Periode challenge ini yaitu 26-29 April 2021. Mengerjakan lebih cepat lebih baik.</a>
                             <br>
                             <b>Note :</b>
                             <ol>
-                            <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi. </b></li>
-                            <li><b>Kode Unik adalah nomor absen pengumuman seleksi lolos tahap 1</b></li>
+                            <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
+                            <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
                             </ol>
                         </div>
                     </div>
@@ -224,15 +224,15 @@
                                 <li>Video harus berisi rekaman diri kamu saat kamu melakukan public speaking, jadi bukan hanya tulisan tapi praktik bicara secara langsung</li>
                                 <li>Upload ke feed instagram/IGTV, video yang sudah kalian buat.</li>
                                 <li>Akun  instagram  dilarang  di  <b>private.</b>  Agar  memudahkan  kami  dalam  proses  penilaian  video yang kamu buat.</li>
-                                <li>Tag   akun   instagram   @slpreneur.id   dan   gunakan   hashtag   #SmartLeaderPreneur,   #VideoChallenge, dan #(kode unik) di postingan kalian.</li>
+                                <li>5.	Tag akun instagram @slp.indonesia dan gunakan hashtag #SmartLeaderPreneur, #VideoChallenge, dan #(kode unik) di postingan kalian.</li>
                                 <li>Poin penilaian dari challenge ini dinilai dari isi, kekreativitasan, dan penyampaian konten.</li>
                             </ol>
-                            <a>Periode challenge ini yaitu mulai tanggal 29 Desember - 02 Januari 2020.</a>
+                            <a>Periode challenge ini yaitu mulai tanggal 26 – 30 April 2021. </a>
                             <br>
                             <b>Note :</b>
                             <ol>
                             <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
-                            <li><b>Kode Unik adalah nomor absen pengumuman seleksi lolos tahap 1</b></li>
+                            <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
                             </ol>
                         </div>
                     </div>
@@ -255,27 +255,63 @@
                             <ol>
                                 <li>SUSCO BITE</li>
                                 <ul>
-                                    <li>Susco bite ini adalah kue sus kering isi coklat yang rasanya enak dan nagih banget.</li>
+                                    <li>Susco bite ini adalah kue sus kering isi coklat, vanilla, dan strawberry yang rasanya enak dan nagih banget.</li>
                                     <li>Harga dari SLP Rp 20.000</li>
                                     <li>Harga jual Rp 25.000 </li>
                                 </ul>
-                                <li>KAOS Smart Leader Preneur dengan sistem penjualan pre-order.</li>
+                                <li>Pempek Asli Jambi.</li>
                                 <ul>
-                                    <li>Susco bite ini adalah kue sus kering isi coklat yang rasanya enak dan nagih banget.</li>
-                                    <li>Harga dari SLP Rp 20.000</li>
-                                    <li>Harga jual Rp 25.000 </li>
+                                    <li>1kg	    : Harga dari SLP Rp 65.000 -> Harga Jual Rp 75.000 – Rp 85.000</li>
+                                    <li>½kg     : Harga dari SLP Rp 35.000 -> Harga Jual Rp 40.000 – Rp 50.000</li>
+                                    <li>KSB	    : Harga dari SLP Rp 60.000 -> Harga Jual Rp 65.000 – Rp 75.000</li>
+                                    <li>Tekwan  : Harga dari SLP Rp 65.000 -> Harga Jual Rp 75.000 – Rp 85.000</li>
                                 </ul>
-                                <li>Upload ke feed instagram/IGTV, video yang sudah kalian buat.</li>
-                                <li>Akun  instagram  dilarang  di  <b>private.</b>  Agar  memudahkan  kami  dalam  proses  penilaian  video yang kamu buat.</li>
-                                <li>Tag   akun   instagram   @slpreneur.id   dan   gunakan   hashtag   #SmartLeaderPreneur,   #VideoChallenge, dan #(kode unik) di postingan kalian.</li>
-                                <li>Poin penilaian dari challenge ini dinilai dari isi, kekreativitasan, dan penyampaian konten.</li>
+                                <li>Buku SHINEBRIDE</li>
+                                <ul>
+                                    <li>Berat : 1kg/2 buah buku</li>
+                                    <li>Harga dari SLP Rp 60.000</li>
+                                    <li>Harga jual Rp 75.000 – Rp 90.000</li>
+                                </ul>
                             </ol>
-                            <a>Periode challenge ini yaitu mulai tanggal 29 Desember - 02 Januari 2020.</a>
+                            <a>▶ Sistem pemesanan </a>
                             <br>
-                            <b>Note :</b>
                             <ol>
-                            <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
-                            <li><b>Kode Unik adalah nomor absen pengumuman seleksi lolos tahap 1</b></li>
+                                <li>Teman-teman pesan produk dengan menghubungi admin SLP via link berikut : </li>
+                                <ul>
+                                    <li>Pemesanan SUSCO  <a href="http://bit.ly/PesenSUSCOdong">di sini</a></li>
+                                    <li>Pemesanan Pempek Asli Jambi   <a href="http://bit.ly/PesenPEMPEK">di sini</a></li>
+                                    <li>Pemesanan Buku SHINEBRIDE   <a href="http://bit.ly/PesenSHINEBRIDE">di sini</a></li>
+                                </ul>
+                                <li>Pembayaran dilakukan dengan cara transfer ke rekening <b>BNI Syariah, 0691552012 an. Aprillia Lusiana</b> dan tidak menerima <b>CASH</b>.
+                                    <br>
+                                    *Gunakan aplikasi flip.id bila beda bank.
+                                </li>
+                                <li>Melakukan pembayaran sesuai dengan panduan admin. Menyertakan <b>KODE UNIK</b> di tiga angka terakhir jumlah transfer.</li>
+                                <ul>
+                                    <li>Contoh Kasus 1 : Ari dengan kode unik 48. Ari membeli 10 buah SUSCO dengan akses pengiriman Jabodetabek (Rp 9.000,00/kg). Maka Ari wajib membayar pesanannya senilai Rp 209.048,00.</li>
+                                    <li>•	Contoh Kasus 2 : Hani bernomor absen 76. Hani membeli 10kg pempek (1kg) dengan akses pengiriman Jabodetabek (Medium - Rp 20.000,00/5kg). Maka Hani wajib membayar pesanannya senilai Rp .670.076,00.</li>
+                                </ul>
+                                <li>Setelah melakukan pembayaran, admin akan merekap dan tim akan membantu mengirimkan pesanannya.</li>
+                            </ol>
+                            <a>▶ Rules of Business Challenge: </a>
+                            <ol>
+                                <li>Mencapai target OMZET <b>PEMBELIAN</b> senilai <b>LIMA RATUS RIBU RUPIAH</b> Contoh target keberhasilan Bussiness Challenge : </li>
+                                <ul>
+                                    <li>Berhasil meraih pemesanan SUSCO sebanyak 25pcs, atau</li>
+                                    <li>Berhasil meraih pemesanan Pempek (1kg) sebanyak 8pcs , atau</li>
+                                    <li>Berhasil meraih pemesanan Pempek (½kg) sebanyak 15pcs, atau</li>
+                                    <li>Berhasil meraih pemesanan Pempek (KSB) sebanyak 9pcs, atau</li>
+                                    <li>Berhasil meraih pemesanan Tekwan sebanyak 8pcs, atau</li>
+                                    <li>Berhasil meraih pemesanan Buku SHINEBRIDE sebanyak 9pcs, atau</li>
+                                    <li>Berhasil meraih pemesanan produk random dengan omzet pembelian senilai Lima Ratus Ribu Rupiah. </li>
+                                </ul>
+                                <li>Peserta wajib klik link pemesanan yang telah disediakan untuk melakukan pemesanan dan mengisi lengkap format yang telah disiapkan. </li>
+                                <li>Sistem pembayaran hanya melalui transfer yang terpusat pada satu rekening, yaitu rekening 
+                                    <br>
+                                    <b>BNI Syariah, 0691552012 an. Aprillia Lusiana</b>
+                                </li>
+                                <li>Marketing Tools berupa poster penjualan telah di lampirkan oleh TIM Smart Leader Preneur, silakan kalian edit info pemesanan dengan nomor WA aktif kalian masing-masing menggunakan aplikasi edit foto/gambar di smartphone dan buat copywriting/broadcast penjualan sekreatif mungkin. </li>
+                                <li>Seluruh keuntungan yang kalian dapatkan dari hasil penjualan bisa kalian nikmati sepenuhnya. Seluruh keuntungan yang didapatkan oleh TIM Smart Leader Preneur akan dialokasikan untuk kebutuhan administrasi program beasiswa selama 6 bulan dan di sedekahkan kepada Rumah Qur’an Youthcare. </li>
                             </ol>
                         </div>
                     </div>

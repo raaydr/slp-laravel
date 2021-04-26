@@ -42,6 +42,19 @@ class PendaftarController extends Controller
 
         return view('user.dashboard', compact('title', 'user', 'biodata'));
     }
+    public function pengumuman()
+    {
+        $title = 'Pengumuman Calon Siswa';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();        
+
+        return view('user.pengumuman', compact('title', 'user', 'biodata'));
+    }
 
     public function eliminasi()
     {

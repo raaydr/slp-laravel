@@ -4,7 +4,8 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
-                <a class="text-center m-2"><b>Semua Form Harus Dilengkapi </b></a>
+               <!--<a class="text-center m-2"><b>Semua Form Harus Dilengkapi </b></a>-->
+                <a class="text-center m-2"><b>Pendaftaran sudah ditutup</b></a>
                 <div class="card-body">
                     @if(session()->has('success'))
                     <div class="alert alert-success">{{ session()->get('success') }}</div>
@@ -270,13 +271,15 @@
                             </ul>
                         </div>
                         @endif
-                        <div class="form-group row mb-0">
+                        <!--
+                            <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Daftar') }}
                                 </button>
                             </div>
                         </div>
+                        -->
                     </form>
                 </div>
             </div>
