@@ -135,7 +135,8 @@
                                 <a href="{{ route('pendaftar.pengumuman') }}" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>
-                                        Pengumuman                                        
+                                        Pengumuman
+                                        <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>
                             </li>
@@ -170,13 +171,6 @@
                 <!-- Main content -->
                 <section class="content">
       <div class="container-fluid">
-      @if(session('pesan'))
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Success</h4>
-            {{session('pesan')}}.
-        </div>
-      @endif
         <div class="row">
         <div class="col-12" id="accordion">
                 <div class="card card-primary card-outline">
@@ -313,6 +307,14 @@
                                 <li>Marketing Tools berupa poster penjualan telah di lampirkan oleh TIM Smart Leader Preneur, silakan kalian edit info pemesanan dengan nomor WA aktif kalian masing-masing menggunakan aplikasi edit foto/gambar di smartphone dan buat copywriting/broadcast penjualan sekreatif mungkin. </li>
                                 <li>Seluruh keuntungan yang kalian dapatkan dari hasil penjualan bisa kalian nikmati sepenuhnya. Seluruh keuntungan yang didapatkan oleh TIM Smart Leader Preneur akan dialokasikan untuk kebutuhan administrasi program beasiswa selama 6 bulan dan di sedekahkan kepada Rumah Qur’an Youthcare. </li>
                             </ol>
+                            <a>Periode challenge ini yaitu mulai tanggal 26 April – 5 Mei 2021. </a>
+                            <br>
+                            <b>Note :</b>
+                            <ol>
+                            <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
+                            <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
+                            <li>Budayakan BACA sebelum BERTANYA.</li> 
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -320,6 +322,13 @@
             </div>
         </div>
           <!-- left column -->
+          @if(session('pesan'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Success</h4>
+            {{session('pesan')}}.
+        </div>
+      @endif
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">

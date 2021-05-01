@@ -31,11 +31,10 @@ class HomeController extends Controller
         $level = Auth::user()->level;
         switch ($level) {
             case '0':
-                
                 return redirect()->action('\App\Http\Controllers\AdminController@index');
                 break;
             case '1':
-                return redirect()->action('\App\Http\Controllers\PendaftarController@index');
+                return redirect()->action('\App\Http\Controllers\PendaftarController@pengumuman');
                 break;   
             case '2':
                 $title = 'Calon Siswa Gugur';
