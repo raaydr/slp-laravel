@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
         <head>
             <meta charset="utf-8" />
@@ -170,8 +170,34 @@
         <section class="content">
         @if (!empty($biodata->seleksi_berkas))
     <!-- Default box -->
+    <div class="card card-primary">
+        <div class="card-header">
+        <h3 class="card-title">Pemberitahuan</h3>
+
+        <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+        </button>
+        </div>
+    </div>
+        <div class="card-body">
+    Bagi yang telah mengisi form Challenge, dapat melihat kembali form yang sudah anda input.
+    <br>
+    Anda dapat melihatnya di halaman <strong>Dashboard</strong> dalam menu <strong>Challenge</strong>, jika ingin mengubah bisa menekan tombol ubah dan mengisi ulang kembali form challenge.
+    <br>
+
+        <br>
+        Selamat berjuang, Salam Leader, Luar Biasa!
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer ">
+        Admin SLP, 1 Mei 2021
+    </div>
+    <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
     <div class="card card-warning">
-    <div class="card-header">
+        <div class="card-header">
         <h3 class="card-title">Lolos Tahap Pemberkasan</h3>
 
         <div class="card-tools">
@@ -180,7 +206,7 @@
         </button>
         </div>
     </div>
-    <div class="card-body">
+        <div class="card-body">
     Selamat Anda lolos tahap pemberkasan. Silakan masuk grup seleksi tahap selanjutnya <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct"><strong>di sini.</strong></a>
     <br>
     Jika grup sebelumnnya sudah penuh, bisa masuk grup yang lain <a href="https://chat.whatsapp.com/HbbLsWKv20RANK9Ui8fW1F"><strong>di sini.</strong></a>Cukup masuk salah satu grup saja.

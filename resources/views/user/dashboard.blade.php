@@ -307,6 +307,7 @@
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#Pertama" data-toggle="tab">More about Me</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Challenge</a></li>
                                         </ul>
                                     </div>
                                     <!-- /.card-header -->
@@ -495,6 +496,282 @@
                                                 </div>
                                                 <!-- /.post -->
                                                 
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                            <div class="tab-pane" id="Kedua">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Challenge</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <label for="exampleInputEmail1">Link Video Challenge :</label>
+                                                    <a type="text" href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">Link Writing Challenge :</label>
+                                                    <a type="text" href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">Link Bussines Challenge :</label>
+                                                    <a class="btn btn-success" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
+                                                    <br />
+                                                    <label for="exampleInputEmail1">User CV :</label>
+                                                    <a class="btn btn-warning" href="{{asset('cvPDF')}}/{{$seleksiPertama->url_cv}}" target="_blank">Lihat</a>
+                                                    <br />
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apakah kamu pernah mengikuti kegiatan mentoring keagamaan atau halaqoh?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->mentoring}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika "Ya", seberapa sering kamu mengikuti kegiatan mentoring tersebut ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->mentoring_rutin}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu lakukan ketika sedang futur (ketika malas beribadah dan melakukan kebaikan) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->futur}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Faith" (Keyakinan) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->faith}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "ethic" (etika) ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->ethic}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Bagaimana tanggapanmu jika melihat atau mengenal orang yang memiliki kemampuan lebih baik dibandingkan dirimu ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question1}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Menurutmu apa perbedaan antara etika, moral, dan akhlak ?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question2}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Bagaimana caramu agar dapat konsisten beretika dan berakhlak baik ? Berikan contohnya !</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question3}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Leadership" ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question4}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Pernahkan kamu aktif terlibat dalam sebuah organisasi ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->organisasi}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika "Pernah", apa peranmu dalam organisasi tersebut ? Jelaskan aktivitas organisasi tersebut !</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->aktif_organisasi}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Sebagai seorang pemimpin, apa yang kamu lakukan jika anggota kelompokmu melakukan kesalahan ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question5}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Sebagai seorang anggota, apa yang kamu lakukan jika mengetahui pemimpinmu melakukan kesalahan?</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->question6}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apa yang kamu pahami tentang "Entrepreneurship" ?Jelaskan ! </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->entrepreneurship}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Kenapa kamu ingin berwirausaha? Jelaskan alasan terbesarmu ! </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->alasan_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Apakah kamu pernah berdagang atau berbisnis ? (selain challenge dari SLP) </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->pernah_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Jika pernah berdagang atau berbisnis, jelaskan pengalamanmu ! (selain challenge dari SLP)</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->exp_wirausaha}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Berapa omset terbesar yang pernah kamu raih dalam berwirausaha ? </a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$seleksiPertama->omset}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <div class="input-group-append">
+                                                    <a href="{{ route('pendaftar.seleksi1') }}" class="btn btn-primary m-2">Ubah</a>
+                                                </div>                                                
                                             </div>
                                             <!-- /.tab-pane -->
                                         </div>

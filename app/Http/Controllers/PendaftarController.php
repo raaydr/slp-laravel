@@ -39,8 +39,8 @@ class PendaftarController extends Controller
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
             ->first();
-
-        return view('user.dashboard', compact('title', 'user', 'biodata'));
+        $seleksiPertama=User::find($id)->seleksiPertama;
+        return view('user.dashboard', compact('title', 'user', 'biodata','seleksiPertama'));
     }
     public function pengumuman()
     {
