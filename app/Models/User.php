@@ -52,5 +52,14 @@ class User extends Authenticatable
     public function userPDF()
     {
         return $this->hasOne('App\Models\userPDF');
-    }  
+    } 
+    public function penilaian()
+    {
+        return $this->hasOne('App\Models\Penilaian');
+    }
+    public function antrian()
+    {
+        return $this->hasOne('App\Models\Antrian');
+    }   
+
 }

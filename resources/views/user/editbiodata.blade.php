@@ -243,23 +243,16 @@
                             <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                             <div class="col-md-4">
-                            <div class="input-group date">
+                                <div class="input-group date">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
-                                    <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir"value="{{$biodata->tanggal_lahir}}">
+                                    <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir" required autofocus />
                                 </div>
-                                </div>
-                                <small id="passwordHelpBlock" class="form-text text-sucess">
-                                 Format: YYYY-MM-DD, contoh 1990-11-29.
-                                </small>                                
-
-                                @if ($errors->has('tanggal_lahir'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('tanggal_lahir') }}</strong>
-                                    </span>
-                                @endif
                             </div>
+                            <small id="passwordHelpBlock" class="form-text text-sucess">
+                                Format: YYYY-MM-DD, contoh 1990-11-29.
+                            </small>
                         </div>
 
                         <div class="form-group row">

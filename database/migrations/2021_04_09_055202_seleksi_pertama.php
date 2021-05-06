@@ -31,7 +31,7 @@ class SeleksiPertama extends Migration
             $table->longText('question3');
             $table->longText('question4');
             $table->enum('organisasi', ['Pernah', 'Belum pernah']);
-            $table->string('aktif_organisasi')->nullable();
+            $table->longText('aktif_organisasi')->nullable();
             $table->longText('question5');
             $table->longText('question6');
             $table->longText('question7');

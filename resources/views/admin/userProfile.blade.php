@@ -237,7 +237,6 @@
                                         </p>
 
                                         <hr />
-                                        
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -247,6 +246,38 @@
                             <div class="col-md-9">
                                 <div class="card">
                                     <div class="card-header p-2">
+                                    @if(session('berhasil'))
+        <div class="alert alert-success alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-check"></i>Penilaian</h5>
+            {{session('berhasil')}}.
+            
+        </div>
+      @endif
+      @if(session('pesan'))
+        <div class="alert alert-warning alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-info"></i>Penilaian</h5>
+            {{session('pesan')}}.
+            
+        </div>
+      @endif
+      @if(session('challenge'))
+        <div class="alert alert-primary alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-check"></i>Seleksi Challenge</h5>
+            {{session('challenge')}}.
+            
+        </div>
+      @endif
+      @if(session('challengeerror'))
+        <div class="alert alert-danger alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-info"></i>Seleksi Challenge</h5>
+            {{session('challengeerror')}}.
+            
+        </div>
+      @endif
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
@@ -353,9 +384,227 @@
                                                     <div class="user-block">
                                                         <span class="username">
                                                             <a href="#">Challenge</a>
+                                                            @if(!empty($penilaian->user_id))
+                                                            <a data-toggle="modal" data-target="#modal-edit" class="btn btn-success m-2 float-right">Ubah Penilaian</a>
+                                                            @endif 
+                                                            @if(empty($penilaian->user_id))
+                                                            <a data-toggle="modal" data-target="#modal-penilaian" class="btn btn-success m-2 float-right">Penilaian</a>
+                                                            @endif
                                                         </span>
                                                     </div>
                                                     <!-- /.user-block -->
+                                                    <div class="modal fade" id="modal-edit">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content bg-warning">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Edit Penilaian</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST" action="{{route('admin.seleksi2.editpenilaian', $users->user_id)}}" enctype="multipart/form-data" class="was-validated">
+                                                                    {{csrf_field()}}
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group row">
+                                                                                <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('id') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="user_id"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
+                                                                                        name="user_id"
+                                                                                        value="{{$users->user_id}}"
+                                                                                        readonly
+                                                                                    />
+                                                                                    @if ($errors->has('user_id'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('writing') }}</label>
+
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="writing"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}"
+                                                                                        name="writing"
+                                                                                        value="{{ old('writing') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if(!empty($penilaian->user_id))
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$penilaian->writing}}</small>
+                                                                                    @endif
+                                                                                    @if ($errors->has('writing'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('writing') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="video" class="col-md-4 col-form-label text-md-right">{{ __('video') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="video"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }}"
+                                                                                        name="video"
+                                                                                        value="{{ old('video') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if(!empty($penilaian->user_id))
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$penilaian->video}}</small>
+                                                                                    @endif
+                                                                                    @if ($errors->has('video'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('video') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="penjualan" class="col-md-4 col-form-label text-md-right">{{ __('penjualan') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="penjualan"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('penjualan') ? ' is-invalid' : '' }}"
+                                                                                        name="penjualan"
+                                                                                        value="{{ old('penjualan') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if(!empty($penilaian->user_id))
+                                                                                    <small id="business" class="form-text text-sucess">nilai sebelumnya {{$penilaian->penjualan}}</small>
+                                                                                    @endif  
+                                                                                    @if ($errors->has('business'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('business') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-outline-primary">Ubah</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
+                                                    <div class="modal fade" id="modal-penilaian">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content bg-primary">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Penilaian</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST" action="{{route('admin.seleksi2.penilaian')}}" enctype="multipart/form-data" class="was-validated">
+                                                                    {{csrf_field()}}
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group row">
+                                                                                <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('id') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="user_id"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
+                                                                                        name="user_id"
+                                                                                        value="{{$users->user_id}}"
+                                                                                        readonly
+                                                                                    />
+                                                                                    @if ($errors->has('user_id'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('writing') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="writing"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}"
+                                                                                        name="writing"
+                                                                                        value="{{ old('writing') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if ($errors->has('writing'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('writing') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="video" class="col-md-4 col-form-label text-md-right">{{ __('video') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="video"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }}"
+                                                                                        name="video"
+                                                                                        value="{{ old('video') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if ($errors->has('video'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('video') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="penjualan" class="col-md-4 col-form-label text-md-right">{{ __('penjualan') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="penjualan"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('penjualan') ? ' is-invalid' : '' }}"
+                                                                                        name="penjualan"
+                                                                                        value="{{ old('penjualan') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if ($errors->has('penjualan'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('penjualan') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-outline-light">Ubah</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
                                                     <label for="exampleInputEmail1">Link Video Challenge :</label>
                                                     <a type="text" href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
                                                     <br />
@@ -622,28 +871,7 @@
                                                     <a data-toggle="modal" data-target="#modal-primary1" class="btn btn-primary m-2">Lulus</a>
                                                     <a data-toggle="modal" data-target="#modal-danger1" class="btn btn-danger m-2">Gagal</a>
                                                 </div>
-                                                <div class="modal fade" id="modal-primary1">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content bg-primary">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Anda yakin ingin meloloskan peserta ?</p>
-                                                            </div>
-                                                            <div class="modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
-                                                            </div>
-                                                        </div>
-                                                        <!-- /.modal-content -->
-                                                    </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
+
                                                 <div class="modal fade" id="modal-danger1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-danger">
@@ -659,6 +887,29 @@
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                                                                 <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <!-- /.modal -->
+                                                <div class="modal fade" id="modal-primary1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->

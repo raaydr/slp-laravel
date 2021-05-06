@@ -96,7 +96,7 @@ class PendaftarController extends Controller
                 'url_cv' => 'required|mimes:pdf|max:10240',
                 'url_writing' => 'required|string',
                 'url_video' => 'required|string',
-                'url_Business' => 'required|mimes:jpeg,png,jpg|max:2048',
+                'url_Business' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
                 'mentoring' => 'required|string',
                 'futur' => 'required|string',
                 'faith' => 'required|string',
@@ -333,6 +333,7 @@ class PendaftarController extends Controller
         File::delete('imgdaftar/'.$foto);
         DB::table('biodata')->where('user_id',$id)->update([            
             'url_foto'=> $GambarName,
+            'updated_at'=> now(),
                     
         ]);
         
@@ -386,7 +387,7 @@ class PendaftarController extends Controller
             ->where('id', $id)
             ->first();
 
-            DB::table('biodata')->where('user_id',$id)->update([
+        DB::table('biodata')->where('user_id',$id)->update([
                 'nama'=> $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tanggal_lahir' => $request->tanggal_lahir,

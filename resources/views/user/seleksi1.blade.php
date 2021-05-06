@@ -381,7 +381,7 @@
                             <div class="col-md-7">
                                 <input id="url_Business" type="file" class="form-control{{ $errors->has('url_Business') ? ' is-invalid' : '' }}" name="url_Business" value="{{ old('url_Business') }}" required autofocus>
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
-                                 Format harus jpg,png,jpeg dan ukuran maksimal 2 mb
+                                 Format harus jpg,png,jpeg,pdf dan ukuran maksimal 2 mb
                                 </small> 
                                 <div class="valid-feedback"></div>
       <div class="invalid-feedback">Tolong dilengkapi</div>
