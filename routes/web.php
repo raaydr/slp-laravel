@@ -49,12 +49,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/seleksi-pertama', 'AdminController@seleksi1')->name('admin.seleksi1');
+	Route::get('/seleksi-eleminasi', 'AdminController@seleksi1')->name('admin.eliminasi');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/gagal-daftar', 'AdminController@seleksi2')->name('admin.seleksi2');
+	Route::get('/gagal-daftar', 'AdminController@seleksi2')->name('admin.gagaldaftar');
     });
 });
 

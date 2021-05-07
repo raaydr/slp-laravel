@@ -118,15 +118,15 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="\admin\seleksi-pertama" class="nav-link">
+                                        <a href="{{ route('admin.eliminasi') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Tahap 1</p>
+                                            <p>Pendaftar Tereliminasi</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="\admin\gagal-daftar" class="nav-link">
+                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Tahap 2</p>
+                                            <p>Pendaftar Ulang</p>
                                         </a>
                                     </li>
                                 </ul>

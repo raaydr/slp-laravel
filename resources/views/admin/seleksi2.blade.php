@@ -117,15 +117,15 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="\admin\seleksi-pertama" class="nav-link ">
+                                        <a href="{{ route('admin.eliminasi') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Tahap 1</p>
+                                            <p>Pendaftar Tereliminasi</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="\admin\seleksi-kedua" class="nav-link active">
+                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Tahap 2</p>
+                                            <p>Pendaftar Ulang</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -172,7 +172,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
+                                    <h3 class="card-title">Pendaftar yang Gagal Daftar</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
