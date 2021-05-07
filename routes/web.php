@@ -138,3 +138,10 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
     });
 });
+
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::get('/ranking-challenge', 'PendaftarController@ranking')->name('pendaftar.ranking.challenge');
+
+    });
+});

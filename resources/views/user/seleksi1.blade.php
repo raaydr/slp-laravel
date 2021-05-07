@@ -357,8 +357,11 @@
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  contoh : https://www.youtube.com/watch?v=dQw4w9WgXcQ
                                 </small>
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('url_video'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('url_video') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             
                         </div>
@@ -370,8 +373,11 @@
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  contoh : https://www.instagram.com/p/CN8v_Wesjud/
                                 </small> 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('url_writing'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('url_writing') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -383,8 +389,11 @@
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  Format harus jpg,png,jpeg,pdf dan ukuran maksimal 2 mb
                                 </small> 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('url_Business'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('url_Business') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                 
@@ -395,8 +404,12 @@
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                  Format harus pdf dan ukuran maksimal 10mb
                                 </small> 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                
+                                @if ($errors->has('url_cv'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('url_cv') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -421,8 +434,11 @@
                             <div class="col-md-6">
                                 <textarea id="mentoring_rutin" type="text" class="form-control{{ $errors->has('mentoring_rutin') ? ' is-invalid' : '' }}" name="mentoring_rutin" value="{{ old('mentoring_rutin') }}" rows="3"> Abaikan Bila Menjawab "Tidak"</textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('mentoring_rutin'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('mentoring_rutin') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -430,8 +446,11 @@
                             <div class="col-md-6">
                                 <textarea id="futur" type="text" class="form-control{{ $errors->has('futur') ? ' is-invalid' : '' }}" name="futur" value="{{ old('futur') }}" rows="3" required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('futur'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('futur') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -440,8 +459,11 @@
                             <div class="col-md-6">
                                 <textarea id="faith" type="text" class="form-control{{ $errors->has('faith') ? ' is-invalid' : '' }}" name="faith" value="{{ old('faith') }}" rows="3" required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('faith'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('faith') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -450,8 +472,11 @@
                             <div class="col-md-6">
                                 <textarea id="ethic" type="text" class="form-control{{ $errors->has('ethic') ? ' is-invalid' : '' }}" name="ethic" value="{{ old('ethic') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('ethic'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('ethic') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -460,8 +485,11 @@
                             <div class="col-md-6">
                                 <textarea id="question1" type="text" class="form-control{{ $errors->has('question1') ? ' is-invalid' : '' }}" name="question1" value="{{ old('question1') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question1'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question1') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -469,8 +497,11 @@
                             <div class="col-md-6">
                                 <textarea id="question2" type="text" class="form-control{{ $errors->has('question2') ? ' is-invalid' : '' }}" name="question2" value="{{ old('question2') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question2'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question2') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -478,8 +509,11 @@
                             <div class="col-md-6">
                                 <textarea id="question3" type="text" class="form-control{{ $errors->has('question3') ? ' is-invalid' : '' }}" name="question3" value="{{ old('question3') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question3'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question3') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -487,8 +521,11 @@
                             <div class="col-md-6">
                                 <textarea id="question4" type="text" class="form-control{{ $errors->has('question4') ? ' is-invalid' : '' }}" name="question4" value="{{ old('question4') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question4'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question4') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         
@@ -513,8 +550,11 @@
                             <div class="col-md-6">
                                 <textarea id="aktif_organisasi" type="text" class="form-control{{ $errors->has('aktif_organisasi') ? ' is-invalid' : '' }}" name="aktif_organisasi" value="{{ old('aktif_organisasi') }}" rows="3">Abaikan Bila Menjawab "Belum Pernah"</textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('aktif_organisasi'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('aktif_organisasi') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         
@@ -523,8 +563,11 @@
                             <div class="col-md-6">
                                 <textarea id="question5" type="text" class="form-control{{ $errors->has('question5') ? ' is-invalid' : '' }}" name="question5" value="{{ old('question5') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question5'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question5') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -533,8 +576,11 @@
                             <div class="col-md-6">
                                 <textarea id="question6" type="text" class="form-control{{ $errors->has('question6') ? ' is-invalid' : '' }}" name="question6" value="{{ old('question6') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('question6'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('question6') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -543,8 +589,11 @@
                             <div class="col-md-6">
                                 <textarea id="entrepreneurship" type="text" class="form-control{{ $errors->has('entrepreneurship') ? ' is-invalid' : '' }}" name="entrepreneurship" value="{{ old('entrepreneurship') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('entrepreneurship'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('entrepreneurship') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -553,8 +602,11 @@
                             <div class="col-md-6">
                                 <textarea id="alasan_wirausaha" type="text" class="form-control{{ $errors->has('alasan_wirausaha') ? ' is-invalid' : '' }}" name="alasan_wirausaha" value="{{ old('alasan_wirausaha') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('alasan_wirausaha'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('alasan_wirausaha') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -581,7 +633,11 @@
                             <div class="col-md-6">
                                 <textarea id="exp_wirausaha" type="text" class="form-control{{ $errors->has('alamat') ? ' is-invalid' : '' }}" name="exp_wirausaha" value="{{ old('exp_wirausaha') }}" rows="3">Abaikan Bila Menjawab "Belum Pernah"</textarea>
 
-                                
+                                @if ($errors->has('exp_wirausaha'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('exp_wirausaha') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -590,8 +646,11 @@
                             <div class="col-md-6">
                                 <textarea id="omset" type="text" class="form-control{{ $errors->has('omset') ? ' is-invalid' : '' }}" name="omset" value="{{ old('omset') }}" rows="3"required autofocus></textarea>
 
-                                <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Tolong dilengkapi</div>
+                                @if ($errors->has('omset'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('omset') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -599,6 +658,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
+                <!-- /.card-body -->
                 <div class="text-center">
                 
                   <button type="submit" class="btn btn-primary">Submit</button>

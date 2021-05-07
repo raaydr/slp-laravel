@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Biodata;
 use App\Models\Seleksi1;
 use App\Models\seleksiPertama;
+use App\Models\Penilaian;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -122,7 +123,7 @@ class PendaftarController extends Controller
                 'url_writing.required' => 'tolong lengkapi !',
                 'url_vide.required' => 'tolong lengkapi !',
                 'url_Business.required' => 'foto tidak boleh kosong!',
-                'url_Business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_Business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
                 'url_Business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
                 'mentoring.required' => 'tolong lengkapi !',
                 'futur.required' => 'tolong lengkapi !',
@@ -423,5 +424,18 @@ class PendaftarController extends Controller
             ->first();
 
         return view('user.editbiodata', compact('title', 'user', 'biodata'));
+    }
+
+    public function ranking()
+    {
+        $title = 'Dashboard Admin';
+        $id = Auth::user()->id;
+        $users = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $ranking = Penilaian::orderBy('total', 'DESC')->get();
+
+
+        return view('user.rankingchallenge', compact('title', 'ranking','users'));
     }
 }

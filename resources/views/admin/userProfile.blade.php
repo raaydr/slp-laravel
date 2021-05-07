@@ -425,6 +425,24 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
+                                                                                <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('nama') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="nama"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
+                                                                                        name="nama"
+                                                                                        value="{{$users->nama}}"
+                                                                                        readonly
+                                                                                    />
+                                                                                    @if ($errors->has('nama'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('nama') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
                                                                                 <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('writing') }}</label>
 
                                                                                 <div class="col-md-7">
@@ -491,6 +509,28 @@
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="point" class="col-md-4 col-form-label text-md-right">{{ __('point') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="point"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('point') ? ' is-invalid' : '' }}"
+                                                                                        name="point"
+                                                                                        value="{{ old('point') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if(!empty($penilaian->user_id))
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$penilaian->video}}</small>
+                                                                                    @endif
+                                                                                    @if ($errors->has('point'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('point') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
@@ -531,6 +571,24 @@
                                                                                     @if ($errors->has('user_id'))
                                                                                     <span class="invalid-feedback" role="alert">
                                                                                         <strong>{{ $errors->first('user_id') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('nama') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="nama"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
+                                                                                        name="nama"
+                                                                                        value="{{$users->nama}}"
+                                                                                        readonly
+                                                                                    />
+                                                                                    @if ($errors->has('nama'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('nama') }}</strong>
                                                                                     </span>
                                                                                     @endif
                                                                                 </div>
@@ -592,11 +650,33 @@
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="point" class="col-md-4 col-form-label text-md-right">{{ __('point') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input
+                                                                                        id="point"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('point') ? ' is-invalid' : '' }}"
+                                                                                        name="point"
+                                                                                        value="{{ old('point') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    @if(!empty($penilaian->user_id))
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$penilaian->video}}</small>
+                                                                                    @endif
+                                                                                    @if ($errors->has('point'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('point') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
                                                                         <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-outline-light">Ubah</button>
+                                                                        <button type="submit" class="btn btn-outline-light">Save</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
