@@ -100,7 +100,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                             <li class="nav-item">
-                                <a href="\admin\dashboard" class="nav-link ">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link ">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -126,6 +126,18 @@
                                         <a href="{{ route('admin.gagaldaftar') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Pendaftar Ulang</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Tahap Challenge</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.challenge.rank') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Rank Challenge</p>
                                         </a>
                                     </li>
                                 </ul>

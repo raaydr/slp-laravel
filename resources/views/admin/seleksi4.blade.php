@@ -128,13 +128,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge') }}" class="nav-link active">
+                                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap Challenge</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge.rank') }}" class="nav-link ">
+                                        <a href="{{ route('admin.challenge.rank') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Rank Challenge</p>
                                         </a>
@@ -214,29 +214,30 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th>Rank</th>
                                                 <th>nama</th>
-                                                <th>CV</th>
                                                 <th>Writing</th>
                                                 <th>Video</th>
                                                 <th>Business</th>
+                                                <th>extra</th>
+                                                <th>total</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $i = 0; ?>
-                                            @foreach ($challenge as $check)
+                                            @foreach ($data as $check)
                                             <?php $i++ ;?>
                                                     <div class="modal fade" id="modal-penilaian">
                                                         <div class="modal-dialog">
-                                                            <div class="modal-content bg-primary">
+                                                            <div class="modal-content bg-warning">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">Penilaian</h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
-                                                                <form method="POST" action="{{route('admin.challenge.penilaian')}}" enctype="multipart/form-data" class="was-validated">
+                                                                <form method="POST" action="{{route('admin.challenge.editpenilaian')}}" enctype="multipart/form-data" class="was-validated">
                                                                     {{csrf_field()}}
                                                                     <div class="modal-body">
                                                                         
@@ -264,8 +265,20 @@
                                                                             </div>
                                                                             <div class="form-group row">
                                                                                 <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('writing') }}</label>
+
                                                                                 <div class="col-md-7">
-                                                                                    <input id="writing" type="text" class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}" name="writing" value="{{ old('writing') }}" required autofocus />
+                                                                                    <input
+                                                                                        id="writing"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}"
+                                                                                        name="writing"
+                                                                                        value="{{ old('writing') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_writing}}" target="_blank">challenge</a></small>
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->writing}}</small>
+                                                                                    
                                                                                     @if ($errors->has('writing'))
                                                                                     <span class="invalid-feedback" role="alert">
                                                                                         <strong>{{ $errors->first('writing') }}</strong>
@@ -276,7 +289,18 @@
                                                                             <div class="form-group row">
                                                                                 <label for="video" class="col-md-4 col-form-label text-md-right">{{ __('video') }}</label>
                                                                                 <div class="col-md-7">
-                                                                                    <input id="video" type="text" class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }}" name="video" value="{{ old('video') }}" required autofocus />
+                                                                                    <input
+                                                                                        id="video"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }}"
+                                                                                        name="video"
+                                                                                        value="{{ old('video') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_video}}" target="_blank">challenge</a></small>
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->video}}</small>
+                                                                                    
                                                                                     @if ($errors->has('video'))
                                                                                     <span class="invalid-feedback" role="alert">
                                                                                         <strong>{{ $errors->first('video') }}</strong>
@@ -287,10 +311,21 @@
                                                                             <div class="form-group row">
                                                                                 <label for="penjualan" class="col-md-4 col-form-label text-md-right">{{ __('penjualan') }}</label>
                                                                                 <div class="col-md-7">
-                                                                                    <input id="penjualan" type="text" class="form-control{{ $errors->has('penjualan') ? ' is-invalid' : '' }}" name="penjualan" value="{{ old('penjualan') }}" required autofocus />
-                                                                                    @if ($errors->has('penjualan'))
+                                                                                    <input
+                                                                                        id="penjualan"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('penjualan') ? ' is-invalid' : '' }}"
+                                                                                        name="penjualan"
+                                                                                        value="{{ old('penjualan') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_Business}}" target="_blank">challenge</a></small>
+                                                                                    <small id="business" class="form-text text-sucess">nilai sebelumnya {{$check->penjualan}}</small>
+                                                                                    
+                                                                                    @if ($errors->has('business'))
                                                                                     <span class="invalid-feedback" role="alert">
-                                                                                        <strong>{{ $errors->first('penjualan') }}</strong>
+                                                                                        <strong>{{ $errors->first('business') }}</strong>
                                                                                     </span>
                                                                                     @endif
                                                                                 </div>
@@ -298,10 +333,19 @@
                                                                             <div class="form-group row">
                                                                                 <label for="point" class="col-md-4 col-form-label text-md-right">{{ __('point') }}</label>
                                                                                 <div class="col-md-7">
-                                                                                    <input id="point" type="text" class="form-control{{ $errors->has('point') ? ' is-invalid' : '' }}" name="point" value="{{ old('point') }}" required autofocus />
-                                                                                    @if(!empty($penilaian->user_id))
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$penilaian->point}}</small>
-                                                                                    @endif @if ($errors->has('point'))
+                                                                                    <input
+                                                                                        id="point"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('point') ? ' is-invalid' : '' }}"
+                                                                                        name="point"
+                                                                                        value="{{ old('point') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    />
+                                                                                    
+                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->point}}</small>
+                                                                                    
+                                                                                    @if ($errors->has('point'))
                                                                                     <span class="invalid-feedback" role="alert">
                                                                                         <strong>{{ $errors->first('point') }}</strong>
                                                                                     </span>
@@ -325,46 +369,41 @@
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $check->nama }}</td>
                                                 <td>
-                                                    @if(($check->url_cv)== '#')
-                                                    <a type="text" href="{{$check->url_cv}}" target="_blank">kosong</a>
-                                                    @else
-                                                    <a type="text" href="{{$check->url_cv}}" target="_blank">check</a>
-                                                    @endif
+                                                {{$check->writing}}
                                                 </td>
                                                 <td>
-                                                    @if(($check->url_writing)== '#')
-                                                    <a type="text" href="{{$check->url_writing}}" target="_blank">kosong</a>
-                                                    @else
-                                                    <a type="text" href="{{$check->url_writing}}" target="_blank">check</a>
-                                                    @endif
+                                                {{$check->video}}
                                                 </td>
                                                 <td>
-                                                    @if(($check->url_video)== '#')
-                                                    <a type="text" href="{{$check->url_video}}" target="_blank">kosong</a>
-                                                    @else
-                                                    <a type="text" href="{{$check->url_video}}" target="_blank">check</a>
-                                                    @endif
+                                                {{$check->business}}
                                                 </td>
                                                 <td>
-                                                    @if(($check->url_Business)== '#')
-                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">kosong</a>
-                                                    @else
-                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">check</a>
-                                                    @endif
+                                                {{$check->point}}
+                                                </td>
+                                                <td>
+                                                {{$check->total}}
                                                 </td>                                                    
                                                 <td class="project-actions text-right">
                                                     
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
-                                                        <i class="fas fa-check"> </i>
-                                                        Penilaian
-                                                    </button>
-                                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
-                                                        <i class="fas fa-folder"> </i>
-                                                        Detail
-                                                    </a>
-                                                    @if(((($check->url_Business)== '#')||(($check->url_video)== '#')||(($check->url_writing)== '#'))== true)
-                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
+                                                    
+                                                    @if(((($check->business) != '0')&&(($check->video)!= '0')&&(($check->writing)!= '0'))== 1)
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
                                                         <i class="fas fa-info"> </i>
+                                                        Ubah Penilaian
+                                                    </button>
+                                                    @else
+                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
+                                                        <i class="fas fa-info"> </i>
+                                                        Ubah Penilaian
+                                                    </button>
+                                                    @endif
+                                                    @if(((($check->business) == 0)&&(($check->video)== 0)&&(($check->writing)== 0))== 0)
+                                                    <a class="btn btn-success btn-sm m-2" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
+                                                        <i class="fas fa-check"> </i>
+                                                        Lulus
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm m-2" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
+                                                        <i class="fas fa-exclamation"> </i>
                                                         Gagal
                                                     </a>
                                                     @endif
@@ -374,12 +413,13 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>No</th>
+                                                <th>Rank</th>
                                                 <th>nama</th>
-                                                <th>CV</th>
                                                 <th>Writing</th>
                                                 <th>Video</th>
                                                 <th>Business</th>
+                                                <th>extra</th>
+                                                <th>total</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>

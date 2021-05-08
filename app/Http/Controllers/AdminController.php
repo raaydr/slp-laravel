@@ -352,7 +352,7 @@ class AdminController extends Controller
                 'penjualan' => $request->penjualan,
                 'updated_at'=> now(),
             ]);
-            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil ubah penilaian');
         }else{
             return redirect()->route('admin.userprofile', [$user_id])->with('pesan', 'Penilaian melebihi yang seharusnya');
@@ -370,6 +370,15 @@ class AdminController extends Controller
         
 
         return view('admin.seleksi3', compact('title', 'challenge', 'penilaian'));
+    }
+    public function rank_challenge(){
+        $title = 'Admin Rank Challenge';
+        $data = DB::table('penilaian_challenge')
+                    ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
+                    ->orderBy('total', 'DESC')->get();
+        
+
+        return view('admin.seleksi4', compact('title', 'data'));
     }
     public function challenge_penilaian (Request $request)
     {
@@ -431,6 +440,75 @@ class AdminController extends Controller
         }else{
             return redirect()->route('admin.challenge')->with('pesan', 'Penilaian melebihi yang seharusnya');
         }
+        
+    
+
+    }
+    public function challenge_editpenilaian (Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'user_id' => 'required',
+                'writing' => 'required|numeric',
+                'video' => 'required|numeric',
+                'penjualan' => 'required|numeric',
+                'point' => 'required|numeric',
+
+                
+
+            ],
+
+            $messages = [
+                
+                'writing.required' => 'Harus angka !',
+                'video.required' => 'Harus angka!',
+                'penjualan.required' => 'Harus angka!',
+                'point' => 'required|numeric',
+               
+
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+
+        $penilaian_challenge = new Penilaian;
+        $user_id = Input::get('user_id');
+        $writing = Input::get('writing');
+        $video = Input::get('video');
+        $point = Input::get('point');
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        
+        
+        
+        if((($writing<=100)&& ($video<=100)== true)){
+            $nbusiness = Input::get('penjualan');
+            $business = ($nbusiness / 500000) *100;
+            $total = $writing + $video + $business + $point;
+            DB::table('penilaian_challenge')->where('user_id',$user_id)->update([
+                'nama'=> $request->nama,
+                'writing'=> $request->writing,
+                'video' => $request->video,
+                'business' => $business,
+                'total'=> $total,
+                'gen'=> $gen,
+                'point'=> $request->point,
+                'penjualan' => $request->penjualan,
+                'updated_at'=> now(),
+            ]);
+            
+            return redirect()->route('admin.challenge.rank')->with('berhasil', 'berhasil  penilaian');
+        }else{
+            return redirect()->route('admin.challenge.rank')->with('pesan', 'Penilaian melebihi yang seharusnya');
+        }
+        
         
     
 
