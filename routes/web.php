@@ -58,6 +58,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     });
 });
 
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/seleksi-challenge', 'AdminController@challenge')->name('admin.challenge');
+    });
+});
+
 
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
@@ -83,6 +89,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+	Route::get('/tahap-challenge/{user_id}', 'AdminController@challenge_gagal')->name('admin.challenge.gagal');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
 	Route::post('/penilaian_challenge', 'AdminController@penilaian')->name('admin.seleksi2.penilaian');
     });
 });Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -90,7 +101,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::post('/dashboard/userProfile/editpenilaian/{user_id}', 'AdminController@editpenilaian')->name('admin.seleksi2.editpenilaian');
     });
 });
-
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/penilaian_seleksichallenge', 'AdminController@challenge_penilaian')->name('admin.challenge.penilaian');
+    });
+});
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {

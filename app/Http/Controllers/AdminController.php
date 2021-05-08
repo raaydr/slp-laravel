@@ -162,16 +162,14 @@ class AdminController extends Controller
             ->value('nama');
 
         if (!empty($penilaian)){
+            User::where('id', $user_id)->update(['level' => '4']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
+        }else {
             User::where('id', $user_id)->update(['level' => '2']);
             Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
-           
-            
-            $users=User::find($user_id)->biodata;
-            $seleksiPertama=User::find($user_id)->seleksiPertama;
-            $pdf=User::find($user_id)->userPDF;
-            return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
-
-        }else {
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             $penilaian_challenge = new Penilaian;
             $penilaian_challenge->user_id = $user_id;
             $penilaian_challenge->nama = $nama;
@@ -184,6 +182,47 @@ class AdminController extends Controller
             $penilaian_challenge->gen = $gen;
             $penilaian_challenge->save();
             return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
+        }
+        
+        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
+    }
+    public function challenge_gagal($user_id)
+    {
+        $title = 'Admin User Profile';
+
+        $penilaian = DB::table('penilaian_challenge')
+            ->where('user_id', $user_id)
+            ->value('id');
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $nama = DB::table('biodata')
+            ->where('user_id', $user_id)
+            ->value('nama');
+
+        if (!empty($penilaian)){
+            User::where('id', $user_id)->update(['level' => '4']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
+
+        }else {
+            User::where('id', $user_id)->update(['level' => '2']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            $penilaian_challenge = new Penilaian;
+            $penilaian_challenge->user_id = $user_id;
+            $penilaian_challenge->nama = $nama;
+            $penilaian_challenge->writing = 0;
+            $penilaian_challenge->video = 0;
+            $penilaian_challenge->business = 0;
+            $penilaian_challenge->total = 0;
+            $penilaian_challenge->penjualan = 0;
+            $penilaian_challenge->point = 0;
+            $penilaian_challenge->gen = $gen;
+            $penilaian_challenge->save();
+            return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
         }
         
         //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
@@ -245,6 +284,7 @@ class AdminController extends Controller
             $penilaian_challenge->point = Input::get('point');
             $penilaian_challenge->penjualan = Input::get('penjualan');
             $penilaian_challenge->save();
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil  penilaian');
         }else{
             return redirect()->route('admin.userprofile', [$user_id])->with('pesan', 'Penilaian melebihi yang seharusnya');
@@ -312,11 +352,85 @@ class AdminController extends Controller
                 'penjualan' => $request->penjualan,
                 'updated_at'=> now(),
             ]);
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil ubah penilaian');
         }else{
             return redirect()->route('admin.userprofile', [$user_id])->with('pesan', 'Penilaian melebihi yang seharusnya');
         }
         
+        
+    
+
+    }
+
+    public function challenge(){
+        $title = 'Admin Seleksi Challenge';
+        $challenge = seleksiPertama::where('checked', 0)->get();
+        $penilaian = Penilaian::get();
+        
+
+        return view('admin.seleksi3', compact('title', 'challenge', 'penilaian'));
+    }
+    public function challenge_penilaian (Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'user_id' => 'required',
+                'writing' => 'required|numeric',
+                'video' => 'required|numeric',
+                'penjualan' => 'required|numeric',
+
+                
+
+            ],
+
+            $messages = [
+                
+                'writing.required' => 'Harus angka !',
+                'video.required' => 'Harus angka!',
+                'penjualan.required' => 'Harus angka!',
+               
+
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+
+        
+        
+        $writing = Input::get('writing');
+        $video = Input::get('video');
+        $user_id = Input::get('user_id');
+        $point = Input::get('point');
+        $nbusiness = Input::get('penjualan');
+        $business = ($nbusiness / 500000) *100;
+        $total = $writing + $video + $business + $point;
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        if((($writing<=100)&&($video<=100)== true)){
+            $penilaian_challenge = new Penilaian;
+            $penilaian_challenge->user_id = Input::get('user_id');
+            $penilaian_challenge->nama = Input::get('nama');
+            $penilaian_challenge->gen = $gen;
+            $penilaian_challenge->writing = Input::get('writing');
+            $penilaian_challenge->video = Input::get('video');
+            $penilaian_challenge->business = $business;
+            $penilaian_challenge->total = $total;
+            $penilaian_challenge->point = Input::get('point');
+            $penilaian_challenge->penjualan = Input::get('penjualan');
+            $penilaian_challenge->save();
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            return redirect()->route('admin.challenge')->with('berhasil', 'berhasil  penilaian');
+        }else{
+            return redirect()->route('admin.challenge')->with('pesan', 'Penilaian melebihi yang seharusnya');
+        }
         
     
 
