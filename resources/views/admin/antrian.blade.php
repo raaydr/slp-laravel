@@ -124,7 +124,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link active">
+                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link ">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Pendaftar Ulang</p>
                                         </a>
@@ -139,6 +139,12 @@
                                         <a href="{{ route('admin.challenge.rank') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Rank Challenge</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Antrian Interview</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -171,7 +177,7 @@
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="/">Admin</a></li>
-                                    <li class="breadcrumb-item active">Pendaftar-Gagal</li>
+                                    <li class="breadcrumb-item active">Antrian-Interview</li>
                                 </ol>
                             </div>
                         </div>
@@ -185,32 +191,42 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Pendaftar yang Gagal Daftar</h3>
+                                    <h3 class="card-title">Daftar Antrian Interview</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>email</th>
-                                                <th>create</th>
-                                                <th>update</th>
+                                                <th>No.Antrian</th>
+                                                <th>Nama</th>
+                                                <th>Kehadiran</th>
+                                                <th></th>
                                                 
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $i = 0; ?>
-                                            @foreach ($users as $user)
+                                            @foreach ($antrian as $user)
                                             <?php $i++ ;?>
                                             <tr>
-                                                <th scope="row">{{ $i }}</th>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>{{ $user->updated_at }}</td>
+                                                <td>{{ $user->antrian }}</td>
+                                                <td>{{ $user->nama }}</td>
+                                                <td>{{ $user->absen }}</td>
+                                                <td class="project-actions text-right">
+                          <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->user_id) }}" target="_blank">
+                              <i class="fas fa-folder">
+                              </i>
+                              Detail
+                          </a>
+                      </td>
                                                 <td>
-                                                    
+                                                <a class="btn btn-success btn-sm" href="#" target="_blank">
+                              <i class="fas fa-check">
+                              </i>
+                              Hadir
+                          </a>
                                                 </td>
                                             </tr>
                                             @endforeach

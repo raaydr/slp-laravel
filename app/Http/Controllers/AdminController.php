@@ -46,6 +46,16 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('title', 'users'));
     }
+    public function antrian_interview()
+    {  
+        $title = 'Antrian Interview';
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $antrian = Antrian::where('gen', $gen)->where('absen', 'Tidak Hadir')->orderBy('antrian', 'ASC')->get();
+
+        return view('admin.antrian', compact('title', 'antrian'));
+    }
 
     public function seleksi1()
     {
@@ -112,7 +122,9 @@ class AdminController extends Controller
     public function seleksi2_lulus($user_id)
     {
         
-
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
         $penilaian = DB::table('penilaian_challenge')
             ->where('user_id', $user_id)
             ->value('id');
@@ -131,6 +143,7 @@ class AdminController extends Controller
             $antrian_interview->nama = $users->nama;
             $antrian_interview->antrian = $antrian;
             $antrian_interview->absen = "Tidak Hadir";
+            $antrian_interview->gen = $gen;
             $antrian_interview->save();
             DB::table('controller')->where('id',1)->update([            
                 'antrian'=> $antrian,

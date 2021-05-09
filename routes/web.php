@@ -68,6 +68,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/rank-challenge', 'AdminController@rank_challenge')->name('admin.challenge.rank');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/antrian-interview', 'AdminController@antrian_interview')->name('admin.interview.antrian');
+    });
+});
 
 
 Route::group(['middleware' => 'check-permission:admin'], function () {
