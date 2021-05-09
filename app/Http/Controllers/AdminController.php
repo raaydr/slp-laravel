@@ -100,7 +100,7 @@ class AdminController extends Controller
         
         User::where('id', $user_id)->update(['level' => '2']);
         Biodata::where('user_id', $user_id)->update(['seleksi_berkas' => 'GAGAL']);
-
+        seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
@@ -111,7 +111,7 @@ class AdminController extends Controller
 
     public function seleksi2_lulus($user_id)
     {
-        $title = 'Admin User Profile';
+        
 
         $penilaian = DB::table('penilaian_challenge')
             ->where('user_id', $user_id)
@@ -162,7 +162,7 @@ class AdminController extends Controller
             ->value('nama');
 
         if (!empty($penilaian)){
-            User::where('id', $user_id)->update(['level' => '4']);
+            User::where('id', $user_id)->update(['level' => '2']);
             Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
@@ -187,9 +187,34 @@ class AdminController extends Controller
         //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
         //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
     }
-    public function challenge_gagal($user_id)
+    public function challenge_lulus($user_id,$nama)
     {
-        $title = 'Admin User Profile';
+        User::where('id', $user_id)->update(['level' => '1']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LULUS']);
+        $antrian = DB::table('controller')
+            ->where('id', 1)
+            ->value('antrian');
+            $antrian++;
+            $antrian_interview = new Antrian;
+            $antrian_interview->user_id = $user_id;
+            $antrian_interview->nama = $nama;
+            $antrian_interview->antrian = $antrian;
+            $antrian_interview->absen = "Tidak Hadir";
+            $antrian_interview->save();
+            DB::table('controller')->where('id',1)->update([            
+                'antrian'=> $antrian,
+                'updated_at'=> now(),
+                        
+            ]);
+            return redirect()->route('admin.challenge.rank')->with('berhasil', 'berhasil meluluskan');
+
+        
+        
+        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
+        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
+    }
+    public function challenge_gagal($user_id,$r)
+    {
 
         $penilaian = DB::table('penilaian_challenge')
             ->where('user_id', $user_id)
@@ -202,10 +227,15 @@ class AdminController extends Controller
             ->value('nama');
 
         if (!empty($penilaian)){
-            User::where('id', $user_id)->update(['level' => '4']);
+            User::where('id', $user_id)->update(['level' => '2']);
             Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
-            return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
+            if($r == 0){
+                return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
+            }else {
+                return redirect()->route('admin.challenge.rank')->with('challenge', 'berhasil menggagalkan');
+            }
+            
 
         }else {
             User::where('id', $user_id)->update(['level' => '2']);
@@ -222,7 +252,11 @@ class AdminController extends Controller
             $penilaian_challenge->point = 0;
             $penilaian_challenge->gen = $gen;
             $penilaian_challenge->save();
-            return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
+            if($r == 0){
+                return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
+            }else {
+                return redirect()->route('admin.challenge.rank')->with('challenge', 'berhasil menggagalkan');
+            }
         }
         
         //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
@@ -367,18 +401,21 @@ class AdminController extends Controller
         $title = 'Admin Seleksi Challenge';
         $challenge = seleksiPertama::where('checked', 0)->get();
         $penilaian = Penilaian::get();
+        $r=0;
         
 
-        return view('admin.seleksi3', compact('title', 'challenge', 'penilaian'));
+        return view('admin.seleksi3', compact('title', 'challenge', 'penilaian','r'));
     }
     public function rank_challenge(){
         $title = 'Admin Rank Challenge';
+        $r=1;
         $data = DB::table('penilaian_challenge')
                     ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
+                    ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
                     ->orderBy('total', 'DESC')->get();
         
 
-        return view('admin.seleksi4', compact('title', 'data'));
+        return view('admin.seleksi4', compact('title', 'data','r'));
     }
     public function challenge_penilaian (Request $request)
     {

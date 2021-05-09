@@ -94,7 +94,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/tahap-challenge/{user_id}', 'AdminController@challenge_gagal')->name('admin.challenge.gagal');
+	Route::get('/tahap-challenge/gagal/{user_id}/{r}', 'AdminController@challenge_gagal')->name('admin.challenge.gagal');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/tahap-challenge/lulus/{user_id}/{nama}', 'AdminController@challenge_lulus')->name('admin.challenge.lulus');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

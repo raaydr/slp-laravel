@@ -659,11 +659,12 @@
 
                 <div class="card-footer">
                 <!-- /.card-body -->
-                <div class="text-center">
+                <!-- /<div class="text-center">
                 
                   <button type="submit" class="btn btn-primary">Submit</button>
                   
-                  </div>
+                </div> -->
+                
                 </div>
               </form>
             </div>

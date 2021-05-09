@@ -325,10 +325,10 @@
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $check->nama }}</td>
                                                 <td>
-                                                    @if(($check->url_cv)== '#')
-                                                    <a type="text" href="{{$check->url_cv}}" target="_blank">kosong</a>
+                                                @if(($check->url_cv)== '#')
+                                                    <a type="text" href="{{asset('cvPDF')}}/{{$check->url_cv}}" target="_blank">kosong</a>
                                                     @else
-                                                    <a type="text" href="{{$check->url_cv}}" target="_blank">check</a>
+                                                    <a type="text" href="{{asset('cvPDF')}}/{{$check->url_cv}}" target="_blank">check</a>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -347,9 +347,9 @@
                                                 </td>
                                                 <td>
                                                     @if(($check->url_Business)== '#')
-                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">kosong</a>
+                                                    <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">kosong</a>
                                                     @else
-                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">check</a>
+                                                    <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">check</a>
                                                     @endif
                                                 </td>                                                    
                                                 <td class="project-actions text-right">
@@ -363,7 +363,7 @@
                                                         Detail
                                                     </a>
                                                     @if(((($check->url_Business)== '#')||(($check->url_video)== '#')||(($check->url_writing)== '#'))== true)
-                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
+                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.challenge.gagal', [$check->user_id,$r]) }}">
                                                         <i class="fas fa-info"> </i>
                                                         Gagal
                                                     </a>

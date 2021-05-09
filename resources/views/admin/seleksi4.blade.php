@@ -220,8 +220,13 @@
                                                 <th>Video</th>
                                                 <th>Business</th>
                                                 <th>extra</th>
+                                                <th>Penjualan</th>
                                                 <th>total</th>
-                                                <th></th>
+                                                <th>Penilaian</th>
+                                                <th>Status</th>
+                                                <th>Challenge Writing</th>
+                                                <th>Challenge Video</th>
+                                                <th>Challenge Business</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -276,8 +281,8 @@
                                                                                         required
                                                                                         autofocus
                                                                                     />
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_writing}}" target="_blank">challenge</a></small>
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->writing}}</small>
+                                                                                    
+                                                                                    
                                                                                     
                                                                                     @if ($errors->has('writing'))
                                                                                     <span class="invalid-feedback" role="alert">
@@ -298,8 +303,7 @@
                                                                                         required
                                                                                         autofocus
                                                                                     />
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_video}}" target="_blank">challenge</a></small>
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->video}}</small>
+                                                                                    
                                                                                     
                                                                                     @if ($errors->has('video'))
                                                                                     <span class="invalid-feedback" role="alert">
@@ -320,8 +324,7 @@
                                                                                         required
                                                                                         autofocus
                                                                                     />
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">lihat : <a type="text" href="{{$check->url_Business}}" target="_blank">challenge</a></small>
-                                                                                    <small id="business" class="form-text text-sucess">nilai sebelumnya {{$check->penjualan}}</small>
+                                                                                    
                                                                                     
                                                                                     @if ($errors->has('business'))
                                                                                     <span class="invalid-feedback" role="alert">
@@ -343,7 +346,6 @@
                                                                                         autofocus
                                                                                     />
                                                                                     
-                                                                                    <small id="passwordHelpBlock" class="form-text text-sucess">nilai sebelumnya {{$check->point}}</small>
                                                                                     
                                                                                     @if ($errors->has('point'))
                                                                                     <span class="invalid-feedback" role="alert">
@@ -381,31 +383,66 @@
                                                 {{$check->point}}
                                                 </td>
                                                 <td>
+                                                {{$check->penjualan}}
+                                                </td>
+                                                <td>
                                                 {{$check->total}}
                                                 </td>                                                    
                                                 <td class="project-actions text-right">
                                                     
                                                     
-                                                    @if(((($check->business) != '0')&&(($check->video)!= '0')&&(($check->writing)!= '0'))== 1)
-                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
+                                                    @if(((($check->business) != '0')&&(($check->video)!= '0')&&(($check->writing)!= '0'))== 0)
+                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-writing="{{$check->writing}}"data-point="{{$check->point}}" data-video="{{$check->video}}" data-penjualan="{{$check->penjualan}}"data-seleksi="{{$check->seleksi_pertama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Penilaian
                                                     </button>
                                                     @else
-                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-writing="{{$check->writing}}"data-point="{{$check->point}}" data-video="{{$check->video}}" data-penjualan="{{$check->penjualan}}"data-seleksi="{{$check->seleksi_pertama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Penilaian
                                                     </button>
                                                     @endif
-                                                    @if(((($check->business) == 0)&&(($check->video)== 0)&&(($check->writing)== 0))== 0)
-                                                    <a class="btn btn-success btn-sm m-2" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
-                                                        <i class="fas fa-check"> </i>
-                                                        Lulus
-                                                    </a>
-                                                    <a class="btn btn-danger btn-sm m-2" href="{{ route('admin.challenge.gagal', $check->user_id) }}">
+                                                </td>
+                                                <td>
+                                                @if(($check->seleksi_pertama)== 'GAGAL')
+                                                    
+                                                <p class="text-danger">GAGAL</p>
+                                                @endif
+                                                @if(($check->seleksi_pertama)== 'LULUS')
+                                                    
+                                                <p class="text-success">LULUS</p>
+                                                @endif
+                                                @if(($check->seleksi_pertama)== '')
+                                                    <a class="btn btn-danger btn-sm m-2" href="{{ route('admin.challenge.gagal', [$check->user_id,$r]) }}">
                                                         <i class="fas fa-exclamation"> </i>
                                                         Gagal
                                                     </a>
+                                                    <a class="btn btn-success btn-sm m-2" href="{{ route('admin.challenge.lulus', [$check->user_id,$check->nama]) }}">
+                                                        <i class="fas fa-check"> </i>
+                                                        Lulus
+                                                    </a>
+                                                    
+                                                @endif
+                                                </td>
+                                                <td>
+                                                    @if(($check->url_writing)== '#')
+                                                    <a type="text" href="{{$check->url_writing}}" target="_blank">kosong</a>
+                                                    @else
+                                                    <a type="text" href="{{$check->url_writing}}" target="_blank">check</a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(($check->url_video)== '#')
+                                                    <a type="text" href="{{$check->url_video}}" target="_blank">kosong</a>
+                                                    @else
+                                                    <a type="text" href="{{$check->url_video}}" target="_blank">check</a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(($check->url_Business)== '#')
+                                                    <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">kosong</a>
+                                                    @else
+                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">check</a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -419,8 +456,13 @@
                                                 <th>Video</th>
                                                 <th>Business</th>
                                                 <th>extra</th>
+                                                <th>penjualan</th>
                                                 <th>total</th>
-                                                <th></th>
+                                                <th>Penilaian</th>
+                                                <th>Status</th>
+                                                <th>Challenge Writing</th>
+                                                <th>Challenge Video</th>
+                                                <th>Challenge Business</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -495,15 +537,22 @@
                 
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var id = button.data('myid')
-                var nama = button.data('myname') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var nama = button.data('myname')
+                var writing = button.data('writing') 
+                var video = button.data('video') 
+                var penjualan = button.data('penjualan') 
+                var point = button.data('point') 
+                var seleksi = button.data('seleksi') 
                 console.log('modal kebuka');
                 console.log(nama);
-                console.log(id);
+                console.log(seleksi);
                 var modal = $(this)
                 modal.find('.modal-body #user_id').val(id)
                 modal.find('.modal-body #nama').val(nama)
+                modal.find('.modal-body #writing').val(writing)
+                modal.find('.modal-body #video').val(video)
+                modal.find('.modal-body #penjualan').val(penjualan)
+                modal.find('.modal-body #point').val(point)
             });
         </script>
     </body>
