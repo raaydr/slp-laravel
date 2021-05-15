@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+        <div class="col-md-6">
+            <div class="card mx-auto mt-5">
+                <div class="card-header  text-center">{{ __('LOGIN') }}</div>
 
                 <div class="card-body">
                 @if(session()->has('success'))
@@ -81,7 +81,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Lupa Password Anda ?') }}
                                     </a>
                                 @endif
                             </div>

@@ -58,7 +58,7 @@
           <li><a href="#services">Pendaftaran</a></li>
           <li><a href="#portfolio">News</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="https://slpindonesia.com/">Login</a></li>
+          <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -321,7 +321,7 @@
       <div class="container text-center">
         <h3>Gabung di Smart Leader Preneur</h3>
         <p> Langsung daftar yuk!</p>
-        <a class="cta-btn" href="https://slpindonesia.com/register" target="_blank">Daftar Sekarang</a>
+        <a class="cta-btn" href="{{ route('register') }}" target="_blank">Daftar Sekarang</a>
       </div>
     </section><!-- #call-to-action -->
 

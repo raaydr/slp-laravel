@@ -22,12 +22,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('develop')}}/img/slp.png" rel="icon">
 </head>
-<body>
+<body style ="background-image: url('{{asset('develop')}}/img/LostSphear.jpg')";>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-blue shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('SLP Indonesia', 'SLP Indonesia') }}
+                <a class="navbar-brand" href="{{ url('/') }}" >
+                <img src="{{asset('develop')}}/img/LOGO - SLP - WHITE.png" class="img-fluid" alt="Responsive image"  width="100"  style="opacity: 0.8;" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

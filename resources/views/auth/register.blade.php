@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
+                <div class="card-header text-center">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
                <!--<a class="text-center m-2"><b>Semua Form Harus Dilengkapi </b></a>-->
                 <a class="text-center m-2"><b>Pendaftaran sudah ditutup</b></a>
                 <div class="card-body">
