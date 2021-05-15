@@ -39,10 +39,18 @@ class HomeController extends Controller
             case '2':
                 $title = 'Calon Siswa Gugur';
                 $id =  Auth::user()->id;
-                $user = DB::table('users')->where('id', $id)->first();
+                $user = User::where('id', $id)->get();
                 $biodata = DB::table('biodata')->where('user_id', $id)->first();
-
-                return view('user.gugur', compact('title', 'user', 'biodata'));
+                $check = DB::table('penilaian_challenge')
+                        ->where('user_id', $id)
+                        ->value('total');
+                if($check == 0){
+                    return view('user.gugur', compact('title', 'user', 'biodata'));
+                }else{
+                    $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
+                    return view('user.gugur2', compact('title', 'user', 'biodata','nilai'));
+                }
+                
                         
                 break;
             case '3':

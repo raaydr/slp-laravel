@@ -110,6 +110,7 @@
       <div class="error-page">
 
         <div class="error-content">
+        
           <h3><i class="fas fa-info-circle text-danger"></i> Kamu Tereliminasi.</h3>
 
           <p>
@@ -120,8 +121,32 @@
             <strong>Cheers!</strong>
             
           </p>
-        
-          
+        <form>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-5 col-form-label">Nama</label>
+                <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$nilai->nama}}"readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Challenge Writing</label>
+                <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$nilai->writing}}"readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Challenge Video</label>
+                <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$nilai->video}}"readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Challenge Business</label>
+                <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$nilai->business}}"readonly>
+                </div>
+            </div>
+        </form>
         </div>
       </div>
       <!-- /.error-page -->
