@@ -195,6 +195,18 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
+                                <a class="btn btn-danger btn-sm" href="{{ route('admin.all.daftarulang') }}">
+                                                        <i class="fas fa-info"> </i>
+                                                        Gagal
+                                                    </a>
+                                                    @if(session('berhasil'))
+        <div class="alert alert-success alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-check"></i>Penilaian</h5>
+            {{session('berhasil')}}.
+            
+        </div>
+      @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -286,7 +298,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        
                     })
                     .buttons()
                     .container()

@@ -130,6 +130,16 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::post('/editpenilaian_seleksichallenge', 'AdminController@challenge_editpenilaian')->name('admin.challenge.editpenilaian');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/challenge/all-gagal', 'AdminController@allGagal')->name('admin.all.gagal');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/challenge/all-gagaldaftar', 'AdminController@allDaftarUlang')->name('admin.all.daftarulang');
+    });
+});
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {

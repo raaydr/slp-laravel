@@ -286,6 +286,8 @@
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
         <!-- AdminLTE App -->
         <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
@@ -297,7 +299,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        
                     })
                     .buttons()
                     .container()

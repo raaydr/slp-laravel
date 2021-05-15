@@ -130,7 +130,7 @@ class AdminController extends Controller
             ->value('id');
         if (!empty($penilaian)){
             User::where('id', $user_id)->update(['level' => '1']);
-        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LULUS']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LOLOS']);
         $users=User::find($user_id)->biodata;
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
@@ -176,12 +176,12 @@ class AdminController extends Controller
 
         if (!empty($penilaian)){
             User::where('id', $user_id)->update(['level' => '2']);
-            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
         }else {
             User::where('id', $user_id)->update(['level' => '2']);
-            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             $penilaian_challenge = new Penilaian;
             $penilaian_challenge->user_id = $user_id;
@@ -203,7 +203,7 @@ class AdminController extends Controller
     public function challenge_lulus($user_id,$nama)
     {
         User::where('id', $user_id)->update(['level' => '1']);
-        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LULUS']);
+        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LOLOS']);
         $antrian = DB::table('controller')
             ->where('id', 1)
             ->value('antrian');
@@ -241,7 +241,7 @@ class AdminController extends Controller
 
         if (!empty($penilaian)){
             User::where('id', $user_id)->update(['level' => '2']);
-            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             if($r == 0){
                 return redirect()->route('admin.challenge')->with('challenge', 'berhasil menggagalkan');
@@ -252,7 +252,7 @@ class AdminController extends Controller
 
         }else {
             User::where('id', $user_id)->update(['level' => '2']);
-            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GAGAL']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             $penilaian_challenge = new Penilaian;
             $penilaian_challenge->user_id = $user_id;
@@ -413,6 +413,7 @@ class AdminController extends Controller
     public function challenge(){
         $title = 'Admin Seleksi Challenge';
         $challenge = seleksiPertama::where('checked', 0)->get();
+        $jumlah=count($challenge);
         $penilaian = Penilaian::get();
         $r=0;
         
@@ -586,5 +587,68 @@ class AdminController extends Controller
         
         
         
+    }
+    public function allDaftarUlang(){
+        $title = 'Gagal Login';
+        $seleksiPertama = seleksiPertama::all();
+        $users = User::where('level', 3)->get();
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $jumlah=count($users);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $user_id = $users[$i]['id'];
+            $email = $users[$i]['email'];
+            $biodata = new Biodata;
+            $biodata->user_id = $user_id;
+            $biodata->nama = "gagal";
+            $biodata->email = $email;
+            $biodata->jenis_kelamin = "Pria";
+            $biodata->tanggal_lahir = now();
+            $biodata->domisili = "Lainnya";
+            $biodata->alamat_domisili = "gagal";
+            $biodata->phonenumber = "gagal";
+            $biodata->aktivitas = "Yang lain";
+            $biodata->minatprogram = "gagal";
+            $biodata->alasanBeasiswa = "gagal";
+            $biodata->five_pros = "gagal";
+            $biodata->five_cons = "gagal";
+            $biodata->url_foto = "gagal" ;
+            $biodata->seleksi_berkas = "GAGAL" ;
+            $biodata->save();
+            User::where('id', $user_id)->update(['level' => '2']);
+
+          }
+        return redirect()->route('admin.gagaldaftar')->with('berhasil', 'bersihkan biodata');
+    }
+    public function allGagal(){
+        $title = 'Admin Seleksi Challenge';
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $challenge = seleksiPertama::where('checked', 0)->get();
+        $jumlah=count($challenge);
+        $penilaian = Penilaian::get();
+        $r=0;
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $user_id = $challenge[$i]['user_id'];
+            $nama = $challenge[$i]['nama'];
+            User::where('id', $user_id)->update(['level' => '2']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
+            seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+            $penilaian_challenge = new Penilaian;
+            $penilaian_challenge->user_id = $user_id;
+            $penilaian_challenge->nama = $nama;
+            $penilaian_challenge->writing = 0;
+            $penilaian_challenge->video = 0;
+            $penilaian_challenge->business = 0;
+            $penilaian_challenge->total = 0;
+            $penilaian_challenge->penjualan = 0;
+            $penilaian_challenge->point = 0;
+            $penilaian_challenge->gen = $gen;
+            $penilaian_challenge->save();
+
+          } 
+          return redirect()->route('admin.challenge')->with('berhasil', 'bersihkan yang tidak mengerjakan');
     }
 }

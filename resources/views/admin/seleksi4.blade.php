@@ -411,13 +411,13 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                @if(($check->seleksi_pertama)== 'GAGAL')
+                                                @if(($check->seleksi_pertama)== 'GUGUR')
                                                     
-                                                <p class="text-danger">GAGAL</p>
+                                                <p class="text-danger">GUGUR</p>
                                                 @endif
-                                                @if(($check->seleksi_pertama)== 'LULUS')
+                                                @if(($check->seleksi_pertama)== 'LOLOS')
                                                     
-                                                <p class="text-success">LULUS</p>
+                                                <p class="text-success">LOLOS</p>
                                                 @endif
                                                 @if(($check->seleksi_pertama)== '')
                                                     <a class="btn btn-danger btn-sm m-2" href="{{ route('admin.challenge.gagal', [$check->user_id,$r]) }}">
