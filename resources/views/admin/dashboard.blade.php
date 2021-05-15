@@ -141,6 +141,12 @@
                                             <p>Rank Challenge</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Antrian Interview</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">

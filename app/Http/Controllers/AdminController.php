@@ -52,7 +52,7 @@ class AdminController extends Controller
         $gen = DB::table('controller')
             ->where('id', 1)
             ->value('gen');
-        $antrian = Antrian::where('gen', $gen)->where('absen', 'Tidak Hadir')->orderBy('antrian', 'ASC')->get();
+        $antrian = Antrian::where('gen', $gen)->orderBy('antrian', 'ASC')->get();
 
         return view('admin.antrian', compact('title', 'antrian'));
     }
@@ -562,5 +562,29 @@ class AdminController extends Controller
         
     
 
+    }
+
+    public function interview_hadir($user_id)
+    {   
+        $check = DB::table('antrian_interview')
+            ->where('user_id', $user_id)
+            ->value('absen');
+        if($check == "Tidak Hadir"){
+            DB::table('antrian_interview')->where('user_id',$user_id)->update([
+                'absen' => "Hadir",
+                'updated_at'=> now(),
+            ]);
+                return redirect()->route('admin.interview.antrian')->with('berhasil', 'hadir bos');
+            
+        }else{
+            DB::table('antrian_interview')->where('user_id',$user_id)->update([
+                'absen' => "Tidak Hadir",
+                'updated_at'=> now(),
+            ]);
+                return redirect()->route('admin.interview.antrian')->with('salah', 'salah klik');
+        }
+        
+        
+        
     }
 }

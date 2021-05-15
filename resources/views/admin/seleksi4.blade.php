@@ -140,6 +140,12 @@
                                             <p>Rank Challenge</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Antrian Interview</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -165,7 +171,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Dashboard Menu</h1>
+                                <h1>Seleksi</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -207,7 +213,7 @@
       @if(session('challenge'))
         <div class="alert alert-danger alert-dismissable md-5">
             <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fa fa-check"></i>Seleksi Challenge</h5>
+            <h5><i class="icon fa fa-check"></i>Penilaian </h5>
             {{session('challenge')}}.
             
         </div>
@@ -481,7 +487,7 @@
             <!-- /.content-wrapper -->
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block"></div>
-                <strong>Copyright &copy; 2014-2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
+                <strong>Copyright &copy;2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
             </footer>
 
             <!-- Control Sidebar -->

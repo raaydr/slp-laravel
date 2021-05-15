@@ -73,7 +73,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/antrian-interview', 'AdminController@antrian_interview')->name('admin.interview.antrian');
     });
 });
-
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/dashboard/interview/hadir/{user_id}', 'AdminController@interview_hadir')->name('admin.interview.hadir');
+    });
+});
 
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {

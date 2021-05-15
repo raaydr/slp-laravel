@@ -141,6 +141,12 @@
                                             <p>Rank Challenge</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Antrian Interview</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -166,7 +172,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Dashboard Menu</h1>
+                                <h1>Seleksi</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -241,7 +247,7 @@
 
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block"></div>
-                <strong>Copyright &copy; 2014-2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
+                <strong>Copyright &copy;2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
             </footer>
 
             <!-- Control Sidebar -->

@@ -172,7 +172,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Dashboard Menu</h1>
+                                <h1>Seleksi</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -195,6 +195,22 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
+                                @if(session('berhasil'))
+        <div class="alert alert-success alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-check"></i>Absensi</h5>
+            {{session('berhasil')}}.
+            
+        </div>
+      @endif
+      @if(session('salah'))
+        <div class="alert alert-danger alert-dismissable md-5">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-check"></i>Absensi</h5>
+            {{session('salah')}}.
+            
+        </div>
+      @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -213,7 +229,14 @@
                                             <tr>
                                                 <td>{{ $user->antrian }}</td>
                                                 <td>{{ $user->nama }}</td>
-                                                <td>{{ $user->absen }}</td>
+                                                <td>@if(($user->absen)== 'Tidak Hadir')
+                                                    
+                                                    <p class="text-danger">Tidak Hadir</p>
+                                                    @endif
+                                                    @if(($user->absen)== 'Hadir')
+                                                        
+                                                    <p class="text-success">Hadir</p>
+                                                    @endif</td>
                                                 <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->user_id) }}" target="_blank">
                               <i class="fas fa-folder">
@@ -221,22 +244,31 @@
                               Detail
                           </a>
                       </td>
-                                                <td>
-                                                <a class="btn btn-success btn-sm" href="#" target="_blank">
+                                                <td>@if(($user->absen)== 'Tidak Hadir')
+                                                <a class="btn btn-success btn-sm" href="{{ route('admin.interview.hadir', $user->user_id) }}" >
                               <i class="fas fa-check">
                               </i>
                               Hadir
                           </a>
+                          @endif
+                          @if(($user->absen)== 'Hadir')
+                                                <a class="btn btn-danger btn-sm" href="{{ route('admin.interview.hadir', $user->user_id) }}" >
+                              <i class="fas fa-exclamation">
+                              </i>
+                              Tidak Hadir
+                          </a>
+                          @endif
+                          
                                                 </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            <th>No</th>
-                                                <th>email</th>
-                                                <th>create</th>
-                                                <th>update</th>
+                                            <th>No.Antrian</th>
+                                                <th>Nama</th>
+                                                <th>Kehadiran</th>
+                                                <th></th>
                                                 
                                                 <th></th>
                                             </tr>
@@ -257,7 +289,7 @@
 
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block"></div>
-                <strong>Copyright &copy; 2014-2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
+                <strong>Copyright &copy;2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
             </footer>
 
             <!-- Control Sidebar -->
@@ -296,7 +328,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        
                     })
                     .buttons()
                     .container()
