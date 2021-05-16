@@ -449,7 +449,7 @@
                                                     @if(($check->url_Business)== '#')
                                                     <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">kosong</a>
                                                     @else
-                                                    <a type="text" href="{{$check->url_Business}}" target="_blank">check</a>
+                                                    <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">check</a>
                                                     @endif
                                                 </td>
                                             </tr>

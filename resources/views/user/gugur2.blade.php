@@ -150,7 +150,64 @@
         </div>
       </div>
       <!-- /.error-page -->
-
+      
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ranking dari Tahap Challenge</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>nama</th>
+                                                <th>writing</th>
+                                                <th>video</th>
+                                                <th>business</th>
+                                                <th>extra-point</th>
+                                                <th>total nilai</th>
+                                                <th>penjualan</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0; ?>
+                                            @foreach ($ranking as $rank)
+                                            <?php $i++ ;?>
+                                            <tr>
+                                                <th scope="row">{{ $i }}</th>
+                                                <td>{{ $rank->nama }}</td>
+                                                <td>{{ $rank->writing }}</td>
+                                                <td>{{ $rank->video }}</td>
+                                                <td>{{ $rank->business }}</td>
+                                                <td>{{ $rank->point }}</td>
+                                                <td>{{ $rank->total }}</td>
+                                                <td>{{ $rank->penjualan }}</td>                                                
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Nama</th>
+                                                <th>writing</th>
+                                                <th>video</th>
+                                                <th>business</th>
+                                                <th>extra-point</th>
+                                                <th>total nilai</th>
+                                                <th>penjualan</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->                    
     </section>
     <!-- /.content -->
   </div>
@@ -198,7 +255,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        
                     })
                     .buttons()
                     .container()

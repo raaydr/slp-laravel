@@ -207,11 +207,15 @@ class AdminController extends Controller
         $antrian = DB::table('controller')
             ->where('id', 1)
             ->value('antrian');
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
             $antrian++;
             $antrian_interview = new Antrian;
             $antrian_interview->user_id = $user_id;
             $antrian_interview->nama = $nama;
             $antrian_interview->antrian = $antrian;
+            $antrian_interview->gen = $gen;
             $antrian_interview->absen = "Tidak Hadir";
             $antrian_interview->save();
             DB::table('controller')->where('id',1)->update([            

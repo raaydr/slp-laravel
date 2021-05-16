@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
+use App\Models\Penilaian;
 use AdminController;
 use Auth;
 
@@ -47,8 +48,9 @@ class HomeController extends Controller
                 if($check == 0){
                     return view('user.gugur', compact('title', 'user', 'biodata'));
                 }else{
+                    $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
                     $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
-                    return view('user.gugur2', compact('title', 'user', 'biodata','nilai'));
+                    return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
                 }
                 
                         

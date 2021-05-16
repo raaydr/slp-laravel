@@ -433,7 +433,7 @@ class PendaftarController extends Controller
         $users = DB::table('users')
             ->where('id', $id)
             ->first();
-        $ranking = Penilaian::orderBy('total', 'DESC')->get();
+            $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
 
 
         return view('user.rankingchallenge', compact('title', 'ranking','users'));
