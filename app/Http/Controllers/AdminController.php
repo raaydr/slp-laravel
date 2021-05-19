@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Biodata;
 use App\Models\seleksiPertama;
 use App\Models\Penilaian;
+use App\Models\Control;
 use App\Models\Antrian;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -34,9 +35,12 @@ class AdminController extends Controller
     public function coba()
     {
         $title = 'coba Admin';
-        $users = User::where('level', 1)->get();
+        $controls = DB::table('control')
+            ->where('id', 1)
+            ->get();
+        
 
-        return view('admin.coba', compact('title', 'users'));
+        return view('admin.coba', compact('title', 'controls'));
     }
 
     public function index()
@@ -130,14 +134,14 @@ class AdminController extends Controller
             ->value('id');
         if (!empty($penilaian)){
             User::where('id', $user_id)->update(['level' => '1']);
-        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LOLOS']);
-        $users=User::find($user_id)->biodata;
-        $seleksiPertama=User::find($user_id)->seleksiPertama;
-        $pdf=User::find($user_id)->userPDF;
-        $antrian = DB::table('controller')
+            Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LOLOS']);
+            $users=User::find($user_id)->biodata;
+            $seleksiPertama=User::find($user_id)->seleksiPertama;
+            $pdf=User::find($user_id)->userPDF;
+            $antrian = DB::table('controller')
             ->where('id', 1)
             ->value('antrian');
-        $antrian++;
+            $antrian++;
             $antrian_interview = new Antrian;
             $antrian_interview->user_id = $user_id;
             $antrian_interview->nama = $users->nama;
@@ -225,10 +229,7 @@ class AdminController extends Controller
             ]);
             return redirect()->route('admin.challenge.rank')->with('berhasil', 'berhasil meluluskan');
 
-        
-        
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
+
     }
     public function challenge_gagal($user_id,$r)
     {
@@ -654,5 +655,102 @@ class AdminController extends Controller
 
           } 
           return redirect()->route('admin.challenge')->with('berhasil', 'bersihkan yang tidak mengerjakan');
+    }
+
+    public function tutupPendaftaran (Request $request){
+        DB::table('control')->where('id',1)->update([
+            'boolean'=> $request->pendaftaran,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'bersihkan yang tidak mengerjakan');
+    }
+
+    public function generateAntrian(){
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $challenge = Biodata::where('seleksi_pertama', 'LOLOS')->get();
+        $jumlah=count($challenge);
+        $penilaian = Penilaian::get();
+        $r=0;
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $user_id = $challenge[$i]['user_id'];
+            $nama = $challenge[$i]['nama'];
+            do {
+                $new_antrian = rand(1,$jumlah);                
+                if (Antrian::where('gen', $gen)->where('antrian', $new_antrian)->exists()) {
+                    $ulang = 0;
+                }else{
+                    $ulang = 2;
+                }
+                } while ($ulang < 1);
+            
+                $antrian_interview = new Antrian;
+                $antrian_interview->user_id = $user_id;
+                $antrian_interview->nama = $nama;
+                $antrian_interview->antrian = $new_antrian;
+                $antrian_interview->absen = "Tidak Hadir";
+                $antrian_interview->gen = $gen;
+                $antrian_interview->save();
+
+          } 
+          return redirect()->route('admin.interview.antrian')->with('berhasil', 'sukses');
+    }
+    public function antrianNote (Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'user_id' => 'required',
+                'nama' => 'required',
+                'note' => 'required',
+                
+
+                
+
+            ],
+
+            $messages = [
+                
+                'user_id.required' => 'tolong dilengkapi',
+                'nama.required' => 'tolong dilengkapi',
+                'note.required' => 'tolong dilengkapi',
+                
+               
+
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+
+        $penilaian_challenge = new Penilaian;
+        $user_id = Input::get('user_id');
+        
+        $note = Input::get('note');
+        
+        
+        
+      
+            DB::table('antrian_interview')->where('user_id',$user_id)->update([
+                
+                'note' => $request->note,
+                'updated_at'=> now(),
+            ]);
+            
+     
+        
+        return redirect()->route('admin.interview.antrian')->with('berhasil', 'sukses');
+    
+
     }
 }

@@ -57,9 +57,11 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $biodata = Biodata::all();
+        $pendaftaran = DB::table('control')
+            ->where('nama', 'pendaftaran')
+            ->value('boolean');
 
-        return view('auth.register', compact('biodata'));
+        return view('auth.register', compact('pendaftaran'));
     }
       /**
      * Handle a registration request for the application.

@@ -137,7 +137,22 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+	Route::get('/challenge/generate-antrian', 'AdminController@generateAntrian')->name('admin.generate.antrian');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
 	Route::get('/challenge/all-gagaldaftar', 'AdminController@allDaftarUlang')->name('admin.all.daftarulang');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/penutupan-pendaftaran', 'AdminController@tutupPendaftaran')->name('admin.tutup.pendaftaran');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/antrian-note', 'AdminController@antrianNote')->name('admin.antrian.note');
     });
 });
 // ROUTES PENDAFTAR

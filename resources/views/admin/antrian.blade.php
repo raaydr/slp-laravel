@@ -211,11 +211,85 @@
             
         </div>
       @endif
+      <div class="modal fade" id="modal-note">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content bg-warning">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Note</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST" action="{{route('admin.antrian.note')}}" enctype="multipart/form-data" class="was-validated">
+                                                                    {{csrf_field()}}
+                                                                    <div class="modal-body">
+                                                                        
+                                                                            <div class="form-group row">
+                                                                                <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('id') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input id="user_id" type="text" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" name="user_id"  readonly />
+                                                                                    @if ($errors->has('user_id'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('nama') }}</label>
+                                                                                <div class="col-md-7">
+                                                                                    <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
+                                                                                    @if ($errors->has('nama'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('nama') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="note" class="col-md-4 col-form-label text-md-right">{{ __('note') }}</label>
+
+                                                                                <div class="col-md-7">
+                                                                                    <textarea
+                                                                                        id="note"
+                                                                                        type="text"
+                                                                                        class="form-control{{ $errors->has('note') ? ' is-invalid' : '' }}"
+                                                                                        name="note"
+                                                                                        value="{{ old('note') }}"
+                                                                                        required
+                                                                                        autofocus
+                                                                                    /></textarea>
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    @if ($errors->has('writing'))
+                                                                                    <span class="invalid-feedback" role="alert">
+                                                                                        <strong>{{ $errors->first('writing') }}</strong>
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-outline-light">Save</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->   
+      
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>No.Antrian</th>
                                                 <th>Nama</th>
+                                                <th>note</th>
                                                 <th>Kehadiran</th>
                                                 <th></th>
                                                 
@@ -229,6 +303,7 @@
                                             <tr>
                                                 <td>{{ $user->antrian }}</td>
                                                 <td>{{ $user->nama }}</td>
+                                                <td>{{ $user->note }}</td>
                                                 <td>@if(($user->absen)== 'Tidak Hadir')
                                                     
                                                     <p class="text-danger">Tidak Hadir</p>
@@ -243,6 +318,10 @@
                               </i>
                               Detail
                           </a>
+                          <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$user->user_id}}" data-myname="{{$user->nama}}" data-target="#modal-note"href="{{ route('admin.antrian.note', $user->user_id) }}" target="_blank">
+                                                        <i class="fas fa-info"> </i>
+                                                        Note
+                        </button>
                       </td>
                                                 <td>@if(($user->absen)== 'Tidak Hadir')
                                                 <a class="btn btn-success btn-sm" href="{{ route('admin.interview.hadir', $user->user_id) }}" >
@@ -267,6 +346,7 @@
                                             <tr>
                                             <th>No.Antrian</th>
                                                 <th>Nama</th>
+                                                <th>note</th>
                                                 <th>Kehadiran</th>
                                                 <th></th>
                                                 
@@ -342,6 +422,19 @@
                     autoWidth: false,
                     responsive: true,
                 });
+            });
+            $('#modal-note').on('show.bs.modal', function (event) {
+                
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var id = button.data('myid')
+                var nama = button.data('myname')
+            
+                console.log('modal kebuka');
+             
+                var modal = $(this)
+                modal.find('.modal-body #user_id').val(id)
+                modal.find('.modal-body #nama').val(nama)
+              
             });
         </script>
     </body>
