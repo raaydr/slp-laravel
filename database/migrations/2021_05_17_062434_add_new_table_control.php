@@ -13,7 +13,7 @@ class AddNewTableControl extends Migration
      */
     public function up()
     {
-        Schema::create('CONTROL', function (Blueprint $table) {
+        Schema::create('control', function (Blueprint $table) {
             //
             $table->increments('id');
             $table->Integer('integer')->unsigned()->nullable();
@@ -32,6 +32,6 @@ class AddNewTableControl extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CONTROL');
+        Schema::dropIfExists('control');
     }
 }

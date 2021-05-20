@@ -446,7 +446,7 @@ class PendaftarController extends Controller
             ->first();
         $antrian = Antrian::where('user_id', $id)
             ->value('antrian');
-        
+        $waktu = "";
             if ((1 <= $antrian) && ($antrian <= 6)){
                 $waktu = "Sabtu 22 mei, jam 9-10.";
             }else if((7 <= $antrian) && ($antrian <= 12)){
