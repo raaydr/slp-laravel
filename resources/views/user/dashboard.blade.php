@@ -123,14 +123,14 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('pendaftar.ranking.challenge') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap 2</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            @if (!empty($biodata->seleksi_berkas))
+                            
                             <li class="nav-item">
                                 <a href="{{ route('pendaftar.pengumuman') }}" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
@@ -140,7 +140,7 @@
                                     </p>
                                 </a>
                             </li>
-                            @endif
+                            
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
