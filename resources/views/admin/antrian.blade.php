@@ -290,6 +290,7 @@
                                                 <th>No.Antrian</th>
                                                 <th>Nama</th>
                                                 <th>note</th>
+                                                <th>kepribadian</th>
                                                 <th>Kehadiran</th>
                                                 <th></th>
                                                 
@@ -304,6 +305,7 @@
                                                 <td>{{ $user->antrian }}</td>
                                                 <td>{{ $user->nama }}</td>
                                                 <td>{{ $user->note }}</td>
+                                                <td><a class="btn btn-primary" href="{{asset('teskepribadian')}}/{{$user->url_kepribadian}}" target="_blank">check</a></td>
                                                 <td>@if(($user->absen)== 'Tidak Hadir')
                                                     
                                                     <p class="text-danger">Tidak Hadir</p>
@@ -347,6 +349,7 @@
                                             <th>No.Antrian</th>
                                                 <th>Nama</th>
                                                 <th>note</th>
+                                                <th>kepribadian</th>
                                                 <th>Kehadiran</th>
                                                 <th></th>
                                                 

@@ -7,6 +7,8 @@ use App\Models\Biodata;
 use App\Models\Seleksi1;
 use App\Models\seleksiPertama;
 use App\Models\Penilaian;
+use App\Models\Antrian;
+use App\Models\Kepribadian;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -40,8 +42,8 @@ class PendaftarController extends Controller
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
             ->first();
-        $seleksiPertama=User::find($id)->seleksiPertama;
-        return view('user.dashboard', compact('title', 'user', 'biodata','seleksiPertama'));
+        $seleksiPertama = User::find($id)->seleksiPertama;
+        return view('user.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama'));
     }
     public function pengumuman()
     {
@@ -52,7 +54,7 @@ class PendaftarController extends Controller
             ->first();
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
-            ->first();        
+            ->first();
 
         return view('user.pengumuman', compact('title', 'user', 'biodata'));
     }
@@ -84,7 +86,20 @@ class PendaftarController extends Controller
             ->where('user_id', $id)
             ->value('checked');
 
-        return view('user.seleksi1', compact('title','biodata', 'user', 'seleksi'));
+        return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi'));
+    }
+    public function seleksi2()
+    {
+        $title = 'Seleksi Kedua Calon Siswa';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
+
+        return view('user.seleksi2', compact('title', 'biodata', 'user'));
     }
 
     public function seleksiPertama(Request $request)
@@ -113,7 +128,6 @@ class PendaftarController extends Controller
                 'alasan_wirausaha' => 'required|string',
                 'pernah_wirausaha' => 'required|string',
                 'omset' => 'required|string',
-
             ],
 
             $messages = [
@@ -140,7 +154,6 @@ class PendaftarController extends Controller
                 'alasan_wirausaha.required' => 'tolong lengkapi !',
                 'pernah_wirausaha.required' => 'tolong lengkapi !',
                 'omset.required' => 'tolong lengkapi !',
-
             ]
         );
 
@@ -155,58 +168,54 @@ class PendaftarController extends Controller
         $cvpdf = DB::table('seleksiPertama')
             ->where('user_id', $id)
             ->value('url_cv');
-        File::delete('cvPDF/'.$cvpdf);
+        File::delete('cvPDF/' . $cvpdf);
         $fotobukti = DB::table('seleksiPertama')
             ->where('user_id', $id)
             ->value('url_Business');
-        File::delete('imgPembelian/'.$fotobukti);
+        File::delete('imgPembelian/' . $fotobukti);
 
         if ($pdf = $request->hasFile('url_cv')) {
             $namaPdf = Input::get('nama');
             $pdf = $request->file('url_cv');
-            $PDFName = $namaPdf .'_'.time().'.'. $pdf->getClientOriginalName();
+            $PDFName = $namaPdf . '_' . time() . '.' . $pdf->getClientOriginalName();
             $lokasiPath = public_path() . '/cvPDF/';
             $pdf->move($lokasiPath, $PDFName);
-            
         }
         if ($gambar = $request->hasFile('url_Business')) {
             $namaGambar = Input::get('nama');
             $gambar = $request->file('url_Business');
-            $GambarName = $namaGambar.'_'.time().'.'. $gambar->getClientOriginalName();
+            $GambarName = $namaGambar . '_' . time() . '.' . $gambar->getClientOriginalName();
             $tujuanPath = public_path() . '/imgPembelian/';
             $gambar->move($tujuanPath, $GambarName);
-            
         }
-        
-        
-        DB::table('seleksiPertama')->where('user_id',$id)->update([
-            'url_cv'=> $PDFName,
-            'url_writing' => $request->url_writing,
-            'url_video' => $request->url_video,
-            'url_Business'=> $GambarName,
-            'mentoring' => $request->mentoring,
-            'mentoring_rutin' => $request->mentoring_rutin,
-            'futur' => $request->futur,
-            'faith' => $request->faith,
-            'ethic' => $request->ethic,
-            'question1' => $request->question1,
-            'question2' => $request->question2,
-            'question3' => $request->question3,
-            'question4' => $request->question4,
-            'organisasi' => $request->organisasi,
-            'aktif_organisasi' => $request->aktif_organisasi,
-            'question5' => $request->question5,
-            'question6' => $request->question6,
-            'entrepreneurship' => $request->entrepreneurship,
-            'alasan_wirausaha' => $request->alasan_wirausaha,
-            'pernah_wirausaha' => $request->pernah_wirausaha,
-            'exp_wirausaha' => $request->exp_wirausaha,
-            'omset' => $request->omset,
-            'checked'=> '1',
-            
-            
-        ]);
-        
+
+        DB::table('seleksiPertama')
+            ->where('user_id', $id)
+            ->update([
+                'url_cv' => $PDFName,
+                'url_writing' => $request->url_writing,
+                'url_video' => $request->url_video,
+                'url_Business' => $GambarName,
+                'mentoring' => $request->mentoring,
+                'mentoring_rutin' => $request->mentoring_rutin,
+                'futur' => $request->futur,
+                'faith' => $request->faith,
+                'ethic' => $request->ethic,
+                'question1' => $request->question1,
+                'question2' => $request->question2,
+                'question3' => $request->question3,
+                'question4' => $request->question4,
+                'organisasi' => $request->organisasi,
+                'aktif_organisasi' => $request->aktif_organisasi,
+                'question5' => $request->question5,
+                'question6' => $request->question6,
+                'entrepreneurship' => $request->entrepreneurship,
+                'alasan_wirausaha' => $request->alasan_wirausaha,
+                'pernah_wirausaha' => $request->pernah_wirausaha,
+                'exp_wirausaha' => $request->exp_wirausaha,
+                'omset' => $request->omset,
+                'checked' => '1',
+            ]);
 
         return redirect('pendaftar/seleksi-pertama')->with('pesan', 'Terima Kasih telah mengisi form Challenge');
     }
@@ -300,16 +309,12 @@ class PendaftarController extends Controller
             $request->all(),
             [
                 'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
-                
-
             ],
 
             $messages = [
                 'url_foto.required' => 'foto tidak boleh kosong!',
                 'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
                 'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
-                
-
             ]
         );
 
@@ -325,21 +330,20 @@ class PendaftarController extends Controller
             $GambarName = $id . '_' . $gambar->getClientOriginalName();
             $tujuanPath = public_path() . '/imgdaftar/';
             $gambar->move($tujuanPath, $GambarName);
-            
         }
-        
+
         $foto = DB::table('biodata')
             ->where('user_id', $id)
             ->value('url_foto');
-        File::delete('imgdaftar/'.$foto);
-        DB::table('biodata')->where('user_id',$id)->update([            
-            'url_foto'=> $GambarName,
-            'updated_at'=> now(),
-                    
-        ]);
-        
+        File::delete('imgdaftar/' . $foto);
+        DB::table('biodata')
+            ->where('user_id', $id)
+            ->update([
+                'url_foto' => $GambarName,
+                'updated_at' => now(),
+            ]);
 
-        return redirect('pendaftar/dashboard')->with('pesan','Berhasil update foto');  
+        return redirect('pendaftar/dashboard')->with('pesan', 'Berhasil update foto');
     }
 
     public function updatebiodata(Request $request)
@@ -388,8 +392,10 @@ class PendaftarController extends Controller
             ->where('id', $id)
             ->first();
 
-        DB::table('biodata')->where('user_id',$id)->update([
-                'nama'=> $request->nama,
+        DB::table('biodata')
+            ->where('user_id', $id)
+            ->update([
+                'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'domisili' => $request->domisili,
@@ -399,17 +405,13 @@ class PendaftarController extends Controller
                 'alasanbeasiswa' => $request->alasanBeasiswa,
                 'five_pros' => $request->five_pros,
                 'five_cons' => $request->five_cons,
-                
-                
             ]);
-
-
 
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
             ->first();
 
-        return view('user.dashboard', compact('title', 'user', 'biodata')); 
+        return view('user.dashboard', compact('title', 'user', 'biodata'));
     }
 
     public function editbiodata(Request $request)
@@ -433,9 +435,103 @@ class PendaftarController extends Controller
         $users = DB::table('users')
             ->where('id', $id)
             ->first();
-            $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
+        $ranking = Penilaian::where('total', '!=', 0)
+            ->orderBy('total', 'DESC')
+            ->get();
+        $nilai = DB::table('penilaian_challenge')
+            ->where('user_id', $id)
+            ->first();
+        $kepribadian = DB::table('table_kepribadian')
+            ->where('user_id', $id)
+            ->first();
+        $antrian = Antrian::where('user_id', $id)
+            ->value('antrian');
+        
+            if ((1 <= $antrian) && ($antrian <= 6)){
+                $waktu = "Sabtu 22 mei, jam 9-10.";
+            }else if((7 <= $antrian) && ($antrian <= 12)){
+                $waktu = "Sabtu 22 mei, jam 10-11.";
+            }else if((12 <= $antrian) && ($antrian <= 18)){
+                $waktu = "Sabtu 22 mei, jam 11-12.";
+            }else if((19 <= $antrian) && ($antrian <= 25)){
+                $waktu = "Sabtu 22 mei, jam 13-14.";
+            }else if((26 <= $antrian) && ($antrian <= 30)){
+                $waktu = "Sabtu 22 mei, jam 14-15.";
+            }else if((31 <= $antrian) && ($antrian <= 36)){
+                $waktu = "Minggu 23 mei, jam 9-10.";
+            }else if((37 <= $antrian) && ($antrian <= 42)){
+                $waktu = "Minggu 23 mei, jam 10-11.";
+            }else if((42 <= $antrian)&&($antrian <= 48)){
+                $waktu = "Minggu 23 mei, jam 11-12.";
+            }else if((49 <= $antrian) && ($antrian <= 55)){
+                $waktu = "Minggu 23 mei, jam 13-14.";
+            }else if((56 <= $antrian) && ($antrian <= 80)){
+                $waktu = "Minggu 23 mei, jam 14-15.";
+            }
 
+        return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu'));
+    }
 
-        return view('user.rankingchallenge', compact('title', 'ranking','users'));
+    public function uploadKepribadian(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'url_kepribadian' => 'required|mimes:jpeg,png,jpg,pdf|max:5120',
+            ],
+
+            $messages = [
+                'url_kepribadian.required' => 'Hasil Tes tidak boleh kosong!',
+                'url_kepribadian.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png,pdf.',
+                'url_kepribadian.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $id = Auth::user()->id;
+        //Table seleksi_1
+        
+
+        $nama = DB::table('biodata')
+            ->where('user_id', $id)
+            ->value('nama');
+        if (Kepribadian::where('user_id', $id)->exists()) {
+            if ($gambar = $request->hasFile('url_kepribadian')) {
+                $gambar = $request->file('url_kepribadian');
+                $GambarName = $id . '_' . $gambar->getClientOriginalName();
+                $tujuanPath = public_path() . '/teskepribadian/';
+                $gambar->move($tujuanPath, $GambarName);
+            }
+            $foto = DB::table('table_kepribadian')
+                ->where('user_id', $id)
+                ->value('url_kepribadian');
+            File::delete('teskepribadian/' . $foto);
+            DB::table('table_kepribadian')
+                ->where('user_id', $id)
+                ->update([
+                    'url_kepribadian' => $GambarName,
+                    'updated_at' => now(),
+                ]);
+        } else {
+            if ($gambar = $request->hasFile('url_kepribadian')) {
+                $gambar = $request->file('url_kepribadian');
+                $GambarName = $id . '_' . $gambar->getClientOriginalName();
+                $tujuanPath = public_path() . '/teskepribadian/';
+                $gambar->move($tujuanPath, $GambarName);
+            }
+            $test_kepribadian = new Kepribadian();
+            $test_kepribadian->user_id = $id;
+            $test_kepribadian->nama = $nama;
+            $test_kepribadian->url_kepribadian = $GambarName;
+
+            $test_kepribadian->save();
+        }
+
+        
+        return redirect()->route('pendaftar.ranking.challenge')->with('pesan', 'Berhasil upload');
     }
 }

@@ -168,29 +168,6 @@
                     
                     <!-- Main content -->
         <section class="content">
-        <div class="card card-warning">
-        <div class="card-header">
-        <h3 class="card-title">LOLOS TAHAP CHALLENGE</h3>
-
-        <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-        </button>
-        </div>
-    </div>
-        <div class="card-body">
-        Selamat! Kamu Lolos ke Tahap Wawancara. Untuk Jadwal wawancara, bisa dilihat di Menu Seleksi Tahap 2 
-    <br>
-
-        Selamat berjuang, Salam Leader, Luar Biasa!
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer ">
-        Admin SLP, 20 Mei 2021
-    </div>
-    <!-- /.card-footer-->
-    </div>
-    <!-- /.card -->
         @if (!empty($biodata->seleksi_berkas))
     <!-- Default box -->
     <div class="card card-primary">

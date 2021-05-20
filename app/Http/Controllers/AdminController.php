@@ -57,6 +57,9 @@ class AdminController extends Controller
             ->where('id', 1)
             ->value('gen');
         $antrian = Antrian::where('gen', $gen)->orderBy('antrian', 'ASC')->get();
+        $antrian = DB::table('antrian_interview')
+                    ->join('table_kepribadian', 'table_kepribadian.user_id', '=', 'antrian_interview.user_id')
+                    ->where('gen', $gen)->orderBy('antrian', 'ASC')->get();
 
         return view('admin.antrian', compact('title', 'antrian'));
     }

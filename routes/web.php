@@ -209,3 +209,15 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
     });
 });
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::get('/seleksi-kedua', 'PendaftarController@seleksi2')->name('pendaftar.seleksi2');
+
+    });
+});
+Route::group(['middleware' => 'check-permission:pendaftar'], function () {
+    Route::group(['prefix' => 'pendaftar'], function () {
+	Route::post('/upload-tes-kepribadian', 'PendaftarController@uploadKepribadian')->name('pendaftar.kepribadian.pdf');
+
+	});
+});

@@ -60,6 +60,10 @@ class User extends Authenticatable
     public function antrian()
     {
         return $this->hasOne('App\Models\Antrian');
-    }   
+    } 
+    public function kepribadian()
+    {
+        return $this->hasOne('App\Models\Kepribadian');
+    }  
 
 }
