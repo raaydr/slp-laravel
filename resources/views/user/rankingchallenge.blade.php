@@ -165,6 +165,13 @@
                         </div>
                     </div>
                     <!-- /.container-fluid -->
+                    @if(session('pesan'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Success</h4>
+            {{session('pesan')}}.
+        </div>
+      @endif
                 </section>
                 @if (!empty($antrian))
                 <!-- Main content -->
@@ -225,7 +232,8 @@
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-sm-5 col-form-label">Tempat : </label>
                                     <div class="col-sm-5">
-                                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Jl. Merdeka Raya No.7, RT.1/RW.7, Abadijaya,Kec. Sukmajaya, Kota Depok,Jawa Barat 16417 " readonly />
+                                    Jl. Merdeka Raya No.7, RT.1/RW.7, Abadijaya,Kec. Sukmajaya, Kota Depok,Jawa Barat 16417 
+                                    (<a href="https://maps.app.goo.gl/LWU3T1yT3Xbc18uz7" target="_blank">Disini</a>)
                                     </div>
                                 </div>
                             </form>
