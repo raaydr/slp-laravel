@@ -448,25 +448,25 @@ class PendaftarController extends Controller
             ->value('antrian');
         $waktu = "";
             if ((1 <= $antrian) && ($antrian <= 6)){
-                $waktu = "Sabtu 22 mei, jam 9-10.";
+                $waktu = "Sabtu 22 mei, jam 10.30 - 11.15";
             }else if((7 <= $antrian) && ($antrian <= 12)){
-                $waktu = "Sabtu 22 mei, jam 10-11.";
+                $waktu = "Sabtu 22 mei, jam 11.15 - 12.00";
             }else if((12 <= $antrian) && ($antrian <= 18)){
-                $waktu = "Sabtu 22 mei, jam 11-12.";
+                $waktu = "Sabtu 22 mei, jam 13.00 - 13.45";
             }else if((19 <= $antrian) && ($antrian <= 25)){
-                $waktu = "Sabtu 22 mei, jam 13-14.";
+                $waktu = "Sabtu 22 mei, jam 13.45 - 14.30";
             }else if((26 <= $antrian) && ($antrian <= 30)){
-                $waktu = "Sabtu 22 mei, jam 14-15.";
+                $waktu = "Sabtu 22 mei, jam 14.30 - 15.15";
             }else if((31 <= $antrian) && ($antrian <= 36)){
-                $waktu = "Minggu 23 mei, jam 9-10.";
+                $waktu = "Minggu 23 mei, jam 10.30 - 11.15";
             }else if((37 <= $antrian) && ($antrian <= 42)){
-                $waktu = "Minggu 23 mei, jam 10-11.";
-            }else if((42 <= $antrian)&&($antrian <= 48)){
-                $waktu = "Minggu 23 mei, jam 11-12.";
+                $waktu = "Minggu 23 mei, jam 11.15 - 12.00";
+            }else if((42 <= $antrian) && ($antrian <= 48)){
+                $waktu = "Minggu 23 mei, jam 13.00 - 13.45";
             }else if((49 <= $antrian) && ($antrian <= 55)){
-                $waktu = "Minggu 23 mei, jam 13-14.";
+                $waktu = "Minggu 23 mei, jam 13.45 - 14.30";
             }else if((56 <= $antrian) && ($antrian <= 80)){
-                $waktu = "Minggu 23 mei, jam 14-15.";
+                $waktu = "Minggu 23 mei, jam  14.30 - 15.15";
             }
 
         return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu'));
