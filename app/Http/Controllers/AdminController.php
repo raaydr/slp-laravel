@@ -85,16 +85,11 @@ class AdminController extends Controller
     {
         $title = 'Admin User Profile';
         
-        //$users = User::where('user_id', $user_id)->first();
-        $id= $user_id;
-        $users=User::find($user_id)->biodata;
-        $seleksiPertama=User::find($user_id)->seleksiPertama;
-        //$penilaian=User::find($user_id)->penilaian_challenge;
-        $penilaian = DB::table('penilaian_challenge')
-        ->where('user_id', $id)
-        ->first();
+        $user = User::where('id', $user_id)->first();
+        
+        
 
-        return view('admin.userProfile', compact('title', 'users','seleksiPertama','id','penilaian'));
+        return view('admin.userProfile', compact('title', 'user'));
     }
 
     public function seleksi1_lulus($user_id)
@@ -755,5 +750,20 @@ class AdminController extends Controller
         return redirect()->route('admin.interview.antrian')->with('berhasil', 'sukses');
     
 
+    }
+    
+    public function seleksi3 ($user_id,$status){
+        if ($status == 0){
+            User::where('id', $user_id)->update(['level' => '2']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_kedua' => 'TERELIMINASI']);
+            return redirect()->route('admin.userprofile', [$user_id])->with('challengeerror', 'berhasil menggagalkan');
+            
+             
+        }else{
+            User::where('id', $user_id)->update(['level' => '1']);
+            Biodata::where('user_id', $user_id)->update(['seleksi_kedua' => 'BERHASIL']);
+            return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan');
+        }
+        
     }
 }

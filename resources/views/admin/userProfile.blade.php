@@ -206,21 +206,22 @@
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
                                         <div class="text-center">
-                                            <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$users->url_foto}}" target="_blank">
-                                                <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$users->url_foto}}" class="img-fluid" alt="Cinque Terre" />
+                                            <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" target="_blank">
+                                                <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" class="img-fluid" alt="Cinque Terre" />
                                             </a>
                                         </div>
 
-                                        <h3 class="profile-username text-center">{{$users->nama}}</h3>
+                                        <h4 class="profile-username text-center">{{$user->Biodata->nama}}</h4>
 
-                                        <p class="text-muted text-center">{{$users->aktivitas}}</p>
+                                        <p class="text-muted text-center">{{$user->Biodata->aktivitas}}</p>
 
                                         <ul class="list-group list-group-unbordered mb-3">
-                                            <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$users->domisili}}</a></li>
-                                            <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$users->jenis_kelamin}}</a></li>
-                                            <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$users->tanggal_lahir}}</a></li>
-                                            <li class="list-group-item"><b>Seleksi Berkas</b> <a class="float-right">{{$users->seleksi_berkas}}</a></li>
-                                            <li class="list-group-item"><b>Seleksi Pertama</b> <a class="float-right">{{$users->seleksi_pertama}}</a></li>
+                                            <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
+                                            <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
+                                            <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$user->Biodata->tanggal_lahir}}</a></li>
+                                            <li class="list-group-item"><b>Seleksi Berkas</b> <a class="float-right">{{$user->Biodata->seleksi_berkas}}</a></li>
+                                            <li class="list-group-item"><b>Seleksi Pertama</b> <a class="float-right">{{$user->Biodata->seleksi_pertama}}</a></li>
+                                            <li class="list-group-item"><b>Seleksi Kedua</b> <a class="float-right">{{$user->Biodata->seleksi_kedua}}</a></li>
                                         </ul>
                                     </div>
                                     <!-- /.card-body -->
@@ -237,21 +238,21 @@
                                         <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
 
                                         <p class="text-muted">
-                                            {{$users->phonenumber}}
+                                            {{$user->Biodata->phonenumber}}
                                         </p>
 
                                         <hr />
 
                                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
 
-                                        <p class="text-muted">{{$users->alamat_domisili}}</p>
+                                        <p class="text-muted">{{$user->Biodata->alamat_domisili}}</p>
 
                                         <hr />
 
                                         <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
 
                                         <p class="text-muted">
-                                            <span class="tag tag-danger"> {{$users->minatprogram}}</span>
+                                            <span class="tag tag-danger"> {{$user->Biodata->minatprogram}}</span>
                                         </p>
 
                                         <hr />
@@ -299,7 +300,9 @@
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
+                                            @if(!empty($user->Antrian->antrian))
                                             <li class="nav-item"><a class="nav-link" href="#Ketiga" data-toggle="tab">Seleksi Kedua</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <!-- /.card-header -->
@@ -315,7 +318,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$users->alasanbeasiswa}}
+                                                        {{$user->Biodata->alasanbeasiswa}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -329,7 +332,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$users->five_pros}}
+                                                        {{$user->Biodata->five_pros}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -342,7 +345,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$users->five_cons}}
+                                                        {{$user->Biodata->five_cons}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -364,7 +367,7 @@
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                <a href="{{ route('admin.seleksi1.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                                <a href="{{ route('admin.seleksi1.lulus', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->
@@ -386,7 +389,7 @@
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                <a href="{{ route('admin.seleksi1.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                                <a href="{{ route('admin.seleksi1.gagal', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->
@@ -402,10 +405,10 @@
                                                     <div class="user-block">
                                                         <span class="username">
                                                             <a href="#">Challenge</a>
-                                                            @if(!empty($penilaian->user_id))
+                                                            @if(!empty($user->Penilaian->user_id))
                                                             <a data-toggle="modal" data-target="#modal-edit" class="btn btn-success m-2 float-right">Ubah Penilaian</a>
                                                             @endif 
-                                                            @if(empty($penilaian->user_id))
+                                                            @if(empty($user->Penilaian->user_id))
                                                             <a data-toggle="modal" data-target="#modal-penilaian" class="btn btn-success m-2 float-right">Penilaian</a>
                                                             @endif
                                                         </span>
@@ -420,7 +423,7 @@
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
-                                                                <form method="POST" action="{{route('admin.seleksi2.editpenilaian', $users->user_id)}}" enctype="multipart/form-data" class="was-validated">
+                                                                <form method="POST" action="{{route('admin.seleksi2.editpenilaian', $user->Biodata->user_id)}}" enctype="multipart/form-data" class="was-validated">
                                                                     {{csrf_field()}}
                                                                     <div class="modal-body">
                                                                         <div class="row">
@@ -432,7 +435,7 @@
                                                                                         type="text"
                                                                                         class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
                                                                                         name="user_id"
-                                                                                        value="{{$users->user_id}}"
+                                                                                        value="{{$user->Biodata->user_id}}"
                                                                                         readonly
                                                                                     />
                                                                                     @if ($errors->has('user_id'))
@@ -450,7 +453,7 @@
                                                                                         type="text"
                                                                                         class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
                                                                                         name="nama"
-                                                                                        value="{{$users->nama}}"
+                                                                                        value="{{$user->Biodata->nama}}"
                                                                                         readonly
                                                                                     />
                                                                                     @if ($errors->has('nama'))
@@ -583,7 +586,7 @@
                                                                                         type="text"
                                                                                         class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
                                                                                         name="user_id"
-                                                                                        value="{{$users->user_id}}"
+                                                                                        value="{{$user->Biodata->user_id}}"
                                                                                         readonly
                                                                                     />
                                                                                     @if ($errors->has('user_id'))
@@ -601,7 +604,7 @@
                                                                                         type="text"
                                                                                         class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
                                                                                         name="nama"
-                                                                                        value="{{$users->nama}}"
+                                                                                        value="{{$user->Biodata->nama}}"
                                                                                         readonly
                                                                                     />
                                                                                     @if ($errors->has('nama'))
@@ -704,16 +707,16 @@
                                                     </div>
                                                     <!-- /.modal -->
                                                     <label for="exampleInputEmail1">Link Video Challenge :</label>
-                                                    <a type="text" href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
+                                                    <a type="text" href="{{$user->seleksiPertama->url_video}}" target="_blank">{{$user->seleksiPertama->url_video}}</a>
                                                     <br />
                                                     <label for="exampleInputEmail1">Link Writing Challenge :</label>
-                                                    <a type="text" href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
+                                                    <a type="text" href="{{$user->seleksiPertama->url_Writing}}" target="_blank">{{$user->seleksiPertama->url_writing}}</a>
                                                     <br />
                                                     <label for="exampleInputEmail1">Link Bussines Challenge :</label>
-                                                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
+                                                    <a class="btn btn-default" href="{{asset('imgPembelian')}}/{{$user->seleksiPertama->url_Business}}" target="_blank">foto</a>
                                                     <br />
                                                     <label for="exampleInputEmail1">User CV :</label>
-                                                    <a class="btn btn-primary" href="{{asset('cvPDF')}}/{{$seleksiPertama->url_cv}}" target="_blank">Lihat</a>
+                                                    <a class="btn btn-primary" href="{{asset('cvPDF')}}/{{$user->seleksiPertama->url_cv}}" target="_blank">Lihat</a>
                                                     <br />
                                                 </div>
                                                 <!-- /.post -->
@@ -727,7 +730,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->mentoring}}
+                                                        {{$user->seleksiPertama->mentoring}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -741,7 +744,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->mentoring_rutin}}
+                                                        {{$user->seleksiPertama->mentoring_rutin}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -755,7 +758,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->futur}}
+                                                        {{$user->seleksiPertama->futur}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -769,7 +772,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->faith}}
+                                                        {{$user->seleksiPertama->faith}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -782,7 +785,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->ethic}}
+                                                        {{$user->seleksiPertama->ethic}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -796,7 +799,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question1}}
+                                                        {{$user->seleksiPertama->question1}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -809,7 +812,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question2}}
+                                                        {{$user->seleksiPertama->question2}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -822,7 +825,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question3}}
+                                                        {{$user->seleksiPertama->question3}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -835,7 +838,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question4}}
+                                                        {{$user->seleksiPertama->question4}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -849,7 +852,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->organisasi}}
+                                                        {{$user->seleksiPertama->organisasi}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -863,7 +866,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->aktif_organisasi}}
+                                                        {{$user->seleksiPertama->aktif_organisasi}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -877,7 +880,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question5}}
+                                                        {{$user->seleksiPertama->question5}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -891,7 +894,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->question6}}
+                                                        {{$user->seleksiPertama->question6}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -905,7 +908,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->entrepreneurship}}
+                                                        {{$user->seleksiPertama->entrepreneurship}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -919,7 +922,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->alasan_wirausaha}}
+                                                        {{$user->seleksiPertama->alasan_wirausaha}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -933,7 +936,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->pernah_wirausaha}}
+                                                        {{$user->seleksiPertama->pernah_wirausaha}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -947,7 +950,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->exp_wirausaha}}
+                                                        {{$user->seleksiPertama->exp_wirausaha}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -961,7 +964,7 @@
                                                     </div>
                                                     <!-- /.user-block -->
                                                     <p>
-                                                        {{$seleksiPertama->omset}}
+                                                        {{$user->seleksiPertama->omset}}
                                                     </p>
                                                 </div>
                                                 <!-- /.post -->
@@ -984,7 +987,7 @@
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                <a href="{{ route('admin.seleksi2.gagal', $users->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                                <a href="{{ route('admin.seleksi2.gagal', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->
@@ -1007,7 +1010,7 @@
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                <a href="{{ route('admin.seleksi2.lulus', $users->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                                <a href="{{ route('admin.seleksi2.lulus', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->
@@ -1017,54 +1020,183 @@
                                                 <!-- /.modal -->
                                             </div>
                                             <!-- /.tab-pane -->
-
+                                            @if(!empty($user->Antrian->antrian))
                                             <div class="tab-pane" id="Ketiga">
-                                                <form class="form-horizontal">
-                                                    <div class="form-group row">
-                                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="email" class="form-control" id="inputName" placeholder="Name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="inputName2" placeholder="Name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                                        <div class="col-sm-10">
-                                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="offset-sm-2 col-sm-10">
-                                                            <div class="checkbox">
-                                                                <label> <input type="checkbox" /> I agree to the <a href="#">terms and conditions</a> </label>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="card card-danger">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">
+                                                            <i class="far fa-chart-bar"></i>
+                                                            Hasil Seleksi Challenge
+                                                            </h4>
+
+                                                            <div class="card-tools">
+                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
                                                             </div>
                                                         </div>
+                                                        <!-- /.card-header -->
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                            <div class="col-6 col-md-3 text-center">
+                                                                <input type="text" class="knob" value="{{$user->Penilaian->writing}}" data-skin="tron" data-thickness="0.2" data-width="90"
+                                                                    data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+                                                                <div class="knob-label">Nilai Writing</div>
+                                                                <a href="{{$user->seleksiPertama->url_writing}}" target="_blank">check</a>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-6 col-md-3 text-center">
+                                                                <input type="text" class="knob" value="{{$user->Penilaian->video}}" data-skin="tron" data-thickness="0.2" data-width="90"
+                                                                    data-height="90" data-fgColor="#f56954" data-readonly="true">
+
+                                                                <div class="knob-label">Nilai Video</div>
+                                                                <a href="{{$user->seleksiPertama->url_video}}" target="_blank">check</a>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-lg-6 col-6">
+                                                                <!-- small card -->
+                                                                <div class="small-box bg-info">
+                                                                <div class="inner" >
+                                                                    
+
+                                                                    <p>Total Penjualan</p>
+                                                                    <h3  id="penjualan"></h3>
+                                                                </div>
+                                                                <div class="icon">
+                                                                    <i class="fas fa-shopping-cart"></i>
+                                                                </div>
+                                                                <a class="small-box-footer" href="{{asset('imgPembelian')}}/{{$user->seleksiPertama->url_Business}}" target="_blank">
+                                                                    Nilali Business : {{$user->Penilaian->business}}
+                                                                </a>
+                                                                </div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            </div>
+                                                            <!-- /.row -->
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                        </div>
+                                                        <!-- /.card -->
                                                     </div>
+                                                    <!-- /.col -->
+                                                    <div class="col-12">
+                                                        <div class="card card-primary">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">
+                                                            <i class="fas fa-book mr-1"></i>
+                                                            Seleksi Interview
+                                                            </h4>
+
+                                                            <div class="card-tools">
+                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <div class="card-body">
+                                                        <form class="form-horizontal">
                                                     <div class="form-group row">
-                                                        <div class="offset-sm-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                                        <label for="inputName" class="col-sm-4 col-form-label">No Antrian</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->antrian}}" readyonly/>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputEmail" class="col-sm-4 col-form-label">Absensi</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{$user->Antrian->absen}}"  readyonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputName" class="col-sm-4 col-form-label">Waktu</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->updated_at}}" readyonly/>
+                                                        </div>
+                                                    </div>
+                                                    @if(!empty($user->Kepribadian->url_kepribadian))
+                                                    <div class="form-group row">
+                                                        <label for="inputName2" class="col-sm-4 col-form-label">Tes Kepribadian</label>
+                                                        <div class="col-sm-8">
+                                                        <a  class="btn btn-success" href="{{asset('teskepribadian')}}/$user->Kepribadian->url_kepribadian}}" target="_blank">check</a>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    <div class="form-group row">
+                                                        <label for="inputExperience" class="col-sm-4 col-form-label">Note</label>
+                                                        <div class="col-sm-8">
+                                                            <h7 >{{$user->Antrian->note}}</h7>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                        <a  data-toggle="modal" data-target="#modal-primary2" class="btn btn-primary" >Lulus</a>
+                                                            <a data-toggle="modal" data-target="#modal-danger2" class="btn btn-danger">Gagal</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="modal-danger2">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Kedua</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi.interview', [$user->Biodata->user_id,0]) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <!-- /.modal -->
+                                                <div class="modal fade" id="modal-primary2">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Kedua</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi.interview', [$user->Biodata->user_id,1]) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
                                                 </form>
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                        </div>
+                                                        <!-- /.card -->
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+                                                
                                             </div>
                                             <!-- /.tab-pane -->
+                                            @endif
                                         </div>
                                         <!-- /.tab-content -->
                                     </div>
@@ -1112,11 +1244,37 @@
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+        <!-- jQuery Knob -->
+        <script src="{{asset('template')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
+        <!-- Sparkline -->
+        <script src="{{asset('template')}}/plugins/sparklines/sparkline.js"></script>
         <!-- AdminLTE App -->
         <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
+        <!-- AdminLTE for demo purposes --> 
         <script src="{{asset('template')}}/dist/js/demo.js"></script>
         <script>
+        function rupiah(){
+            var bilangan = {{$user->Penilaian->penjualan}} ;
+    var	number_string = bilangan.toString(),
+	sisa 	= number_string.length % 3,
+	rupiah 	= number_string.substr(0, sisa),
+	ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+		
+if (ribuan) {
+	separator = sisa ? '.' : '';
+	rupiah += separator + ribuan.join('.');
+}
+
+// Cetak hasil
+
+            
+
+$("h3").text("Rp "+rupiah)
+
+//the function body is the same as you have defined sue the textbox object to set the value
+}
+
+rupiah();
             $(function () {
                 $("#example1")
                     .DataTable({
@@ -1138,6 +1296,80 @@
                     responsive: true,
                 });
             });
+            $(function () {
+    /* jQueryKnob */
+
+    $('.knob').knob({
+      /*change : function (value) {
+       //console.log("change : " + value);
+       },
+       release : function (value) {
+       console.log("release : " + value);
+       },
+       cancel : function () {
+       console.log("cancel : " + this.value);
+       },*/
+      draw: function () {
+
+        // "tron" case
+        if (this.$.data('skin') == 'tron') {
+
+          var a   = this.angle(this.cv)  // Angle
+            ,
+              sa  = this.startAngle          // Previous start angle
+            ,
+              sat = this.startAngle         // Start angle
+            ,
+              ea                            // Previous end angle
+            ,
+              eat = sat + a                 // End angle
+            ,
+              r   = true
+
+          this.g.lineWidth = this.lineWidth
+
+          this.o.cursor
+          && (sat = eat - 0.3)
+          && (eat = eat + 0.3)
+
+          if (this.o.displayPrevious) {
+            ea = this.startAngle + this.angle(this.value)
+            this.o.cursor
+            && (sa = ea - 0.3)
+            && (ea = ea + 0.3)
+            this.g.beginPath()
+            this.g.strokeStyle = this.previousColor
+            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false)
+            this.g.stroke()
+          }
+
+          this.g.beginPath()
+          this.g.strokeStyle = r ? this.o.fgColor : this.fgColor
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false)
+          this.g.stroke()
+
+          this.g.lineWidth = 2
+          this.g.beginPath()
+          this.g.strokeStyle = this.o.fgColor
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false)
+          this.g.stroke()
+
+          return false
+        }
+      }
+    })
+    /* END JQUERY KNOB */
+
+    //INITIALIZE SPARKLINE CHARTS
+    var sparkline1 = new Sparkline($('#sparkline-1')[0], { width: 240, height: 70, lineColor: '#92c1dc', endColor: '#92c1dc' })
+    var sparkline2 = new Sparkline($('#sparkline-2')[0], { width: 240, height: 70, lineColor: '#f56954', endColor: '#f56954' })
+    var sparkline3 = new Sparkline($('#sparkline-3')[0], { width: 240, height: 70, lineColor: '#3af221', endColor: '#3af221' })
+
+    sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
+    sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
+    sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
+
+  })
         </script>
     </body>
 </html>

@@ -202,7 +202,7 @@
                                                 <th>Nama</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Domisili</th>
-                                                <th>Alamat Lengkap</th>
+                                                <th>Gender</th>
                                                 <th>Peminatan</th>
                                                 <th>Seleksi Berkas</th>
                                                 <th>Seleksi Challenge</th>
@@ -219,7 +219,7 @@
                                                 <td>{{ $user->Biodata->nama }}</td>
                                                 <td>{{ $user->Biodata->tanggal_lahir }}</td>
                                                 <td>{{ $user->Biodata->domisili }}</td>
-                                                <td>{{ $user->Biodata->alamat_domisili }}</td>
+                                                <td>{{ $user->Biodata->jenis_kelamin }}</td>
                                                 <td>{{ $user->Biodata->minatprogram }}</td>
                                                 <td>{{ $user->Biodata->seleksi_berkas }}</td>
                                                 <td>{{ $user->Biodata->seleksi_pertama }}</td>
@@ -240,7 +240,7 @@
                                                 <th>Nama</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Domisili</th>
-                                                <th>Alamat Lengkap</th>
+                                                <th>Gender</th>
                                                 <th>Peminatan</th>
                                                 <th>Seleksi Berkas</th>
                                                 <th>Seleksi Challenge</th>

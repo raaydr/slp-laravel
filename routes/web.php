@@ -155,6 +155,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::post('/antrian-note', 'AdminController@antrianNote')->name('admin.antrian.note');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/seleksi/interview/{user_id}/{r}', 'AdminController@seleksi3')->name('admin.seleksi.interview');
+    });
+});
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
