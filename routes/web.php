@@ -160,6 +160,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/seleksi/interview/{user_id}/{r}', 'AdminController@seleksi3')->name('admin.seleksi.interview');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/seleksi/stadium-general/{user_id}/{r}', 'AdminController@seleksi3')->name('admin.stadiumgeneral');
+    });
+});
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
@@ -223,6 +228,13 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/upload-tes-kepribadian', 'PendaftarController@uploadKepribadian')->name('pendaftar.kepribadian.pdf');
+
+	});
+});
+// ROUTES Peserta
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/pengumuman', 'PesertaController@index')->name('peserta.pengumuman');
 
 	});
 });

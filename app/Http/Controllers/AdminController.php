@@ -766,4 +766,16 @@ class AdminController extends Controller
         }
         
     }
+    public function stadiumgeneral ($user_id,$status){
+        if ($status == 0){
+            User::where('id', $user_id)->update(['level' => '2']);
+            return redirect()->route('admin.userprofile', [$user_id])->with('challengeerror', 'berhasil menggagalkan');
+            
+             
+        }else{
+            User::where('id', $user_id)->update(['level' => '4']);
+            return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan');
+        }
+        
+    }
 }

@@ -228,6 +228,60 @@
                                             @if(!empty($user->Biodata->seleksi_kedua))
                                             <li class="list-group-item"><b>Seleksi Kedua</b> <a class="float-right">{{$user->Biodata->seleksi_kedua}}</a></li>
                                             @endif
+                                            @if(($user->Biodata->seleksi_kedua)=="BERHASIL")
+                                            <div class="form-group row">
+                                            <label  class="col-md-12 col-form-label text-md-center">Stadium general </label>
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                        <a  data-toggle="modal" data-target="#modal-primary3" class="btn btn-primary" >Lulus</a>
+                                                            <a data-toggle="modal" data-target="#modal-danger3" class="btn btn-danger">Gagal</a>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    <div class="modal fade" id="modal-danger3">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Kedua</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi.interview', [$user->Biodata->user_id,0]) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <!-- /.modal -->
+                                                <div class="modal fade" id="modal-primary3">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Tahap Seleksi Kedua</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                <a href="{{ route('admin.seleksi.interview', [$user->Biodata->user_id,1]) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
                                         </ul>
                                     </div>
                                     <!-- /.card-body -->

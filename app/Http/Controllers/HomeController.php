@@ -62,6 +62,10 @@ class HomeController extends Controller
     
                 return view('user.gagaldaftar', compact('title', 'user'));
                             
+                break;
+            case '4':
+                return redirect()->action('\App\Http\Controllers\PesertaController@index');
+                                
                 break;    
                 default:
                 echo "SLP INDONESIA";
