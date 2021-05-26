@@ -252,9 +252,15 @@
                                             <li class="list-group-item">
                                                 <b>Tahap Pemberkasan</b> <a class="float-right"><strong>{{$biodata->seleksi_berkas}}</strong></a>
                                             </li>
-                                            @endif @if (!empty($biodata->seleksi_pertama))
+                                            @endif 
+                                            @if (!empty($biodata->seleksi_pertama))
                                             <li class="list-group-item">
                                                 <b>Tahap Pertama</b> <a class="float-right"><strong>{{$biodata->seleksi_pertama}}</strong></a>
+                                            </li>
+                                            @endif
+                                            @if (!empty($biodata->seleksi_kedua))
+                                            <li class="list-group-item">
+                                                <b>Tahap Kedua</b> <a class="float-right"><strong>{{$biodata->seleksi_kedua}}</strong></a>
                                             </li>
                                             @endif
                                         </ul>

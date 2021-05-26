@@ -241,7 +241,7 @@
                             <br />
                             Untuk hasilnya, silahkan upload Screenshot bagian Conclusion/Kesimpulan dari Kepribadian kamu dan Upload disini yaa 😋
                             <br />
-                            <button
+                           <!-- <button
                                 class="btn btn-success btn-sm m-4"
                                 data-toggle="modal"
                                 data-myid="{{$nilai->user_id}}"
@@ -252,7 +252,7 @@
                             >
                                 <i class="fas fa-check"> </i>
                                 Upload
-                            </button>
+                            </button>-->
                             @if (!empty($kepribadian->url_kepribadian))
                             <a class="btn btn-primary btn-sm m-4" href="{{asset('teskepribadian')}}/{{$kepribadian->url_kepribadian}}" target="_blank">check</a>
                             @endif

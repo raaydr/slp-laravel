@@ -169,6 +169,31 @@
 
                 <!-- Main content -->
                 <section class="content">
+                @if (!empty($biodata->seleksi_kedua))
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">LOLOS TAHAP INTERVIEW</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            Selamat! Kamu Lolos dari Tahap Wawancara. jangan lupa ikut sg di rabbani
+                            <br />
+
+                            Selamat berjuang, Salam Leader, Luar Biasa!
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Admin SLP, 28 Mei 2021
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    @endif
+                    <!-- /.card -->
                 @if (!empty($biodata->seleksi_pertama))
                     <div class="card card-warning">
                         <div class="card-header">
