@@ -21,6 +21,9 @@
       case 1:
         return 'pendaftar';
         break;
+      case 4:
+        return 'peserta';
+        break;
       default:
         return 'user';
         break;
