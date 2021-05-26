@@ -219,9 +219,15 @@
                                             <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
                                             <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
                                             <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$user->Biodata->tanggal_lahir}}</a></li>
-                                            <li class="list-group-item"><b>Seleksi Berkas</b> <a class="float-right">{{$user->Biodata->seleksi_berkas}}</a></li>
+                                            @if(!empty($user->Biodata->seleksi_berkas))
+                                            <lsi class="list-group-item"><b>Seleksi Berkas</b> <a class="float-right">{{$user->Biodata->seleksi_berkas}}</a></lsi>
+                                            @endif
+                                            @if(!empty($user->Biodata->seleksi_pertama))
                                             <li class="list-group-item"><b>Seleksi Pertama</b> <a class="float-right">{{$user->Biodata->seleksi_pertama}}</a></li>
+                                            @endif
+                                            @if(!empty($user->Biodata->seleksi_kedua))
                                             <li class="list-group-item"><b>Seleksi Kedua</b> <a class="float-right">{{$user->Biodata->seleksi_kedua}}</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <!-- /.card-body -->
@@ -231,7 +237,7 @@
                                 <!-- About Me Box -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">About Me</h3>
+                                        <h4 class="card-title">About Me</h4>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -1121,7 +1127,7 @@
                                                     <div class="form-group row">
                                                         <label for="inputName2" class="col-sm-4 col-form-label">Tes Kepribadian</label>
                                                         <div class="col-sm-8">
-                                                        <a  class="btn btn-success" href="{{asset('teskepribadian')}}/$user->Kepribadian->url_kepribadian}}" target="_blank">check</a>
+                                                        <a  class="btn btn-success" href="{{asset('teskepribadian')}}/{{$user->Kepribadian->url_kepribadian}}" target="_blank">check</a>
                                                             
                                                         </div>
                                                     </div>
