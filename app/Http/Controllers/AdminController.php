@@ -8,6 +8,7 @@ use App\Models\seleksiPertama;
 use App\Models\Penilaian;
 use App\Models\Control;
 use App\Models\Antrian;
+use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,8 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+// VIEW 
     public function coba()
     {
         $title = 'coba Admin';
@@ -91,7 +94,42 @@ class AdminController extends Controller
 
         return view('admin.userProfile', compact('title', 'user'));
     }
+    public function challenge(){
+        $title = 'Admin Seleksi Challenge';
+        $challenge = seleksiPertama::where('checked', 0)->get();
+        $jumlah=count($challenge);
+        $penilaian = Penilaian::get();
+        $r=0;
+        
 
+        return view('admin.seleksi3', compact('title', 'challenge', 'penilaian','r'));
+    }
+    public function rank_challenge(){
+        $title = 'Admin Rank Challenge';
+        $r=1;
+        $data = DB::table('penilaian_challenge')
+                    ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
+                    ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
+                    ->orderBy('total', 'DESC')->get();
+        
+
+        return view('admin.seleksi4', compact('title', 'data','r'));
+    }
+    public function create_fasil(){
+        $title = 'Admin Fasil';
+        
+        
+
+        return view('admin.createfasil', compact('title'));
+    }
+    public function ubah_password(){
+        $title = 'Admin ubah password';
+        
+        
+
+        return view('admin.ubahpassword', compact('title'));
+    }
+// Method LULUS GAGAL
     public function seleksi1_lulus($user_id)
     {
         $title = 'Admin User Profile';
@@ -102,8 +140,7 @@ class AdminController extends Controller
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
         return redirect()->route('admin.userprofile', [$user_id]);
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
+        
     }
 
     public function seleksi1_gagal($user_id)
@@ -117,8 +154,7 @@ class AdminController extends Controller
         $seleksiPertama=User::find($user_id)->seleksiPertama;
         $pdf=User::find($user_id)->userPDF;
         return redirect()->route('admin.userprofile', [$user_id]);
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
+        
     }
 
     public function seleksi2_lulus($user_id)
@@ -158,8 +194,7 @@ class AdminController extends Controller
             return redirect()->route('admin.userprofile', [$user_id])->with('challengeerror', 'Isi Penilaian terlebih dahulu');
         }
         
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('lulus','Pendaftar Lulus Tahap Pemberkasan');
+        
     }
 
     public function seleksi2_gagal($user_id)
@@ -199,8 +234,7 @@ class AdminController extends Controller
             return redirect()->route('admin.userprofile', [$user_id])->with('challenge', 'berhasil menggagalkan');
         }
         
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
+        
     }
     public function challenge_lulus($user_id,$nama)
     {
@@ -275,8 +309,7 @@ class AdminController extends Controller
             }
         }
         
-        //return view('admin.userProfile', compact('title', 'users','seleksiPertama','pdf'));
-        //return view('admin\userProfile')->with(compact('title', 'users','seleksiPertama','pdf'))->with('gagal','Pendaftar Gagal Tahap Pemberkasan');
+        
     }
     
     public function penilaian (Request $request)
@@ -413,27 +446,7 @@ class AdminController extends Controller
 
     }
 
-    public function challenge(){
-        $title = 'Admin Seleksi Challenge';
-        $challenge = seleksiPertama::where('checked', 0)->get();
-        $jumlah=count($challenge);
-        $penilaian = Penilaian::get();
-        $r=0;
-        
-
-        return view('admin.seleksi3', compact('title', 'challenge', 'penilaian','r'));
-    }
-    public function rank_challenge(){
-        $title = 'Admin Rank Challenge';
-        $r=1;
-        $data = DB::table('penilaian_challenge')
-                    ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
-                    ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
-                    ->orderBy('total', 'DESC')->get();
-        
-
-        return view('admin.seleksi4', compact('title', 'data','r'));
-    }
+    
     public function challenge_penilaian (Request $request)
     {
         $validator = Validator::make(
@@ -777,5 +790,29 @@ class AdminController extends Controller
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan');
         }
         
+    }
+    
+    public function change_password(Request $request)
+
+    {
+
+        $request->validate([
+
+            'current_password' => ['required', new MatchOldPassword],
+
+            'new_password' => ['required'],
+
+            'new_confirm_password' => ['same:new_password'],
+
+        ]);
+
+   
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+   
+
+        return redirect()->route('admin.dashboard');
+
     }
 }

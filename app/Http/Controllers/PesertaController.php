@@ -32,7 +32,10 @@ class PesertaController extends Controller
         $user = DB::table('users')
             ->where('id', $id)
             ->first();
+        $biodata = DB::table('users')
+            ->where('id', $id)
+            ->get();
         
-        return view('peserta.pengumuman', compact('title', 'user'));
+        return view('peserta.pengumuman', compact('title', 'user','biodata'));
     }
 }

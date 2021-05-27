@@ -165,6 +165,21 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/seleksi/stadium-general/{user_id}/{r}', 'AdminController@stadiumgeneral')->name('admin.stadiumgeneral');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/create-fasil', 'AdminController@create_fasil')->name('admin.create.fasil');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/ubah-password', 'AdminController@ubah_password')->name('admin.ubah.password');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/change-password', 'AdminController@change_password')->name('admin.change.password');
+    });
+});
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
