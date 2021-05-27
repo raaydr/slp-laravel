@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'tanggal_lahir' => 'required',
             'domisili' => 'required',
             'alamat_domisili' => 'required|string',
-            'phonenumber' => 'required|string|max:13',
+            'phonenumber' => 'required|numeric|digits_between:12,13',
             
             'aktivitas' => 'required',
             'minatprogram' => 'required',
@@ -121,12 +121,15 @@ class RegisterController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
         //Table Users
         $user = new User;
         $user->email = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
         $user->level = 1;
+        $user->gen = $gen;
         $user->save();
 
         //Table seleksiPertama

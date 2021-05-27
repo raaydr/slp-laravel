@@ -149,10 +149,33 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/admin/coba" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
+                                <a href="../widgets.html" class="nav-link ">
+                                    <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Layout Options
+                                        Fasil
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.create.fasil') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daftar Fasil</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.list.fasil') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>List Fasil</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                    <p>
+                                    Controller
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>

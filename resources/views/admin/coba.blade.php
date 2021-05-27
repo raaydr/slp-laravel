@@ -117,8 +117,8 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                            <li class="nav-item">
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+               <li class="nav-item">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link ">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -141,25 +141,25 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link">
+                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link ">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Pendaftar Ulang</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge') }}" class="nav-link active">
+                                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap Challenge</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge.rank') }}" class="nav-link ">
+                                        <a href="{{ route('admin.challenge.rank') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Rank Challenge</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Antrian Interview</p>
                                         </a>
@@ -167,10 +167,33 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/admin/coba" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
+                                <a href="../widgets.html" class="nav-link ">
+                                    <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Layout Options
+                                        Fasil
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.create.fasil') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daftar Fasil</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.list.fasil') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>List Fasil</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
+                                    <i class="nav-icon far fa-plus-square"></i>
+                                    <p>
+                                    Controller
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>SLP Indonesia | Admin-Seleksi Kedua</title>
+        <title>SLP Indonesia | Admin</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
-        <link href="{{asset('develop')}}/img/slp.png" rel="icon">
+        <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
     </head>
     <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
@@ -53,7 +53,6 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            
                             <a
                                 class="dropdown-item"
                                 href="{{ route('logout') }}"
@@ -109,7 +108,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../widgets.html" class="nav-link active">
+                                <a href="../widgets.html" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Seleksi
@@ -124,13 +123,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link active">
+                                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Pendaftar Ulang</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
+                                        <a href="{{ route('admin.challenge') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap Challenge</p>
                                         </a>
@@ -142,7 +141,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Antrian Interview</p>
                                         </a>
@@ -150,7 +149,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="../widgets.html" class="nav-link ">
+                                <a href="../widgets.html" class="nav-link active">
                                     <i class="nav-icon fas fa-columns"></i>
                                     <p>
                                         Fasil
@@ -165,7 +164,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.list.fasil') }}" class="nav-link">
+                                        <a href="{{ route('admin.list.fasil') }}" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>List Fasil</p>
                                         </a>
@@ -195,12 +194,12 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Seleksi</h1>
+                                <h1>List Fasil</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="/">Admin</a></li>
-                                    <li class="breadcrumb-item active">Pendaftar-Gagal</li>
+                                    <li class="breadcrumb-item active">Fasil</li>
                                 </ol>
                             </div>
                         </div>
@@ -214,30 +213,17 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Pendaftar yang Gagal Daftar</h3>
+                                    <h3 class="card-title">Kumpulan Fasil yang telah terdaftar</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                <a class="btn btn-danger btn-sm" href="{{ route('admin.all.daftarulang') }}">
-                                                        <i class="fas fa-info"> </i>
-                                                        Gagal
-                                                    </a>
-                                                    @if(session('berhasil'))
-        <div class="alert alert-success alert-dismissable md-5">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fa fa-check"></i>Penilaian</h5>
-            {{session('berhasil')}}.
-            
-        </div>
-      @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>email</th>
-                                                <th>create</th>
-                                                <th>update</th>
-                                                
+                                                <th>Nama</th>
+                                                <th>Gender</th>
+                                                <th>status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -247,22 +233,32 @@
                                             <?php $i++ ;?>
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>{{ $user->updated_at }}</td>
+                                                <td>{{ $user->Fasil->nama }}</td>
+                                                <td>{{ $user->Fasil->jenis_kelamin }}</td>
                                                 <td>
+                                                    @if(($user->Fasil->status)== 0)
                                                     
+                                                    <p class="text-danger">non-aktif</p>
+                                                    @endif
+                                                    @if(($user->Fasil->status)== 1)
+                                                        
+                                                    <p class="text-success">aktif</p>
+                                                    @endif</td>
+                                                <td class="project-actions text-right">
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.fasilprofile', $user->Fasil->user_id) }}" target="_blank">
+                                                        <i class="fas fa-folder"> </i>
+                                                        Detail
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            <th>No</th>
-                                                <th>email</th>
-                                                <th>create</th>
-                                                <th>update</th>
-                                                
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>Gender</th>
+                                                <th>status</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -282,7 +278,7 @@
 
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block"></div>
-                <strong>Copyright &copy;2021 <a href="https://slpindonesia.com">SLP Indonesia</a>.</strong> All rights reserved.
+                <strong>Copyright &copy;2021 <a href="https://slpindonesia.com/home">SLP Indonesia</a>.</strong> All rights reserved.
             </footer>
 
             <!-- Control Sidebar -->

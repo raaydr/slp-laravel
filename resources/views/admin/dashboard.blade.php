@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
-        <link href="{{asset('develop')}}/img/slp.png" rel="icon">
+        <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
     </head>
     <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
@@ -53,7 +53,6 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            
                             <a
                                 class="dropdown-item"
                                 href="{{ route('logout') }}"
@@ -130,7 +129,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
+                                        <a href="{{ route('admin.challenge') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tahap Challenge</p>
                                         </a>
@@ -142,7 +141,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link ">
+                                        <a href="{{ route('admin.interview.antrian') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Antrian Interview</p>
                                         </a>
@@ -150,10 +149,33 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
+                                <a href="../widgets.html" class="nav-link ">
+                                    <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Pengumuman
+                                        Fasil
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.create.fasil') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daftar Fasil</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.list.fasil') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>List Fasil</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                    <p>
+                                    Controller
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
@@ -225,12 +247,11 @@
                                                 <td>{{ $user->Biodata->seleksi_pertama }}</td>
                                                 <td>{{ $user->Biodata->seleksi_kedua }}</td>
                                                 <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->Biodata->user_id) }}" target="_blank">
-                              <i class="fas fa-folder">
-                              </i>
-                              Detail
-                          </a>
-                      </td>
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->Biodata->user_id) }}" target="_blank">
+                                                        <i class="fas fa-folder"> </i>
+                                                        Detail
+                                                    </a>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

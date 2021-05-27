@@ -8,6 +8,7 @@ use App\Models\seleksiPertama;
 use App\Models\Penilaian;
 use App\Models\Control;
 use App\Models\Antrian;
+use App\Models\Fasil;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -121,6 +122,24 @@ class AdminController extends Controller
         
 
         return view('admin.createfasil', compact('title'));
+    }
+    public function list_fasil(){
+        $title = 'Admin List Fasil';
+        $users = User::where('level', 5)->orderBy('id', 'ASC')->get();
+        
+        
+
+        return view('admin.listfasil', compact('title','users'));
+    }
+    public function fasilProfile($user_id)
+    {
+        $title = 'Admin Fasil Profile';
+        
+        $user = User::where('id', $user_id)->first();
+        
+        
+
+        return view('admin.fasilProfile', compact('title', 'user'));
     }
     public function ubah_password(){
         $title = 'Admin ubah password';
@@ -814,5 +833,99 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard');
 
+    }
+
+    public function daftar_fasil(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), 
+        [   
+            'nama' => 'required|alpha|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            
+            'jenis_kelamin' => 'required',
+            'phonenumber' => 'required|numeric|digits_between:12,13',
+            'instagram' => 'required|string',
+            'prestasi' => 'required|string',
+            'quotes' => 'required|string',
+            'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+            
+
+        ],
+
+        $messages = 
+        [
+            'nama.required' => 'Nama tidak boleh kosong!',
+            'email.required' => 'E-Mail tidak boleh kosong !',
+            'password.required' => 'Password tidak boleh kosong',
+            'jenis_kelamin.required' => 'jenis kelamin harus dipilih!',
+            
+            'email.unique' => 'E-Mail sudah dipakai',
+            'phonenumber.numeric' => 'Nomor telpon harus berupa angka',
+            'nama.alpha' => 'Harus berupa alfabet !',
+            'url_foto.required' => 'foto tidak boleh kosong!',
+            'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+            'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        
+        
+
+        $detail=$request->prestasi;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name= "/imgfasil/" . time().$k.'.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $detail = $dom->saveHTML();
+
+        //Table Users
+        $user = new User;
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+        $user->level = 5;
+        $user->gen = 0;
+        $user->save();
+
+         //Table fasil
+        $user_id = $user->id;
+        $fasil = new Fasil;
+        $fasil->nama =   $request->nama;
+        $fasil->email = $request->email;
+        $fasil->jenis_kelamin = $request->jenis_kelamin;
+        $fasil->instagram = $request->instagram;
+        $fasil->phonenumber =$request->phonenumber;
+        $fasil->prestasi = $detail;
+        $fasil->quotes = $request->quotes;
+        $fasil->status = 1;
+        $fasil->user_id = $user_id;
+        if($file = $request->hasFile('url_foto')) 
+            {
+            $namaFile = $user->id;
+            $file = $request->file('url_foto') ;
+            $fileName = $namaFile.'_'.$file->getClientOriginalName() ;
+            $destinationPath = public_path().'/imgfasil/' ;
+            $file->move($destinationPath,$fileName);
+            $fasil->url_foto = $fileName ;
+        }
+        $fasil->save();
+        
+        return redirect()->route('admin.create.fasil')->with('success', 'Registrasi Anda telah berhasil!. Silakan login dengan menggunakan email dan password Anda.');
     }
 }

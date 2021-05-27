@@ -66,4 +66,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Kepribadian');
     }  
 
+    public function fasil()
+    {
+        return $this->hasOne('App\Models\Fasil');
+    }
+
 }

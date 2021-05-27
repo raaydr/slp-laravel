@@ -167,7 +167,22 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/create-fasil', 'AdminController@create_fasil')->name('admin.create.fasil');
+	Route::get('/daftar-fasil', 'AdminController@create_fasil')->name('admin.create.fasil');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/list-fasil', 'AdminController@list_fasil')->name('admin.list.fasil');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/dashboard/fasilProfile/{user_id}', 'AdminController@fasilProfile')->name('admin.fasilprofile');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/create-fasil', 'AdminController@daftar_fasil')->name('admin.daftar.fasil');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
