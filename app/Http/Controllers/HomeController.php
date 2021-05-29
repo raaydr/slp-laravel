@@ -42,16 +42,28 @@ class HomeController extends Controller
                 $id =  Auth::user()->id;
                 $user = User::where('id', $id)->get();
                 $biodata = DB::table('biodata')->where('user_id', $id)->first();
-                $check = DB::table('penilaian_challenge')
+                $berkas = DB::table('biodata')->where('user_id', $id)->value('seleksi_berkas');
+                $pertama = DB::table('biodata')->where('user_id', $id)->value('seleksi_pertama');
+                $kedua = DB::table('biodata')->where('user_id', $id)->value('seleksi_kedua');
+
+                if(!empty($kedua)){
+
+                    return view('user.gugur3', compact('title', 'user', 'biodata'));
+                } else if (!empty($pertama)){
+                    $check = DB::table('penilaian_challenge')
                         ->where('user_id', $id)
                         ->value('total');
-                if($check == 0){
+                    if($check == 0){
+                        return view('user.gugur', compact('title', 'user', 'biodata'));
+                    }else{
+                        $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
+                        $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
+                        return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
+                    }
+                } else {
                     return view('user.gugur', compact('title', 'user', 'biodata'));
-                }else{
-                    $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
-                    $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
-                    return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
                 }
+                
                 
                         
                 break;
