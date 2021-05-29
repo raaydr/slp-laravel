@@ -78,6 +78,10 @@ class HomeController extends Controller
             case '4':
                 return redirect()->action('\App\Http\Controllers\PesertaController@index');
                                 
+                break;
+            case '5':
+                return redirect()->action('\App\Http\Controllers\FasilController@index');
+                                
                 break;    
                 default:
                 echo "SLP INDONESIA";

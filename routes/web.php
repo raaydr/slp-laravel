@@ -261,10 +261,20 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
 	});
 });
+
 // ROUTES Peserta
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
 	Route::get('/pengumuman', 'PesertaController@index')->name('peserta.pengumuman');
+
+	});
+});
+
+
+// ROUTES Fasil
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/dashboard', 'FasilController@index')->name('fasil.dashboard');
 
 	});
 });

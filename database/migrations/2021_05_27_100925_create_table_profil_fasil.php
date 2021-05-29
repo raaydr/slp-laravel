@@ -25,7 +25,7 @@ class CreateTableProfilFasil extends Migration
             $table->string('quotes');
             $table->boolean('status');
             $table->text('url_foto');
-            $table->integer('grup');
+            $table->integer('grup')->nullable();
             $table->integer('user_id')->unsigned();   
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

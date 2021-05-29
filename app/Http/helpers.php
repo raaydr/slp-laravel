@@ -24,6 +24,9 @@
       case 4:
         return 'peserta';
         break;
+      case 5:
+        return 'fasil';
+        break;  
       default:
         return 'user';
         break;

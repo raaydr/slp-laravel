@@ -18,7 +18,7 @@ class CreateTablePeserta extends Migration
             $table->string('nama');
             $table->boolean('status');
             $table->boolean('captain');
-            $table->integer('grup');
+            $table->integer('grup')->nullable();;
             $table->integer('gen');
             
             $table->integer('user_id')->unsigned();   
