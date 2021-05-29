@@ -181,7 +181,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            Selamat! Kamu Lolos dari Tahap Wawancara. jangan lupa ikut sg di rabbani
+                            Selamat! Kamu Lolos dari Tahap Wawancara.
                             <br />
 
                             Selamat berjuang, Salam Leader, Luar Biasa!
