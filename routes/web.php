@@ -115,7 +115,8 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/penilaian_challenge', 'AdminController@penilaian')->name('admin.seleksi2.penilaian');
     });
-});Route::group(['middleware' => 'check-permission:admin'], function () {
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/dashboard/userProfile/editpenilaian/{user_id}', 'AdminController@editpenilaian')->name('admin.seleksi2.editpenilaian');
     });
@@ -193,6 +194,21 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/change-password', 'AdminController@change_password')->name('admin.change.password');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/pengelompokkan', 'AdminController@pengelompok_peserta')->name('admin.peserta.pengelompok');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Peserta/add-grup', 'AdminController@add_grup')->name('admin.peserta.addgrup');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/delete-grup/{id}', 'AdminController@delete_grup')->name('admin.peserta.deletegrup');
     });
 });
 // ROUTES PENDAFTAR

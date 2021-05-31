@@ -8,6 +8,7 @@ use App\Models\seleksiPertama;
 use App\Models\Penilaian;
 use App\Models\Control;
 use App\Models\Antrian;
+use App\Models\Peserta;
 use App\Models\Fasil;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -147,6 +148,18 @@ class AdminController extends Controller
         
 
         return view('admin.ubahpassword', compact('title'));
+    }
+
+    public function pengelompok_peserta(){
+        $title = 'Admin Peserta Pengelompokkan';
+        
+        $users = User::where('level', 4)->get();
+        $grup1 = Peserta::where('grup',1)->get();
+        $grup2 = Peserta::where('grup',2)->get();
+        $grup3 = Peserta::where('grup',3)->get();
+        
+
+        return view('admin.pengelompokPeserta', compact('title','users','grup1','grup2','grup3'));
     }
 // Method LULUS GAGAL
     public function seleksi1_lulus($user_id)
@@ -927,5 +940,65 @@ class AdminController extends Controller
         $fasil->save();
         
         return redirect()->route('admin.create.fasil')->with('success', 'Registrasi Anda telah berhasil!. Silakan login dengan menggunakan email dan password Anda.');
+    }
+
+    public function add_grup (Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            
+            'grup' => 'required|numeric',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'grup.required' => 'grup tidak boleh kosong!',
+            
+            
+            'grup.numeric' => 'grup telpon harus berupa angka',
+            
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        $gen = DB::table('controller')
+            ->where('id', 1)
+            ->value('gen');
+        $id =  Input::get('user_id');
+
+        if (Peserta::where('gen', $gen)->where('user_id', $id)->exists()) {
+            DB::table('peserta')->where('user_id',$id)->update([
+                
+                'grup' => $request->grup,
+                'updated_at'=> now(),
+            ]);
+            return redirect()->route('admin.peserta.pengelompok')->with('pesan', 'berhasil update');
+        } else{
+             //Table Peserta
+            $user = new Peserta;
+            $user->nama = Input::get('nama');
+            $user->status =  1;
+            $user->captain = 0;
+            $user->gen = $gen;
+            $user->grup =  Input::get('grup');
+            $user->user_id = Input::get('user_id');
+            $user->save();
+            return redirect()->route('admin.peserta.pengelompok')->with('berhasil', 'berhasil menambahkan grup');
+        }
+        
+    }
+
+    public function delete_grup($id){
+        DB::table('peserta')->where('user_id',$id)->update([
+                
+            'grup' => NULL,
+            'updated_at'=> now(),
+        ]);
+        return redirect()->route('admin.peserta.pengelompok')->with('challenge', 'berhasil menghapus');
     }
 }

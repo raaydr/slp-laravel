@@ -71,4 +71,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Fasil');
     }
 
+    public function peserta()
+    {
+        return $this->hasOne('App\Models\Peserta');
+    }
+
+
 }

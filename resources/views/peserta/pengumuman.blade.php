@@ -151,8 +151,11 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            Selamat! Kamu Lolos dari Tahap Wawancara. jangan lupa ikut sg di rabbani
-                            <br />
+                        Selamat! Kamu Lolos dari Tahap Wawancara.
+Ini berarti tinggal satu langkah lagi untuk menjadi "Awardee Smart Leader Preneur #2"
+                            <br>
+                            Sampai bertemu di Stadium General, pada Sabtu, 5 Juni 2021. 
+                            <br>
 
                             Selamat berjuang, Salam Leader, Luar Biasa!
                         </div>
