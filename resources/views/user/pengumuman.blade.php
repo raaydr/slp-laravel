@@ -184,9 +184,10 @@
                         Selamat! Kamu Lolos dari Tahap Wawancara.
 Ini berarti tinggal satu langkah lagi untuk menjadi "Awardee Smart Leader Preneur #2"
                             <br>
-                            Sampai bertemu di Stadium General, pada Sabtu, 5 Juni 2021. 
+                            Sampai bertemu di Stadium General, pada Sabtu, 5 Juni 2021 pukul 08.00 di <a href="https://g.co/kgs/G9k7b4" target="_blank">Masjid Al - Hikmah</a> 
                             <br>
-
+                            Jl. Bangka II No.24, RT.8/RW.3, Pela Mampang, Kec. Mampang Prpt., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta
+                            <br>
                             Selamat berjuang, Salam Leader, Luar Biasa!
                         </div>
                         <!-- /.card-body -->
