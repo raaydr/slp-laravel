@@ -213,34 +213,29 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">List Pendaftar yang Tereliminasi</h3>
+                                    <h3 class="card-title">List Peserta</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                @if(session('berhasil'))
-        <div class="alert alert-success alert-dismissable md-5">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fa fa-check"></i>Tambah Grup</h5>
-            {{session('berhasil')}}.
-            
-        </div>
-      @endif
-      @if(session('pesan'))
-        <div class="alert alert-warning alert-dismissable md-5">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fa fa-info"></i>Ubah Grup</h5>
-            {{session('pesan')}}.
-            
-        </div>
-      @endif
-      @if(session('challenge'))
-        <div class="alert alert-danger alert-dismissable md-5">
-            <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fa fa-check"></i>Grup </h5>
-            {{session('challenge')}}.
-            
-        </div>
-      @endif
+                                    @if(session('berhasil'))
+                                    <div class="alert alert-success alert-dismissable md-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <h5><i class="icon fa fa-check"></i>Tambah Grup</h5>
+                                        {{session('berhasil')}}.
+                                    </div>
+                                    @endif @if(session('pesan'))
+                                    <div class="alert alert-warning alert-dismissable md-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <h5><i class="icon fa fa-info"></i>Ubah Grup</h5>
+                                        {{session('pesan')}}.
+                                    </div>
+                                    @endif @if(session('challenge'))
+                                    <div class="alert alert-danger alert-dismissable md-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <h5><i class="icon fa fa-check"></i>Grup</h5>
+                                        {{session('challenge')}}.
+                                    </div>
+                                    @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -328,36 +323,31 @@
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->Biodata->nama }}</td>
                                                 <td>{{ $user->Biodata->tanggal_lahir }}</td>
-                                                <td> @if(($user->Biodata->jenis_kelamin)== 'Pria')
-                                                        
-                                                        <p class="text-primary">Pria</p>
-                                                        @endif
-                                                        @if(($user->Biodata->jenis_kelamin)== 'Wanita')
-                                                        
-                                                        <p class="text-success">Wanita</p>
-                                                        @endif</td>
+                                                <td>
+                                                    @if(($user->Biodata->jenis_kelamin)== 'Pria')
+
+                                                    <p class="text-primary">Pria</p>
+                                                    @endif @if(($user->Biodata->jenis_kelamin)== 'Wanita')
+
+                                                    <p class="text-success">Wanita</p>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $user->Biodata->domisili }}</td>
                                                 <td>{{ $user->Biodata->minatprogram }}</td>
                                                 <td>
                                                     @if(empty($user->Peserta->grup))
 
                                                     <p class="text-danger">Kosong</p>
-                                                    @endif 
-                                                    @if(!empty($user->Peserta->grup))
+                                                    @endif @if(!empty($user->Peserta->grup)) @if(($user->Peserta->grup)== 1)
 
-                                                        @if(($user->Peserta->grup)== 1)
-                                                        
-                                                        <p class="text-primary"><b>Kel-1</b></p>
-                                                        @endif
-                                                        @if(($user->Peserta->grup)== 2)
-                                                        
-                                                        <p class="text-success"><b>Kel-2</b></p>
-                                                        @endif
-                                                        @if(($user->Peserta->grup)== 3)
-                                                        
-                                                        <p class="text-warning"><b>Kel-3</b></p>
-                                                        @endif
-                                                    @endif
+                                                    <p class="text-primary"><b>Kel-1</b></p>
+                                                    @endif @if(($user->Peserta->grup)== 2)
+
+                                                    <p class="text-success"><b>Kel-2</b></p>
+                                                    @endif @if(($user->Peserta->grup)== 3)
+
+                                                    <p class="text-warning"><b>Kel-3</b></p>
+                                                    @endif @endif
                                                 </td>
                                                 <td class="project-actions text-right">
                                                     <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
@@ -417,7 +407,7 @@
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->nama }}</td>
                                                 <td class="project-actions text-right">
-                                                <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
+                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
                                                         <i class="fas fa-exclamation"> </i>
                                                         hapus
                                                     </a>
@@ -462,7 +452,7 @@
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->nama }}</td>
                                                 <td class="project-actions text-right">
-                                                <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
+                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
                                                         <i class="fas fa-exclamation"> </i>
                                                         hapus
                                                     </a>

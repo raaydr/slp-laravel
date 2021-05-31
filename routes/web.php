@@ -188,6 +188,11 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Fasil/add-grup', 'AdminController@add_grupFasil')->name('admin.fasil.addgrup');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
 	Route::get('/ubah-password', 'AdminController@ubah_password')->name('admin.ubah.password');
     });
 });

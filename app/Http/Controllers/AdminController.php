@@ -1001,4 +1001,40 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admin.peserta.pengelompok')->with('challenge', 'berhasil menghapus');
     }
+
+    public function add_grupFasil (Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            
+            'grup' => 'required|numeric',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'grup.required' => 'grup tidak boleh kosong!',
+            
+            
+            'grup.numeric' => 'grup telpon harus berupa angka',
+            
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        $id =  Input::get('user_id');
+
+        
+        DB::table('fasil')->where('user_id',$id)->update([
+                
+                'grup' => $request->grup,
+                'updated_at'=> now(),
+        ]);
+        return redirect()->route('admin.list.fasil')->with('pesan', 'berhasil update');
+        
+    }
 }
