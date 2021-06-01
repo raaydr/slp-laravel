@@ -172,6 +172,24 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
+                                <a href="../widgets.html" class="nav-link ">
+                                    <i class="nav-icon fas ion-person"></i>
+                                    <p>
+                                        Peserta
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Pengelompokkan</p>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
                                 <i class="nav-icon far fa-plus-square"></i>
                                     <p>

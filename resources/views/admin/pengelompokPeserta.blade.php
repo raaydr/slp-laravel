@@ -108,7 +108,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../widgets.html" class="nav-link active">
+                                <a href="../widgets.html" class="nav-link ">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Seleksi
@@ -117,7 +117,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.eliminasi') }}" class="nav-link active">
+                                        <a href="{{ route('admin.eliminasi') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Pendaftar Tereliminasi</p>
                                         </a>
@@ -172,6 +172,24 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
+                                <a href="../widgets.html" class="nav-link active">
+                                    <i class="nav-icon fas ion-person"></i>
+                                    <p>
+                                        Peserta
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Pengelompokkan</p>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
                                     <i class="nav-icon far fa-plus-square"></i>
                                     <p>
@@ -199,7 +217,7 @@
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="/">Admin</a></li>
-                                    <li class="breadcrumb-item active">Pendaftar-Tereliminasi</li>
+                                    <li class="breadcrumb-item active">Pengelompokkan-Peserta</li>
                                 </ol>
                             </div>
                         </div>
@@ -568,7 +586,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                
                     })
                     .buttons()
                     .container()
