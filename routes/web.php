@@ -290,6 +290,17 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/grup', 'PesertaController@grup_peserta')->name('peserta.grup');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/grup/userProfile/{user_id}', 'PesertaController@userProfile')->name('peserta.userprofile');
+    });
+});
 
 
 // ROUTES Fasil

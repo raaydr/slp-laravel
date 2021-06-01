@@ -106,7 +106,16 @@
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>
                                         Pengumuman
-                                        <span class="right badge badge-danger">New</span>
+                                        
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('peserta.grup') }}" class="nav-link ">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Grup
+                                        
                                     </p>
                                 </a>
                             </li>
