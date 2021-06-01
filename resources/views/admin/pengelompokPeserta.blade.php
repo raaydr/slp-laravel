@@ -212,7 +212,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Seleksi</h1>
+                                <h1>Peserta</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -409,7 +409,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example3" class="table table-bordered table-striped">
+                                    <table id="example2" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -499,7 +499,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example3" class="table table-bordered table-striped">
+                                    <table id="example4" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -509,7 +509,7 @@
                                         </thead>
                                         <tbody>
                                             <?php $i = 0; ?>
-                                            @foreach ($grup2 as $user)
+                                            @foreach ($grup3 as $user)
                                             <?php $i++ ;?>
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
