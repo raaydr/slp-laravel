@@ -189,6 +189,7 @@
                             <li>Alat tulis</li>
                             <li>Papan jalan</li>
                             <li>Tumbler</li>
+                            <li>masker/faceshield</li>
                         </ul>
                        
                         </div>

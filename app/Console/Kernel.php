@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\daily_quest::class,
     ];
 
     /**
@@ -24,19 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {   
-        $schedule->call(function () {
-               
-                    $antrian = DB::table('controller')
-                    ->where('id', 1)
-                    ->value('antrian');
-                    $nantrian = $antrian + 1;
-                    DB::table('controller')->where('id',1)->update([
-                            
-                        'antrian' =>$nantrian,
-                        'updated_at'=> now(),
-                    ]);
-                
-            })->everyMinute();
+        $schedule->command('sg:daily-quest')->everyMinute(); 
     }
 
     /**
