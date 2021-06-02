@@ -47,6 +47,14 @@ class AdminController extends Controller
 
         return view('admin.coba', compact('title', 'controls'));
     }
+    public function view_create_controller()
+    {
+        $title = 'Admin create controller';
+        
+        
+
+        return view('admin.createController', compact('title'));
+    }
 
     public function index()
     {
@@ -710,7 +718,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'bersihkan yang tidak mengerjakan');
+        return redirect()->route('admin.coba')->with('berhasil', 'menutup pendaftaran');
     }
 
     public function generateAntrian(){
@@ -1036,5 +1044,42 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admin.list.fasil')->with('pesan', 'berhasil update');
         
+    }
+
+    public function create_controller(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), 
+        [   
+            'nama' => 'required|alpha|max:255',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'nama.required' => 'Nama tidak boleh kosong!',
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        
+
+        //Table control
+        $controller = new Control;
+        $controller->nama = Input::get('nama');
+        $controller->string = Input::get('string');
+        $controller->boolean = Input::get('boolean');
+        $controller->integer = Input::get('integer');
+        $controller->date = Input::get('date');
+        $controller->save();
+        
+        return redirect()->route('admin.controller.create')->with('pesan', 'Controller terbuat');
     }
 }

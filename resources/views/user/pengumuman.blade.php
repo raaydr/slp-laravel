@@ -170,6 +170,36 @@
                 <!-- Main content -->
                 <section class="content">
                 @if (!empty($biodata->seleksi_kedua))
+                <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Persiapan Stadium General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                        Selain kamu harus datang ada beberapa hal yang harus kalian bawa juga, yaitu:
+                        <br>
+                        <ul>
+                            <li>Kartu nama minimal 34 lembar</li>
+                            <li>Materai 10.000</li>
+                            <li>Alat tulis</li>
+                            <li>Papan jalan</li>
+                            <li>Tumbler</li>
+                        </ul>
+                       
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Admin SLP, 2 Juni 2021
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    
+                    <!-- /.card -->
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">LOLOS TAHAP INTERVIEW</h3>

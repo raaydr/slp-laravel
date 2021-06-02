@@ -29,7 +29,6 @@ Route::get('/program-beasiswa', function () {
 	});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/a', [App\Http\Controllers\AdminController::class, 'coba']);
 Route::get('/b', [App\Http\Controllers\PendaftarController::class, 'insertSeleksi1']);
 // ROUTES ADMIN
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -39,7 +38,17 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/coba', 'AdminController@coba')->name('admin.coba');
+	Route::get('/Controller/control', 'AdminController@coba')->name('admin.coba');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Controller/create_control', 'AdminController@view_create_controller')->name('admin.controller.create');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Controller/create-control', 'AdminController@create_controller')->name('admin.create.controller');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -216,6 +225,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/delete-grup/{id}', 'AdminController@delete_grup')->name('admin.peserta.deletegrup');
     });
 });
+
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
