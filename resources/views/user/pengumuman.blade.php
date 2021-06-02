@@ -191,7 +191,13 @@
                             <li>Tumbler</li>
                             <li>masker/faceshield</li>
                         </ul>
-                       
+                        <br>
+                        Untuk DressCodenya Sepatu, kaos kaki, baju putih  
+                        <ul>
+                            <li>Perempuan: rok hitam dan kerudung putih</li>
+                            <li>Laki-laki: celana hitam</li>
+                        </ul>
+                        
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
