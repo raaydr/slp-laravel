@@ -302,6 +302,37 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/daily-quest', 'PesertaController@quest')->name('peserta.daily.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/daily-quest/upload', 'PesertaController@daily_quest')->name('peserta.upload.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/daily-quest/video', 'PesertaController@video_quest')->name('peserta.video.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/daily-quest/writing', 'PesertaController@writing_quest')->name('peserta.writing.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/daily-quest/business', 'PesertaController@business_quest')->name('peserta.business.quest');
+
+	});
+});
+
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
 	Route::get('/grup', 'PesertaController@grup_peserta')->name('peserta.grup');
 
 	});
@@ -311,6 +342,8 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 	Route::get('/grup/userProfile/{user_id}', 'PesertaController@userProfile')->name('peserta.userprofile');
     });
 });
+
+
 
 
 // ROUTES Fasil

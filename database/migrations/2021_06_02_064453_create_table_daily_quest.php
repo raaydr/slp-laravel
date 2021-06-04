@@ -15,11 +15,11 @@ class CreateTableDailyQuest extends Migration
     {
         Schema::create('daily_quest', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('hari')->unsigned();   
+            $table->integer('day')->unsigned();   
             $table->string('video')->nullable();
             $table->text('writing')->nullable();
-            $table->text('url_bukti');
-            $table->string('hasil');
+            $table->text('business');
+            $table->integer('hasil');
             $table->LongText('note')->nullable();
             
             $table->boolean('status');

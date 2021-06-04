@@ -76,5 +76,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Peserta');
     }
 
+    public function quest()
+    {
+        return $this->hasMany('App\Models\Quest');
+    }
 
 }

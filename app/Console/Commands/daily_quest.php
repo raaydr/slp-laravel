@@ -37,14 +37,20 @@ class daily_quest extends Command
      */
     public function handle()
     {
-        $antrian = DB::table('controller')
-        ->where('id', 1)
-        ->value('antrian');
-        $nantrian = $antrian + 1;
-        DB::table('controller')->where('id',1)->update([
-                
-            'antrian' =>$nantrian,
-            'updated_at'=> now(),
-        ]);
+        $run = DB::table('control')
+        ->where('id', 2)
+        ->value('boolean');
+        if($run == 1){
+            $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+            $newquest = $quest + 1;
+            DB::table('control')->where('id',2)->update([
+                    
+                'integer' =>$newquest,
+                'updated_at'=> now(),
+            ]);
+        
+            }
     }
 }

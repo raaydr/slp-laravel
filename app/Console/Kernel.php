@@ -23,8 +23,11 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
+    
     {   
-        $schedule->command('sg:daily-quest')->everyMinute(); 
+
+        $schedule->command('sg:daily-quest')->daily(); 
+        
     }
 
     /**
