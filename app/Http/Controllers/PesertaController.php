@@ -106,12 +106,12 @@ class PesertaController extends Controller
 
         $messages = 
         [
-            'business.required' => 'foto tidak boleh kosong!',
+            'business.required' => 'tidak boleh kosong!',
             'business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
             'business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
             'writing.image' => 'Format file tidak mendukung! Gunakan doc,pdf,docx,zip,pdf',
             'writing.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
-            'hasil.required' => 'grup tidak boleh kosong!',
+            'hasil.required' => ' tidak boleh kosong!',
 
 
         ]);     
@@ -176,7 +176,7 @@ class PesertaController extends Controller
             ],
 
             $messages = [
-                'writing.required' => 'Hasil Tes tidak boleh kosong!',
+                'writing.required' => 'tidak boleh kosong!',
                 'writing.image' => 'Format file tidak mendukung! Gunakan doc,pdf,docx,zip,pdf.',
                 'writing.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
             ]
@@ -216,11 +216,95 @@ class PesertaController extends Controller
         
         return redirect()->route('peserta.daily.quest')->with('pesan', 'ubah writing sukses');
     }
-    function downloadWriting($file_name){
-        $file = Storage::disk('public')->get($file_name);
-  
-        return (new Response($file, 200))
-              ->header('Content-Type', 'image/jpeg');
+    public function video_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'video' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'video.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $id = Auth::user()->id;
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+    
+        
+    
+            Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    'video' => Input::get('video'),
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return redirect()->route('peserta.daily.quest')->with('pesan', 'berhasil mengubah link video');
+    }
+    public function business_quest(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), 
+        [   
+            
+            'business' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+            'hasil' => 'required',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'business.required' => 'tidak boleh kosong!',
+            'business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
+            'business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            'hasil.required' => ' tidak boleh kosong!',
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        $id = Auth::user()->id;
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        
+        if ($business = $request->hasFile('business')) {
+            $business = $request->file('business');
+            $businessName = $id.'hari'.$hari.'-'.time(). '_' . $business->getClientOriginalName();
+            $tujuanPath = public_path() . '/imgBusinessQuest/';
+            $business->move($tujuanPath, $businessName);
+        }
+        $harga = Input::get('hasil');
+        $harga_str = preg_replace("/[^0-9]/", "", $harga);
+        $hasil = (int) $harga_str;
+
+        
+        //Table daily_quest
+        Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    'business' => $businessName,
+                    'hasil' => $hasil,
+                    'updated_at' => now(),
+                ]);
+        
+        
+        return redirect()->route('peserta.daily.quest')->with('pesan', 'berhasil mengubah business challenge');
     }
     
 }

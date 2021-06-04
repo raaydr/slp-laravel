@@ -161,8 +161,8 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="video" class="col-md-4 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
-                              <div class="col-md-6 col-form-label text-md-left">
+                              <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
+                              <div class="col-md-2 col-form-label text-md-left">
                                  
                                  
                                  @if(($data->video)== 'tidak mengerjakan')
@@ -171,7 +171,7 @@
                                  <a type="text" href="{{$data->video}}" target="_blank">check</a>
                                  @endif
                               </div>
-                              <div class="col-md-2 col-form-label text-md-right">
+                              <div class="col-md-4 col-form-label text-md-left">
                               <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Link Video
@@ -179,8 +179,8 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
-                              <div class="col-md-6 col-form-label text-md-left">
+                              <label for="writing" class="col-md-6 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
+                              <div class="col-md-2 col-form-label text-md-left">
                                  
                                  
                                  @if(($data->writing)== 'tidak mengerjakan')
@@ -189,7 +189,7 @@
                                  <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">check</a>
                                  @endif
                               </div>
-                              <div class="col-md-2 col-form-label text-md-right">
+                              <div class="col-md-4 col-form-label text-md-left">
                               <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Writing
@@ -197,17 +197,17 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="business" class="col-md-4 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
-                              <div class="col-md-6 col-form-label text-md-left">
+                              <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
+                              <div class="col-md-2 col-form-label text-md-left">
                                  
                                  
                                  @if(($data->business)== 'tidak mengerjakan')
                                  <p class="text-danger">tidak mengerjakan</p>
                                  @else 
-                                 <a type="text" href="{{$data->business}}" target="_blank">check</a>
+                                 <a type="text" href="{{asset('imgBusinessQuest')}}/{{$data->business}}" target="_blank">check</a>
                                  @endif
                               </div>
-                              <div class="col-md-2 col-form-label text-md-right">
+                              <div class="col-md-4 col-form-label text-md-left">
                               <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-business" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Business
@@ -215,8 +215,8 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="hasil" class="col-md-4 col-form-label text-md-right">{{ __('Hasil Business Challenge') }}</label>
-                              <div class="col-md-8 col-form-label text-md-left">
+                              <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Hasil Business Challenge') }}</label>
+                              <div class="col-md-2 col-form-label text-md-left">
                                 <hasil></hasil>
                               </div>
                            </div>
@@ -234,7 +234,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="{{route('pendaftar.kepribadian.pdf')}}" enctype="multipart/form-data" class="was-validated">
+                                <form method="POST" action="{{route('peserta.video.quest')}}" enctype="multipart/form-data" class="was-validated">
                                     {{csrf_field()}}
                                     <div class="modal-body">
                                         <div class="row">
@@ -314,7 +314,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="{{route('pendaftar.kepribadian.pdf')}}" enctype="multipart/form-data" class="was-validated">
+                                <form method="POST" action="{{route('peserta.business.quest')}}" enctype="multipart/form-data" class="was-validated">
                                     {{csrf_field()}}
                                     <div class="modal-body">
                                         <div class="row">
