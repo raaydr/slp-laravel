@@ -861,7 +861,7 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), 
         [   
-            'nama' => 'required|alpha|max:255',
+            'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             
@@ -884,7 +884,6 @@ class AdminController extends Controller
             
             'email.unique' => 'E-Mail sudah dipakai',
             'phonenumber.numeric' => 'Nomor telpon harus berupa angka',
-            'nama.alpha' => 'Harus berupa alfabet !',
             'url_foto.required' => 'foto tidak boleh kosong!',
             'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
             'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 8Mb !',
