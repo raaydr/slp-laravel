@@ -19,6 +19,9 @@ class CreateTableDailyQuest extends Migration
             $table->string('video')->nullable();
             $table->text('writing')->nullable();
             $table->text('business');
+            $table->string('sumber_produk');
+            $table->string('jenis_produk');
+            $table->text('keterangan');
             $table->integer('hasil');
             $table->LongText('note')->nullable();
             

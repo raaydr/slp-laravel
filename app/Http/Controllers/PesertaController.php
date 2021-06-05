@@ -98,7 +98,10 @@ class PesertaController extends Controller
         [   
             'writing' => 'mimes:doc,pdf,docx,zip,pdf|max:2048',
             'business' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
-            'hasil' => 'required',
+            'sumber_produk' => 'required',
+            'jenis_produk' => 'required',
+            'keterangan' => 'required',
+
             
             
 
@@ -111,6 +114,9 @@ class PesertaController extends Controller
             'business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
             'writing.image' => 'Format file tidak mendukung! Gunakan doc,pdf,docx,zip,pdf',
             'writing.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            'sumber_produk.required' => ' tidak boleh kosong!',
+            'jenis_produk.required' => ' tidak boleh kosong!',
+            'keterangan.required' => ' tidak boleh kosong!',
             'hasil.required' => ' tidak boleh kosong!',
 
 
@@ -154,6 +160,9 @@ class PesertaController extends Controller
         $daily_quest->video = $video;
         $daily_quest->writing = $writingName;
         $daily_quest->business = $businessName;
+        $daily_quest->sumber_produk = Input::get('sumber_produk');
+        $daily_quest->jenis_produk = Input::get('jenis_produk');
+        $daily_quest->keterangan = Input::get('keterangan');
         $daily_quest->hasil = $hasil;
 
         $daily_quest->status = 0;

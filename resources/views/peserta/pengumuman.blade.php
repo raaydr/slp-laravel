@@ -119,6 +119,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                        <a href="{{ route('peserta.daily.quest') }}" class="nav-link">
+                           <i class="nav-icon fas ion-person"></i>
+                           <p>
+                           Daily Quest
+                           </p>
+                        </a>
+                     </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

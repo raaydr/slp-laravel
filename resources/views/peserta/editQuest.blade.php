@@ -99,10 +99,18 @@
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a href="{{ route('peserta.grup') }}" class="nav-link active">
+                        <a href="{{ route('peserta.grup') }}" class="nav-link ">
                            <i class="nav-icon fas fa-table"></i>
                            <p>
                               Grup
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
+                           <i class="nav-icon fas ion-person"></i>
+                           <p>
+                           Daily Quest
                            </p>
                         </a>
                      </li>
@@ -215,7 +223,30 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Hasil Business Challenge') }}</label>
+                              <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                              <a type="text" >{{$data->sumber_produk}}</a>
+                              </div>
+                           </div>
+                        
+                        <div class="form-group row">
+                              <label for="jenis_produk" class="col-md-6 col-form-label text-md-right">{{ __('Jenis Produk') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                              <a type="text" >{{$data->jenis_produk}}</a>
+                              </div>
+                           </div>
+                        
+                        <div class="form-group row">
+                              <label for="keterangan" class="col-md-6 col-form-label text-md-right">{{ __('Keterangan') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                              <?php
+                                                       echo $data->keterangan ;
+                                                    ?>
+                              </div>
+                           </div>
+                        
+                        <div class="form-group row">
+                              <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Profit Hari Ini') }}</label>
                               <div class="col-md-2 col-form-label text-md-left">
                                 <hasil></hasil>
                               </div>

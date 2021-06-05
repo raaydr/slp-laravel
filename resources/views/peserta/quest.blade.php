@@ -14,9 +14,15 @@
       <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
       <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
       <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
+      <!-- summernote -->
+      <link rel="stylesheet" href="{{asset('template')}}/plugins/summernote/summernote-bs4.min.css">
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
+      <style>.note-group-select-from-files {
+  display: none;
+}
+      </style>
    </head>
    <body class="hold-transition sidebar-mini">
       <!-- Site wrapper -->
@@ -99,10 +105,18 @@
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a href="{{ route('peserta.grup') }}" class="nav-link active">
+                        <a href="{{ route('peserta.grup') }}" class="nav-link ">
                            <i class="nav-icon fas fa-table"></i>
                            <p>
                               Grup
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
+                           <i class="nav-icon fas ion-person"></i>
+                           <p>
+                           Daily Quest
                            </p>
                         </a>
                      </li>
@@ -196,6 +210,8 @@
                                  <input id="business" type="file" class="form-control{{ $errors->has('business') ? ' is-invalid' : '' }}" name="business" value="{{ old('business') }}" required autofocus>
                                  <small id="passwordHelpBlock" class="form-text text-sucess">
                                  Format harus jpeg,png,pdf dan ukuran maksimal 2mb
+                                 <br>
+                                 tolong gabungkan gambar jika punya gambar banyak menjadi 1 gambar
                                  </small> 
                                  @if ($errors->has('business'))
                                  <span class="invalid-feedback" role="alert">
@@ -205,7 +221,68 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="hasil" class="col-md-4 col-form-label text-md-right">{{ __('Hasil Business Challenge') }}</label>
+                            <label for="sumber_produk" class="col-md-4 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline1" name="sumber_produk" class="custom-control-input" value="Produk SLP" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline1">Produk SLP</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="sumber_produk" class="custom-control-input" value="Produk Luar" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline2">Produk Luar</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline3" name="sumber_produk" class="custom-control-input" value="Produk Campuran" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline3">Produk Campuran(SLP+Luar)</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenis_produk" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Produk') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline3" name="jenis_produk" class="custom-control-input" value="Jasa" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline3">Jasa</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline4" name="jenis_produk" class="custom-control-input" value="Konsumtif" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline4">Konsumtif</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline5" name="jenis_produk" class="custom-control-input" value="Barang" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline5">Barang</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline6" name="jenis_produk" class="custom-control-input" value="Lainnya" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline6">Lainnya</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline8" name="jenis_produk" class="custom-control-input" value="Campuran" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline8">Campuran</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                                            <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
+                                            <div class="col-md-6">
+                                                <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan" value="{{ old('keterangan') }}"  required autofocus></textarea>
+                                                <small id="passwordHelpBlock" class="form-text text-sucess">
+                                 Diisi dengan harga jual barang, harga beli barang, dan profit
+                                 <br>
+                                 contoh : 
+                                 <br>
+                                 Nama Barang : Pempek , harga jual 80.000 , harga beli 65.000, profit 15.000
+                                 </small> 
+                                                @if ($errors->has('keterangan'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('keterangan') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                           <div class="form-group row">
+                              <label for="hasil" class="col-md-4 col-form-label text-md-right">{{ __('Profit Hari ini') }}</label>
                               <div class="col-md-6">
                                  <input id="hasil" type="text" class="form-control" name="hasil" value="{{ old('hasil') }}" required autofocus>
                                  @if ($errors->has('hasil'))
@@ -260,6 +337,8 @@
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+      <!-- Summernote -->
+      <script src="{{asset('template')}}/plugins/summernote/summernote-bs4.min.js"></script>
       <!-- AdminLTE App -->
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
@@ -310,6 +389,16 @@
          rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
          return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
          }
+         $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
       </script>
    </body>
 </html>

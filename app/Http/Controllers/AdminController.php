@@ -870,7 +870,7 @@ class AdminController extends Controller
             'instagram' => 'required|string',
             'prestasi' => 'required|string',
             'quotes' => 'required|string',
-            'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+            'url_foto' => 'required|mimes:jpeg,png,jpg|max:8192',
             
 
         ],
@@ -887,7 +887,7 @@ class AdminController extends Controller
             'nama.alpha' => 'Harus berupa alfabet !',
             'url_foto.required' => 'foto tidak boleh kosong!',
             'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
-            'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 8Mb !',
 
 
         ]);     
