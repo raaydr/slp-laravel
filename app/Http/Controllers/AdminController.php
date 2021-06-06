@@ -178,9 +178,10 @@ class AdminController extends Controller
         $grup1 = Peserta::where('grup',1)->get();
         $grup2 = Peserta::where('grup',2)->get();
         $grup3 = Peserta::where('grup',3)->get();
+        $grup4 = Peserta::where('grup',4)->get();
         
 
-        return view('admin.pengelompokPeserta', compact('title','users','grup1','grup2','grup3'));
+        return view('admin.pengelompokPeserta', compact('title','users','grup1','grup2','grup3','grup4'));
     }
 // Method LULUS GAGAL
     public function seleksi1_lulus($user_id)

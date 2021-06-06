@@ -537,6 +537,51 @@
                             <!-- /.card -->
                         </div>
                         <!-- /.col -->
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Grup dummy</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example4" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0; ?>
+                                            @foreach ($grup4 as $user)
+                                            <?php $i++ ;?>
+                                            <tr>
+                                                <th scope="row">{{ $i }}</th>
+                                                <td>{{ $user->nama }}</td>
+                                                <td class="project-actions text-right">
+                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
+                                                        <i class="fas fa-exclamation"> </i>
+                                                        hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
                     </div>
                     <!-- /.row -->
                 </section>
@@ -610,6 +655,15 @@
                     responsive: true,
                 });
                 $("#example4").DataTable({
+                    paging: true,
+                    lengthChange: false,
+                    searching: false,
+                    ordering: false,
+                    info: false,
+                    autoWidth: false,
+                    responsive: true,
+                });
+                $("#example5").DataTable({
                     paging: true,
                     lengthChange: false,
                     searching: false,
