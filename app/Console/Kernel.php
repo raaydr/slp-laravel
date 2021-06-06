@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ganti_hari::class,
         Commands\daily_quest::class,
+        Commands\DemoCron::class,
         
     ];
 
@@ -30,6 +31,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('sg:ganti-hari')->daily();
         $schedule->command('sg:daily-quest')->daily(); 
+        $schedule->command('sg:demo-cron')->everyMinute(); 
         
     }
 
