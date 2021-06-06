@@ -138,21 +138,16 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
+                    @if(session('pesan'))
+                                <div class="alert alert-success alert-dismissable md-5">
+                                    <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <h5><i class="icon fa fa-info"></i>Berhasil</h5>
+                                    {{session('pesan')}}.
+                                    
+                                </div>
+                            @endif
                         <div class="row">
                             <div class="col-md-3">
-                                @if(!empty($Lulus))
-                                <div class="alert alert-success alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4><i class="icon fa fa-check"></i>Success</h4>
-                                    {{session('lulus')}}.
-                                </div>
-                                @endif @if(!empty($Gagal))
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4><i class="icon fa fa-check"></i>Success</h4>
-                                    {{session('gagal')}}.
-                                </div>
-                                @endif
                                 <!-- Profile Image -->
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
@@ -168,8 +163,61 @@
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Fasil->jenis_kelamin}}</a></li>
                                             <li class="list-group-item"><b>No.Telp</b> <a class="float-right">{{$user->Fasil->phonenumber}}</a></li>
-                                            <li class="list-group-item"><b>Instagram</b> <a class="float-right">{{$user->Fasil->instagram}}</a></li>
+                                            <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="{{$user->Fasil->instagram}}" target="_blank">lihat</a></li>
                                         </ul>
+
+                                        <div class="text-center">
+                                            <a data-toggle="modal" data-target="#modal-foto" class="btn btn-primary btn-sm m-2">ubah foto</a>
+                                            
+                                        </div>
+                                        <div class="modal fade" id="modal-foto">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-primary">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Ubah Foto</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST" action="{{route('fasil.edit.foto')}}" enctype="multipart/form-data" class="was-validated">
+                                                        {{csrf_field()}}
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="form-group row">
+                                                                    <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
+                                                                    <div class="col-md-7">
+                                                                        <input
+                                                                            id="url_foto"
+                                                                            type="file"
+                                                                            class="form-control{{ $errors->has('url_foto') ? ' is-invalid' : '' }}"
+                                                                            name="url_foto"
+                                                                            value="{{ old('url_foto') }}"
+                                                                            required
+                                                                            autofocus
+                                                                        />
+                                                                        <small id="passwordHelpBlock" class="form-text text-sucess">
+                                                                            Format harus jpg,png,jpeg dan ukuran 2 mb
+                                                                        </small>
+                                                                        @if ($errors->has('url_foto'))
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $errors->first('url_foto') }}</strong>
+                                                                        </span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-outline-light">Ubah</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <!-- /.modal -->
                                     </div>
                                     <!-- /.card-body -->
                                 </div>

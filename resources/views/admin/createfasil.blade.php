@@ -341,7 +341,9 @@
 
                                             <div class="col-md-6">
                                                 <input id="instagram" type="text" class="form-control{{ $errors->has('instagram') ? ' is-invalid' : '' }}" name="instagram" value="{{ old('instagram') }}" required autofocus />
-
+                                                <small id="passwordHelpBlock" class="form-text text-sucess">
+                                                contoh : https://www.instagram.com/slp.indonesia/
+                                                </small>
                                                 <div class="valid-feedback"></div>
                                                 @if ($errors->has('instagram'))
                                                 <span class="invalid-feedback" role="alert">

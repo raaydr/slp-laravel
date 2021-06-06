@@ -353,3 +353,9 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/edit-foto', 'FasilController@editfoto')->name('fasil.edit.foto');
+
+	});
+});
