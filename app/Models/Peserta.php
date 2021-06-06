@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Peserta extends Model
 {
-    protected $table = 'Peserta';
+    protected $table = 'peserta';
     use HasFactory;
     public function User()
 	{
