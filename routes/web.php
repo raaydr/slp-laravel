@@ -332,7 +332,25 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/dashboard', 'PesertaController@dashboard')->name('peserta.dashboard');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/edit-foto', 'PesertaController@editfoto')->name('peserta.edit.foto');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
 	Route::get('/daily-quest', 'PesertaController@quest')->name('peserta.daily.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/record-quest', 'PesertaController@questRecord')->name('peserta.record.quest');
 
 	});
 });

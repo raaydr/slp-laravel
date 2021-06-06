@@ -91,6 +91,48 @@ class PesertaController extends Controller
         
     }
 
+    public function questRecord(){
+        $title = 'Daily Quest Peserta';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)
+            ->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $video_challenge = 0;
+        $writing_challenge = 0;
+        $business_challenge = 0;
+        $hasil_business = 0;
+        $record = Quest::where('user_id', $id)->where('status', 1)->get();
+        $jumlah=count($record);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $v = $record[$i]['video_check'];
+            $video_challenge = $video_challenge + $v;
+            $w = $record[$i]['writing_check'];
+            $writing_challenge = $writing_challenge + $w;
+            $b = $record[$i]['business_check'];
+            $business_challenge = $business_challenge + $b;
+            $h = $record[$i]['hasil'];
+            $hasil_business = $hasil_business + $h;
+
+          }
+        $rate_video = ($video_challenge / $quest) *100;
+        $rate_writing = ($writing_challenge / $quest) *100;
+        $rate_business = ($business_challenge / $quest) *100;
+        $rate_hasil = ($hasil_business / 2000000) *100;
+        $data = array(
+            "video" => $rate_video,
+            "writing" => $rate_writing,
+            "business" => $rate_business,
+            "hasil" => $rate_hasil
+        ); 
+         return view('peserta.recordQuest', compact('title', 'user', 'quest', 'data',
+         'rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
+         'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
+        
+        
+    }
+
     public function daily_quest(Request $request)
     {
 
@@ -315,5 +357,58 @@ class PesertaController extends Controller
         
         return redirect()->route('peserta.daily.quest')->with('pesan', 'berhasil mengubah business challenge');
     }
-    
+    public function dashboard()
+    {
+        $title = 'Dashboard Calon Siswa';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)
+            ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
+        $seleksiPertama = User::find($id)->seleksiPertama;
+        return view('peserta.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama'));
+    }
+    public function editfoto(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+            ],
+
+            $messages = [
+                'url_foto.required' => 'foto tidak boleh kosong!',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $id = Auth::user()->id;
+        //Table seleksi_1
+        if ($gambar = $request->hasFile('url_foto')) {
+            $gambar = $request->file('url_foto');
+            $GambarName = $id . '_' . $gambar->getClientOriginalName();
+            $tujuanPath = public_path() . '/imgdaftar/';
+            $gambar->move($tujuanPath, $GambarName);
+        }
+
+        $foto = DB::table('biodata')
+            ->where('user_id', $id)
+            ->value('url_foto');
+        File::delete('imgdaftar/' . $foto);
+        DB::table('biodata')
+            ->where('user_id', $id)
+            ->update([
+                'url_foto' => $GambarName,
+                'updated_at' => now(),
+            ]);
+
+            return redirect()->route('peserta.dashboard')->with('pesan', 'berhasil mengubah business challenge');
+    }
 }

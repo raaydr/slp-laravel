@@ -759,7 +759,7 @@ class AdminController extends Controller
     }
     public function resetQuest (Request $request){
         DB::table('control')->where('id',2)->update([
-            'integer'=> 1,
+            'integer'=> 0,
             'updated_at'=> now(),
             
             
