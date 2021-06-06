@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 use Illuminate\Support\Facades\DB;
+use App\Models\Quest;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class daily_quest extends Command
@@ -37,20 +39,31 @@ class daily_quest extends Command
      */
     public function handle()
     {
-        $run = DB::table('control')
-        ->where('id', 2)
-        ->value('boolean');
-        if($run == 1){
-            $quest = DB::table('control')
+        $users = User::where('level', 4)->get();
+        $hari = DB::table('control')
             ->where('id', 2)
             ->value('integer');
-            $newquest = $quest + 1;
-            DB::table('control')->where('id',2)->update([
-                    
-                'integer' =>$newquest,
-                'updated_at'=> now(),
-            ]);
-        
-            }
+        $jumlah=count($users);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $user_id = $users[$i]['id'];
+            $email = $users[$i]['email'];
+            $quest = new Quest;
+            $quest->user_id = $user_id;
+            $quest->day = $hari;
+            $quest->video = "belum mengerjakan";
+            $quest->writing = "belum mengerjakan";
+            $quest->business = "belum mengerjakan";
+            $quest->sumber_produk = "kosong";
+            $quest->jenis_produk = "kosong";
+            $quest->keterangan = "kosong";
+            $quest->hasil = 0;
+            $quest->status = 0;
+            $quest->video_check = 0;
+            $quest->writing_check = 0;
+            $quest->business_check = 0;
+            $quest->save();
+            
+
+          }
     }
 }

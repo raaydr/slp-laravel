@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\ganti_hari::class,
         Commands\daily_quest::class,
+        
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     
     {   
 
+        $schedule->command('sg:ganti-hari')->daily();
         $schedule->command('sg:daily-quest')->daily(); 
         
     }

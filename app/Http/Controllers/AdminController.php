@@ -10,6 +10,7 @@ use App\Models\Control;
 use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
+use App\Models\Quest;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
