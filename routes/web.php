@@ -365,3 +365,8 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/change-password', 'FasilController@change_password')->name('fasil.change.password');
+    });
+});

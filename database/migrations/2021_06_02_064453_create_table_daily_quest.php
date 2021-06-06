@@ -17,7 +17,9 @@ class CreateTableDailyQuest extends Migration
             $table->increments('id');
             $table->integer('day')->unsigned();   
             $table->string('video')->nullable();
+            $table->string('topik_video')->nullable();
             $table->text('writing')->nullable();
+            $table->string('topik_writing')->nullable();
             $table->text('business');
             $table->string('sumber_produk');
             $table->string('jenis_produk');

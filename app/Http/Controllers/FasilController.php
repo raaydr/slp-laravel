@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -130,5 +131,29 @@ class FasilController extends Controller
          ]);
         
          return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah biodata');
+    }
+
+    public function change_password(Request $request)
+
+    {
+
+        $request->validate([
+
+            'current_password' => ['required', new MatchOldPassword],
+
+            'new_password' => ['required'],
+
+            'new_confirm_password' => ['same:new_password'],
+
+        ]);
+
+   
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+   
+
+        return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah password');
+
     }
 }
