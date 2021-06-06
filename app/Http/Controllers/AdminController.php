@@ -47,9 +47,18 @@ class AdminController extends Controller
         $quest = DB::table('control')
             ->where('id', 2)
             ->get();
+        $seleksiPertama = DB::table('control')
+            ->where('id', 3)
+            ->get();
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->get();
+        $interview = DB::table('control')
+            ->where('id', 5)
+            ->get();            
         
 
-        return view('admin.coba', compact('title', 'pendaftaran', 'quest'));
+        return view('admin.coba', compact('title', 'pendaftaran', 'quest', 'seleksiPertama', 'gen', 'interview'));
     }
     public function view_create_controller()
     {
@@ -722,7 +731,19 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'menutup pendaftaran');
+        return redirect()->route('admin.coba')->with('berhasil', 'ubah pendaftaran');
+    }
+    public function ubahChallenge (Request $request){
+        DB::table('control')->where('id',3)->update([
+            'boolean'=> $request->seleksiPertama,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'ubah tahap challenge');
     }
     public function gateQuest (Request $request){
         DB::table('control')->where('id',2)->update([
@@ -747,6 +768,50 @@ class AdminController extends Controller
   
 
         return redirect()->route('admin.coba')->with('berhasil', 'reset daily quest');
+    }
+    public function nextGen (Request $request){
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
+        $gen = $gen + 1;
+        DB::table('control')->where('id',4)->update([
+            'integer'=> $gen++,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'ubah ke generasi selanjutnya');
+    }
+    public function preGen (Request $request){
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
+        $gen = $gen-1;
+        DB::table('control')->where('id',4)->update([
+            'integer'=> $gen,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'ubah ke generasi selanjutnya');
+    }
+    public function resetInterview (Request $request){
+        DB::table('control')->where('id',5)->update([
+            'integer'=> 1,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'reset antrian interview');
     }
 
     public function generateAntrian(){

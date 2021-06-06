@@ -162,12 +162,32 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+	Route::post('/ubah-tahap-challenge', 'AdminController@ubahChallenge')->name('admin.ubah.challenge');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
 	Route::post('/gate-quest', 'AdminController@gateQuest')->name('admin.gate.quest');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/reset-quest', 'AdminController@resetQuest')->name('admin.reset.quest');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/next-gen', 'AdminController@nextGen')->name('admin.next.gen');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/pre-gen', 'AdminController@preGen')->name('admin.pre.gen');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/reset-antrian-interview', 'AdminController@resetInterview')->name('admin.reset.interview');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
