@@ -41,12 +41,15 @@ class AdminController extends Controller
     public function coba()
     {
         $title = 'coba Admin';
-        $controls = DB::table('control')
+        $pendaftaran = DB::table('control')
             ->where('id', 1)
+            ->get();
+        $quest = DB::table('control')
+            ->where('id', 2)
             ->get();
         
 
-        return view('admin.coba', compact('title', 'controls'));
+        return view('admin.coba', compact('title', 'pendaftaran', 'quest'));
     }
     public function view_create_controller()
     {
@@ -720,6 +723,30 @@ class AdminController extends Controller
   
 
         return redirect()->route('admin.coba')->with('berhasil', 'menutup pendaftaran');
+    }
+    public function gateQuest (Request $request){
+        DB::table('control')->where('id',2)->update([
+            'boolean'=> $request->quest,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'mengubah daily quest');
+    }
+    public function resetQuest (Request $request){
+        DB::table('control')->where('id',2)->update([
+            'integer'=> 1,
+            'updated_at'=> now(),
+            
+            
+        ]);
+
+  
+
+        return redirect()->route('admin.coba')->with('berhasil', 'reset daily quest');
     }
 
     public function generateAntrian(){
