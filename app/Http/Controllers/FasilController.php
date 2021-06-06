@@ -55,7 +55,7 @@ class FasilController extends Controller
                 ->withInput();
         }
         $id = Auth::user()->id;
-        //Table seleksi_1
+        
         if ($gambar = $request->hasFile('url_foto')) {
             $gambar = $request->file('url_foto');
             $GambarName = $id . '_' . $gambar->getClientOriginalName();
@@ -75,5 +75,60 @@ class FasilController extends Controller
             ]);
 
             return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah foto');
+    }
+    public function editbiodata(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), 
+        [   
+            'nama' => 'required|string|max:255',
+            
+            'jenis_kelamin' => 'required',
+            'phonenumber' => 'required|numeric|digits_between:12,13',
+            'instagram' => 'required|string',
+            'prestasi' => 'required|string',
+            'quotes' => 'required|string',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'nama.required' => 'Nama tidak boleh kosong!',
+            'jenis_kelamin.required' => 'jenis kelamin harus dipilih!',
+            
+            'email.unique' => 'E-Mail sudah dipakai',
+            'phonenumber.numeric' => 'Nomor telpon harus berupa angka',
+            
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        
+        
+
+        $detail=$request->prestasi;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        $id = Auth::user()->id;
+         //Table fasil
+        DB::table('fasil')
+         ->where('user_id', $id)
+         ->update([
+            'nama' => Input::get('nama'),
+            'jenis_kelamin' => Input::get('jenis_kelamin'),
+            'instagram' => Input::get('instagram'),
+            'phonenumber' => Input::get('phonenumber'),
+            'prestasi' => $detail,
+            'quotes' => Input::get('quotes'),
+             'updated_at' => now(),
+         ]);
+        
+         return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah biodata');
     }
 }

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/program-beasiswa', function () {
     return view('compro');
-});
+})->name('compro');
 
 
     Route::group(['prefix' => 'pendaftar'], function () {
@@ -356,6 +356,12 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::post('/edit-foto', 'FasilController@editfoto')->name('fasil.edit.foto');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/edit-biodata', 'FasilController@editbiodata')->name('fasil.edit.biodata');
 
 	});
 });
