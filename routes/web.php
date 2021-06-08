@@ -390,7 +390,12 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 	Route::get('/grup/userProfile/{user_id}', 'PesertaController@userProfile')->name('peserta.userprofile');
     });
 });
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/daily-quest/business-edit', 'PesertaController@businessQuest')->name('peserta.quest.business');
 
+	});
+});
 
 
 

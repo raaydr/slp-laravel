@@ -312,7 +312,9 @@ class PesertaController extends Controller
             
             'business' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
             'hasil' => 'required',
-            
+            'sumber_produk' => 'required',
+            'jenis_produk' => 'required',
+            'summernote' => 'required',
             
 
         ],
@@ -322,6 +324,9 @@ class PesertaController extends Controller
             'business.required' => 'tidak boleh kosong!',
             'business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
             'business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            'sumber_produk.required' => ' tidak boleh kosong!',
+            'jenis_produk.required' => ' tidak boleh kosong!',
+            'summernote.required' => ' tidak boleh kosong!',
             'hasil.required' => ' tidak boleh kosong!',
 
 
@@ -335,7 +340,10 @@ class PesertaController extends Controller
         $hari = DB::table('control')
             ->where('id', 2)
             ->value('integer');
-        
+        $detail=$request->summernote;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
         if ($business = $request->hasFile('business')) {
             $business = $request->file('business');
             $businessName = $id.'hari'.$hari.'-'.time(). '_' . $business->getClientOriginalName();
@@ -351,6 +359,9 @@ class PesertaController extends Controller
         Quest::where('user_id', $id)->where('day', $hari)
                 ->update([
                     'business' => $businessName,
+                    'sumber_produk' => Input::get('sumber_produk'),
+                    'jenis_produk' => Input::get('jenis_produk'),
+                    'keterangan' => $detail,
                     'hasil' => $hasil,
                     'updated_at' => now(),
                 ]);
@@ -411,5 +422,18 @@ class PesertaController extends Controller
             ]);
 
             return redirect()->route('peserta.dashboard')->with('pesan', 'berhasil mengubah business challenge');
+    }
+
+    public function businessQuest(){
+        $title = 'Business Quest Peserta';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)
+            ->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $data = Quest::where('user_id', $id)->where('day', $quest)->first();
+        return view('peserta.businessQuest', compact('title', 'user', 'quest','data'));            
+        
     }
 }

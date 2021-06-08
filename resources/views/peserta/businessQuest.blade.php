@@ -86,7 +86,7 @@
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                                <a href="{{ route('peserta.pengumuman') }}" class="nav-link">
+                                <a href="{{ route('peserta.pengumuman') }}" class="nav-link ">
                                 <i class="nav-icon nav-icon far fa-envelope"></i>
                                 <p>
                                     Pengumuman
@@ -143,7 +143,7 @@
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                           <li class="breadcrumb-item active">Daily-Quest-Edit</li>
+                           <li class="breadcrumb-item active">Daily-Quest</li>
                         </ol>
                      </div>
                   </div>
@@ -162,12 +162,14 @@
                @endif
                <div class="col-md-12">
                   <!-- general form elements -->
-                  <div class="card card-success">
+                  <div class="card card-primary">
                      <div class="card-header">
-                        <h3 class="card-title">Edit Daily Quest hari ke - {{$quest}}</h3>
+                        <h3 class="card-title">Daily Quest hari ke - {{$quest}}</h3>
                      </div>
                      <!-- /.card-header -->
                      <!-- form start -->
+                     <form action="{{ route('peserta.business.quest') }}" method="POST" enctype="multipart/form-data" >
+                        @csrf
                         <div class="card-body">
                            <div class="row">
                               <div class="form-group col-md-6">
@@ -180,173 +182,104 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 
-                                 
-                                 @if(($data->video)== 'belum mengerjakan')
-                                 <p class="text-danger">belum mengerjakan</p>
-                                 @else 
-                                 <a type="text" href="{{$data->video}}" target="_blank">check</a>
+                              <label for="business" class="col-md-4 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
+                              <div class="col-md-7">
+                                 <input id="business" type="file" class="form-control{{ $errors->has('business') ? ' is-invalid' : '' }}" name="business" value="{{ old('business') }}" required autofocus>
+                                 <small  class="form-text text-sucess">
+                                 Format harus jpeg,png,pdf dan ukuran maksimal 2mb
+                                 <br>
+                                 tolong gabungkan gambar jika punya gambar banyak menjadi 1 gambar
+                                 </small> 
+                                 @if ($errors->has('business'))
+                                 <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $errors->first('business') }}</strong>
+                                 </span>
                                  @endif
-                              </div>
-                              <div class="col-md-4 col-form-label text-md-left">
-                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
-                                                        <i class="fas fa-info"> </i>
-                                                        Ubah Link Video
-                                                    </button>
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="writing" class="col-md-6 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 
-                                 
-                                 @if(($data->writing)== 'belum mengerjakan')
-                                 <p class="text-danger">belum mengerjakan</p>
-                                 @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">check</a>
-                                 @endif
-                              </div>
-                              <div class="col-md-4 col-form-label text-md-left">
-                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
-                                                        <i class="fas fa-info"> </i>
-                                                         Upload Writing
-                                                    </button>
-                              </div>
-                           </div>
+                            <label for="sumber_produk" class="col-md-4 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline1" name="sumber_produk" class="custom-control-input" value="Produk SLP" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline1">Produk SLP</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="sumber_produk" class="custom-control-input" value="Produk Luar" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline2">Produk Luar</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline3" name="sumber_produk" class="custom-control-input" value="Produk Campuran" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline3">Produk Campuran(SLP+Luar)</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenis_produk" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Produk') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline3" name="jenis_produk" class="custom-control-input" value="Jasa" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline3">Jasa</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline4" name="jenis_produk" class="custom-control-input" value="Konsumtif" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline4">Konsumtif</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline5" name="jenis_produk" class="custom-control-input" value="Barang" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline5">Barang</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline6" name="jenis_produk" class="custom-control-input" value="Lainnya" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline6">Lainnya</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline8" name="jenis_produk" class="custom-control-input" value="Campuran" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline8">Campuran</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                                            <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
+                                            <div class="col-md-6">
+                                                <textarea id="summernote"  class="form-control{{ $errors->has('summernote') ? ' is-invalid' : '' }}" name="summernote" value="{{ old('summernote') }}"  required autofocus></textarea>
+                                                <small class="form-text text-sucess">
+                                 Diisi dengan harga jual barang, harga beli barang, dan profit
+                                 <br>
+                                 contoh : 
+                                 <br>
+                                 Nama Barang : Pempek , harga jual 80.000 , harga beli 65.000, profit 15.000
+                                 </small> 
+                                                @if ($errors->has('summernote'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('summernote') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
                            <div class="form-group row">
-                              <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 
-                                 
-                                 @if(($data->business)== 'belum mengerjakan')
-                                 <p class="text-danger">belum mengerjakan</p>
-                                 @else 
-                                 <a type="text" href="{{asset('imgBusinessQuest')}}/{{$data->business}}" target="_blank">check</a>
+                              <label for="hasil" class="col-md-4 col-form-label text-md-right">{{ __('Profit Hari ini') }}</label>
+                              <div class="col-md-6">
+                                 <input id="hasil" type="text" class="form-control" name="hasil" value="{{ old('hasil') }}" required autofocus>
+                                 @if ($errors->has('hasil'))
+                                 <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $errors->first('hasil') }}</strong>
+                                 </span>
                                  @endif
-                              </div>
-                              <div class="col-md-4 col-form-label text-md-left">
-                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business') }}">
-                                                        <i class="fas fa-info"> </i>
-                                                         Upload Business
-                                                    </a>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                              <a type="text" >{{$data->sumber_produk}}</a>
-                              </div>
-                           </div>
-                        
-                        <div class="form-group row">
-                              <label for="jenis_produk" class="col-md-6 col-form-label text-md-right">{{ __('Jenis Produk') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                              <a type="text" >{{$data->jenis_produk}}</a>
-                              </div>
-                           </div>
-                        
-                        <div class="form-group row">
-                              <label for="keterangan" class="col-md-6 col-form-label text-md-right">{{ __('Keterangan') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                              <?php
-                                                       echo $data->keterangan ;
-                                                    ?>
-                              </div>
-                           </div>
-                        
-                        <div class="form-group row">
-                              <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Profit Hari Ini') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                <hasil></hasil>
                               </div>
                            </div>
                         </div>
                         <!-- /.card-body -->
-                        
+                        <div class="card-footer">
+                           <!-- /.card-body -->
+                           <div class="text-center">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                           </div>
+                        </div>
+                     </form>
                   </div>
                   <!-- /.card -->
-                  <div class="modal fade" id="modal-video">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-primary">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Video Challenge</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="POST" action="{{route('peserta.video.quest')}}" enctype="multipart/form-data" class="was-validated">
-                                    {{csrf_field()}}
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="form-group row">
-                                                <label for="video" class="col-md-4 col-form-label text-md-right">{{ __('Edit Link Video') }}</label>
-                                                <div class="col-md-6">
-                                                   <input id="video" type="text" class="form-control" name="video" value="{{ old('video') }}" required autofocus >
-                                                   <small  class="form-text text-sucess">
-                                                   contoh : https://www.youtube.com/watch?v=dQw4w9WgXcQ
-                                                   </small>
-                                                   @if ($errors->has('video'))
-                                                   <span class="invalid-feedback" role="alert">
-                                                   <strong>{{ $errors->first('video') }}</strong>
-                                                   </span>
-                                                   @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-outline-light">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
-                    <div class="modal fade" id="modal-writing">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-primary">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Writing Challenge</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="POST" action="{{route('peserta.writing.quest')}}" enctype="multipart/form-data" class="was-validated">
-                                    {{csrf_field()}}
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="form-group row">
-                                                <label for="writing" class="col-md-4 col-form-label text-md-right">{{ __('Upload Writing') }}</label>
-                                                <div class="col-md-7">
-                                                   <input id="writing" type="file" class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}" name="writing" value="{{ old('writing') }}" required autofocus>
-                                                   <small  class="form-text text-sucess">
-                                                   Format harus doc,docx,pdf dan ukuran maksimal 2mb
-                                                   </small> 
-                                                   @if ($errors->has('writing'))
-                                                   <span class="invalid-feedback" role="alert">
-                                                   <strong>{{ $errors->first('writing') }}</strong>
-                                                   </span>
-                                                   @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-outline-light">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
                </div>
                <!-- /.row -->
             </div>
@@ -388,27 +321,6 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
-      function rupiah(){
-         var bilangan = {{$data->hasil}} ;
-         var	number_string = bilangan.toString(),
-         sisa 	= number_string.length % 3,
-         rupiah 	= number_string.substr(0, sisa),
-         ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
-            
-      if (ribuan) {
-         separator = sisa ? '.' : '';
-         rupiah += separator + ribuan.join('.');
-      }
-
-      // Cetak hasil
-
-                  
-
-      $("hasil").text("Rp "+rupiah)
-
-      //the function body is the same as you have defined sue the textbox object to set the value
-      }
-      rupiah();
          $(function () {
              $("#example1")
                  .DataTable({
@@ -430,7 +342,7 @@
                  responsive: true,
              });
          });
-         var rupiah = document.getElementById("profit");
+         var rupiah = document.getElementById("hasil");
          hasil.addEventListener("keyup", function(e) {
          // tambahkan 'Rp.' pada saat form di ketik
          // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka

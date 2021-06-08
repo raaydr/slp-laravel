@@ -161,7 +161,7 @@
                 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">LOLOS TAHAP INTERVIEW</h3>
+                            <h3 class="card-title">Semangat</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -170,103 +170,23 @@
                             </div>
                         </div>
                         <div class="card-body">
-                        Selamat! Kamu Lolos dari Tahap Wawancara.
-Ini berarti tinggal satu langkah lagi untuk menjadi "Awardee Smart Leader Preneur #2"
+                      daily quest
                             <br>
-                            Sampai bertemu di Stadium General, pada Sabtu, 5 Juni 2021. 
+                            belum siap
                             <br>
 
-                            Selamat berjuang, Salam Leader, Luar Biasa!
+                            capek
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            Admin SLP, 28 Mei 2021
+                            Admin SLP, 10 Juni 2021
                         </div>
                         <!-- /.card-footer-->
                     </div>
                     
                     <!-- /.card -->
                 
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">LOLOS TAHAP CHALLENGE</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            Selamat! Kamu Lolos ke Tahap Wawancara. Untuk Jadwal wawancara, bisa dilihat di Menu Seleksi Tahap 2
-                            <br />
-
-                            Selamat berjuang, Salam Leader, Luar Biasa!
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Admin SLP, 20 Mei 2021
-                        </div>
-                        <!-- /.card-footer-->
-                    </div>
                     
-                    <!-- /.card -->
-                    
-                    <!-- Default box -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Pemberitahuan</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            Bagi yang telah mengisi form Challenge, dapat melihat kembali form yang sudah anda input.
-                            <br />
-                            Anda dapat melihatnya di halaman <strong>Dashboard</strong> dalam menu <strong>Challenge</strong>, jika ingin mengubah bisa menekan tombol ubah dan mengisi ulang kembali form challenge.
-                            <br />
-
-                            <br />
-                            Selamat berjuang, Salam Leader, Luar Biasa!
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Admin SLP, 1 Mei 2021
-                        </div>
-                        <!-- /.card-footer-->
-                    </div>
-                    <!-- /.card -->
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">Lolos Tahap Pemberkasan</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            Selamat Anda lolos tahap pemberkasan. Silakan masuk grup seleksi tahap selanjutnya <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct"><strong>di sini.</strong></a>
-                            <br />
-                            Jika grup sebelumnnya sudah penuh, bisa masuk grup yang lain <a href="https://chat.whatsapp.com/HbbLsWKv20RANK9Ui8fW1F"><strong>di sini.</strong></a>Cukup masuk salah satu grup saja.
-                            <br />
-                            Kemudian jadwalkan pertemuan online hari ini pada pukul 20.30 WIB di <a href="https://us02web.zoom.us/j/7584159011?pwd=MjVsQjc3ckpxUmd2K2pBVG1HdFpRZz09"><strong>Zoom</strong></a>
-                            <br />
-                            Meeting ID: 758 415 9011 Passcode: 18A
-                            <br />
-                            Selamat berjuang, Salam Leader, Luar Biasa!
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Admin SLP, 26 April 2021
-                        </div>
-                        <!-- /.card-footer-->
-                    </div>
-                    <!-- /.card -->
                     
                 </section>
                 <!-- /.content -->
