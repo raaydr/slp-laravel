@@ -148,131 +148,272 @@
                   </div>
                   @endif
                   <div class="row">
-                            <div class="col-md-3">
-                                <!-- Profile Image -->
-                                <div class="card card-primary card-outline">
-                                    <div class="card-body box-profile">
-                                        <div class="text-center">
-                                            <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" target="_blank">
-                                                <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" class="img-fluid" alt="Cinque Terre" />
-                                            </a>
-                                        </div>
-
-                                        <h3 class="profile-username text-center">{{ $user->Biodata->nama }}</h3>
-
-                                        <p class="text-muted text-center">{{ $user->Biodata->aktivitas}}</p>
-                                        <ul class="list-group list-group-unbordered mb-3">
-                                            <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
-                                            <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
-                                            <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$user->Biodata->tanggal_lahir}}</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-
-                                <!-- About Me Box -->
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">About Me</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
-
-                                        <p class="text-muted">
-                                            {{$user->Biodata->phonenumber}}
-                                        </p>
-
-                                        <hr />
-
-                                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
-
-                                        <p class="text-muted">{{$user->Biodata->alamat_domisili}}</p>
-
-                                        <hr />
-
-                                        <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
-
-                                        <p class="text-muted">
-                                            <span class="tag tag-danger"> {{$user->Biodata->minatprogram}}</span>
-                                        </p>
-                                            
-                                        <hr />
-                                        
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-9">
-                                <div class="card">
-                                    <div class="card-header p-2">
-                                        <ul class="nav nav-pills">
-                                            
-                                            <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">More about Me</a></li>
-                                            
-                                        </ul>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="Pertama">
-                                                <!-- Post -->
-                                                <div class="post">
-                                                    <div class="user-block">
-                                                        <span class="username">
-                                                            <a href="#">Alasan Beasiswa</a>
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.user-block -->
-                                                    <p>
-                                                        {{$user->Biodata->alasanbeasiswa}}
-                                                    </p>
-                                                </div>
-                                                <!-- /.post -->
-
-                                                <!-- Post -->
-                                                <div class="post">
-                                                    <div class="user-block">
-                                                        <span class="username">
-                                                            <a href="#">5 Kelebihan</a>
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.user-block -->
-                                                    <p>
-                                                        {{$user->Biodata->five_pros}}
-                                                    </p>
-                                                </div>
-                                                <!-- /.post -->
-                                                <!-- Post -->
-                                                <div class="post">
-                                                    <div class="user-block">
-                                                        <span class="username">
-                                                            <a href="#">5 Kekurangan</a>
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.user-block -->
-                                                    <p>
-                                                        {{$user->Biodata->five_cons}}
-                                                    </p>
-                                                </div>
-                                                <!-- /.post -->
-                                                
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                            
-                                        </div>
-                                        <!-- /.tab-content -->
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!-- /.col -->
+                     <div class="col-md-3">
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                           <div class="card-body box-profile">
+                              <div class="text-center">
+                                 <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" target="_blank">
+                                 <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" class="img-fluid" alt="Cinque Terre" />
+                                 </a>
+                              </div>
+                              <h3 class="profile-username text-center">{{ $user->Biodata->nama }}</h3>
+                              <p class="text-muted text-center">{{ $user->Biodata->aktivitas}}</p>
+                              <ul class="list-group list-group-unbordered mb-3">
+                                 <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
+                                 <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
+                                 <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$user->Biodata->tanggal_lahir}}</a></li>
+                              </ul>
+                           </div>
+                           <!-- /.card-body -->
                         </div>
-                        <!-- /.row -->
+                        <!-- /.card -->
+                        <!-- About Me Box -->
+                        <div class="card card-primary">
+                           <div class="card-header">
+                              <h3 class="card-title">About Me</h3>
+                           </div>
+                           <!-- /.card-header -->
+                           <div class="card-body">
+                              <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
+                              <p class="text-muted">
+                                 {{$user->Biodata->phonenumber}}
+                              </p>
+                              <hr />
+                              <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
+                              <p class="text-muted">{{$user->Biodata->alamat_domisili}}</p>
+                              <hr />
+                              <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
+                              <p class="text-muted">
+                                 <span class="tag tag-danger"> {{$user->Biodata->minatprogram}}</span>
+                              </p>
+                              <hr />
+                           </div>
+                           <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                     </div>
+                     <!-- /.col -->
+                     <div class="col-md-9">
+                        <div class="card">
+                           <div class="card-header p-2">
+                              <ul class="nav nav-pills">
+                                 <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">More about Me</a></li>
+                                 <li class="nav-item"><a class="nav-link " href="#Kedua" data-toggle="tab">Quest Record</a></li>
+                              </ul>
+                           </div>
+                           <!-- /.card-header -->
+                           <div class="card-body">
+                              <div class="tab-content">
+                                 <div class="tab-pane active" id="Pertama">
+                                    <!-- Post -->
+                                    <div class="post">
+                                       <div class="user-block">
+                                          <span class="username">
+                                          <a href="#">Alasan Beasiswa</a>
+                                          </span>
+                                       </div>
+                                       <!-- /.user-block -->
+                                       <p>
+                                          {{$user->Biodata->alasanbeasiswa}}
+                                       </p>
+                                    </div>
+                                    <!-- /.post -->
+                                    <!-- Post -->
+                                    <div class="post">
+                                       <div class="user-block">
+                                          <span class="username">
+                                          <a href="#">5 Kelebihan</a>
+                                          </span>
+                                       </div>
+                                       <!-- /.user-block -->
+                                       <p>
+                                          {{$user->Biodata->five_pros}}
+                                       </p>
+                                    </div>
+                                    <!-- /.post -->
+                                    <!-- Post -->
+                                    <div class="post">
+                                       <div class="user-block">
+                                          <span class="username">
+                                          <a href="#">5 Kekurangan</a>
+                                          </span>
+                                       </div>
+                                       <!-- /.user-block -->
+                                       <p>
+                                          {{$user->Biodata->five_cons}}
+                                       </p>
+                                    </div>
+                                    <!-- /.post -->
+                                 </div>
+                                 <!-- /.tab-pane -->
+                                 <div class="tab-pane " id="Kedua">
+                                    <div class="row">
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-info">
+                                             <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Writing Rate</span>
+                                                <span class="info-box-number">{{$writing_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_writing}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-success">
+                                             <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Business Rate</span>
+                                                <span class="info-box-number">{{$business_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_business}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_business}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-danger">
+                                             <span class="info-box-icon"><i class="fas fa-comments"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Video Rate</span>
+                                                <span class="info-box-number">{{$video_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_video}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_video}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-orange">
+                                             <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Profit</span>
+                                                <span class="info-box-number">{{$hasil_business}} earn</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_hasil}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                              
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <div class="card">
+                                          <div class="card-header">
+                                             <h3 class="card-title">List Daily Quest</h3>
+                                          </div>
+                                          <!-- /.card-header -->
+                                          <div class="card-body">
+                                             <table id="example1" class="table table-bordered table-striped table-responsive">
+                                                <thead>
+                                                   <tr>
+                                                      <th>Hari</th>
+                                                      <th>Public Speaking</th>
+                                                      <th>Writing</th>
+                                                      <th>Business</th>
+                                                      <th>status</th>
+                                                      <th></th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                   @foreach ($daily_quest as $user)
+                                                   <tr>
+                                                      <td>{{ $user->day }}</td>
+                                                      <td>
+                                                         @if(($user->video_check)== 0)
+                                                         <p class="text-danger">failed</p>
+                                                         @endif @if(($user->video_check)== 1)
+                                                         <p class="text-success">clear</p>
+                                                         @endif
+                                                      </td>
+                                                      <td>
+                                                         @if(($user->writing_check)== 0)
+                                                         <p class="text-danger">failed</p>
+                                                         @endif @if(($user->writing_check)== 1)
+                                                         <p class="text-success">clear</p>
+                                                         @endif
+                                                      </td>
+                                                      <td>
+                                                         @if(($user->business_check)== 0)
+                                                         <p class="text-danger">failed</p>
+                                                         @endif @if(($user->business_check)== 1)
+                                                         <p class="text-success">clear</p>
+                                                         @endif
+                                                      </td>
+                                                      <td>
+                                                         @if(($user->status)== 0)
+                                                         <p class="text-danger">belum diperiksa</p>
+                                                         @endif @if(($user->status)== 1)
+                                                         <p class="text-success">sudah diperiksa</p>
+                                                         @endif
+                                                      </td>
+                                                      <td class="project-actions text-right">
+                                                         <a class="btn btn-primary btn-sm" href="{{ route('peserta.userprofile', Crypt::encrypt($user->id)) }}" target="_blank">
+                                                         <i class="fas fa-folder"> </i>
+                                                         Detail
+                                                         </a>
+                                                      </td>
+                                                   </tr>
+                                                   @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                   <tr>
+                                                      <th>Hari</th>
+                                                      <th>Public Speaking</th>
+                                                      <th>Writing</th>
+                                                      <th>Business</th>
+                                                      <th>status</th>
+                                                      <th></th>
+                                                   </tr>
+                                                </tfoot>
+                                             </table>
+                                          </div>
+                                          <!-- /.card-body -->
+                                       </div>
+                                       <!-- /.card -->
+                                    </div>
+                                    </div>
+                                 </div>
+                              
+                                 <!-- /.tab-pane -->
+                              </div>
+                              <!-- /.tab-content -->
+                           </div>
+                           <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                     </div>
+                     <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
                </div>
                <!-- /.container-fluid -->
             </section>
@@ -324,7 +465,7 @@
                      responsive: true,
                      lengthChange: false,
                      autoWidth: false,
-                     buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                     
                  })
                  .buttons()
                  .container()

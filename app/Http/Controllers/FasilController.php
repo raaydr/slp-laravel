@@ -314,6 +314,7 @@ class FasilController extends Controller
         $business_challenge = 0;
         $hasil_business = 0;
         $record = Quest::where('user_id', $id)->where('status', 1)->get();
+        $daily_quest = Quest::where('user_id', $id)->get();
         $jumlah=count($record);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $v = $record[$i]['video_check'];
@@ -332,7 +333,7 @@ class FasilController extends Controller
         $rate_hasil = ($hasil_business / 2000000) *100;
       
         
-        return view('fasil.pesertaProfile', compact('title', 'user','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
+        return view('fasil.pesertaProfile', compact('title', 'user','daily_quest','quest','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
         'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
     }
     

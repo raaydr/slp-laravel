@@ -79,46 +79,46 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                                <a href="{{ route('peserta.pengumuman') }}" class="nav-link">
-                                <i class="nav-icon nav-icon far fa-envelope"></i>
-                                <p>
-                                    Pengumuman
-                                </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('peserta.grup') }}" class="nav-link ">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Grup
-                                </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('peserta.daily.quest') }}" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                Daily Quest
-                                </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('peserta.record.quest') }}" class="nav-link active">
-                                    <i class="nav-icon fas fa-edit"></i>
-                                    <p>
-                                        Quest Record
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('peserta.dashboard') }}" class="nav-link ">
-                                    <i class="nav-icon fas ion-person"></i>
-                                    <p>
-                                        Dashboard
-                                    </p>
-                                </a>
-                            </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.pengumuman') }}" class="nav-link">
+                           <i class="nav-icon nav-icon far fa-envelope"></i>
+                           <p>
+                              Pengumuman
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.grup') }}" class="nav-link ">
+                           <i class="nav-icon fas fa-table"></i>
+                           <p>
+                              Grup
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.daily.quest') }}" class="nav-link ">
+                           <i class="nav-icon fas fa-tachometer-alt"></i>
+                           <p>
+                              Daily Quest
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.record.quest') }}" class="nav-link active">
+                           <i class="nav-icon fas fa-edit"></i>
+                           <p>
+                              Quest Record
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('peserta.dashboard') }}" class="nav-link ">
+                           <i class="nav-icon fas ion-person"></i>
+                           <p>
+                              Dashboard
+                           </p>
+                        </a>
+                     </li>
                   </ul>
                </nav>
                <!-- /.sidebar-menu -->
@@ -157,83 +157,91 @@
                <div class="col-md-12">
                   <!-- general form elements -->
                   <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">Record Daily Quest</h3>
-                        </div>
+                     <div class="card-header">
+                        <h3 class="card-title">Record Daily Quest</h3>
+                     </div>
                      <!-- /.card-header -->
                      <!-- form start -->
-                        <div class="card-body">
-                            
-                        
-        <div class="row">
-          <div class="col-md-4 col-sm-8 col-12">
-            <div class="info-box bg-gradient-info">
-              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Writing Rate</span>
-                <span class="info-box-number">{{$writing_challenge}}x passed challenge</span>
-
-                <div class="progress">
-                  <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
-                </div>
-                <span class="progress-description">
-                {{$rate_writing}}% until {{$quest}} days
-                
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-4 col-sm-8 col-12">
-            <div class="info-box bg-gradient-success">
-              <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Business Rate</span>
-                <span class="info-box-number">{{$business_challenge}}x passed challenge</span>
-
-                <div class="progress">
-                  <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
-                </div>
-                <span class="progress-description">
-                {{$rate_business}}% until {{$quest}} days
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-4 col-sm-8 col-12">
-            <div class="info-box bg-gradient-danger">
-              <span class="info-box-icon"><i class="fas fa-comments"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Video Rate</span>
-                <span class="info-box-number">{{$video_challenge}}x passed challenge</span>
-
-                <div class="progress">
-                  <div class="progress-bar" style="width: {{$rate_video}}%"></div>
-                </div>
-                <span class="progress-description">
-                {{$rate_video}}% until {{$quest}} days
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-md-4 col-sm-8 col-12">
+                              <div class="info-box bg-gradient-info">
+                                 <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+                                 <div class="info-box-content">
+                                    <span class="info-box-text">Writing Rate</span>
+                                    <span class="info-box-number">{{$writing_challenge}}x passed challenge</span>
+                                    <div class="progress">
+                                       <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                    {{$rate_writing}}% until {{$quest}} days
+                                    </span>
+                                 </div>
+                                 <!-- /.info-box-content -->
+                              </div>
+                              <!-- /.info-box -->
+                           </div>
+                           <!-- /.col -->
+                           <div class="col-md-4 col-sm-8 col-12">
+                              <div class="info-box bg-gradient-success">
+                                 <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
+                                 <div class="info-box-content">
+                                    <span class="info-box-text">Business Rate</span>
+                                    <span class="info-box-number">{{$business_challenge}}x passed challenge</span>
+                                    <div class="progress">
+                                       <div class="progress-bar" style="width: {{$rate_business}}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                    {{$rate_business}}% until {{$quest}} days
+                                    </span>
+                                 </div>
+                                 <!-- /.info-box-content -->
+                              </div>
+                              <!-- /.info-box -->
+                           </div>
+                           <!-- /.col -->
+                           <div class="col-md-4 col-sm-8 col-12">
+                              <div class="info-box bg-gradient-danger">
+                                 <span class="info-box-icon"><i class="fas fa-comments"></i></span>
+                                 <div class="info-box-content">
+                                    <span class="info-box-text">Video Rate</span>
+                                    <span class="info-box-number">{{$video_challenge}}x passed challenge</span>
+                                    <div class="progress">
+                                       <div class="progress-bar" style="width: {{$rate_video}}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                    {{$rate_video}}% until {{$quest}} days
+                                    </span>
+                                 </div>
+                                 <!-- /.info-box-content -->
+                              </div>
+                              <!-- /.info-box -->
+                           </div>
+                           <!-- /.col -->
+                           <div class="col-md-4 col-sm-8 col-12">
+                              <div class="info-box bg-gradient-orange">
+                                 <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
+                                 <div class="info-box-content">
+                                    <span class="info-box-text">Profit</span>
+                                    <span class="info-box-number">{{$hasil_business}} earn</span>
+                                    <div class="progress">
+                                       <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                    {{$rate_hasil}}% until {{$quest}} days
+                                    </span>
+                                 </div>
+                                 <!-- /.info-box-content -->
+                              </div>
+                              <!-- /.info-box -->
+                           </div>
+                           <!-- /.col -->
                         </div>
-                        <!-- /.card -->
-                  
-                    </div>
-                </div>
+                        <!-- /.row -->
+                     </div>
+                     <!-- /.card -->
+                  </div>
+               </div>
                <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
@@ -272,72 +280,72 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
-      function rupiah(){
-         var bilangan = "" ;
-         var	number_string = bilangan.toString(),
-         sisa 	= number_string.length % 3,
-         rupiah 	= number_string.substr(0, sisa),
-         ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
-            
-      if (ribuan) {
-         separator = sisa ? '.' : '';
-         rupiah += separator + ribuan.join('.');
-      }
-
-      // Cetak hasil
-
-                  
-
-      $("hasil").text("Rp "+rupiah)
-
-      //the function body is the same as you have defined sue the textbox object to set the value
-      }
-      rupiah();
-         $(function () {
-             $("#example1")
-                 .DataTable({
-                     responsive: true,
-                     lengthChange: false,
-                     autoWidth: false,
-                     buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                 })
-                 .buttons()
-                 .container()
-                 .appendTo("#example1_wrapper .col-md-6:eq(0)");
-             $("#example2").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: true,
-                 info: true,
-                 autoWidth: false,
-                 responsive: true,
-             });
-         });
-         var rupiah = document.getElementById("hasil");
-         hasil.addEventListener("keyup", function(e) {
-         // tambahkan 'Rp.' pada saat form di ketik
-         // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-         rupiah.value = formatRupiah(this.value, "Rp. ");
-         });
-         
-         /* Fungsi formatRupiah */
-         function formatRupiah(angka, prefix) {
-         var number_string = angka.replace(/[^,\d]/g, "").toString(),
-         split = number_string.split(","),
-         sisa = split[0].length % 3,
-         rupiah = split[0].substr(0, sisa),
-         ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-         
-         // tambahkan titik jika yang di input sudah menjadi angka ribuan
+         function rupiah(){
+            var bilangan = "" ;
+            var	number_string = bilangan.toString(),
+            sisa 	= number_string.length % 3,
+            rupiah 	= number_string.substr(0, sisa),
+            ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+               
          if (ribuan) {
-         separator = sisa ? "." : "";
-         rupiah += separator + ribuan.join(".");
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
          }
          
-         rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-         return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+         // Cetak hasil
+         
+                     
+         
+         $("hasil").text("Rp "+rupiah)
+         
+         //the function body is the same as you have defined sue the textbox object to set the value
          }
+         rupiah();
+            $(function () {
+                $("#example1")
+                    .DataTable({
+                        responsive: true,
+                        lengthChange: false,
+                        autoWidth: false,
+                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                    })
+                    .buttons()
+                    .container()
+                    .appendTo("#example1_wrapper .col-md-6:eq(0)");
+                $("#example2").DataTable({
+                    paging: true,
+                    lengthChange: false,
+                    searching: false,
+                    ordering: true,
+                    info: true,
+                    autoWidth: false,
+                    responsive: true,
+                });
+            });
+            var rupiah = document.getElementById("hasil");
+            hasil.addEventListener("keyup", function(e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            rupiah.value = formatRupiah(this.value, "Rp. ");
+            });
+            
+            /* Fungsi formatRupiah */
+            function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+            split = number_string.split(","),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+            separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+            }
+            
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+            }
       </script>
    </body>
 </html>
