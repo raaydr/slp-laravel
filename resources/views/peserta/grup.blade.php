@@ -238,10 +238,10 @@
                                             <th scope="row">{{ $i }}</th>
                                             <td>{{ $user->nama }}</td>
                                             <td>
-                                                @if(($user->status)== 0)
+                                                @if(($user->aktif)== 0)
 
                                                 <p class="text-danger">non-aktif</p>
-                                                @endif @if(($user->status)== 1)
+                                                @endif @if(($user->aktif)== 1)
 
                                                 <p class="text-success">aktif</p>
                                                 @endif

@@ -96,11 +96,19 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+                     
                      <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+                        <a href="{{ route('fasil.daily.quest') }}" class="nav-link ">
                            <i class="nav-icon fas fa-tachometer-alt"></i>
                            <p>
-                              Dashboard
+                           Daily Quest
+                           </p>
+                        </a>
+                     </li><li class="nav-item">
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+                           <i class="nav-icon fas ion-person"></i>
+                           <p>
+                           Profile
                            </p>
                         </a>
                      </li>
@@ -121,8 +129,8 @@
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                           <li class="breadcrumb-item"><a href="#">Home</a></li>
-                           <li class="breadcrumb-item active">User Profile</li>
+                           <li class="breadcrumb-item"><a href="#">Fasil</a></li>
+                           <li class="breadcrumb-item active">Profile</li>
                         </ol>
                      </div>
                   </div>
@@ -150,13 +158,16 @@
                                  </a>
                               </div>
                               <h4 class="profile-username text-center">{{$user->Fasil->nama}}</h4>
+                              <div class="text-center">
+                                 <a data-toggle="modal" data-target="#modal-foto" class="btn btn-primary btn-sm m-2">ubah foto</a>
+                                        </div>
                               <ul class="list-group list-group-unbordered mb-3">
                                  <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Fasil->jenis_kelamin}}</a></li>
                                  <li class="list-group-item"><b>No.Telp</b> <a class="float-right">{{$user->Fasil->phonenumber}}</a></li>
                                  <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="{{$user->Fasil->instagram}}" target="_blank">lihat</a></li>
                               </ul>
                               <div class="text-center">
-                                 <a data-toggle="modal" data-target="#modal-foto" class="btn btn-primary btn-sm m-2">ubah foto</a>
+                                 
                                  <a data-toggle="modal" data-target="#modal-password" class="btn btn-success btn-sm m-2">ubah password</a>
                                  <button class="btn btn-warning btn-sm-2" data-toggle="modal" data-myid="{{$user->Fasil->user_id}}" data-myname="{{$user->Fasil->nama}}" data-phonenumber="{{$user->Fasil->phonenumber}}" data-instagram="{{$user->Fasil->instagram}}" data-quotes="{{$user->Fasil->quotes}}"  data-target="#modal-biodata" href="{{ route('fasil.edit.biodata') }}"  target="_blank">
                                  <i class="fas fa-info"> </i>

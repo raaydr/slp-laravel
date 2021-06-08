@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Quest;
+use App\Models\Peserta;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -156,4 +158,159 @@ class FasilController extends Controller
         return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah password');
 
     }
+
+    public function dailyQuest()
+    {
+        $title = 'Daily Quest Fasil';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $grup = DB::table('fasil')
+            ->where('user_id', $id)
+            ->value('grup');
+        
+        $quest = DB::table('users')
+                    ->join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    ->join('daily_quest', 'daily_quest.user_id', '=', 'users.id')
+                    ->where('grup', $grup)
+                    ->where('day', $hari)->orderBy('status', 'DESC')->get();
+        
+        return view('fasil.dailyQuest', compact('title', 'user', 'quest','hari'));
+    }
+
+    public function pesertaQuest($id)
+    {
+        $title = 'Daily Quest Fasil';
+        
+        
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $peserta=Peserta::where('user_id', $id)->first();
+        $data = Quest::where('user_id', $id)->where('day', $hari)->first();
+      
+        
+        return view('fasil.questPeserta', compact('title', 'data','hari','peserta'));
+    }
+    public function video_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'video' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'video.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $id=Input::get('user_id');
+        Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    'topik_video' => Input::get('video'),
+                    'video_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return redirect()->route('fasil.peserta.quest',[$id])->with('pesan', 'Pemeriksaan Video berhasil');
+    }
+    public function writing_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'writing' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'writing.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $id=Input::get('user_id');
+        Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    'topik_writing' => Input::get('video'),
+                    'writing_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return redirect()->route('fasil.peserta.quest',[$id])->with('pesan', 'Pemeriksaan Writing berhasil');
+    }
+
+    public function batal_quest($id,$quest){
+        if ($quest == 0){
+            $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');        
+            Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    
+                    'video_check' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+            return redirect()->route('fasil.peserta.quest',[$id])->with('batal', 'batal pemeriksaan video');
+            
+             
+        }else{
+            $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');        
+            Quest::where('user_id', $id)->where('day', $hari)
+                ->update([
+                    
+                    'writing_check' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+            return redirect()->route('fasil.peserta.quest',[$id])->with('batal', 'batal pemeriksaan link video');
+        }
+    }
+    public function pesertaProfile($id)
+    {
+        $title = 'Daily Quest Fasil';
+        
+        
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $quest = Quest::where('id', $id)->where('day', $hari)->first();
+      
+        
+        return view('fasil.questPeserta', compact('title', 'quest','hari'));
+    }
+    
 }

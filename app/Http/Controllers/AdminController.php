@@ -1083,11 +1083,15 @@ class AdminController extends Controller
              //Table Peserta
             $user = new Peserta;
             $user->nama = Input::get('nama');
-            $user->status =  1;
+            $user->aktif =  1;
             $user->captain = 0;
             $user->gen = $gen;
             $user->grup =  Input::get('grup');
             $user->user_id = Input::get('user_id');
+            $user->video_clear =  0;
+            $user->writing_clear =  0;
+            $user->business_clear =  0;
+            $user->hasil_clear =  0;
             $user->save();
             return redirect()->route('admin.peserta.pengelompok')->with('berhasil', 'berhasil menambahkan grup');
         }

@@ -418,3 +418,38 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 	Route::post('/change-password', 'FasilController@change_password')->name('fasil.change.password');
     });
 });
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/daily-quest', 'FasilController@dailyQuest')->name('fasil.daily.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/peserta-quest/{id}', 'FasilController@pesertaQuest')->name('fasil.peserta.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/peserta-profile/{id}', 'FasilController@pesertaProfile')->name('fasil.peserta.profile');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/daily-quest/batal/{user_id}/{quest}', 'FasilController@batal_quest')->name('fasil.batal.quest');
+    });
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/daily-quest/video', 'FasilController@video_quest')->name('fasil.video.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/daily-quest/writing', 'FasilController@writing_quest')->name('fasil.writing.quest');
+
+	});
+});
