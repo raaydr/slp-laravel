@@ -147,114 +147,132 @@
                      {{session('pesan')}}.
                   </div>
                   @endif
-                  <div class="col-md-12">
-                     <!-- general form elements -->
-                     <div class="card card-primary">
-                        <div class="card-header">
-                           <h3 class="card-title">Daily Quest hari ke - {{$hari}}</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <div class="card-body">
-                           <h3 class="mt-4 mb-4">List Peserta</h3>
-                           <div class="row">
-                              @foreach ($quest as $user)
-                              <div class="col-md-4">
-                                 <!-- Widget: user widget style 2 -->
-                                 <div class="card card-widget widget-user-2">
-                                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                                    <div class="widget-user-header bg-orange">
-                                       <div class="widget-user-image">        
-                                          <img class="img-circle elevation-2" src="{{asset('imgdaftar')}}/{{$user->url_foto}}" alt="User Avatar">
-                                       </div>
-                                       <!-- /.widget-user-image -->
-                                       <h3 class="widget-user-username">{{$user->nama}}</h3>
-                                       <h5 class="widget-user-desc">Grup - {{$user->grup}}</h5>
+                  <div class="row">
+                            <div class="col-md-3">
+                                <!-- Profile Image -->
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body box-profile">
+                                        <div class="text-center">
+                                            <a class="btn btn-default" href="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" target="_blank">
+                                                <img class="profile-user-img img-fluid" src="{{asset('imgdaftar')}}/{{$user->Biodata->url_foto}}" class="img-fluid" alt="Cinque Terre" />
+                                            </a>
+                                        </div>
+
+                                        <h3 class="profile-username text-center">{{ $user->Biodata->nama }}</h3>
+
+                                        <p class="text-muted text-center">{{ $user->Biodata->aktivitas}}</p>
+                                        <ul class="list-group list-group-unbordered mb-3">
+                                            <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
+                                            <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
+                                            <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$user->Biodata->tanggal_lahir}}</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="card-footer p-0">
-                                       <ul class="nav flex-column">
-                                          <li class="nav-item">
-                                             @if (($user->writing_check) == 1)
-                                             <a  class="nav-link">
-                                             Writing                       
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->writing_check) == 0)                     
-                                             <a  class="nav-link">
-                                             Writing                       
-                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
-                                             </a>
-                                             @endif
-                                          </li>
-                                          <li class="nav-item">
-                                             @if (($user->video_check) == 1)
-                                             <a  class="nav-link">
-                                             Public Speaking                      
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->video_check) == 0)                     
-                                             <a  class="nav-link">
-                                             Public Speaking                       
-                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
-                                             </a>
-                                             @endif
-                                          </li>
-                                          <li class="nav-item">
-                                             @if (($user->business_check) == 1)
-                                             <a  class="nav-link">
-                                             Business                       
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->business_check) == 0)                     
-                                             <a  class="nav-link">
-                                             Business                       
-                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
-                                             </a>
-                                             @endif
-                                          </li>
-                                          <li class="nav-item">
-                                             @if (($user->status) == 1)
-                                             <a  class="nav-link">
-                                             Daily Quest Hari Ini                       
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->status) == 0)                     
-                                             <a  class="nav-link">
-                                             Daily Quest Hari Ini                       
-                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
-                                             </a>
-                                             @endif
-                                          </li>
-                                          <li class="nav-item">
-                                          <a class="btn btn-primary float-left btn-sm m-2" href="{{ route('fasil.peserta.quest', $user->user_id) }}" >
-                                                        <i class="fas fa-folder"> </i>
-                                                        Quest
-                                                    </a>
-                                          <a class="btn btn-primary float-right btn-sm m-2" href="{{ route('fasil.peserta.profil', Crypt::encrypt($user->user_id))}}" >
-                                                        <i class="fas fa-folder"> </i>
-                                                        Profil
-                                          </a>                                                    
-                                          </li>
-                                       </ul>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+
+                                <!-- About Me Box -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">About Me</h3>
                                     </div>
-                                 </div>
-                                 <!-- /.widget-user -->
-                              </div>
-                              <!-- /.col -->
-                              @endforeach
-                           </div>
-                           <!-- /.row -->
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
+
+                                        <p class="text-muted">
+                                            {{$user->Biodata->phonenumber}}
+                                        </p>
+
+                                        <hr />
+
+                                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
+
+                                        <p class="text-muted">{{$user->Biodata->alamat_domisili}}</p>
+
+                                        <hr />
+
+                                        <strong><i class="fas fa-pencil-alt mr-1"></i>Minat Program</strong>
+
+                                        <p class="text-muted">
+                                            <span class="tag tag-danger"> {{$user->Biodata->minatprogram}}</span>
+                                        </p>
+                                            
+                                        <hr />
+                                        
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div class="card-header p-2">
+                                        <ul class="nav nav-pills">
+                                            
+                                            <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">More about Me</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="Pertama">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">Alasan Beasiswa</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$user->Biodata->alasanbeasiswa}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">5 Kelebihan</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$user->Biodata->five_pros}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <span class="username">
+                                                            <a href="#">5 Kekurangan</a>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        {{$user->Biodata->five_cons}}
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                                
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                            
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                        
-                           <!-- /.card-body -->
-                        </div>
-                        </form>
-                     </div>
-                     <!-- /.card -->
-                  </div>
-                  <!-- /.row -->
+                        <!-- /.row -->
                </div>
                <!-- /.container-fluid -->
             </section>

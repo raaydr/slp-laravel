@@ -432,12 +432,6 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 });
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
-	Route::get('/peserta-profile/{id}', 'FasilController@pesertaProfile')->name('fasil.peserta.profile');
-
-	});
-});
-Route::group(['middleware' => 'check-permission:fasil'], function () {
-    Route::group(['prefix' => 'fasil'], function () {
 	Route::get('/daily-quest/batal/{user_id}/{quest}', 'FasilController@batal_quest')->name('fasil.batal.quest');
     });
 });
@@ -450,6 +444,12 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::post('/daily-quest/writing', 'FasilController@writing_quest')->name('fasil.writing.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/profil-peserta/{id}', 'FasilController@pesertaProfil')->name('fasil.peserta.profil');
 
 	});
 });

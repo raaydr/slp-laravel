@@ -248,7 +248,7 @@
                                             </td>
 
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-primary btn-sm" href="{{ route('peserta.userprofile', $user->user_id) }}" target="_blank">
+                                                <a class="btn btn-primary btn-sm" href="{{ route('peserta.userprofile', Crypt::encrypt($user->user_id)) }}" target="_blank">
                                                     <i class="fas fa-folder"> </i>
                                                     Detail
                                                 </a>

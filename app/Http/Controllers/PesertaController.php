@@ -13,6 +13,7 @@ use App\Models\Quest;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -66,8 +67,8 @@ class PesertaController extends Controller
     public function userProfile($user_id)
     {
         $title = 'Peserta Profile';
-        
-        $user = User::where('id', $user_id)->first();
+        $id = Crypt::decrypt($user_id);
+        $user = User::where('id', $id)->first();
         
         
 

@@ -9,6 +9,8 @@ use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -299,18 +301,39 @@ class FasilController extends Controller
             return redirect()->route('fasil.peserta.quest',[$id])->with('batal', 'batal pemeriksaan link video');
         }
     }
-    public function pesertaProfile($id)
+    public function pesertaProfil($user_id)
     {
-        $title = 'Daily Quest Fasil';
-        
-        
-        $hari = DB::table('control')
+        $title = 'Peserta Profile';
+        $id = Crypt::decrypt($user_id);  
+        $user = User::where('id', $id)->first();
+        $quest = DB::table('control')
             ->where('id', 2)
             ->value('integer');
-        $quest = Quest::where('id', $id)->where('day', $hari)->first();
+        $video_challenge = 0;
+        $writing_challenge = 0;
+        $business_challenge = 0;
+        $hasil_business = 0;
+        $record = Quest::where('user_id', $id)->where('status', 1)->get();
+        $jumlah=count($record);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $v = $record[$i]['video_check'];
+            $video_challenge = $video_challenge + $v;
+            $w = $record[$i]['writing_check'];
+            $writing_challenge = $writing_challenge + $w;
+            $b = $record[$i]['business_check'];
+            $business_challenge = $business_challenge + $b;
+            $h = $record[$i]['hasil'];
+            $hasil_business = $hasil_business + $h;
+
+          }
+        $rate_video = ($video_challenge / $quest) *100;
+        $rate_writing = ($writing_challenge / $quest) *100;
+        $rate_business = ($business_challenge / $quest) *100;
+        $rate_hasil = ($hasil_business / 2000000) *100;
       
         
-        return view('fasil.questPeserta', compact('title', 'quest','hari'));
+        return view('fasil.pesertaProfile', compact('title', 'user','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
+        'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
     }
     
 }
