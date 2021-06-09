@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>SLP Indonesia | Admin</title>
+      <title>SLP Indonesia Fasil</title>
       <!-- Google Font: Source Sans Pro -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
       <!-- Font Awesome -->
@@ -76,7 +76,7 @@
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
             <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
-            <span class="brand-text font-weight-light">AdminSLP</span>
+            <span class="brand-text font-weight-light">Fasil</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -97,10 +97,26 @@
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                      <li class="nav-item">
+                        <a href="{{ route('fasil.pengumuman') }}" class="nav-link ">
+                           <i class="nav-icon nav-icon far fa-envelope"></i>
+                           <p>
+                              Pengumuman
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
                         <a href="{{ route('fasil.daily.quest') }}" class="nav-link active">
                            <i class="nav-icon fas fa-tachometer-alt"></i>
                            <p>
                               Daily Quest
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('fasil.grup') }}" class="nav-link ">
+                           <i class="nav-icon fas fa-th"></i>
+                           <p>
+                              Grup
                            </p>
                         </a>
                      </li>
@@ -189,14 +205,14 @@
                               </div>
                               @if(($data->video_check)== 0)
                               <div class="col-md-4 col-form-label text-md-left">
-                              <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->user_id}}" data-myname="{{$peserta->nama}}" data-target="#modal-video"target="_blank">
+                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-video"target="_blank">
                                  <i class="fas fa-check"> </i>
                                  checked
                                  </button>
                               </div>
                               @else 
                               <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->user_id,0]) }}">
+                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
                                  <i class="fas fa-info"> </i>
                                  kesalahan
                                  </a>
@@ -209,7 +225,7 @@
                                  @if(($data->writing)== 'belum mengerjakan')
                                  <a class="text-danger" type="text" >kosong</a>
                                  @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">check</a>
+                                 <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">Periksa</a>
                                  @endif
                                  @if(($data->writing_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
@@ -219,14 +235,14 @@
                               </div>
                               @if(($data->writing_check)== 0)
                               <div class="col-md-4 col-form-label text-md-left">
-                              <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->user_id}}" data-myname="{{$peserta->nama}}" data-target="#modal-writing"target="_blank">
+                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-writing"target="_blank">
                                  <i class="fas fa-check"> </i>
                                  checked
                                  </button>
                               </div>
                               @else 
                               <div class="col-md-4 col-form-label text-md-left">
-                              <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->user_id,1]) }}">
+                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
                                  <i class="fas fa-info"> </i>
                                  kesalahan
                                  </a>
@@ -239,7 +255,7 @@
                                  @if(($data->business)== 'belum mengerjakan')
                                  <a class="text-danger" type="text" >kosong</a>
                                  @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">check</a>
+                                 <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">Periksa</a>
                                  @endif
                                  @if(($data->business_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
@@ -288,43 +304,42 @@
                                  <form method="POST" action="{{route('fasil.video.quest')}}" enctype="multipart/form-data" class="was-validated">
                                     {{csrf_field()}}
                                     <div class="modal-body">
-                                    <div class="form-group row">
-                                             <label for="user_id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
-                                             <div class="col-md-7">
-                                                <input id="user_id" type="text" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" name="user_id"  readonly />
-                                                @if ($errors->has('user_id'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('user_id') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       <div class="form-group row">
+                                          <label for="id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="id" type="text" class="form-control{{ $errors->has('id') ? ' is-invalid' : '' }}" name="id"  readonly />
+                                             @if ($errors->has('id'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('id') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                          <div class="form-group row">
-                                             <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
-                                             <div class="col-md-7">
-                                                <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
-                                                @if ($errors->has('nama'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('nama') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
+                                             @if ($errors->has('nama'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('nama') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                          <div class="form-group row">
-                                             <label for="video" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
-                                             <div class="col-md-7">
-                                                <textarea id="video" type="text" class="form-control" name="video" value="{{ old('video') }}" required autofocus ></textarea>
-                                                <small id="passwordHelpBlock" class="form-text text-sucess">
-                                                maksimal huruf 255
-                                                </small>
-                                                @if ($errors->has('video'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('video') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="video" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
+                                          <div class="col-md-7">
+                                             <textarea id="video" type="text" class="form-control" name="video" value="{{ old('video') }}" required autofocus ></textarea>
+                                             <small id="passwordHelpBlock" class="form-text text-sucess">
+                                             maksimal huruf 255
+                                             </small>
+                                             @if ($errors->has('video'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('video') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                       
+                                       </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -349,43 +364,42 @@
                                  <form method="POST" action="{{route('fasil.writing.quest')}}" enctype="multipart/form-data" class="was-validated">
                                     {{csrf_field()}}
                                     <div class="modal-body">
-                                    <div class="form-group row">
-                                             <label for="user_id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
-                                             <div class="col-md-7">
-                                                <input id="user_id" type="text" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" name="user_id"  readonly />
-                                                @if ($errors->has('user_id'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('user_id') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       <div class="form-group row">
+                                          <label for="id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="id" type="text" class="form-control{{ $errors->has('id') ? ' is-invalid' : '' }}" name="id"  readonly />
+                                             @if ($errors->has('user_id'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('user_id') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                          <div class="form-group row">
-                                             <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
-                                             <div class="col-md-7">
-                                                <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
-                                                @if ($errors->has('nama'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('nama') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
+                                             @if ($errors->has('nama'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('nama') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                          <div class="form-group row">
-                                             <label for="writing" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
-                                             <div class="col-md-7">
-                                                <textarea id="writing" type="text" class="form-control" name="writing" value="{{ old('writing') }}" required autofocus ></textarea>
-                                                <small id="passwordHelpBlock" class="form-text text-sucess">
-                                                maksimal huruf 255
-                                                </small>
-                                                @if ($errors->has('writing'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('writing') }}</strong>
-                                                </span>
-                                                @endif
-                                             </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="writing" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
+                                          <div class="col-md-7">
+                                             <textarea id="writing" type="text" class="form-control" name="writing" value="{{ old('writing') }}" required autofocus ></textarea>
+                                             <small id="passwordHelpBlock" class="form-text text-sucess">
+                                             maksimal huruf 255
+                                             </small>
+                                             @if ($errors->has('writing'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('writing') }}</strong>
+                                             </span>
+                                             @endif
                                           </div>
-                                       
+                                       </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -399,20 +413,100 @@
                         </div>
                         <!-- /.modal -->
                         <div class="card-footer">
-                                    <div class="justify-content-between">
-                                       
-                                    <a class="btn bg-orange btn-sm" href="{{ route('fasil.daily.quest') }}">
-                                          <i class="fas fa-angle-left right"> </i>
-                                          Kembali
-                                    </a>
-                                    </div>
+                           <div class="justify-content-between">
+                              <a class="btn bg-orange btn-sm" href="{{ route('fasil.daily.quest') }}">
+                              <i class="fas fa-angle-left right"> </i>
+                              Kembali
+                              </a>
+                           </div>
                            <!-- /.card-body -->
                         </div>
                      </div>
                      <!-- /.card -->
                   </div>
-                  <!-- /.row -->
+                  <div class="col-12">
+                     <div class="card">
+                        <div class="card-header">
+                           <h3 class="card-title">Quest Peserta</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                           <table id="example1" class="table table-bordered table-striped">
+                              <thead>
+                                 <tr>
+                                    <th>Hari</th>
+                                    <th>Public Speaking</th>
+                                    <th>Writing</th>
+                                    <th>Business</th>
+                                    <th>status</th>
+                                    <th></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 @foreach ($daily_quest as $user)
+                                 <tr>
+                                    <td>{{ $user->day }}</td>
+                                    <td>
+                                       @if(($user->video_check)== 0)
+                                       <p class="text-danger">failed</p>
+                                       @endif @if(($user->video_check)== 1)
+                                       <a href="{{ $user->video }}" target="_blank">clear</a>
+                                       <br>
+                                       <p class="text-success">topik : {{ $user->topik_video }}</p>
+                                       @endif
+                                    </td>
+                                    <td>
+                                       @if(($user->writing_check)== 0)
+                                       <p class="text-danger">failed</p>
+                                       @endif @if(($user->writing_check)== 1)
+                                       <a href="{{ $user->writing }}" target="_blank">clear</a>
+                                       <br>
+                                       <p class="text-success">topik : {{ $user->topik_writing }}</p>
+                                       @endif
+                                    </td>
+                                    <td>
+                                       @if(($user->business_check)== 0)
+                                       <p class="text-danger">failed</p>
+                                       @endif @if(($user->business_check)== 1)
+                                       <p class="text-success">clear</p>
+                                       @endif
+                                    </td>
+                                    <td>
+                                       @if(($user->status)== 0)
+                                       <p class="text-danger">belum diperiksa</p>
+                                       @endif @if(($user->status)== 1)
+                                       <p class="text-success">sudah diperiksa</p>
+                                       @endif
+                                    </td>
+                                    <td class="project-actions text-right">
+                                       @if(($user->status)== 0)
+                                       <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest',[$peserta->user_id,Crypt::encrypt($user->id)])}}"  target="_blank">
+                                       <i class="fas fa-folder"> </i>
+                                       Detail
+                                       </a>
+                                       @endif
+                                    </td>
+                                 </tr>
+                                 @endforeach
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                    <th>Hari</th>
+                                    <th>Public Speaking</th>
+                                    <th>Writing</th>
+                                    <th>Business</th>
+                                    <th>status</th>
+                                    <th></th>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                        <!-- /.card-body -->
+                     </div>
+                     <!-- /.card -->
+                  </div>
                </div>
+               <!-- /.row -->
                <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
@@ -507,9 +601,9 @@
               
                 var modal = $(this)
                 
-                modal.find('.modal-body #user_id').val(id)
+                modal.find('.modal-body #id').val(id)
                 modal.find('.modal-body #nama').val(nama)
-
+         
                
             });
             $('#modal-writing').on('show.bs.modal', function (event) {
@@ -520,9 +614,9 @@
               
                 var modal = $(this)
                 
-                modal.find('.modal-body #user_id').val(id)
+                modal.find('.modal-body #id').val(id)
                 modal.find('.modal-body #nama').val(nama)
-
+         
                
             });
             $(function () {

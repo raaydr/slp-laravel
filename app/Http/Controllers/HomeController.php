@@ -80,7 +80,7 @@ class HomeController extends Controller
                                 
                 break;
             case '5':
-                return redirect()->action('\App\Http\Controllers\FasilController@index');
+                return redirect()->action('\App\Http\Controllers\FasilController@pengumuman');
                                 
                 break;    
                 default:

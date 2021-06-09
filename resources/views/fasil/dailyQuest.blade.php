@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>SLP Indonesia | Admin</title>
+      <title>SLP Indonesia | Fasil</title>
       <!-- Google Font: Source Sans Pro -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
       <!-- Font Awesome -->
@@ -76,7 +76,7 @@
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
             <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
-            <span class="brand-text font-weight-light">AdminSLP</span>
+            <span class="brand-text font-weight-light">Fasil</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -96,11 +96,27 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                                <a href="{{ route('fasil.pengumuman') }}" class="nav-link ">
+                                <i class="nav-icon nav-icon far fa-envelope"></i>
+                                <p>
+                                    Pengumuman
+                                </p>
+                                </a>
+                            </li>
                      <li class="nav-item">
                         <a href="{{ route('fasil.daily.quest') }}" class="nav-link active">
                            <i class="nav-icon fas fa-tachometer-alt"></i>
                            <p>
                               Daily Quest
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('fasil.grup') }}" class="nav-link ">
+                           <i class="nav-icon fas fa-th"></i>
+                           <p>
+                              Grup
                            </p>
                         </a>
                      </li>
@@ -226,7 +242,7 @@
                                              @endif
                                           </li>
                                           <li class="nav-item">
-                                          <a class="btn btn-primary float-left btn-sm m-2" href="{{ route('fasil.peserta.quest', $user->user_id) }}" >
+                                          <a class="btn btn-primary float-left btn-sm m-2" href="{{ route('fasil.peserta.quest', Crypt::encrypt($user->user_id)) }}" >
                                                         <i class="fas fa-folder"> </i>
                                                         Quest
                                                     </a>

@@ -487,3 +487,26 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/pengumuman', 'FasilController@pengumuman')->name('fasil.pengumuman');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/grup', 'FasilController@grup_peserta')->name('fasil.grup');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/fasil/userProfile/{user_id}', 'FasilController@userProfile')->name('fasil.userprofile');
+    });
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/record-quest/detail-quest/{quest_id}/{user_id}', 'FasilController@detailQuest')->name('fasil.detail.quest');
+
+	});
+});

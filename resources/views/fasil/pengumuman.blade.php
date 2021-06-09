@@ -139,21 +139,14 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="container-fluid">
-               @if(session('pesan'))
-               <div class="alert alert-success alert-dismissable">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check"></i>Success</h4>
-                  {{session('pesan')}}.
-               </div>
-               @endif
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>Detail Quest Peserta</h1>
+                        <h1>Pengumuman</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="#">Fasil</a></li>
-                           <li class="breadcrumb-item active">Detail-Quest</li>
+                           <li class="breadcrumb-item active">Pengumumant</li>
                         </ol>
                      </div>
                   </div>
@@ -163,104 +156,32 @@
             <!-- Main content -->
             <section class="content">
                 
-            <div class="col-md-12">
-                     <!-- general form elements -->
-                     <div class="card card-primary">
-                        <div class="card-header">
-                           <h3 class="card-title">Quest Peserta hari ke - {{$data->day}}</h3>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Untuk Fasil</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <div class="card-body">
-                           <div class="row">
-                              <div class="form-group col-md-6">
-                                 <label for="exampleInputEmail1">ID</label>
-                                 <input type="text" class="form-control" name="id" value="{{$data->id}}" readonly>
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label for="exampleInputPassword1">Nama</label>
-                                 <input type="text" class="form-control" name="nama" value="{{ $peserta}}"readonly>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 @if(($data->video)== 'belum mengerjakan')
-                                 <a class="text-danger">kosong</a>
-                                 @else 
-                                 <a type="text" href="{{$data->video}}" target="_blank">Periksa</a>
-                                 @endif
-                                 @if(($data->video_check)== 1)
-                                 <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
-                                 <span class="float-right badge bg-danger">X</span>
-                                 @endif    
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="writing" class="col-md-6 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 @if(($data->writing)== 'belum mengerjakan')
-                                 <a class="text-danger" type="text" >kosong</a>
-                                 @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">Periksa</a>
-                                 @endif
-                                 @if(($data->writing_check)== 1)
-                                 <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
-                                 <span class="float-right badge bg-danger">X</span>
-                                 @endif 
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 @if(($data->business)== 'belum mengerjakan')
-                                 <a class="text-danger" type="text" >kosong</a>
-                                 @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">Periksa</a>
-                                 @endif
-                                 @if(($data->business_check)== 1)
-                                 <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
-                                 <span class="float-right badge bg-danger">X</span>
-                                 @endif 
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                                 <a type="text" >{{$data->sumber_produk}}</a>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="jenis_produk" class="col-md-6 col-form-label text-md-right">{{ __('Jenis Produk') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                                 <a type="text" >{{$data->jenis_produk}}</a>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="keterangan" class="col-md-6 col-form-label text-md-right">{{ __('Keterangan') }}</label>
-                              <div class="col-md-6 col-form-label ">
-                                 <?php
-                                    echo $data->keterangan ;
-                                    ?>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Profit Hari Ini') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 <hasil></hasil>
-                              </div>
-                           </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                           <!-- /.card-body -->
-                        </div>
-                     </div>
-                     <!-- /.card -->
-                  </div>
+                    </div>
+                    <div class="card-body">
+                  Jangan lupa di check ya kakak fasil daily quest peserta setiap magrib
+                        <br>
+                        biar nanti malamnya di check sama rokes gaming
+                        <br>
+
+                        capek
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        Admin SLP, 10 Juni 2021
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                
+                <!-- /.card -->
             
                 
                 
@@ -327,6 +248,23 @@
                  autoWidth: false,
                  responsive: true,
              });
+         });
+         $('#modal-biodata').on('show.bs.modal', function (event) {
+             
+             var button = $(event.relatedTarget) // Button that triggered the modal
+             var id = button.data('myid')
+             var nama = button.data('myname')
+             var phonenumber = button.data('phonenumber')
+             var instagram = button.data('instagram')
+             var quotes = button.data('quotes')
+             var modal = $(this)
+             
+             modal.find('.modal-body #user_id').val(id)
+             modal.find('.modal-body #nama').val(nama)
+             modal.find('.modal-body #phonenumber').val(phonenumber)
+             modal.find('.modal-body #instagram').val(instagram)
+             modal.find('.modal-body #quotes').val(quotes)
+            
          });
          $(function () {
              // Summernote

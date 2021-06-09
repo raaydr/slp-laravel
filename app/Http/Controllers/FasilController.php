@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Fasil;
 use App\Models\Quest;
 use App\Models\Peserta;
+use Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -38,6 +40,19 @@ class FasilController extends Controller
         
         
         return view('fasil.dashboard', compact('title', 'user'));
+    }
+    public function pengumuman()
+    {
+        $title = 'Dashboard Peserta';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('users')
+            ->where('id', $id)
+            ->get();
+        
+        return view('fasil.pengumuman', compact('title', 'user','biodata'));
     }
     public function editfoto(Request $request)
     {
@@ -183,19 +198,20 @@ class FasilController extends Controller
         return view('fasil.dailyQuest', compact('title', 'user', 'quest','hari'));
     }
 
-    public function pesertaQuest($id)
+    public function pesertaQuest($user_id)
     {
         $title = 'Daily Quest Fasil';
-        
+        $id = Crypt::decrypt($user_id);
         
         $hari = DB::table('control')
             ->where('id', 2)
             ->value('integer');
         $peserta=Peserta::where('user_id', $id)->first();
         $data = Quest::where('user_id', $id)->where('day', $hari)->first();
+        $daily_quest = Quest::where('user_id', $id)->get();
       
         
-        return view('fasil.questPeserta', compact('title', 'data','hari','peserta'));
+        return view('fasil.questPeserta', compact('title', 'data','hari','peserta','daily_quest'));
     }
     public function video_quest(Request $request)
     {
@@ -217,11 +233,8 @@ class FasilController extends Controller
                 ->withInput();
         }
         
-        $hari = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');
-        $id=Input::get('user_id');
-        Quest::where('user_id', $id)->where('day', $hari)
+        $id=Input::get('id');
+        Quest::where('id', $id)
                 ->update([
                     'topik_video' => Input::get('video'),
                     'video_check' => 1,
@@ -230,7 +243,7 @@ class FasilController extends Controller
         
 
         
-        return redirect()->route('fasil.peserta.quest',[$id])->with('pesan', 'Pemeriksaan Video berhasil');
+            return Redirect::back()->with('pesan','Operation Successful !');
     }
     public function writing_quest(Request $request)
     {
@@ -252,28 +265,24 @@ class FasilController extends Controller
                 ->withInput();
         }
         
-        $hari = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');
-        $id=Input::get('user_id');
-        Quest::where('user_id', $id)->where('day', $hari)
+        
+        $id=Input::get('id');
+        Quest::where('id', $id)
                 ->update([
-                    'topik_writing' => Input::get('video'),
+                    'topik_writing' => Input::get('writing'),
                     'writing_check' => 1,
                     'updated_at' => now(),
                 ]);
         
 
         
-        return redirect()->route('fasil.peserta.quest',[$id])->with('pesan', 'Pemeriksaan Writing berhasil');
+        return Redirect::back()->with('pesan','Operation Successful !');
     }
 
     public function batal_quest($id,$quest){
         if ($quest == 0){
-            $hari = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');        
-            Quest::where('user_id', $id)->where('day', $hari)
+                    
+            Quest::where('id', $id)
                 ->update([
                     
                     'video_check' => 0,
@@ -282,14 +291,12 @@ class FasilController extends Controller
         
 
         
-            return redirect()->route('fasil.peserta.quest',[$id])->with('batal', 'batal pemeriksaan video');
+                return Redirect::back()->with('pesan','Operation Successful !');
             
              
         }else{
-            $hari = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');        
-            Quest::where('user_id', $id)->where('day', $hari)
+             
+            Quest::where('id', $id)
                 ->update([
                     
                     'writing_check' => 0,
@@ -298,7 +305,7 @@ class FasilController extends Controller
         
 
         
-            return redirect()->route('fasil.peserta.quest',[$id])->with('batal', 'batal pemeriksaan link video');
+                return Redirect::back()->with('pesan','Operation Successful !');
         }
     }
     public function pesertaProfil($user_id)
@@ -337,4 +344,52 @@ class FasilController extends Controller
         'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
     }
     
+    public function grup_peserta()
+    {
+        $title = 'Grup Peserta';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $grup = DB::table('fasil')
+            ->where('user_id', $id)
+            ->value('grup');
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
+
+        $fasil = Fasil::where('grup', $grup)->first();
+        $peserta = Peserta::where('gen',$gen)->where('grup',$grup)->get();
+        //dd($fasil);
+        return view('fasil.grup', compact('title', 'user','fasil','peserta'));
+    }
+
+    public function detailQuest($uid,$quest_id){
+        $title = 'Detail Quest Peserta';
+        $user_id = Auth::user()->id;
+        $id = Crypt::decrypt($quest_id);
+        
+        $user = User::where('id', $user_id)
+            ->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        if ((Quest::where('id', $id)->where('status', 1)->exists())){
+            $data = Quest::where('id', $uid)->first();
+            $peserta = DB::table('peserta')
+            ->where('user_id', $uid)
+            ->value('nama');
+            $daily_quest = Quest::where('user_id', $uid)->get();
+            return view('fasil.detailQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+        }else{
+            $data = Quest::where('id', $id)->first();
+            $peserta = DB::table('peserta')
+            ->where('user_id', $uid)
+            ->value('nama');
+            $daily_quest = Quest::where('user_id', $uid)->get();
+            return view('fasil.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+        }
+       
+        
+    }
 }

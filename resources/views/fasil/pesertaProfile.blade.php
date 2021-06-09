@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>SLP Indonesia | Admin</title>
+      <title>SLP Indonesia | Fasil</title>
       <!-- Google Font: Source Sans Pro -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
       <!-- Font Awesome -->
@@ -76,7 +76,7 @@
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
             <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
-            <span class="brand-text font-weight-light">AdminSLP</span>
+            <span class="brand-text font-weight-light">Fasil</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -96,11 +96,27 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                                <a href="{{ route('fasil.pengumuman') }}" class="nav-link ">
+                                <i class="nav-icon nav-icon far fa-envelope"></i>
+                                <p>
+                                    Pengumuman
+                                </p>
+                                </a>
+                            </li>
                      <li class="nav-item">
-                        <a href="{{ route('fasil.daily.quest') }}" class="nav-link active">
+                        <a href="{{ route('fasil.daily.quest') }}" class="nav-link ">
                            <i class="nav-icon fas fa-tachometer-alt"></i>
                            <p>
                               Daily Quest
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{ route('fasil.grup') }}" class="nav-link ">
+                           <i class="nav-icon fas fa-th"></i>
+                           <p>
+                              Grup
                            </p>
                         </a>
                      </li>
@@ -125,12 +141,12 @@
                <div class="container-fluid">
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>Daily Quest</h1>
+                        <h1>Profil Peserta</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="#">Fasil</a></li>
-                           <li class="breadcrumb-item active">Daily Quest</li>
+                           <li class="breadcrumb-item active">Profile-Peserta</li>
                         </ol>
                      </div>
                   </div>
@@ -344,39 +360,39 @@
                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                   @foreach ($daily_quest as $user)
+                                                   @foreach ($daily_quest as $data)
                                                    <tr>
-                                                      <td>{{ $user->day }}</td>
+                                                      <td>{{ $data->day }}</td>
                                                       <td>
-                                                         @if(($user->video_check)== 0)
+                                                         @if(($data->video_check)== 0)
                                                          <p class="text-danger">failed</p>
-                                                         @endif @if(($user->video_check)== 1)
+                                                         @endif @if(($data->video_check)== 1)
                                                          <p class="text-success">clear</p>
                                                          @endif
                                                       </td>
                                                       <td>
-                                                         @if(($user->writing_check)== 0)
+                                                         @if(($data->writing_check)== 0)
                                                          <p class="text-danger">failed</p>
-                                                         @endif @if(($user->writing_check)== 1)
+                                                         @endif @if(($data->writing_check)== 1)
                                                          <p class="text-success">clear</p>
                                                          @endif
                                                       </td>
                                                       <td>
-                                                         @if(($user->business_check)== 0)
+                                                         @if(($data->business_check)== 0)
                                                          <p class="text-danger">failed</p>
-                                                         @endif @if(($user->business_check)== 1)
+                                                         @endif @if(($data->business_check)== 1)
                                                          <p class="text-success">clear</p>
                                                          @endif
                                                       </td>
                                                       <td>
-                                                         @if(($user->status)== 0)
+                                                         @if(($data->status)== 0)
                                                          <p class="text-danger">belum diperiksa</p>
-                                                         @endif @if(($user->status)== 1)
+                                                         @endif @if(($data->status)== 1)
                                                          <p class="text-success">sudah diperiksa</p>
                                                          @endif
                                                       </td>
                                                       <td class="project-actions text-right">
-                                                         <a class="btn btn-primary btn-sm" href="{{ route('peserta.userprofile', Crypt::encrypt($user->id)) }}" target="_blank">
+                                                         <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest', [$user->Biodata->user_id,Crypt::encrypt($data->id),])}}" target="_blank">
                                                          <i class="fas fa-folder"> </i>
                                                          Detail
                                                          </a>
