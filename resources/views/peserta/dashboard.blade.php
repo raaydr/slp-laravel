@@ -307,10 +307,7 @@
                                                             <h3 class="timeline-header"><a href="#">Stadium General</a></h3>
 
                                                             <div class="timeline-body">
-                                                                Kita diceramahin oleh <b>Kak Kusnan</b> dan <b>Zhevit</b>
-                                                                <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ" target="”_blank”"><b>Tempatnya disini</b></a>
-                                                                <br />
-                                                               Pukul 23.00 wib hari apaan ya, done
+                                                                Stadium General
                                                             </div>
                                                         </div>
                                                     </div>
@@ -327,9 +324,9 @@
                                                         <i class="fas fa-comments bg-orange"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Materinya apaan</a></h3>
+                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -347,9 +344,9 @@
                                                         <i class="fas fa-comments bg-success"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Materinya apaan</a></h3>
+                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -366,9 +363,9 @@
                                                         <i class="fas fa-comments bg-primary"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Materinya apaan</a></h3>
+                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -386,9 +383,9 @@
                                                         <i class="fas fa-comments bg-orange"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Materinya apaan</a></h3>
+                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -405,9 +402,9 @@
                                                         <i class="fas fa-envelope bg-success"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Materinya apaan</a></h3>
+                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,7 +412,7 @@
                                                     <!-- timeline time label -->
                                                     <div class="time-label">
                                                         <span class="bg-danger">
-                                                            Tanggal brp lulusnya  2021 T_T(gua)
+                                                           Graduate
                                                         </span>
                                                     </div>
                                                     <!-- /.timeline-label -->
@@ -426,7 +423,7 @@
                                                         <div class="timeline-item">
                                                             <h3 class="timeline-header border-0"><a href="#">Graduate</a></h3>
                                                             <div class="timeline-body">
-                                                                apa dong acaranya dan sama siapa dimana kapan jam brp 
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>

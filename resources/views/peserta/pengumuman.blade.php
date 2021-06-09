@@ -161,7 +161,7 @@
                 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Semangat</h3>
+                            <h3 class="card-title">Selamat!</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -170,16 +170,18 @@
                             </div>
                         </div>
                         <div class="card-body">
-                      daily quest
-                            <br>
-                            belum siap
-                            <br>
-
-                            capek
+                        
+<br>
+Kamu sudah resmi menjadi Awardee Smart Leader Preneur (SLP) Batch 2. Maka dari itu, mulai sekarang kamu sudah berkomitmen untuk mengembangkan diri bersama-sama.
+<br>
+Bagaimana caranya? Kerjakan misimu untuk mendapatkan apa yang sudah ditargetkan di SLP dengan laporan rutin di Daily Quest setiap harinya.
+<br>
+Yuk, learning, growing, inspiring. Pasti bisa!
+<br>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            Admin SLP, 10 Juni 2021
+                            Admin SLP, 7 Juni 2021
                         </div>
                         <!-- /.card-footer-->
                     </div>

@@ -189,10 +189,14 @@
                               @endif
                            </div>
                            <div class="col-md-4 col-form-label text-md-left">
-                           <button class="btn btn-warning btn-sm" data-toggle="modal" data-id="{{$data->id}}" data-target="#modal-video" target="_blank">
+                           @if(($data->video_check)== 1)
+                                 <p class="text-success">sudah diperiksa</p>
+                              @else 
+                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
-                                                        Ubah Video
-                           </button>
+                                                        Ubah Link Video
+                                                    </button>
+                              @endif
                            </div>
                         </div>
                         <div class="form-group row">
@@ -205,10 +209,14 @@
                               @endif
                            </div>
                            <div class="col-md-4 col-form-label text-md-left">
-                           <button class="btn btn-warning btn-sm" data-toggle="modal" data-id="{{$data->id}}" data-target="#modal-writing" target="_blank">
+                           @if(($data->writing_check)== 1)
+                                 <p class="text-success">sudah diperiksa</p>
+                              @else 
+                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
                                                         <i class="fas fa-info"> </i>
-                                                        Ubah Writing
-                           </button>
+                                                         Upload Writing
+                                                    </button>
+                              @endif
                            </div>
                         </div>
                         <div class="form-group row">
@@ -221,10 +229,14 @@
                               @endif
                            </div>
                            <div class="col-md-4 col-form-label text-md-left">
-                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.business.editquest', Crypt::encrypt($data->id)) }}">
-                              <i class="fas fa-info"> </i>
-                              Upload Business
-                              </a>
+                           @if(($data->business_check)== 1)
+                                 <p class="text-success">sudah diperiksa</p>
+                              @else 
+                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business') }}">
+                                                        <i class="fas fa-info"> </i>
+                                                         Upload Business
+                                                    </a>
+                              @endif
                            </div>
                         </div>
                         <div class="form-group row">
