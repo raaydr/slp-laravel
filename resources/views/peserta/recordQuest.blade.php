@@ -132,12 +132,12 @@
                <div class="container-fluid">
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>Daily Quest Peserta</h1>
+                        <h1>Record Quest Peserta</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                           <li class="breadcrumb-item active">Daily-Quest-Edit</li>
+                           <li class="breadcrumb-item active">Record-Quest-Peserta</li>
                         </ol>
                      </div>
                   </div>
@@ -223,7 +223,7 @@
                                  <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
                                  <div class="info-box-content">
                                     <span class="info-box-text">Profit</span>
-                                    <span class="info-box-number">{{$hasil_business}} earn</span>
+                                    <span class="info-box-number"><hasil></hasil> earn</span>
                                     <div class="progress">
                                        <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
                                     </div>
@@ -236,6 +236,84 @@
                               <!-- /.info-box -->
                            </div>
                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <div class="row">
+                           <div class="col-12">
+                              <div class="card">
+                                 <div class="card-header">
+                                    <h3 class="card-title">List Daily Quest</h3>
+                                 </div>
+                                 <!-- /.card-header -->
+                                 <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                       <thead>
+                                          <tr>
+                                             <th>Hari</th>
+                                             <th>Public Speaking</th>
+                                             <th>Writing</th>
+                                             <th>Business</th>
+                                             <th>status</th>
+                                             <th></th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          @foreach ($daily_quest as $user)
+                                          <tr>
+                                             <td>{{ $user->day }}</td>
+                                             <td>
+                                                @if(($user->video_check)== 0)
+                                                <p class="text-danger">tidak mengerjakan</p>
+                                                @endif @if(($user->video_check)== 1)
+                                                <p class="text-success">done</p>
+                                                @endif
+                                             </td>
+                                             <td>
+                                                @if(($user->writing_check)== 0)
+                                                <p class="text-danger">gk ngerjain</p>
+                                                @endif @if(($user->writing_check)== 1)
+                                                <p class="text-success">completed</p>
+                                                @endif
+                                             </td>
+                                             <td>
+                                                @if(($user->business_check)== 0)
+                                                <p class="text-danger">mission failed</p>
+                                                @endif @if(($user->business_check)== 1)
+                                                <p class="text-success">clear</p>
+                                                @endif
+                                             </td>
+                                             <td>
+                                                @if(($user->status)== 0)
+                                                <p class="text-danger">belum diperiksa</p>
+                                                @endif @if(($user->status)== 1)
+                                                <p class="text-success">sudah diperiksa</p>
+                                                @endif
+                                             </td>
+                                             <td class="project-actions text-right">
+                                                <a class="btn btn-primary btn-sm" href="{{ route('peserta.detail.quest', Crypt::encrypt($user->id)) }}" target="_blank">
+                                                <i class="fas fa-folder"> </i>
+                                                Detail
+                                                </a>
+                                             </td>
+                                          </tr>
+                                          @endforeach
+                                       </tbody>
+                                       <tfoot>
+                                          <tr>
+                                             <th>Hari</th>
+                                             <th>Public Speaking</th>
+                                             <th>Writing</th>
+                                             <th>Business</th>
+                                             <th>status</th>
+                                             <th></th>
+                                          </tr>
+                                       </tfoot>
+                                    </table>
+                                 </div>
+                                 <!-- /.card-body -->
+                              </div>
+                              <!-- /.card -->
+                           </div>
                         </div>
                         <!-- /.row -->
                      </div>
@@ -281,7 +359,7 @@
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
          function rupiah(){
-            var bilangan = "" ;
+            var bilangan = {{$hasil_business}} ;
             var	number_string = bilangan.toString(),
             sisa 	= number_string.length % 3,
             rupiah 	= number_string.substr(0, sisa),
@@ -307,7 +385,7 @@
                         responsive: true,
                         lengthChange: false,
                         autoWidth: false,
-                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        
                     })
                     .buttons()
                     .container()

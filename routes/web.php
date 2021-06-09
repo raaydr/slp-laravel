@@ -396,7 +396,36 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/record-quest/detail-quest/{id}', 'PesertaController@detailQuest')->name('peserta.detail.quest');
 
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/record-quest/edit-video-quest', 'PesertaController@edit_video_quest')->name('peserta.video.edit');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/record-quest/edit-writing-quest', 'PesertaController@edit_writing_quest')->name('peserta.writing.edit');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::post('/record-quest/edit-business-quest', 'PesertaController@edit_business_quest')->name('peserta.business.edit');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/record-quest/edit-business-quest/{id}', 'PesertaController@editbusinessQuest')->name('peserta.business.editquest');
+
+	});
+});
 
 
 // ROUTES Fasil

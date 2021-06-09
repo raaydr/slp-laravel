@@ -105,6 +105,7 @@ class PesertaController extends Controller
         $business_challenge = 0;
         $hasil_business = 0;
         $record = Quest::where('user_id', $id)->where('status', 1)->get();
+        $daily_quest = Quest::where('user_id', $id)->get();
         $jumlah=count($record);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $v = $record[$i]['video_check'];
@@ -127,7 +128,7 @@ class PesertaController extends Controller
             "business" => $rate_business,
             "hasil" => $rate_hasil
         ); 
-         return view('peserta.recordQuest', compact('title', 'user', 'quest', 'data',
+         return view('peserta.recordQuest', compact('title', 'user', 'quest', 'daily_quest','data',
          'rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
          'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
         
@@ -435,5 +436,190 @@ class PesertaController extends Controller
         $data = Quest::where('user_id', $id)->where('day', $quest)->first();
         return view('peserta.businessQuest', compact('title', 'user', 'quest','data'));            
         
+    }
+
+    public function detailQuest($quest_id){
+        $title = 'Detail Quest Peserta';
+        $user_id = Auth::user()->id;
+        $id = Crypt::decrypt($quest_id);
+        $user = User::where('id', $user_id)
+            ->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        if ((Quest::where('id', $id)->where('status', 1)->exists())){
+            $data = Quest::where('id', $id)->first();
+            return view('peserta.detailQuest', compact('title', 'user', 'quest','data'));
+        }else{
+            $data = Quest::where('id', $id)->first();
+            return view('peserta.ubahQuest', compact('title', 'user', 'quest','data'));
+        }
+       
+        
+    }
+
+    public function edit_writing_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'writing' => 'required|mimes:doc,pdf,docx,zip,pdf|max:2048',
+            ],
+
+            $messages = [
+                'writing.required' => 'tidak boleh kosong!',
+                'writing.image' => 'Format file tidak mendukung! Gunakan doc,pdf,docx,zip,pdf.',
+                'writing.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+    
+        $id = Input::get('id');
+        $hari = DB::table('daily_quest')
+            ->where('id', $id)
+            ->value('day');
+        $file = Quest::where('id', $id)->value('writing');
+            
+            if ($writing = $request->hasFile('writing')) {
+                $writing = $request->file('writing');
+                $writingName = $id.'hari'.$hari.'-'.time(). '_' . $writing->getClientOriginalName();
+                $tujuanPath = public_path() . '/docWriting/';
+                $writing->move($tujuanPath, $writingName);
+            }else{
+                $writingName = "tidak mengerjakan";
+            }
+            File::delete('docWriting/' . $file);
+            Quest::where('id', $id)
+                ->update([
+                    'writing' => $writingName,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return redirect()->route('peserta.detail.quest', [Crypt::encrypt($id)])->with('pesan', 'ubah writing sukses');
+    }
+
+    public function edit_video_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'video' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'video.required' => 'tidak boleh kosong!',
+                
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+    
+        $id = Input::get('id');
+        $hari = DB::table('daily_quest')
+            ->where('id', $id)
+            ->value('day');
+            Quest::where('id', $id)
+                ->update([
+                    'video' => Input::get('video'),
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return redirect()->route('peserta.detail.quest', [Crypt::encrypt($id)])->with('pesan', 'ubah video sukses');
+    }
+
+    public function editbusinessQuest($daily_quest){
+        $title = 'Edit Business Quest';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)
+            ->first();
+        $quest_id = Crypt::decrypt($daily_quest);
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $data = Quest::where('id', $quest_id)->first();
+        return view('peserta.editBusinessQuest', compact('title', 'user', 'quest','data'));            
+        
+    }
+
+    public function edit_business_quest(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), 
+        [   
+            
+            'business' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+            'hasil' => 'required',
+            'sumber_produk' => 'required',
+            'jenis_produk' => 'required',
+            'summernote' => 'required',
+            
+
+        ],
+
+        $messages = 
+        [
+            'business.required' => 'tidak boleh kosong!',
+            'business.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
+            'business.max' => 'Ukuran file terlalu besar, maksimal file 2Mb !',
+            'sumber_produk.required' => ' tidak boleh kosong!',
+            'jenis_produk.required' => ' tidak boleh kosong!',
+            'summernote.required' => ' tidak boleh kosong!',
+            'hasil.required' => ' tidak boleh kosong!',
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        $daily_quest = Input::get('id');
+        $id = Auth::user()->id;
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $detail=$request->summernote;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        if ($business = $request->hasFile('business')) {
+            $business = $request->file('business');
+            $businessName = $id.'hari'.$hari.'-'.time(). '_' . $business->getClientOriginalName();
+            $tujuanPath = public_path() . '/imgBusinessQuest/';
+            $business->move($tujuanPath, $businessName);
+        }
+        $harga = Input::get('hasil');
+        $harga_str = preg_replace("/[^0-9]/", "", $harga);
+        $hasil = (int) $harga_str;
+
+        
+        //Table daily_quest
+        Quest::where('id', $daily_quest)
+                ->update([
+                    'business' => $businessName,
+                    'sumber_produk' => Input::get('sumber_produk'),
+                    'jenis_produk' => Input::get('jenis_produk'),
+                    'keterangan' => $detail,
+                    'hasil' => $hasil,
+                    'updated_at' => now(),
+                ]);
+        
+        
+        return redirect()->route('peserta.business.editquest', [Crypt::encrypt($daily_quest)])->with('pesan', 'berhasil mengubah business challenge');
     }
 }

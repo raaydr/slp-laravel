@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
+                                <a href="{{ route('peserta.daily.quest') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                 Daily Quest
@@ -110,7 +110,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('peserta.record.quest') }}" class="nav-link ">
+                                <a href="{{ route('peserta.record.quest') }}" class="nav-link active">
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>
                                         Quest Record
@@ -138,12 +138,12 @@
                <div class="container-fluid">
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>Daily Quest Peserta</h1>
+                        <h1>Record Business Quest Peserta</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                           <li class="breadcrumb-item active">Daily-Quest</li>
+                           <li class="breadcrumb-item active">Record-Business-Quest</li>
                         </ol>
                      </div>
                   </div>
@@ -164,21 +164,21 @@
                   <!-- general form elements -->
                   <div class="card card-primary">
                      <div class="card-header">
-                        <h3 class="card-title">Daily Quest hari ke - {{$quest}}</h3>
+                        <h3 class="card-title">Daily Quest hari ke - {{$data->day}}</h3>
                      </div>
                      <!-- /.card-header -->
                      <!-- form start -->
-                     <form action="{{ route('peserta.business.quest') }}" method="POST" enctype="multipart/form-data" >
+                     <form action="{{ route('peserta.business.edit') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <div class="card-body">
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label for="exampleInputEmail1">ID</label>
-                                 <input type="text" class="form-control" name="id" value="{{$user->Biodata->user_id}}" readonly>
+                                 <input type="text" class="form-control" name="id" value="{{$data->id}}" readonly>
                               </div>
                               <div class="form-group col-md-6">
-                                 <label for="exampleInputPassword1">Nama</label>
-                                 <input type="text" class="form-control" name="nama" value="{{ $user->Biodata->nama}}"readonly>
+                                 <label for="exampleInputPassword1">Hari</label>
+                                 <input type="text" class="form-control" name="nama" value="{{ $data->day}}"readonly>
                               </div>
                            </div>
                            <div class="form-group row">
@@ -241,7 +241,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                                            <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
+                              <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('Keterangan yang lama') }}</label>
+                              <div class="col-md-6">
+                              <?php
+                                       echo $data->keterangan ;
+                                       ?>
+                              </div>
+                           </div>
+                        <div class="form-group row">
+                                            <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('Keterangan yang baru') }}</label>
                                             <div class="col-md-6">
                                                 <textarea id="summernote"  class="form-control{{ $errors->has('summernote') ? ' is-invalid' : '' }}" name="summernote" value="{{ old('summernote') }}"  required autofocus></textarea>
                                                 <small class="form-text text-sucess">
