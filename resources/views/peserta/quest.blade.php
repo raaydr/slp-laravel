@@ -142,7 +142,7 @@
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                           <li class="breadcrumb-item"><a href="/">Home</a></li>
+                           <li class="breadcrumb-item"><a href="/">Peserta</a></li>
                            <li class="breadcrumb-item active">Daily-Quest</li>
                         </ol>
                      </div>
@@ -316,7 +316,7 @@
          <!-- /.content-wrapper -->
          <footer class="main-footer">
             <div class="float-right d-none d-sm-block"></div>
-            <strong>Copyright &copy;2021 <a href="https://slpindonesia.com/home">SLP Indonesia</a>.</strong> All rights reserved.
+            <strong>Copyright &copy;2021 <a href="https://slpindonesia.com/program-beasiswa">SLP Indonesia</a>.</strong> All rights reserved.
          </footer>
          <!-- Control Sidebar -->
          <aside class="control-sidebar control-sidebar-dark">
