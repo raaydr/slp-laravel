@@ -188,6 +188,7 @@ class FasilController extends Controller
             ->where('user_id', $id)
             ->value('grup');
         
+        
         $quest = DB::table('users')
                     ->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')

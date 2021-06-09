@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Crypt;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -1178,5 +1180,53 @@ class AdminController extends Controller
         $controller->save();
         
         return redirect()->route('admin.controller.create')->with('pesan', 'Controller terbuat');
+    }
+
+    public function daily_quest()
+    {  
+        $title = 'Daily Quest';
+        $hari = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
+        
+        $daily_quest = DB::table('users')
+                    ->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    ->join('daily_quest', 'daily_quest.user_id', '=', 'users.id')
+                    
+                    ->where('day', $hari)->orderBy('status', 'DESC')->get();
+
+        return view('admin.dailyQuest', compact('title', 'daily_quest'));
+    }
+
+    public function detailQuest($uid,$quest_id){
+        $title = 'Detail Quest Peserta';
+        $user_id = Auth::user()->id;
+        $id = Crypt::decrypt($quest_id);
+        
+        $user = User::where('id', $user_id)
+            ->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        if ((Quest::where('id', $id)->where('status', 1)->exists())){
+            $data = Quest::where('id', $uid)->first();
+            $peserta = DB::table('peserta')
+            ->where('user_id', $uid)
+            ->value('nama');
+            $daily_quest = Quest::where('user_id', $uid)->get();
+            return view('admin.detailQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+        }else{
+            $data = Quest::where('id', $id)->first();
+            $peserta = DB::table('peserta')
+            ->where('user_id', $uid)
+            ->value('nama');
+            $daily_quest = Quest::where('user_id', $uid)->get();
+            return view('admin.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+        }
+       
+        
     }
 }

@@ -255,6 +255,18 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/delete-grup/{id}', 'AdminController@delete_grup')->name('admin.peserta.deletegrup');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/daily-quest', 'AdminController@daily_quest')->name('admin.daily.quest');
+    });
+});
+
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/detail-quest/{quest_id}/{user_id}', 'AdminController@detailQuest')->name('admin.detail.quest');
+
+	});
+});
 
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
