@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
+use Redirect;
 
 class AdminController extends Controller
 {
@@ -1228,5 +1229,182 @@ class AdminController extends Controller
         }
        
         
+    }
+
+    public function writing_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'writing' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'writing.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        
+        $id=Input::get('id');
+        Quest::where('id', $id)
+                ->update([
+                    'topik_writing' => Input::get('writing'),
+                    'writing_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
+    }
+
+    public function video_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'video' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'video.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $id=Input::get('id');
+        Quest::where('id', $id)
+                ->update([
+                    'topik_video' => Input::get('video'),
+                    'video_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+            return Redirect::back()->with('pesan','Operation Successful !');
+    }
+
+    public function note(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'note' => 'required|string|max:255',
+            ],
+
+            $messages = [
+                'note.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $id=Input::get('id');
+        Quest::where('id', $id)
+                ->update([
+                    'topik_video' => Input::get('video'),
+                    'video_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+            return Redirect::back()->with('pesan','Operation Successful !');
+    }
+    public function batal_quest($id,$quest){
+        if ($quest == 0){
+                    
+            
+            
+             
+        }else if($quest == 1){
+             
+            
+        }
+        switch ($quest) {
+            case '0':
+                Quest::where('id', $id)
+                ->update([
+                    
+                    'video_check' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');
+                break;
+            case '1':
+                Quest::where('id', $id)
+                ->update([
+                    
+                    'writing_check' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');
+                break;   
+            case '2':
+                Quest::where('id', $id)
+                ->update([
+                    
+                    'business_check' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');        
+                break;
+            case '3':
+                Quest::where('id', $id)
+                ->update([
+                    
+                    'status' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');        
+                break;
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+    }
+
+    public function business_quest($id){
+        Quest::where('id', $id)
+                ->update([
+                    
+                    'business_check' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');
     }
 }

@@ -257,7 +257,7 @@
                               </div>
                               @else 
                               <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
+                                 <a class="btn btn-danger btn-sm" href="{{ route('admin.batal.quest', [$data->id,0]) }}">
                                  <i class="fas fa-info"> </i>
                                  kesalahan
                                  </a>
@@ -287,7 +287,7 @@
                               </div>
                               @else 
                               <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
+                                 <a class="btn btn-danger btn-sm" href="{{ route('admin.batal.quest', [$data->id,1]) }}">
                                  <i class="fas fa-info"> </i>
                                  kesalahan
                                  </a>
@@ -296,33 +296,34 @@
                            </div>
                            <div class="form-group row">
                               <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
-                              <div class="col-md-2 col-form-label text-md-left">
-                                 @if(($data->business)== 'belum mengerjakan')
-                                 <a class="text-danger" type="text" >kosong</a>
+                                 <div class="col-md-2 col-form-label text-md-left">
+                                    @if(($data->business)== 'belum mengerjakan')
+                                    <a class="text-danger" type="text" >kosong</a>
+                                    @else 
+                                    <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">Periksa</a>
+                                    @endif
+                                    @if(($data->business_check)== 1)
+                                    <span class="float-right badge bg-success"><i class="fas fa-check"></i></span>
+                                    @else
+                                    <span class="float-right badge bg-danger">X</span>
+                                    @endif
+                                    @if(($data->business_check)== 0)
+                                 </div>
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-success btn-sm" href="{{ route('admin.business.quest', [$data->id]) }}">
+                                       <i class="fas fa-check"> </i>
+                                       checked
+                                       </a>
+                                 </div>
                                  @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">Periksa</a>
-                                 @endif
-                                 @if(($data->business_check)== 1)
-                                 <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
-                                 <span class="float-right badge bg-danger">X</span>
-                                 @endif
-                                 @if(($data->business_check)== 0)
-                              <div class="col-md-4 col-form-label text-md-left">
-                              <a class="btn btn-success btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                              </div>
-                              @else 
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
-                                 <i class="fas fa-info"> </i>
-                                 kesalahan
-                                 </a>
-                              </div>
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.batal.quest', [$data->id,2]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    kesalahan
+                                    </a>
+                                 </div>
                               @endif 
-                              </div>
+                           </div>
                            </div>
                            <div class="form-group row">
                               <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
@@ -361,7 +362,7 @@
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                  </div>
-                                 <form method="POST" action="{{route('admin.business.quest')}}" enctype="multipart/form-data" class="was-validated">
+                                 <form method="POST" action="{{route('admin.note.quest')}}" enctype="multipart/form-data" class="was-validated">
                                     {{csrf_field()}}
                                     <div class="modal-body">
                                        <div class="form-group row">
@@ -496,13 +497,132 @@
                            </table>
                         </div>
                         <!-- /.card-body -->
+                        <div class="modal fade" id="modal-video">
+                           <div class="modal-dialog">
+                              <div class="modal-content bg-primary">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title">Periksa Video Challenge</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <form method="POST" action="{{route('admin.video.quest')}}" enctype="multipart/form-data" class="was-validated">
+                                    {{csrf_field()}}
+                                    <div class="modal-body">
+                                       <div class="form-group row">
+                                          <label for="id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="id" type="text" class="form-control{{ $errors->has('id') ? ' is-invalid' : '' }}" name="id"  readonly />
+                                             @if ($errors->has('user_id'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('user_id') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
+                                             @if ($errors->has('nama'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('nama') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="video" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
+                                          <div class="col-md-7">
+                                             <textarea id="video" type="text" class="form-control" name="video" value="{{ old('video') }}" required autofocus ></textarea>
+                                             <small id="passwordHelpBlock" class="form-text text-sucess">
+                                             maksimal huruf 255
+                                             </small>
+                                             @if ($errors->has('video'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('video') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                       <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                       <button type="submit" class="btn btn-outline-light">Save</button>
+                                    </div>
+                                 </form>
+                              </div>
+                              <!-- /.modal-content -->
+                           </div>
+                           <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <div class="modal fade" id="modal-writing">
+                           <div class="modal-dialog">
+                              <div class="modal-content bg-primary">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title">Edit Writing Challenge</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <form method="POST" action="{{route('admin.writing.quest')}}" enctype="multipart/form-data" class="was-validated">
+                                    {{csrf_field()}}
+                                    <div class="modal-body">
+                                       <div class="form-group row">
+                                          <label for="id" class="col-md-5 col-form-label text-md-right">{{ __('id') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="id" type="text" class="form-control{{ $errors->has('id') ? ' is-invalid' : '' }}" name="id"  readonly />
+                                             @if ($errors->has('user_id'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('user_id') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="nama" class="col-md-5 col-form-label text-md-right">{{ __('nama') }}</label>
+                                          <div class="col-md-7">
+                                             <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
+                                             @if ($errors->has('nama'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('nama') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+                                          <label for="writing" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
+                                          <div class="col-md-7">
+                                             <textarea id="writing" type="text" class="form-control" name="writing" value="{{ old('writing') }}" required autofocus ></textarea>
+                                             <small id="passwordHelpBlock" class="form-text text-sucess">
+                                             maksimal huruf 255
+                                             </small>
+                                             @if ($errors->has('writing'))
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $errors->first('writing') }}</strong>
+                                             </span>
+                                             @endif
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                       <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                       <button type="submit" class="btn btn-outline-light">Save</button>
+                                    </div>
+                                 </form>
+                              </div>
+                              <!-- /.modal-content -->
+                           </div>
+                           <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
                      </div>
                      <!-- /.card -->
                   </div>
-                  </div>
-            
+                  
                 
-                
+                  
             </section>
             <!-- /.content -->
             </section>
@@ -616,9 +736,31 @@
                  var nama = button.data("myname");
          
                  var modal = $(this);
-                 modal.find(".modal-body #user_id").val(id);
+                 modal.find(".modal-body #id").val(id);
                  modal.find(".modal-body #nama").val(nama);
              });
+         });
+         $('#modal-video').on('show.bs.modal', function (event) {
+             
+             var button = $(event.relatedTarget) // Button that triggered the modal
+             var id = button.data('myid')
+             var nama = button.data('myname')
+             
+             var modal = $(this)
+             
+             modal.find('.modal-body #id').val(id)
+             modal.find('.modal-body #nama').val(nama)
+         });
+         $('#modal-writing').on('show.bs.modal', function (event) {
+             
+             var button = $(event.relatedTarget) // Button that triggered the modal
+             var id = button.data('myid')
+             var nama = button.data('myname')
+             
+             var modal = $(this)
+             
+             modal.find('.modal-body #id').val(id)
+             modal.find('.modal-body #nama').val(nama)
          });
          $(function () {
              // Summernote

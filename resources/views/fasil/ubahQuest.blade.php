@@ -407,11 +407,7 @@
                         </div>
                         <!-- /.modal -->
                         <div class="card-footer">
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-video"target="_blank">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                           <!-- /.card-body -->
+                           
                         </div>
                      </div>
                      <!-- /.card -->

@@ -268,6 +268,36 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	});
 });
 
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Peserta/daily-quest/video', 'AdminController@video_quest')->name('admin.video.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Peserta/daily-quest/writing', 'AdminController@writing_quest')->name('admin.writing.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/Peserta/daily-quest/note', 'AdminController@note_quest')->name('admin.note.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/daily-quest/business/{id}', 'AdminController@business_quest')->name('admin.business.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/daily-quest/batal/{user_id}/{quest}', 'AdminController@batal_quest')->name('admin.batal.quest');
+    });
+});
+
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {

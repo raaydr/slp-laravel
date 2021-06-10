@@ -104,7 +104,7 @@ class FasilController extends Controller
             'nama' => 'required|string|max:255',
             
             'jenis_kelamin' => 'required',
-            'phonenumber' => 'required|numeric|digits_between:12,13',
+            'phonenumber' => 'required|numeric|digits_between:11,13',
             'instagram' => 'required|string',
             'prestasi' => 'required|string',
             'quotes' => 'required|string',
