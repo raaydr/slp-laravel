@@ -307,8 +307,9 @@
                                     @else
                                     <span class="float-right badge bg-danger">X</span>
                                     @endif
-                                    @if(($data->business_check)== 0)
+                                    
                                  </div>
+                                 @if(($data->business_check)== 0)
                                  <div class="col-md-4 col-form-label text-md-left">
                                     <a class="btn btn-success btn-sm" href="{{ route('admin.business.quest', [$data->id]) }}">
                                        <i class="fas fa-check"> </i>
@@ -324,7 +325,7 @@
                                  </div>
                               @endif 
                            </div>
-                           </div>
+                        
                            <div class="form-group row">
                               <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Sumber Produk') }}</label>
                               <div class="col-md-6 col-form-label ">

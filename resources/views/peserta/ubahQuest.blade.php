@@ -192,7 +192,7 @@
                            @if(($data->video_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
                               @else 
-                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
+                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Link Video
                                                     </button>
@@ -212,7 +212,7 @@
                            @if(($data->writing_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
                               @else 
-                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
+                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-target="#modal-writing" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Writing
                                                     </button>
@@ -412,10 +412,11 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
+
          $('#modal-writing').on('show.bs.modal', function (event) {
                      
                      var button = $(event.relatedTarget) // Button that triggered the modal
-                     var id = button.data('id')
+                     var id = button.data('myid')
                   
                      var modal = $(this)
                      modal.find('.modal-body #id').val(id)
@@ -424,7 +425,7 @@
          $('#modal-video').on('show.bs.modal', function (event) {
                      
                      var button = $(event.relatedTarget) // Button that triggered the modal
-                     var id = button.data('id')
+                     var id = button.data('myid')
                   
                      var modal = $(this)
                      modal.find('.modal-body #id').val(id)
