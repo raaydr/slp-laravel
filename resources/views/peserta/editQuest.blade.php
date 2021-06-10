@@ -160,6 +160,100 @@
                   {{session('pesan')}}.
                </div>
                @endif
+               <div class="col-12" id="accordion">
+                <div class="card card-primary card-outline">
+                    <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                        <div class="card-header">
+                            <h4 class="card-title w-100">
+                            <b>Cara input Laporan Writing Challenge ke Website SLP Indonesia : </b>
+                                
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <a>Ikuti langkah dibawah ini :</a>
+                            <ol>
+                                <li>Buat tulisan yang akan di publikasi di word</li>
+                                <li>Upload hasil tulisan mu ke Instagram Pribadimu</li>
+                                <li>Tag akun Instagram <a href="https://www.instagram.com/slp.indonesia/" target="_blank">@slp.indonesia</a> dan gunakan hastag <a class="text-primary">#SmartLeaderPreneur</a> <a class="text-primary">#SLPBatch2</a></li>
+                                <li>Screenshoot hasil Upload-tan tulisan mu dan taruh dibawah file word yg sudah kamu buat diawal</li>
+                                <li>Save Hasil Tulisan + Screenshoot dalam file word tdi dengan format <b>Warna Kelompok _ Nama Lengkap _ WCDay#1</b></li>
+                                Contoh :  <b>Orange_Aprilliana _ WCDay#1</b>
+                                <br>
+                                Notes : Maks. File 2mb ya 
+                                <br>
+                                <li>Setelah selesai, tinggal Upload di website deh! </li>
+                            </ol>
+                            <a>Semangat 💪🏻✨</a>
+                            <br>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-warning card-outline">
+                    <a class="d-block w-100" data-toggle="collapse" href="#collapseFour">
+                        <div class="card-header">
+                            <h4 class="card-title w-100">
+                               <b>Cara input Laporan Public Speaking Challenge ke Website SLP Indonesia : </b> 
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="collapseFour" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                        <a>Ikuti langkah dibawah ini :</a>
+                            <ol>
+                                <li>Buat video sesuai dengan konsep yang sudah kamu buat</li>
+                                <li>Upload hasilnya di Youtube / Instagram Pribadi mu</li>
+                                <li>Jangan Private Instagram kamu ya kalau uploadnya di IG</li>
+                                <li>Tag akun Instagram <a href="https://www.instagram.com/slp.indonesia/" target="_blank">@slp.indonesia</a> dan gunakan hastag <a class="text-primary">#SmartLeaderPreneur</a> <a class="text-primary">#SLPBatch2</a></li>
+                                <li>Masukin link dari video yg di Upload ke Website</li>
+                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card card-danger card-outline">
+                    <a class="d-block w-100" data-toggle="collapse" href="#collapseSeven">
+                        <div class="card-header">
+                            <h4 class="card-title w-100">
+                            <b>Cara input Laporan Business Challenge ke Website SLP Indonesia : </b> 
+                                
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                        <a>Ikuti langkah dibawah ini :</a>
+                            <ol>
+                                <li>Pada bagian Upload file, isi dengan <b>Bukti Transfer</b> yah</li>
+                                📝 Notes : Jika bukti Transfer banyak, silahkan digabungkan seperti biasa ya
+                                <br>
+                                <li>Pada bagian sumber produk, silahkan pilih dari mana sumber produk yang kamu jual</li>
+                                <li>Pada bagian jenis produk, silahkan pilih jenis produk apa saja yang kamu jual hari ini</li>
+                                <li>Pada bagian keterangan, isi dengan : 
+                                 <br>                                 
+                                    Nama Produk : 
+                                    <br>                                    
+                                    Harga Jual : 
+                                    <br>
+                                    Harga Beli : 
+                                    <br>
+                                    Profit : </li>
+                                 📝 Notes : Jika menjual lebih dari 1 produk, <b>silahkan diisi terus kebawah</b> sesuai dengan format
+                                 <br>
+                                <li>Pada bagian profit hari ini, tuliskan jumlah <b>PROFIT</b> yang kamu dapatkan hari ini. Profitnya aja yaaa~</li>
+                                <li>Pastikan setiap <b>file bukti transfer</b> yg kamu Upload, <b>sesuai</b> dengan jumlah yang tertulis dibagian <b>Keterangan</b> dan <b>Profit</b> ya</li>
+                                
+                            </ol>
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
                <div class="col-md-12">
                   <!-- general form elements -->
                   <div class="card card-success">
