@@ -437,6 +437,16 @@ class PesertaController extends Controller
         
     }
 
+    public function download_writing($quest_id) {
+        
+        $id = Crypt::decrypt($quest_id);
+        $file_name = DB::table('daily_quest')
+            ->where('id', $id)
+            ->value('writing');
+        $file_path = public_path('docWriting/'.$file_name);
+        return response()->download($file_path);
+      }
+
     public function detailQuest($quest_id){
         $title = 'Detail Quest Peserta';
         $user_id = Auth::user()->id;

@@ -420,7 +420,12 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:peserta'], function () {
+    Route::group(['prefix' => 'peserta'], function () {
+	Route::get('/download/{id}', 'PesertaController@download_writing')->name('peserta.download.writing');
 
+	});
+});
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
 	Route::get('/grup', 'PesertaController@grup_peserta')->name('peserta.grup');

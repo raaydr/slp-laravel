@@ -205,7 +205,7 @@
                               @if(($data->writing)== 'belum mengerjakan')
                               <p class="text-danger">belum mengerjakan</p>
                               @else 
-                              <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">check</a>
+                              <a type="text" href="{{ route('peserta.download.writing', Crypt::encrypt($data->id)) }}" target="_blank">check</a>
                               @endif
                            </div>
                            <div class="col-md-4 col-form-label text-md-left">
