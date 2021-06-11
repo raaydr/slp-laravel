@@ -21,7 +21,9 @@ Auth::routes();
 Route::get('/program-beasiswa', function () {
     return view('compro');
 })->name('compro');
-
+Route::get('/home', function () {
+    return view('home');
+})->name('rumah');
 
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/daftar-ulang', 'PendaftarController@daftarUlang')->name('register.ulang');

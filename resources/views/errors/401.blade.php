@@ -3,3 +3,23 @@
 @section('title', __('Unauthorized'))
 @section('code', '401')
 @section('message', __('Unauthorized'))
+@section('tes')
+<body class="text-center">
+      <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+         <header class="masthead mb-auto">
+            <div class="inner">
+               <h3 class="masthead-brand">Error 401</h3>
+            </div>
+         </header>
+         <main role="main" class="inner cover">
+            <h1 class="cover-heading">Kenapa bisa begini ???</h1>
+            <p class="lead">Dilarang sama satpam, kalau bukan yang berkepentingan</p>
+            
+         </main>
+         <footer class="mastfoot mt-auto">
+            <div class="inner">
+               
+            </div>
+         </footer>
+      </div>
+@stop
