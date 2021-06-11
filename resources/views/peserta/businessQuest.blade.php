@@ -202,7 +202,7 @@
                   <!-- general form elements -->
                   <div class="card card-primary">
                      <div class="card-header">
-                        <h3 class="card-title">Daily Quest hari ke - {{$quest}}</h3>
+                        <h3 class="card-title">Daily Quest hari ke - {{$data->day}}</h3>
                      </div>
                      <!-- /.card-header -->
                      <!-- form start -->
@@ -212,7 +212,7 @@
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label for="exampleInputEmail1">ID</label>
-                                 <input type="text" class="form-control" name="id" value="{{$user->Biodata->user_id}}" readonly>
+                                 <input type="text" class="form-control" name="id" value="{{$data->id}}" readonly>
                               </div>
                               <div class="form-group col-md-6">
                                  <label for="exampleInputPassword1">Nama</label>

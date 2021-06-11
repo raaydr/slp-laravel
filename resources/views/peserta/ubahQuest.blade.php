@@ -232,7 +232,7 @@
                            @if(($data->business_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
                               @else 
-                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business', Crypt::encrypt($data->id)) }}" target="_blank">
+                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business', Crypt::encrypt($data->id)) }}">
                               
                                                         <i class="fas fa-info"> </i>
                                                          Upload Business

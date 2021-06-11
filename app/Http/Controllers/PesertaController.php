@@ -354,10 +354,10 @@ class PesertaController extends Controller
         $harga = Input::get('hasil');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);
         $hasil = (int) $harga_str;
-
+        $quest_id = Input::get('id');
         
         //Table daily_quest
-        Quest::where('user_id', $id)->where('day', $hari)
+        Quest::where('id', $quest_id)
                 ->update([
                     'business' => $businessName,
                     'sumber_produk' => Input::get('sumber_produk'),
@@ -368,7 +368,7 @@ class PesertaController extends Controller
                 ]);
         
         
-        return redirect()->route('peserta.daily.quest')->with('pesan', 'berhasil mengubah business challenge');
+        return redirect()->route('peserta.detail.quest',[Crypt::encrypt($quest_id)])->with('pesan', 'berhasil mengubah business challenge');
     }
     public function dashboard()
     {
