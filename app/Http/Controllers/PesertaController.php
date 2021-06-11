@@ -425,16 +425,15 @@ class PesertaController extends Controller
             return redirect()->route('peserta.dashboard')->with('pesan', 'berhasil mengubah business challenge');
     }
 
-    public function businessQuest(){
+    public function businessQuest($quest_id){
         $title = 'Business Quest Peserta';
+        $id_quest = Crypt::decrypt($quest_id);
         $id = Auth::user()->id;
         $user = User::where('id', $id)
             ->first();
-        $quest = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');
-        $data = Quest::where('user_id', $id)->where('day', $quest)->first();
-        return view('peserta.businessQuest', compact('title', 'user', 'quest','data'));            
+        
+        $data = Quest::where('id', $id_quest)->first();
+        return view('peserta.businessQuest', compact('title', 'user', 'data'));            
         
     }
 

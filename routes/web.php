@@ -434,7 +434,7 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
-	Route::get('/daily-quest/business-edit', 'PesertaController@businessQuest')->name('peserta.quest.business');
+	Route::get('/daily-quest/business-edit/{quest_id}', 'PesertaController@businessQuest')->name('peserta.quest.business');
 
 	});
 });
