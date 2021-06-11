@@ -219,7 +219,7 @@
                                  @if(($data->writing)== 'belum mengerjakan')
                                  <a class="text-danger" type="text" >kosong</a>
                                  @else 
-                                 <a type="text" href="{{asset('docWriting')}}/{{$data->writing}}" target="_blank">Periksa</a>
+                                 <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($data->id)) }}" >Periksa</a>
                                  @endif
                                  @if(($data->writing_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>

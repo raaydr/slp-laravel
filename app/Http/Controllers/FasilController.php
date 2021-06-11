@@ -175,6 +175,15 @@ class FasilController extends Controller
         return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah password');
 
     }
+    public function download_writing($quest_id) {
+        
+        $id = Crypt::decrypt($quest_id);
+        $file_name = DB::table('daily_quest')
+            ->where('id', $id)
+            ->value('writing');
+        $file_path = public_path('docWriting/'.$file_name);
+        return response()->download($file_path);
+    }
 
     public function dailyQuest()
     {

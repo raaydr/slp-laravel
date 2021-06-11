@@ -557,3 +557,9 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/download/{id}', 'FasilController@download_writing')->name('fasil.download.writing');
+
+	});
+});
