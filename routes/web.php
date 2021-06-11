@@ -260,36 +260,29 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/daily-quest', 'AdminController@daily_quest')->name('admin.daily.quest');
     });
 });
-
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/Peserta/detail-quest/{quest_id}/{user_id}', 'AdminController@detailQuest')->name('admin.detail.quest');
-
 	});
 });
-
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/Peserta/daily-quest/video', 'AdminController@video_quest')->name('admin.video.quest');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/Peserta/daily-quest/writing', 'AdminController@writing_quest')->name('admin.writing.quest');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::post('/Peserta/daily-quest/note', 'AdminController@note_quest')->name('admin.note.quest');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/Peserta/daily-quest/business/{id}', 'AdminController@business_quest')->name('admin.business.quest');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -297,73 +290,67 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/daily-quest/batal/{user_id}/{quest}', 'AdminController@batal_quest')->name('admin.batal.quest');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/download/writing/{id}', 'AdminController@download_writing')->name('admin.download.writing');
+
+	});
+});
+
 
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/dashboard', 'PendaftarController@index')->name('pendaftar.dashboard');
-
 	});
 });
-
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/pengumuman', 'PendaftarController@pengumuman')->name('pendaftar.pengumuman');
-
 	});
 });
-
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/seleksi-pertama', 'PendaftarController@seleksi1')->name('pendaftar.seleksi1');
 
 	});
 });
-
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/upload-seleksi-pertama', 'PendaftarController@seleksiPertama')->name('pendaftar.upload.seleksi1');
-
 	});
 });
-
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/edit-foto', 'PendaftarController@editfoto')->name('pendaftar.edit.foto');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/edit-biodata', 'PendaftarController@editbiodata')->name('pendaftar.edit.biodata');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/update-biodata', 'PendaftarController@updatebiodata')->name('pendaftar.update.biodata');
-
     });
 });
-
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/ranking-challenge', 'PendaftarController@ranking')->name('pendaftar.ranking.challenge');
-
     });
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/seleksi-kedua', 'PendaftarController@seleksi2')->name('pendaftar.seleksi2');
-
     });
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/upload-tes-kepribadian', 'PendaftarController@uploadKepribadian')->name('pendaftar.kepribadian.pdf');
-
 	});
 });
+
 
 // ROUTES Peserta
 Route::group(['middleware' => 'check-permission:peserta'], function () {
@@ -422,7 +409,7 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
-	Route::get('/download/{id}', 'PesertaController@download_writing')->name('peserta.download.writing');
+	Route::get('/download/writing//{id}', 'PesertaController@download_writing')->name('peserta.download.writing');
 
 	});
 });
@@ -479,7 +466,6 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::get('/dashboard', 'FasilController@index')->name('fasil.dashboard');
-
 	});
 });
 Route::group(['middleware' => 'check-permission:fasil'], function () {
@@ -559,7 +545,7 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 });
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
-	Route::get('/download/{id}', 'FasilController@download_writing')->name('fasil.download.writing');
+	Route::get('/download/writing//{id}', 'FasilController@download_writing')->name('fasil.download.writing');
 
 	});
 });

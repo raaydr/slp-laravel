@@ -274,7 +274,7 @@
                                        @if(($quest->writing)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                       <a type="text" href="{{asset('docWriting')}}/{{$quest->writing}}" target="_blank">check</a>
+                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >check</a>
                                        @endif
                                     </td>
                                     <td>
