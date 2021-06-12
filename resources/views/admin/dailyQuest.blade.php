@@ -172,9 +172,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                            <li class="nav-item">
-                              <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link active">
+                              <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link ">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Pengelompokkan</p>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a href="{{ route('admin.daily.quest') }}" class="nav-link active">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Daily Quest</p>
                               </a>
                            </li>
                         </ul>
@@ -219,7 +225,7 @@
                   <div class="col-12">
                      <div class="card">
                         <div class="card-header">
-                           <h3 class="card-title">Daily Quest Peserta</h3>
+                           <h3 class="card-title">Daily Quest Peserta hari ke - <a class= "text-primary"><b>{{$hari}}</b></a></h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -267,27 +273,52 @@
                                        @if(($quest->video)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                       <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                          @if(($quest->video_check)== 0)
+                                             
+                                             <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                             <p class="text-danger">belum diperiksa</p>
+                                          @else
+                                             
+                                             <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                             <p class="text-success">sudah diperiksa</p>
+                                          @endif   
                                        @endif
                                     </td>
                                     <td>
                                        @if(($quest->writing)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >check</a>
+                                          @if(($quest->writing_check)== 0)
+                                             
+                                          <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
+                                             <p class="text-danger">belum diperiksa</p>
+                                          @else
+                                             
+                                          <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
+                                             <p class="text-success">sudah diperiksa</p>
+                                          @endif 
+                                       
                                        @endif
                                     </td>
                                     <td>
                                        @if(($quest->business)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                       <a type="text" href="{{asset('imgBusinessQuest')}}/{{$quest->business}}" target="_blank">check</a>
+                                          @if(($quest->business_check)== 0)
+                                             
+                                             <a class="text-primary">Mengerjakan</a>
+                                             <p class="text-danger">belum diperiksa</p>
+                                          @else
+                                             
+                                             <a class="text-primary">Mengerjakan</a>  
+                                             <p class="text-success">sudah diperiksa</p>
+                                          @endif 
                                        @endif
                                     </td>
                                     <td> 
                                        @if (($quest->status) == 1)
                                        <a  class="nav-link">                       
-                                       <span class="float-right badge bg-success">Sudah Diperiksa</span>
+                                       <span class="float-right badge bg-success">valid</span>
                                        </a>
                                        @elseif (($quest->status) == 0)                     
                                        <a  class="nav-link">                       
@@ -312,7 +343,7 @@
                                         @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest',[$quest->user_id,Crypt::encrypt($quest->id)])}}"  target="_blank">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest',[$quest->user_id,$quest->id])}}"  target="_blank">
                                                         <i class="fas fa-folder"> </i>
                                                         Quest
                                                     </a>

@@ -1199,34 +1199,29 @@ class AdminController extends Controller
                     
                     ->where('day', $hari)->orderBy('status', 'DESC')->get();
 
-        return view('admin.dailyQuest', compact('title', 'daily_quest'));
+        return view('admin.dailyQuest', compact('title', 'daily_quest','hari'));
     }
 
     public function detailQuest($uid,$quest_id){
         $title = 'Detail Quest Peserta';
         $user_id = Auth::user()->id;
-        $id = Crypt::decrypt($quest_id);
+        
         
         $user = User::where('id', $user_id)
             ->first();
         $quest = DB::table('control')
             ->where('id', 2)
             ->value('integer');
-        if ((Quest::where('id', $id)->where('status', 1)->exists())){
-            $data = Quest::where('id', $uid)->first();
-            $peserta = DB::table('peserta')
-            ->where('user_id', $uid)
-            ->value('nama');
-            $daily_quest = Quest::where('user_id', $uid)->get();
-            return view('admin.detailQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
-        }else{
-            $data = Quest::where('id', $id)->first();
+        
+            $data = Quest::where('id', $quest_id)->first();
             $peserta = DB::table('peserta')
             ->where('user_id', $uid)
             ->value('nama');
             $daily_quest = Quest::where('user_id', $uid)->get();
             return view('admin.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
-        }
+        
+            
+        
        
         
     }
@@ -1415,5 +1410,18 @@ class AdminController extends Controller
             ->value('writing');
         $file_path = public_path('docWriting/'.$file_name);
         return response()->download($file_path);
+    }
+
+    public function status_quest($id){
+        Quest::where('id', $id)
+                ->update([
+                    
+                    'status' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');
     }
 }

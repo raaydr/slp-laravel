@@ -172,9 +172,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                            <li class="nav-item">
-                              <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link active">
+                              <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Pengelompokkan</p>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a href="{{ route('admin.daily.quest') }}" class="nav-link active">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Daily Quest</p>
                               </a>
                            </li>
                         </ul>
@@ -224,6 +230,16 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
+                        <div class="form-group row">
+                              <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                                    @if(($data->status)== 0)
+                                    <a class="text-danger"><b>Belum Valid</b></a>
+                                    @else 
+                                    <a class="text-success"><b>Valid</b></a>
+                                    @endif
+                              </div>
+                           </div>
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label for="exampleInputEmail1">ID</label>
@@ -346,10 +362,31 @@
                                     ?>
                               </div>
                            </div>
+                           
                            <div class="form-group row">
                               <label for="hasil" class="col-md-6 col-form-label text-md-right">{{ __('Profit Hari Ini') }}</label>
                               <div class="col-md-2 col-form-label text-md-left">
                                  <hasil></hasil>
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label for="status" class="col-md-6 col-form-label text-md-right"></label>
+                              <div class="col-md-6 col-form-label text-md-left">
+                                 @if((($data->writing_check)&&($data->video_check)&&($data->business_check)==1)&&($data->status)==0)
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                 <a class="btn btn-success btn-sm" href="{{ route('admin.status.quest', [$data->id]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    Ubah Menjadi Valid
+                                    </a>
+                                 </div>
+                                 @else 
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.batal.quest', [$data->id,3]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    BELUM VALID
+                                    </a>
+                                 </div>
+                                 @endif
                               </div>
                            </div>
                         </div>
@@ -444,43 +481,43 @@
                                     <td>{{ $user->day }}</td>
                                     <td>
                                        @if(($user->video_check)== 0)
-                                       <p class="text-danger">failed</p>
+                                       <p class="text-danger">belum diperiksa</p>
                                        @endif @if(($user->video_check)== 1)
                                        <a href="{{ $user->video }}" target="_blank">clear</a>
                                        <br>
-                                       <p class="text-success">topik : {{ $user->topik_video }}</p>
+                                       <p class="text-success">note : {{ $user->topik_video }}</p>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($user->writing_check)== 0)
-                                       <p class="text-danger">failed</p>
+                                       <p class="text-danger">belum diperiksa</p>
                                        @endif @if(($user->writing_check)== 1)
                                        <a href="{{ $user->writing }}" target="_blank">clear</a>
                                        <br>
-                                       <p class="text-success">topik : {{ $user->topik_writing }}</p>
+                                       <p class="text-success">note : {{ $user->topik_writing }}</p>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($user->business_check)== 0)
-                                       <p class="text-danger">failed</p>
+                                       <p class="text-danger">belum diperiksa</p>
                                        @endif @if(($user->business_check)== 1)
                                        <p class="text-success">clear</p>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($user->status)== 0)
-                                       <p class="text-danger">belum diperiksa</p>
+                                       <p class="text-danger">belum valid</p>
                                        @endif @if(($user->status)== 1)
-                                       <p class="text-success">sudah diperiksa</p>
+                                       <p class="text-success">valid</p>
                                        @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                       @if(($user->status)== 0)
-                                       <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest',[$user->user_id,Crypt::encrypt($user->id)])}}"  target="_blank">
+                                       
+                                       <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest',[$user->user_id,$user->id])}}"  target="_blank">
                                        <i class="fas fa-folder"> </i>
                                        Detail
                                        </a>
-                                       @endif
+                                       
                                     </td>
                                  </tr>
                                  @endforeach

@@ -187,6 +187,12 @@
                                             <p>Pengelompokkan</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.daily.quest') }}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daily Quest</p>
+                                        </a>
+                                    </li>
                                     
                                 </ul>
                             </li>

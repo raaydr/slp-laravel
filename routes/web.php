@@ -264,11 +264,6 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/Peserta/detail-quest/{quest_id}/{user_id}', 'AdminController@detailQuest')->name('admin.detail.quest');
-	});
-});
-Route::group(['middleware' => 'check-permission:admin'], function () {
-    Route::group(['prefix' => 'admin'], function () {
 	Route::post('/Peserta/daily-quest/video', 'AdminController@video_quest')->name('admin.video.quest');
 	});
 });
@@ -297,6 +292,17 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/download/writing/{id}', 'AdminController@download_writing')->name('admin.download.writing');
 
 	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/daily-quest/detail-quest/{user_id}/{quest_id}', 'AdminController@detailQuest')->name('admin.detail.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/daily-quest/valid/{quest}', 'AdminController@status_quest')->name('admin.status.quest');
+    });
 });
 
 
