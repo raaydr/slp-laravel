@@ -197,20 +197,22 @@
                                  <span class="float-right badge bg-danger">X</span>
                                  @endif    
                               </div>
-                              @if(($data->video_check)== 0)
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-video"target="_blank">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                              </div>
-                              @else 
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
-                                 <i class="fas fa-info"> </i>
-                                 kesalahan
-                                 </a>
-                              </div>
+                              @if(($data->status)== 0)
+                                 @if(($data->video_check)== 0)
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-video"target="_blank">
+                                    <i class="fas fa-check"> </i>
+                                    checked
+                                    </button>
+                                 </div>
+                                 @else 
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    kesalahan
+                                    </a>
+                                 </div>
+                                 @endif
                               @endif
                            </div>
                            <div class="form-group row">
@@ -227,21 +229,23 @@
                                  <span class="float-right badge bg-danger">X</span>
                                  @endif 
                               </div>
-                              @if(($data->writing_check)== 0)
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-writing"target="_blank">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                              </div>
-                              @else 
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
-                                 <i class="fas fa-info"> </i>
-                                 kesalahan
-                                 </a>
-                              </div>
-                              @endif
+                              @if(($data->status)== 0)
+                                 @if(($data->writing_check)== 0)
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-writing"target="_blank">
+                                    <i class="fas fa-check"> </i>
+                                    checked
+                                    </button>
+                                 </div>
+                                 @else 
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    kesalahan
+                                    </a>
+                                 </div>
+                                 @endif
+                              @endif                                 
                            </div>
                            <div class="form-group row">
                               <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
@@ -466,12 +470,12 @@
                                        @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                       @if(($user->status)== 0)
+                                       
                                        <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest',[$user->user_id,Crypt::encrypt($user->id)])}}"  target="_blank">
                                        <i class="fas fa-folder"> </i>
                                        Detail
                                        </a>
-                                       @endif
+                                       
                                     </td>
                                  </tr>
                                  @endforeach

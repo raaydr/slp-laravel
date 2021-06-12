@@ -391,7 +391,7 @@ class FasilController extends Controller
             ->where('user_id', $uid)
             ->value('nama');
             $daily_quest = Quest::where('user_id', $uid)->get();
-            return view('fasil.detailQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+            return view('fasil.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
        
         
     }
