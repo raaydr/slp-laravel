@@ -96,14 +96,14 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                                <a href="{{ route('fasil.pengumuman') }}" class="nav-link ">
-                                <i class="nav-icon nav-icon far fa-envelope"></i>
-                                <p>
-                                    Pengumuman
-                                </p>
-                                </a>
-                            </li>
+                     <li class="nav-item">
+                        <a href="{{ route('fasil.pengumuman') }}" class="nav-link ">
+                           <i class="nav-icon nav-icon far fa-envelope"></i>
+                           <p>
+                              Pengumuman
+                           </p>
+                        </a>
+                     </li>
                      <li class="nav-item">
                         <a href="{{ route('fasil.daily.quest') }}" class="nav-link ">
                            <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -339,87 +339,104 @@
                                        <!-- /.col -->
                                     </div>
                                     <!-- /.row -->
-                              
-                                 <div class="row">
-                                    <div class="col-12">
-                                       <div class="card">
-                                          <div class="card-header">
-                                             <h3 class="card-title">List Daily Quest</h3>
+                                    <div class="row">
+                                       <div class="col-12">
+                                          <div class="card">
+                                             <div class="card-header">
+                                                <h3 class="card-title">List Daily Quest</h3>
+                                             </div>
+                                             <!-- /.card-header -->
+                                             <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped table-responsive">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      @foreach ($daily_quest as $data)
+                                                      <tr>
+                                                         <td>{{ $data->day }}</td>
+                                                         <td>
+                                                            @if(($data->video)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{$data->video}}" target="_blank">link video</a>
+                                                            @if(($data->video_check)== 0)
+                                                            <p class="text-danger">dalam pemeriksaan</p>
+                                                            @endif 
+                                                            @if(($data->video_check)== 1)
+                                                            <p class="text-success">Quest Done</p>
+                                                            <p class="text-success">topik : {{ $data->topik_video }}</p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->writing)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                                            @if(($data->writing_check)== 0)
+                                                            <p class="text-danger">sedang diperiksa</p>
+                                                            @endif 
+                                                            @if(($data->writing_check)== 1)
+                                                            <p class="text-success">Quest Clear</p>
+                                                            <p class="text-success">topik : {{ $data->topik_writing }}</p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->business)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            @if(($data->business_check)== 0)
+                                                            <p class="text-danger">lagi diperiksa</p>
+                                                            @endif 
+                                                            @if(($data->business_check)== 1)
+                                                            <p class="text-success">Quest Complete</p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->status)== 0)
+                                                            <p class="text-danger">belum diperiksa</p>
+                                                            @endif @if(($data->status)== 1)
+                                                            <p class="text-success">sudah diperiksa</p>
+                                                            @endif
+                                                         </td>
+                                                         <td class="project-actions text-right">
+                                                            <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest', [$user->Biodata->user_id,Crypt::encrypt($data->id),])}}" target="_blank">
+                                                            <i class="fas fa-folder"> </i>
+                                                            Detail
+                                                            </a>
+                                                         </td>
+                                                      </tr>
+                                                      @endforeach
+                                                   </tbody>
+                                                   <tfoot>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </tfoot>
+                                                </table>
+                                             </div>
+                                             <!-- /.card-body -->
                                           </div>
-                                          <!-- /.card-header -->
-                                          <div class="card-body">
-                                             <table id="example1" class="table table-bordered table-striped table-responsive">
-                                                <thead>
-                                                   <tr>
-                                                      <th>Hari</th>
-                                                      <th>Public Speaking</th>
-                                                      <th>Writing</th>
-                                                      <th>Business</th>
-                                                      <th>status</th>
-                                                      <th></th>
-                                                   </tr>
-                                                </thead>
-                                                <tbody>
-                                                   @foreach ($daily_quest as $data)
-                                                   <tr>
-                                                      <td>{{ $data->day }}</td>
-                                                      <td>
-                                                         @if(($data->video_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->video_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->writing_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->writing_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->business_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->business_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->status)== 0)
-                                                         <p class="text-danger">belum diperiksa</p>
-                                                         @endif @if(($data->status)== 1)
-                                                         <p class="text-success">sudah diperiksa</p>
-                                                         @endif
-                                                      </td>
-                                                      <td class="project-actions text-right">
-                                                         <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest', [$user->Biodata->user_id,Crypt::encrypt($data->id),])}}" target="_blank">
-                                                         <i class="fas fa-folder"> </i>
-                                                         Detail
-                                                         </a>
-                                                      </td>
-                                                   </tr>
-                                                   @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                   <tr>
-                                                      <th>Hari</th>
-                                                      <th>Public Speaking</th>
-                                                      <th>Writing</th>
-                                                      <th>Business</th>
-                                                      <th>status</th>
-                                                      <th></th>
-                                                   </tr>
-                                                </tfoot>
-                                             </table>
-                                          </div>
-                                          <!-- /.card-body -->
+                                          <!-- /.card -->
                                        </div>
-                                       <!-- /.card -->
-                                    </div>
                                     </div>
                                  </div>
                                  <!-- /.row -->
-                              
                                  <!-- /.tab-pane -->
                               </div>
                               <!-- /.tab-content -->

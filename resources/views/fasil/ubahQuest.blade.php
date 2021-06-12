@@ -438,29 +438,44 @@
                                  <tr>
                                     <td>{{ $user->day }}</td>
                                     <td>
-                                       @if(($user->video_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->video_check)== 1)
-                                       <a href="{{ $user->video }}" target="_blank">clear</a>
-                                       <br>
-                                       <p class="text-success">topik : {{ $user->topik_video }}</p>
-                                       @endif
+                                    @if(($user->video)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                <a type="text" href="{{$user->video}}" target="_blank">link video</a>
+                                                   @if(($user->video_check)== 0)
+                                                      <p class="text-danger">dalam pemeriksaan</p>
+                                                   @endif 
+                                                   @if(($user->video_check)== 1)
+                                                   <p class="text-success">Quest Done</p>
+                                                   <p class="text-success">topik : {{ $user->topik_video }}</p>
+                                                   @endif
+                                          @endif
                                     </td>
                                     <td>
-                                       @if(($user->writing_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->writing_check)== 1)
-                                       <a href="{{ $user->writing }}" target="_blank">clear</a>
-                                       <br>
-                                       <p class="text-success">topik : {{ $user->topik_writing }}</p>
-                                       @endif
+                                    @if(($user->writing)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                   <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                                   @if(($user->writing_check)== 0)
+                                                      <p class="text-danger">sedang diperiksa</p>
+                                                   @endif 
+                                                   @if(($user->writing_check)== 1)
+                                                   <p class="text-success">Quest Clear</p>
+                                                   <p class="text-success">topik : {{ $user->topik_writing }}</p>
+                                                   @endif
+                                                @endif
                                     </td>
                                     <td>
-                                       @if(($user->business_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->business_check)== 1)
-                                       <p class="text-success">clear</p>
-                                       @endif
+                                    @if(($user->business)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                   @if(($user->business_check)== 0)
+                                                      <p class="text-danger">lagi diperiksa</p>
+                                                   @endif 
+                                                   @if(($user->business_check)== 1)
+                                                   <p class="text-success">Quest Complete</p>
+                                                   @endif
+                                                @endif
                                     </td>
                                     <td>
                                        @if(($user->status)== 0)
