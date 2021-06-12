@@ -279,7 +279,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/Peserta/daily-quest/business/{id}', 'AdminController@business_quest')->name('admin.business.quest');
+	Route::get('/Peserta/daily-quest/business/{id}/{level}', 'AdminController@business_quest')->name('admin.business.quest');
 	});
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

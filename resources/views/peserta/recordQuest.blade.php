@@ -228,7 +228,7 @@
                                        <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
                                     </div>
                                     <span class="progress-description">
-                                    {{$rate_hasil}}% until {{$quest}} days
+                                    {{$rate_hasil}}% from Rp 2.000.000
                                     </span>
                                  </div>
                                  <!-- /.info-box-content -->
@@ -262,50 +262,63 @@
                                           <tr>
                                              <td>{{ $user->day }}</td>
                                              <td>
-                                                @if(($user->video)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                <a type="text" href="{{$user->video}}" target="_blank">link video</a>
-                                                   @if(($user->video_check)== 0)
-                                                      <p class="text-danger">dalam pemeriksaan</p>
-                                                   @endif 
-                                                   @if(($user->video_check)== 1)
-                                                   <p class="text-success">done</p>
+                                             @if(($user->video)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{$user->video}}" target="_blank">link video</a>
+                                                            @if(($user->video_check)== 0)
+                                                            <p class="text-danger">dalam pemeriksaan</p>
+                                                            @endif 
+                                                            @if(($user->video_check)== 1)
+                                                            <p class="text-primary"><b>Quest Done</b></p>
+                                                   
                                                    @endif
-                                                @endif
+                                                   @if(($user->video_check)== 2)
+                                                   <p class="text-danger"><b>Quest Fail</b></p>
+                                                   
+                                                            @endif
+                                                            @endif
                                              </td>
                                              <td>
-                                                @if(($user->writing)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                   <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
-                                                   @if(($user->writing_check)== 0)
-                                                      <p class="text-danger">sedang diperiksa</p>
-                                                   @endif 
-                                                   @if(($user->writing_check)== 1)
-                                                   <p class="text-success">done</p>
+                                             @if(($user->writing)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                                            @if(($user->writing_check)== 0)
+                                                            <p class="text-danger">sedang diperiksa</p>
+                                                            @endif 
+                                                            @if(($user->writing_check)== 1)
+                                                            <p class="text-primary"><b>Quest Clear</b></p>
+                                                   
                                                    @endif
-                                                @endif
+                                                   @if(($user->writing_check)== 2)
+                                                   <p class="text-danger"><b>Quest Gagal</b></p>
+                                                   
+                                                            @endif
+                                                            @endif
                                              </td>
                                              <td>
-                                                @if(($user->business)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                   @if(($user->business_check)== 0)
-                                                      <p class="text-danger">lagi diperiksa</p>
-                                                   @endif 
-                                                   @if(($user->business_check)== 1)
-                                                   <p class="text-success">done</p>
+                                             @if(($user->business)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            @if(($user->business_check)== 0)
+                                                            <p class="text-danger">lagi diperiksa</p>
+                                                            @endif 
+                                                            @if(($user->business_check)== 1)
+                                                            <p class="text-success"><b>Quest Complete</b></p>
                                                    @endif
-                                                @endif
+                                                   @if(($user->business_check)== 2)
+                                                   <p class="text-danger"><b>Quest Kandas</b></p>
+                                                            @endif
+                                                            @endif
                                              </td>
                                              <td>
-                                                @if(($user->status)== 0)
-                                                <p class="text-danger">Belum Valid</p>
-                                                @endif 
-                                                @if(($user->status)== 1)
-                                                <p class="text-success">Valid</p>
-                                                @endif
+                                             @if(($user->status)== 0)
+                                                            <p class="text-danger"><b>BELUM VALID</b></p>
+                                       @endif @if(($user->status)== 1)
+                                       <p class="text-success"><b>VALID</b></p>
+                                                            @endif
+                                                         </td>
                                              </td>
                                              <td class="project-actions text-right">
                                                 <a class="btn btn-primary btn-sm" href="{{ route('peserta.detail.quest', Crypt::encrypt($user->id)) }}" target="_blank">

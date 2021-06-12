@@ -109,13 +109,19 @@ class PesertaController extends Controller
         $jumlah=count($record);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $v = $record[$i]['video_check'];
-            $video_challenge = $video_challenge + $v;
+            if($v==1){
+                $video_challenge = $video_challenge + $v;
+            }
             $w = $record[$i]['writing_check'];
-            $writing_challenge = $writing_challenge + $w;
+            if($w==1){
+                $writing_challenge = $writing_challenge + $w;
+            }
             $b = $record[$i]['business_check'];
-            $business_challenge = $business_challenge + $b;
-            $h = $record[$i]['hasil'];
-            $hasil_business = $hasil_business + $h;
+            if($b==1){
+                $business_challenge = $business_challenge + $b;
+                $h = $record[$i]['hasil'];
+                $hasil_business = $hasil_business + $h;
+            }
 
           }
         $rate_video = ($video_challenge / $quest) *100;

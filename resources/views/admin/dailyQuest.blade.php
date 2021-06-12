@@ -289,10 +289,15 @@
                                        @if(($quest->video_check)== 0)
                                        <a type="text" href="{{$quest->video}}" target="_blank">check</a>
                                        <p class="text-danger">belum diperiksa</p>
-                                       @else
+                                       @endif
+                                       @if(($quest->video_check)== 1)
                                        <a type="text" href="{{$quest->video}}" target="_blank">check</a>
                                        <p class="text-success">sudah diperiksa</p>
-                                       @endif   
+                                       @endif
+                                       @if(($quest->video_check)== 2)
+                                       <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                       <p class="text-danger">sudah diperiksa</p>
+                                       @endif     
                                        @endif
                                     </td>
                                     <td>
@@ -302,10 +307,15 @@
                                        @if(($quest->writing_check)== 0)
                                        <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
                                        <p class="text-danger">belum diperiksa</p>
-                                       @else
+                                       @endif
+                                       @if(($quest->writing_check)== 1)
                                        <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
                                        <p class="text-success">sudah diperiksa</p>
-                                       @endif 
+                                       @endif
+                                       @if(($quest->writing_check)== 2)
+                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
+                                       <p class="text-danger">sudah diperiksa</p>
+                                       @endif    
                                        @endif
                                     </td>
                                     <td>
@@ -315,9 +325,14 @@
                                        @if(($quest->business_check)== 0)
                                        <a class="text-primary">Mengerjakan</a>
                                        <p class="text-danger">belum diperiksa</p>
-                                       @else
+                                       @endif
+                                       @if(($quest->business_check)== 1)
                                        <a class="text-primary">Mengerjakan</a>  
                                        <p class="text-success">sudah diperiksa</p>
+                                       @endif 
+                                       @if(($quest->business_check)== 2)
+                                       <a class="text-primary">Mengerjakan</a>  
+                                       <p class="text-danger">sudah diperiksa</p>
                                        @endif 
                                        @endif
                                     </td>

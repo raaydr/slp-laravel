@@ -182,17 +182,21 @@
                         <div class="form-group row">
                            <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Link Video Challenge') }}</label>
                            <div class="col-md-2 col-form-label text-md-left">
-                              @if(($data->video)== 'belum mengerjakan')
-                              <p class="text-danger">belum mengerjakan</p>
-                              @else 
-                              <a type="text" href="{{$data->video}}" target="_blank">check</a>
-                              @endif
-                           </div>
-                           <div class="col-md-4 col-form-label text-md-left">
-                           @if(($data->video_check)== 1)
+                           @if(($data->video)== 'belum mengerjakan')
+                                 <p class="text-danger">belum mengerjakan</p>
+                                 @else 
+                                 <a type="text" href="{{$data->video}}" target="_blank">check</a>
+                                 @endif
+                              </div>
+                              <div class="col-md-4 col-form-label text-md-left">
+                              @if(($data->video_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
-                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-target="#modal-video" target="_blank">
+                              @endif
+                              @if(($data->video_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->video_check)== 0) 
+                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Link Video
                                                     </button>
@@ -202,17 +206,21 @@
                         <div class="form-group row">
                            <label for="writing" class="col-md-6 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
                            <div class="col-md-2 col-form-label text-md-left">
-                              @if(($data->writing)== 'belum mengerjakan')
-                              <p class="text-danger">belum mengerjakan</p>
-                              @else 
-                              <a type="text" href="{{ route('peserta.download.writing', Crypt::encrypt($data->id)) }}" target="_blank">check</a>
-                              @endif
-                           </div>
-                           <div class="col-md-4 col-form-label text-md-left">
-                           @if(($data->writing_check)== 1)
+                           @if(($data->writing)== 'belum mengerjakan')
+                                 <p class="text-danger">belum mengerjakan</p>
+                                 @else 
+                                 <a type="text" href="{{ route('peserta.download.writing', Crypt::encrypt($data->id)) }}" target="_blank">check</a>
+                                 @endif
+                              </div>
+                              <div class="col-md-4 col-form-label text-md-left">
+                              @if(($data->writing_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
-                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-target="#modal-writing" target="_blank">
+                              @endif
+                              @if(($data->writing_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->writing_check)== 0) 
+                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Writing
                                                     </button>
@@ -222,18 +230,21 @@
                         <div class="form-group row">
                            <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
                            <div class="col-md-2 col-form-label text-md-left">
-                              @if(($data->business)== 'belum mengerjakan')
-                              <p class="text-danger">belum mengerjakan</p>
-                              @else 
-                              <a type="text" href="{{asset('imgBusinessQuest')}}/{{$data->business}}" target="_blank">check</a>
-                              @endif
-                           </div>
-                           <div class="col-md-4 col-form-label text-md-left">
-                           @if(($data->business_check)== 1)
+                           @if(($data->business)== 'belum mengerjakan')
+                                 <p class="text-danger">belum mengerjakan</p>
+                                 @else 
+                                 <a type="text" href="{{asset('imgBusinessQuest')}}/{{$data->business}}" target="_blank">check</a>
+                                 @endif
+                              </div>
+                              <div class="col-md-4 col-form-label text-md-left">
+                              @if(($data->business_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
-                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business', Crypt::encrypt($data->id)) }}">
-                              
+                              @endif
+                              @if(($data->business_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->business_check)== 0) 
+                              <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business',Crypt::encrypt($data->id)) }}">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Business
                                                     </a>

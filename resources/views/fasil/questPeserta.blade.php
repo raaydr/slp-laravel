@@ -199,8 +199,10 @@
                                  @endif
                                  @if(($data->video_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
+                                 @elseif(($data->video_check)== 2)
                                  <span class="float-right badge bg-danger">X</span>
+                                 @elseif(($data->video_check)== 0)
+                                 <span class="float-right badge bg-warning"><i class="fas fa-info"></i></span>
                                  @endif    
                               </div>
                               @if(($data->status)== 0)
@@ -214,7 +216,7 @@
                                  @else 
                                  <div class="col-md-4 col-form-label text-md-left">
                                     <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
-                                    <i class="fas fa-info"> </i>
+                                    <i class="fas fa-info"></i>
                                     kesalahan
                                     </a>
                                  </div>
@@ -232,8 +234,10 @@
                                  @endif
                                  @if(($data->writing_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
+                                 @elseif(($data->writing_check)== 2)
                                  <span class="float-right badge bg-danger">X</span>
+                                 @elseif(($data->writing_check)== 0)
+                                 <span class="float-right badge bg-warning"><i class="fas fa-info"></i></span>
                                  @endif 
                               </div>
                               @if(($data->status)== 0)
@@ -264,8 +268,10 @@
                                  @endif
                                  @if(($data->business_check)== 1)
                                  <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
-                                 @else
+                                 @elseif(($data->business_check)== 2)
                                  <span class="float-right badge bg-danger">X</span>
+                                 @elseif(($data->business_check)== 0)
+                                 <span class="float-right badge bg-warning"><i class="fas fa-info"></i></span>
                                  @endif 
                               </div>
                            </div>
@@ -332,6 +338,19 @@
                                           </div>
                                        </div>
                                        <div class="form-group row">
+                            <label for="poin" class="col-md-5 col-form-label text-md-right">{{ __('status') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline1" name="poin" class="custom-control-input" value="1" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline1">Clear</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="poin" class="custom-control-input" value="2" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline2">Fail</label>
+                                </div>
+                            </div>
+                        </div>
+                                       <div class="form-group row">
                                           <label for="video" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
                                           <div class="col-md-7">
                                              <textarea id="video" type="text" class="form-control" name="video" value="{{ old('video') }}" required autofocus ></textarea>
@@ -391,6 +410,19 @@
                                              @endif
                                           </div>
                                        </div>
+                                       <div class="form-group row">
+                            <label for="poin" class="col-md-5 col-form-label text-md-right">{{ __('status') }}</label>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline mt-2">
+                                    <input type="radio" id="customRadioInline3" name="poin" class="custom-control-input" value="1" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline3">Clear</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline4" name="poin" class="custom-control-input" value="2" required autofocus />
+                                    <label class="custom-control-label" for="customRadioInline4">Fail</label>
+                                </div>
+                            </div>
+                        </div>
                                        <div class="form-group row">
                                           <label for="writing" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
                                           <div class="col-md-7">
@@ -461,8 +493,12 @@
                                                       <p class="text-danger">dalam pemeriksaan</p>
                                                    @endif 
                                                    @if(($user->video_check)== 1)
-                                                   <p class="text-success">Quest Done</p>
-                                                   <p class="text-success">topik : {{ $user->topik_video }}</p>
+                                                   <p class="text-primary"><b>Quest Done</b></p>
+                                                   <p class="text-success">note : {{ $user->topik_video }}</p>
+                                                   @endif
+                                                   @if(($user->video_check)== 2)
+                                                   <p class="text-danger"><b>Quest Fail</b></p>
+                                                   <p >note : {{ $user->topik_video }}</p>
                                                    @endif
                                           @endif
                                     </td>
@@ -475,8 +511,12 @@
                                                       <p class="text-danger">sedang diperiksa</p>
                                                    @endif 
                                                    @if(($user->writing_check)== 1)
-                                                   <p class="text-success">Quest Clear</p>
-                                                   <p class="text-success">topik : {{ $user->topik_writing }}</p>
+                                                   <p class="text-primary"><b>Quest Clear</b></p>
+                                                   <p class="text-success">note : {{ $user->topik_writing }}</p>
+                                                   @endif
+                                                   @if(($user->writing_check)== 2)
+                                                   <p class="text-danger"><b>Quest Gagal</b></p>
+                                                   <p >note : {{ $user->topik_writing }}</p>
                                                    @endif
                                                 @endif
                                     </td>
@@ -488,15 +528,18 @@
                                                       <p class="text-danger">lagi diperiksa</p>
                                                    @endif 
                                                    @if(($user->business_check)== 1)
-                                                   <p class="text-success">Quest Complete</p>
+                                                   <p class="text-success"><b>Quest Complete</b></p>
+                                                   @endif
+                                                   @if(($user->business_check)== 2)
+                                                   <p class="text-danger"><b>Quest Kandas</b></p>
                                                    @endif
                                                 @endif
                                     </td>
                                     <td>
                                        @if(($user->status)== 0)
-                                       <p class="text-danger">belum diperiksa</p>
+                                       <p class="text-danger"><b>BELUM VALID</b></p>
                                        @endif @if(($user->status)== 1)
-                                       <p class="text-success">sudah diperiksa</p>
+                                       <p class="text-success"><b>VALID</b></p>
                                        @endif
                                     </td>
                                     <td class="project-actions text-right">

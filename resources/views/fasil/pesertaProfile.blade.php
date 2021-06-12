@@ -324,12 +324,12 @@
                                              <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
                                              <div class="info-box-content">
                                                 <span class="info-box-text">Profit</span>
-                                                <span class="info-box-number">{{$hasil_business}} earn</span>
+                                                <span class="info-box-number"><hasil></hasil> earn</span>
                                                 <div class="progress">
                                                    <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
                                                 </div>
                                                 <span class="progress-description">
-                                                {{$rate_hasil}}% until {{$quest}} days
+                                                {{$rate_hasil}}% until Rp 2.000.000
                                                 </span>
                                              </div>
                                              <!-- /.info-box-content -->
@@ -371,8 +371,12 @@
                                                             <p class="text-danger">dalam pemeriksaan</p>
                                                             @endif 
                                                             @if(($data->video_check)== 1)
-                                                            <p class="text-success">Quest Done</p>
-                                                            <p class="text-success">topik : {{ $data->topik_video }}</p>
+                                                            <p class="text-primary"><b>Quest Done</b></p>
+                                                   <p class="text-success">note : {{ $data->topik_video }}</p>
+                                                   @endif
+                                                   @if(($data->video_check)== 2)
+                                                   <p class="text-danger"><b>Quest Fail</b></p>
+                                                   <p >note : {{ $data->topik_video }}</p>
                                                             @endif
                                                             @endif
                                                          </td>
@@ -385,8 +389,12 @@
                                                             <p class="text-danger">sedang diperiksa</p>
                                                             @endif 
                                                             @if(($data->writing_check)== 1)
-                                                            <p class="text-success">Quest Clear</p>
-                                                            <p class="text-success">topik : {{ $data->topik_writing }}</p>
+                                                            <p class="text-primary"><b>Quest Clear</b></p>
+                                                   <p class="text-success">note : {{ $data->topik_writing }}</p>
+                                                   @endif
+                                                   @if(($data->writing_check)== 2)
+                                                   <p class="text-danger"><b>Quest Gagal</b></p>
+                                                   <p >note : {{ $data->topik_writing }}</p>
                                                             @endif
                                                             @endif
                                                          </td>
@@ -398,15 +406,18 @@
                                                             <p class="text-danger">lagi diperiksa</p>
                                                             @endif 
                                                             @if(($data->business_check)== 1)
-                                                            <p class="text-success">Quest Complete</p>
+                                                            <p class="text-success"><b>Quest Complete</b></p>
+                                                   @endif
+                                                   @if(($data->business_check)== 2)
+                                                   <p class="text-danger"><b>Quest Kandas</b></p>
                                                             @endif
                                                             @endif
                                                          </td>
                                                          <td>
                                                             @if(($data->status)== 0)
-                                                            <p class="text-danger">belum diperiksa</p>
-                                                            @endif @if(($data->status)== 1)
-                                                            <p class="text-success">sudah diperiksa</p>
+                                                            <p class="text-danger"><b>BELUM VALID</b></p>
+                                       @endif @if(($data->status)== 1)
+                                       <p class="text-success"><b>VALID</b></p>
                                                             @endif
                                                          </td>
                                                          <td class="project-actions text-right">
@@ -492,7 +503,28 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes --> 
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
-      <script>        
+      <script>
+      function rupiah(){
+            var bilangan = {{$hasil_business}} ;
+            var	number_string = bilangan.toString(),
+            sisa 	= number_string.length % 3,
+            rupiah 	= number_string.substr(0, sisa),
+            ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+               
+         if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+         }
+         
+         // Cetak hasil
+         
+                     
+         
+         $("hasil").text("Rp "+rupiah)
+         
+         //the function body is the same as you have defined sue the textbox object to set the value
+         }
+         rupiah();        
          $(function () {
              $("#example1")
                  .DataTable({

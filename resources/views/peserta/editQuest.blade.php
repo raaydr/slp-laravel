@@ -287,7 +287,11 @@
                               <div class="col-md-4 col-form-label text-md-left">
                               @if(($data->video_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
+                              @endif
+                              @if(($data->video_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->video_check)== 0) 
                                  <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Link Video
@@ -310,7 +314,11 @@
                               <div class="col-md-4 col-form-label text-md-left">
                               @if(($data->writing_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
+                              @endif
+                              @if(($data->writing_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->writing_check)== 0) 
                               <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Writing
@@ -333,7 +341,11 @@
                               <div class="col-md-4 col-form-label text-md-left">
                               @if(($data->business_check)== 1)
                                  <p class="text-success">sudah diperiksa</p>
-                              @else 
+                              @endif
+                              @if(($data->business_check)== 2)
+                                 <p class="text-danger">sudah diperiksa</p>
+                              @endif
+                              @if(($data->business_check)== 0) 
                               <a class="btn btn-warning btn-sm" href="{{ route('peserta.quest.business',Crypt::encrypt($data->id)) }}">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Business

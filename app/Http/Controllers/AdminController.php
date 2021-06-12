@@ -127,13 +127,19 @@ class AdminController extends Controller
         $jumlah=count($record);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $v = $record[$i]['video_check'];
-            $video_challenge = $video_challenge + $v;
+            if($v==1){
+                $video_challenge = $video_challenge + $v;
+            }
             $w = $record[$i]['writing_check'];
-            $writing_challenge = $writing_challenge + $w;
+            if($w==1){
+                $writing_challenge = $writing_challenge + $w;
+            }
             $b = $record[$i]['business_check'];
-            $business_challenge = $business_challenge + $b;
-            $h = $record[$i]['hasil'];
-            $hasil_business = $hasil_business + $h;
+            if($b==1){
+                $business_challenge = $business_challenge + $b;
+                $h = $record[$i]['hasil'];
+                $hasil_business = $hasil_business + $h;
+            }
 
           }
         $rate_video = ($video_challenge / $quest) *100;
@@ -1277,7 +1283,7 @@ class AdminController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_writing' => Input::get('writing'),
-                    'writing_check' => 1,
+                    'writing_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
         
@@ -1310,7 +1316,7 @@ class AdminController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_video' => Input::get('video'),
-                    'video_check' => 1,
+                    'video_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
         
@@ -1352,15 +1358,6 @@ class AdminController extends Controller
             return Redirect::back()->with('pesan','Operation Successful !');
     }
     public function batal_quest($id,$quest){
-        if ($quest == 0){
-                    
-            
-            
-             
-        }else if($quest == 1){
-             
-            
-        }
         switch ($quest) {
             case '0':
                 Quest::where('id', $id)
@@ -1419,8 +1416,10 @@ class AdminController extends Controller
         }
     }
 
-    public function business_quest($id){
-        Quest::where('id', $id)
+    public function business_quest($id,$level){
+        switch ($level) {
+            case '1':
+                Quest::where('id', $id)
                 ->update([
                     
                     'business_check' => 1,
@@ -1430,6 +1429,22 @@ class AdminController extends Controller
 
         
                 return Redirect::back()->with('pesan','Operation Successful !');
+                break;   
+            case '2':
+                Quest::where('id', $id)
+                ->update([
+                    'business_check' => 2,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+                return Redirect::back()->with('pesan','Operation Successful !');        
+                break;
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
     }
     public function download_writing($quest_id) {
         
