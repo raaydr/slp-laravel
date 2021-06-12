@@ -186,13 +186,27 @@
                         </ul>
                      </li>
                      <li class="nav-item">
-                        <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
+                        <a href="../widgets.html" class="nav-link ">
                            <i class="nav-icon far fa-plus-square"></i>
                            <p>
                               Controller
                               <i class="fas fa-angle-left right"></i>
                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a href="{{ route('admin.coba') }}" class="nav-link ">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Control</p>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a href="{{ route('admin.controller.create') }}" class="nav-link ">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Create-control</p>
+                              </a>
+                           </li>
+                        </ul>
                      </li>
                   </ul>
                </nav>
@@ -265,7 +279,6 @@
                                  <?php $i = 0; ?>
                                  @foreach ($daily_quest as $quest)
                                  <?php $i++ ;?>
-                                 
                                  <tr>
                                     <th scope="row">{{ $i }}</th>
                                     <td>{{ $quest->nama }}</td>
@@ -273,46 +286,39 @@
                                        @if(($quest->video)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                          @if(($quest->video_check)== 0)
-                                             
-                                             <a type="text" href="{{$quest->video}}" target="_blank">check</a>
-                                             <p class="text-danger">belum diperiksa</p>
-                                          @else
-                                             
-                                             <a type="text" href="{{$quest->video}}" target="_blank">check</a>
-                                             <p class="text-success">sudah diperiksa</p>
-                                          @endif   
+                                       @if(($quest->video_check)== 0)
+                                       <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                       <p class="text-danger">belum diperiksa</p>
+                                       @else
+                                       <a type="text" href="{{$quest->video}}" target="_blank">check</a>
+                                       <p class="text-success">sudah diperiksa</p>
+                                       @endif   
                                        @endif
                                     </td>
                                     <td>
                                        @if(($quest->writing)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                          @if(($quest->writing_check)== 0)
-                                             
-                                          <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
-                                             <p class="text-danger">belum diperiksa</p>
-                                          @else
-                                             
-                                          <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
-                                             <p class="text-success">sudah diperiksa</p>
-                                          @endif 
-                                       
+                                       @if(($quest->writing_check)== 0)
+                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
+                                       <p class="text-danger">belum diperiksa</p>
+                                       @else
+                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
+                                       <p class="text-success">sudah diperiksa</p>
+                                       @endif 
                                        @endif
                                     </td>
                                     <td>
                                        @if(($quest->business)== 'belum mengerjakan')
                                        <p class="text-danger">belum mengerjakan</p>
                                        @else 
-                                          @if(($quest->business_check)== 0)
-                                             
-                                             <a class="text-primary">Mengerjakan</a>
-                                             <p class="text-danger">belum diperiksa</p>
-                                          @else
-                                             
-                                             <a class="text-primary">Mengerjakan</a>  
-                                             <p class="text-success">sudah diperiksa</p>
-                                          @endif 
+                                       @if(($quest->business_check)== 0)
+                                       <a class="text-primary">Mengerjakan</a>
+                                       <p class="text-danger">belum diperiksa</p>
+                                       @else
+                                       <a class="text-primary">Mengerjakan</a>  
+                                       <p class="text-success">sudah diperiksa</p>
+                                       @endif 
                                        @endif
                                     </td>
                                     <td> 
@@ -327,30 +333,30 @@
                                        @endif
                                     </td>
                                     <td>
-                                        @if(empty($quest->grup))
+                                       @if(empty($quest->grup))
                                        <p class="text-danger">Kosong</p>
                                        @endif 
                                        @if(!empty($quest->grup)) 
-                                            @if(($quest->grup)== 1)
-                                            <p class="text-primary"><b>Kel-1</b></p>
-                                            @endif 
-                                            @if(($quest->grup)== 2)
-                                            <p class="text-success"><b>Kel-2</b></p>
-                                            @endif 
-                                            @if(($quest->grup)== 3)
-                                            <p class="text-warning"><b>Kel-3</b></p>
-                                            @endif 
-                                        @endif
+                                       @if(($quest->grup)== 1)
+                                       <p class="text-primary"><b>Kel-1</b></p>
+                                       @endif 
+                                       @if(($quest->grup)== 2)
+                                       <p class="text-success"><b>Kel-2</b></p>
+                                       @endif 
+                                       @if(($quest->grup)== 3)
+                                       <p class="text-warning"><b>Kel-3</b></p>
+                                       @endif 
+                                       @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm m-2" href="{{ route('admin.detail.quest',[$quest->user_id,$quest->id])}}"  >
-                                                        <i class="fas fa-folder"> </i>
-                                                        Quest
-                                                    </a>
-                                                    <a class="btn bg-orange btn-sm m-2" href="{{ route('admin.userprofile', $quest->user_id) }}" >
-                                                        <i class="fas ion-person"> </i>
-                                                        Profil
-                                                    </a>
+                                       <a class="btn btn-primary btn-sm m-2" href="{{ route('admin.detail.quest',[$quest->user_id,$quest->id])}}"  >
+                                       <i class="fas fa-folder"> </i>
+                                       Quest
+                                       </a>
+                                       <a class="btn bg-orange btn-sm m-2" href="{{ route('admin.userprofile', $quest->user_id) }}" >
+                                       <i class="fas ion-person"> </i>
+                                       Profil
+                                       </a>
                                     </td>
                                  </tr>
                                  @endforeach
@@ -375,7 +381,6 @@
                      <!-- /.card -->
                   </div>
                   <!-- /.col -->
-                 
                </div>
                <!-- /.row -->
             </section>

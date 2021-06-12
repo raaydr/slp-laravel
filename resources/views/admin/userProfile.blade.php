@@ -186,13 +186,27 @@
                         </ul>
                      </li>
                      <li class="nav-item">
-                        <a href="{{ route('admin.coba') }}" admin.coba class="nav-link">
+                        <a href="../widgets.html" class="nav-link ">
                            <i class="nav-icon far fa-plus-square"></i>
                            <p>
                               Controller
                               <i class="fas fa-angle-left right"></i>
                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a href="{{ route('admin.coba') }}" class="nav-link ">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Control</p>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a href="{{ route('admin.controller.create') }}" class="nav-link ">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Create-control</p>
+                              </a>
+                           </li>
+                        </ul>
                      </li>
                   </ul>
                </nav>
@@ -1315,7 +1329,9 @@
                                              <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
                                              <div class="info-box-content">
                                                 <span class="info-box-text">Profit</span>
-                                                <span class="info-box-number"><earn></earn></span>
+                                                <span class="info-box-number">
+                                                   <earn></earn>
+                                                </span>
                                                 <div class="progress">
                                                    <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
                                                 </div>
@@ -1330,87 +1346,85 @@
                                        <!-- /.col -->
                                     </div>
                                     <!-- /.row -->
-                              
-                                 <div class="row">
-                                    <div class="col-12">
-                                       <div class="card">
-                                          <div class="card-header">
-                                             <h3 class="card-title">List Daily Quest</h3>
+                                    <div class="row">
+                                       <div class="col-12">
+                                          <div class="card">
+                                             <div class="card-header">
+                                                <h3 class="card-title">List Daily Quest</h3>
+                                             </div>
+                                             <!-- /.card-header -->
+                                             <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped table-responsive">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      @foreach ($daily_quest as $data)
+                                                      <tr>
+                                                         <td>{{ $data->day }}</td>
+                                                         <td>
+                                                            @if(($data->video_check)== 0)
+                                                            <p class="text-danger">failed</p>
+                                                            @endif @if(($data->video_check)== 1)
+                                                            <p class="text-success">clear</p>
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->writing_check)== 0)
+                                                            <p class="text-danger">failed</p>
+                                                            @endif @if(($data->writing_check)== 1)
+                                                            <p class="text-success">clear</p>
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->business_check)== 0)
+                                                            <p class="text-danger">failed</p>
+                                                            @endif @if(($data->business_check)== 1)
+                                                            <p class="text-success">clear</p>
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->status)== 0)
+                                                            <p class="text-danger">belum diperiksa</p>
+                                                            @endif @if(($data->status)== 1)
+                                                            <p class="text-success">sudah diperiksa</p>
+                                                            @endif
+                                                         </td>
+                                                         <td class="project-actions text-right">
+                                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest', [$user->id,$data->id])}}" target="_blank">
+                                                            <i class="fas fa-folder"> </i>
+                                                            Detail
+                                                            </a>
+                                                         </td>
+                                                      </tr>
+                                                      @endforeach
+                                                   </tbody>
+                                                   <tfoot>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </tfoot>
+                                                </table>
+                                             </div>
+                                             <!-- /.card-body -->
                                           </div>
-                                          <!-- /.card-header -->
-                                          <div class="card-body">
-                                             <table id="example1" class="table table-bordered table-striped table-responsive">
-                                                <thead>
-                                                   <tr>
-                                                      <th>Hari</th>
-                                                      <th>Public Speaking</th>
-                                                      <th>Writing</th>
-                                                      <th>Business</th>
-                                                      <th>status</th>
-                                                      <th></th>
-                                                   </tr>
-                                                </thead>
-                                                <tbody>
-                                                   @foreach ($daily_quest as $data)
-                                                   <tr>
-                                                      <td>{{ $data->day }}</td>
-                                                      <td>
-                                                         @if(($data->video_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->video_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->writing_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->writing_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->business_check)== 0)
-                                                         <p class="text-danger">failed</p>
-                                                         @endif @if(($data->business_check)== 1)
-                                                         <p class="text-success">clear</p>
-                                                         @endif
-                                                      </td>
-                                                      <td>
-                                                         @if(($data->status)== 0)
-                                                         <p class="text-danger">belum diperiksa</p>
-                                                         @endif @if(($data->status)== 1)
-                                                         <p class="text-success">sudah diperiksa</p>
-                                                         @endif
-                                                      </td>
-                                                      <td class="project-actions text-right">
-                                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest', [$user->id,$data->id])}}" target="_blank">
-                                                         <i class="fas fa-folder"> </i>
-                                                         Detail
-                                                         </a>
-                                                      </td>
-                                                   </tr>
-                                                   @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                   <tr>
-                                                      <th>Hari</th>
-                                                      <th>Public Speaking</th>
-                                                      <th>Writing</th>
-                                                      <th>Business</th>
-                                                      <th>status</th>
-                                                      <th></th>
-                                                   </tr>
-                                                </tfoot>
-                                             </table>
-                                          </div>
-                                          <!-- /.card-body -->
+                                          <!-- /.card -->
                                        </div>
-                                       <!-- /.card -->
-                                    </div>
                                     </div>
                                  </div>
                                  <!-- /.row -->
-                              
                                  <!-- /.tab-pane -->
                                  @endif
                               </div>
@@ -1467,7 +1481,7 @@
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
          function rupiah(){
-        var bilangan = {{$user->Penilaian->penjualan}} ;
+         var bilangan = {{$user->Penilaian->penjualan}} ;
          var	number_string = bilangan.toString(),
          sisa 	= number_string.length % 3,
          rupiah 	= number_string.substr(0, sisa),
@@ -1487,7 +1501,7 @@
          //the function body is the same as you have defined sue the textbox object to set the value
          }
          function earn(){
-        var bilangan = {{$hasil_business}} ;
+         var bilangan = {{$hasil_business}} ;
          var	number_string = bilangan.toString(),
          sisa 	= number_string.length % 3,
          rupiah 	= number_string.substr(0, sisa),

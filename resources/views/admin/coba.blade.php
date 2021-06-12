@@ -461,15 +461,14 @@
                         </div>
                      </div>
                      <!-- /.card -->
+                  </div>
+               
                </div>
-               <!-- /.col (right) -->
+            
+            <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
          </div>
-      </div>
-      <!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-      
-      </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
          <div class="float-right d-none d-sm-block"></div>
