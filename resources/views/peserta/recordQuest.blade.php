@@ -291,7 +291,6 @@
                                                 @if(($user->business)== 'belum mengerjakan')
                                                    <a class="text-danger" type="text" >kosong</a>
                                                 @else    
-                                                <a type="text" href="{{$user->business}}" target="_blank">link video</a>
                                                    @if(($user->business_check)== 0)
                                                       <p class="text-danger">lagi diperiksa</p>
                                                    @endif 

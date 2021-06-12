@@ -374,31 +374,24 @@ class FasilController extends Controller
         return view('fasil.grup', compact('title', 'user','fasil','peserta'));
     }
 
-    public function detailQuest($uid,$quest_id){
+    public function detailQuest($uid,$id){
+        $quest_id = Crypt::decrypt($id);
         $title = 'Detail Quest Peserta';
         $user_id = Auth::user()->id;
-        $id = Crypt::decrypt($quest_id);
+        
         
         $user = User::where('id', $user_id)
             ->first();
         $quest = DB::table('control')
             ->where('id', 2)
             ->value('integer');
-        if ((Quest::where('id', $id)->where('status', 1)->exists())){
-            $data = Quest::where('id', $uid)->first();
+        
+            $data = Quest::where('id', $quest_id)->first();
             $peserta = DB::table('peserta')
             ->where('user_id', $uid)
             ->value('nama');
             $daily_quest = Quest::where('user_id', $uid)->get();
             return view('fasil.detailQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
-        }else{
-            $data = Quest::where('id', $id)->first();
-            $peserta = DB::table('peserta')
-            ->where('user_id', $uid)
-            ->value('nama');
-            $daily_quest = Quest::where('user_id', $uid)->get();
-            return view('fasil.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
-        }
        
         
     }

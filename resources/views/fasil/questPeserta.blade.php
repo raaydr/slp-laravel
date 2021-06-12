@@ -203,20 +203,22 @@
                                  <span class="float-right badge bg-danger">X</span>
                                  @endif    
                               </div>
-                              @if(($data->video_check)== 0)
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-video"target="_blank">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                              </div>
-                              @else 
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
-                                 <i class="fas fa-info"> </i>
-                                 kesalahan
-                                 </a>
-                              </div>
+                              @if(($data->status)== 0)
+                                 @if(($data->video_check)== 0)
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-video"target="_blank">
+                                    <i class="fas fa-check"> </i>
+                                    checked
+                                    </button>
+                                 </div>
+                                 @else 
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,0]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    kesalahan
+                                    </a>
+                                 </div>
+                                 @endif
                               @endif
                            </div>
                            <div class="form-group row">
@@ -234,20 +236,22 @@
                                  <span class="float-right badge bg-danger">X</span>
                                  @endif 
                               </div>
-                              @if(($data->writing_check)== 0)
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-writing"target="_blank">
-                                 <i class="fas fa-check"> </i>
-                                 checked
-                                 </button>
-                              </div>
-                              @else 
-                              <div class="col-md-4 col-form-label text-md-left">
-                                 <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
-                                 <i class="fas fa-info"> </i>
-                                 kesalahan
-                                 </a>
-                              </div>
+                              @if(($data->status)== 0)
+                                 @if(($data->writing_check)== 0)
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta->nama}}" data-target="#modal-writing"target="_blank">
+                                    <i class="fas fa-check"> </i>
+                                    checked
+                                    </button>
+                                 </div>
+                                 @else 
+                                 <div class="col-md-4 col-form-label text-md-left">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('fasil.batal.quest', [$data->id,1]) }}">
+                                    <i class="fas fa-info"> </i>
+                                    kesalahan
+                                    </a>
+                                 </div>
+                                 @endif
                               @endif
                            </div>
                            <div class="form-group row">
@@ -448,29 +452,45 @@
                                  <tr>
                                     <td>{{ $user->day }}</td>
                                     <td>
-                                       @if(($user->video_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->video_check)== 1)
-                                       <a href="{{ $user->video }}" target="_blank">clear</a>
-                                       <br>
-                                       <p class="text-success">topik : {{ $user->topik_video }}</p>
-                                       @endif
+                                    
+                                       @if(($user->video)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                <a type="text" href="{{$user->video}}" target="_blank">link video</a>
+                                                   @if(($user->video_check)== 0)
+                                                      <p class="text-danger">dalam pemeriksaan</p>
+                                                   @endif 
+                                                   @if(($user->video_check)== 1)
+                                                   <p class="text-success">Quest Done</p>
+                                                   <p class="text-success">topik : {{ $user->topik_video }}</p>
+                                                   @endif
+                                          @endif
                                     </td>
                                     <td>
-                                       @if(($user->writing_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->writing_check)== 1)
-                                       <a href="{{ $user->writing }}" target="_blank">clear</a>
-                                       <br>
-                                       <p class="text-success">topik : {{ $user->topik_writing }}</p>
-                                       @endif
+                                    @if(($user->writing)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                   <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                                   @if(($user->writing_check)== 0)
+                                                      <p class="text-danger">sedang diperiksa</p>
+                                                   @endif 
+                                                   @if(($user->writing_check)== 1)
+                                                   <p class="text-success">Quest Clear</p>
+                                                   <p class="text-success">topik : {{ $user->topik_writing }}</p>
+                                                   @endif
+                                                @endif
                                     </td>
                                     <td>
-                                       @if(($user->business_check)== 0)
-                                       <p class="text-danger">failed</p>
-                                       @endif @if(($user->business_check)== 1)
-                                       <p class="text-success">clear</p>
-                                       @endif
+                                    @if(($user->business)== 'belum mengerjakan')
+                                                   <a class="text-danger" type="text" >kosong</a>
+                                                @else    
+                                                   @if(($user->business_check)== 0)
+                                                      <p class="text-danger">lagi diperiksa</p>
+                                                   @endif 
+                                                   @if(($user->business_check)== 1)
+                                                   <p class="text-success">Quest Complete</p>
+                                                   @endif
+                                                @endif
                                     </td>
                                     <td>
                                        @if(($user->status)== 0)
@@ -480,12 +500,12 @@
                                        @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                       @if(($user->status)== 0)
+                                       
                                        <a class="btn btn-primary btn-sm" href="{{ route('fasil.detail.quest',[$peserta->user_id,Crypt::encrypt($user->id)])}}"  target="_blank">
                                        <i class="fas fa-folder"> </i>
                                        Detail
                                        </a>
-                                       @endif
+                                       
                                     </td>
                                  </tr>
                                  @endforeach
