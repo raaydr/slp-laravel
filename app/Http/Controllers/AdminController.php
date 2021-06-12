@@ -1367,6 +1367,7 @@ class AdminController extends Controller
                 ->update([
                     
                     'video_check' => 0,
+                    'status' => 0,
                     'updated_at' => now(),
                 ]);
         
@@ -1379,6 +1380,7 @@ class AdminController extends Controller
                 ->update([
                     
                     'writing_check' => 0,
+                    'status' => 0,
                     'updated_at' => now(),
                 ]);
         
@@ -1391,6 +1393,7 @@ class AdminController extends Controller
                 ->update([
                     
                     'business_check' => 0,
+                    'status' => 0,
                     'updated_at' => now(),
                 ]);
         
