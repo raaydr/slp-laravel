@@ -343,9 +343,13 @@
                                         @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest',[$quest->user_id,$quest->id])}}"  target="_blank">
+                                    <a class="btn btn-primary btn-sm m-2" href="{{ route('admin.detail.quest',[$quest->user_id,$quest->id])}}"  >
                                                         <i class="fas fa-folder"> </i>
                                                         Quest
+                                                    </a>
+                                                    <a class="btn bg-orange btn-sm m-2" href="{{ route('admin.userprofile', $quest->user_id) }}" >
+                                                        <i class="fas ion-person"> </i>
+                                                        Profil
                                                     </a>
                                     </td>
                                  </tr>

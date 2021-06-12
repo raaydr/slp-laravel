@@ -115,10 +115,36 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         $user = User::where('id', $user_id)->first();
+        $quest = DB::table('control')
+            ->where('id', 2)
+            ->value('integer');
+        $video_challenge = 0;
+        $writing_challenge = 0;
+        $business_challenge = 0;
+        $hasil_business = 0;
+        $record = Quest::where('user_id', $user_id)->where('status', 1)->get();
+        $daily_quest = Quest::where('user_id', $user_id)->get();
+        $jumlah=count($record);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $v = $record[$i]['video_check'];
+            $video_challenge = $video_challenge + $v;
+            $w = $record[$i]['writing_check'];
+            $writing_challenge = $writing_challenge + $w;
+            $b = $record[$i]['business_check'];
+            $business_challenge = $business_challenge + $b;
+            $h = $record[$i]['hasil'];
+            $hasil_business = $hasil_business + $h;
+
+          }
+        $rate_video = ($video_challenge / $quest) *100;
+        $rate_writing = ($writing_challenge / $quest) *100;
+        $rate_business = ($business_challenge / $quest) *100;
+        $rate_hasil = ($hasil_business / 2000000) *100;
         
         
 
-        return view('admin.userProfile', compact('title', 'user'));
+        return view('admin.userProfile', compact('title', 'user','daily_quest','quest','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
+        'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
     }
     public function challenge(){
         $title = 'Admin Seleksi Challenge';

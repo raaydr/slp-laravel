@@ -55,7 +55,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/dashboard/userProfile/{user_id}', 'AdminController@userProfile')->name('admin.userprofile');
+	Route::get('/userProfile/{user_id}', 'AdminController@userProfile')->name('admin.userprofile');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
