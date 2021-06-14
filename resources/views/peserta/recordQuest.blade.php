@@ -174,7 +174,7 @@
                                        <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
                                     </div>
                                     <span class="progress-description">
-                                    {{$rate_writing}}% until {{$quest}} days
+                                    {{$rate_writing}}% in {{$quest}} days
                                     </span>
                                  </div>
                                  <!-- /.info-box-content -->
@@ -192,7 +192,7 @@
                                        <div class="progress-bar" style="width: {{$rate_business}}%"></div>
                                     </div>
                                     <span class="progress-description">
-                                    {{$rate_business}}% until {{$quest}} days
+                                    {{$rate_business}}% in {{$quest}} days
                                     </span>
                                  </div>
                                  <!-- /.info-box-content -->
@@ -210,7 +210,7 @@
                                        <div class="progress-bar" style="width: {{$rate_video}}%"></div>
                                     </div>
                                     <span class="progress-description">
-                                    {{$rate_video}}% until {{$quest}} days
+                                    {{$rate_video}}% in {{$quest}} days
                                     </span>
                                  </div>
                                  <!-- /.info-box-content -->
@@ -267,10 +267,10 @@
                                                             @else    
                                                             <a type="text" href="{{$user->video}}" target="_blank">link video</a>
                                                             @if(($user->video_check)== 0)
-                                                            <p class="text-danger">dalam pemeriksaan</p>
+                                                            <p class="text-orange">dalam pemeriksaan</p>
                                                             @endif 
                                                             @if(($user->video_check)== 1)
-                                                            <p class="text-primary"><b>Quest Done</b></p>
+                                                            <p class="text-success"><b>Quest Done</b></p>
                                                    
                                                    @endif
                                                    @if(($user->video_check)== 2)
@@ -285,10 +285,10 @@
                                                             @else    
                                                             <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
                                                             @if(($user->writing_check)== 0)
-                                                            <p class="text-danger">sedang diperiksa</p>
+                                                            <p class="text-orange">sedang diperiksa</p>
                                                             @endif 
                                                             @if(($user->writing_check)== 1)
-                                                            <p class="text-primary"><b>Quest Clear</b></p>
+                                                            <p class="text-success"><b>Quest Clear</b></p>
                                                    
                                                    @endif
                                                    @if(($user->writing_check)== 2)
@@ -302,7 +302,7 @@
                                                             <a class="text-danger" type="text" >kosong</a>
                                                             @else    
                                                             @if(($user->business_check)== 0)
-                                                            <p class="text-danger">lagi diperiksa</p>
+                                                            <p class="text-orange">lagi diperiksa</p>
                                                             @endif 
                                                             @if(($user->business_check)== 1)
                                                             <p class="text-success"><b>Quest Complete</b></p>

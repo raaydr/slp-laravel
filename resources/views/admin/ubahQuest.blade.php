@@ -494,20 +494,20 @@
                                  <tr>
                                     <td>{{ $user->day }}</td>
                                     <td>
-                                    @if(($user->writing)== 'belum mengerjakan')
+                                    @if(($user->video)== 'belum mengerjakan')
                                                    <a class="text-danger" type="text" >kosong</a>
                                                 @else    
-                                                   <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
-                                                   @if(($user->writing_check)== 0)
+                                                <a type="text" href="{{$user->video}}" target="_blank">Periksa</a>
+                                                   @if(($user->video_check)== 0)
                                                       <p class="text-danger">sedang diperiksa</p>
                                                    @endif 
-                                                   @if(($user->writing_check)== 1)
-                                                   <p class="text-primary"><b>Quest Clear</b></p>
-                                                   <p class="text-success">note : {{ $user->topik_writing }}</p>
+                                                   @if(($user->video_check)== 1)
+                                                   <p class="text-primary"><b>Quest Done</b></p>
+                                                   <p class="text-success">note : {{ $user->video_writing }}</p>
                                                    @endif
-                                                   @if(($user->writing_check)== 2)
+                                                   @if(($user->video_check)== 2)
                                                    <p class="text-danger"><b>Quest Gagal</b></p>
-                                                   <p >note : {{ $user->topik_writing }}</p>
+                                                   <p >note : {{ $user->video_writing }}</p>
                                                    @endif
                                                 @endif
                                     </td>

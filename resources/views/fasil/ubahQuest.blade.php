@@ -475,7 +475,7 @@
                                                 @else    
                                                 <a type="text" href="{{$user->video}}" target="_blank">link video</a>
                                                    @if(($user->video_check)== 0)
-                                                      <p class="text-danger">dalam pemeriksaan</p>
+                                                      <p class="text-orange">dalam pemeriksaan</p>
                                                    @endif 
                                                    @if(($user->video_check)== 1)
                                                    <p class="text-primary"><b>Quest Done</b></p>
@@ -493,7 +493,7 @@
                                                 @else    
                                                    <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
                                                    @if(($user->writing_check)== 0)
-                                                      <p class="text-danger">sedang diperiksa</p>
+                                                      <p class="text-orange">sedang diperiksa</p>
                                                    @endif 
                                                    @if(($user->writing_check)== 1)
                                                    <p class="text-primary"><b>Quest Clear</b></p>
@@ -510,7 +510,7 @@
                                                    <a class="text-danger" type="text" >kosong</a>
                                                 @else    
                                                    @if(($user->business_check)== 0)
-                                                      <p class="text-danger">lagi diperiksa</p>
+                                                      <p class="text-orange">lagi diperiksa</p>
                                                    @endif 
                                                    @if(($user->business_check)== 1)
                                                    <p class="text-success"><b>Quest Complete</b></p>

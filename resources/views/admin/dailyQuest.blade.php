@@ -284,11 +284,11 @@
                                     <td>{{ $quest->nama }}</td>
                                     <td>
                                        @if(($quest->video)== 'belum mengerjakan')
-                                       <p class="text-danger">belum mengerjakan</p>
+                                       <p class="text-purple">belum mengerjakan</p>
                                        @else 
                                        @if(($quest->video_check)== 0)
                                        <a type="text" href="{{$quest->video}}" target="_blank">check</a>
-                                       <p class="text-danger">belum diperiksa</p>
+                                       <p class="text-orange">belum diperiksa</p>
                                        @endif
                                        @if(($quest->video_check)== 1)
                                        <a type="text" href="{{$quest->video}}" target="_blank">check</a>
@@ -302,11 +302,11 @@
                                     </td>
                                     <td>
                                        @if(($quest->writing)== 'belum mengerjakan')
-                                       <p class="text-danger">belum mengerjakan</p>
+                                       <p class="text-purple">belum mengerjakan</p>
                                        @else 
                                        @if(($quest->writing_check)== 0)
                                        <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
-                                       <p class="text-danger">belum diperiksa</p>
+                                       <p class="text-orange">belum diperiksa</p>
                                        @endif
                                        @if(($quest->writing_check)== 1)
                                        <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($quest->id)) }}" >clear</a>
@@ -320,11 +320,11 @@
                                     </td>
                                     <td>
                                        @if(($quest->business)== 'belum mengerjakan')
-                                       <p class="text-danger">belum mengerjakan</p>
+                                       <p class="text-purple">belum mengerjakan</p>
                                        @else 
                                        @if(($quest->business_check)== 0)
                                        <a class="text-primary">Mengerjakan</a>
-                                       <p class="text-danger">belum diperiksa</p>
+                                       <p class="text-orange">belum diperiksa</p>
                                        @endif
                                        @if(($quest->business_check)== 1)
                                        <a class="text-primary">Mengerjakan</a>  

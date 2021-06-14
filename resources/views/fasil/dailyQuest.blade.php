@@ -190,41 +190,41 @@
                                     <div class="card-footer p-0">
                                        <ul class="nav flex-column">
                                           <li class="nav-item">
-                                             @if (($user->writing_check) == 1)
-                                             <a  class="nav-link">
-                                             Writing                       
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->writing_check) == 0)                     
+                                             @if (($user->writing_check) == 0)
                                              <a  class="nav-link">
                                              Writing                       
                                              <span class="float-right badge bg-danger">Belum Diperiksa</span>
                                              </a>
+                                             @else                 
+                                             <a  class="nav-link">
+                                             Writing                       
+                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
+                                             </a>
                                              @endif
                                           </li>
                                           <li class="nav-item">
-                                             @if (($user->video_check) == 1)
+                                             @if (($user->video_check) == 0)
                                              <a  class="nav-link">
                                              Public Speaking                      
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
+                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
                                              </a>
-                                             @elseif (($user->video_check) == 0)                     
+                                             @else
                                              <a  class="nav-link">
                                              Public Speaking                       
-                                             <span class="float-right badge bg-danger">Belum Diperiksa</span>
+                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
                                              </a>
                                              @endif
                                           </li>
                                           <li class="nav-item">
-                                             @if (($user->business_check) == 1)
-                                             <a  class="nav-link">
-                                             Business                       
-                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
-                                             </a>
-                                             @elseif (($user->business_check) == 0)                     
+                                             @if (($user->business_check) == 0)
                                              <a  class="nav-link">
                                              Business                       
                                              <span class="float-right badge bg-danger">Belum Diperiksa</span>
+                                             </a>
+                                             @else                   
+                                             <a  class="nav-link">
+                                             Business                       
+                                             <span class="float-right badge bg-success">Sudah Diperiksa</span>
                                              </a>
                                              @endif
                                           </li>
