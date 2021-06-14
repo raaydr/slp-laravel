@@ -229,10 +229,12 @@ class FasilController extends Controller
             $request->all(),
             [
                 'video' => 'required|string|max:255',
+                'video_komentar' => 'required',
             ],
 
             $messages = [
                 'video.required' => 'tidak boleh kosong!',
+                'video_komentar.required' => 'tidak boleh kosong!',
                
             ]
         );
@@ -247,6 +249,7 @@ class FasilController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_video' => Input::get('video'),
+                    'komentar_video' => Input::get('video_komentar'),
                     'video_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
@@ -261,10 +264,12 @@ class FasilController extends Controller
             $request->all(),
             [
                 'writing' => 'required|string|max:255',
+                'writing_komentar' => 'required',
             ],
 
             $messages = [
                 'writing.required' => 'tidak boleh kosong!',
+                'writing_komentar.required' => 'tidak boleh kosong!',
                
             ]
         );
@@ -280,6 +285,7 @@ class FasilController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_writing' => Input::get('writing'),
+                    'komentar_writing' => Input::get('writing_komentar'),
                     'writing_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
@@ -322,6 +328,38 @@ class FasilController extends Controller
                 echo "SLP INDONESIA";
                 break;
         }
+    }
+    public function note_quest(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'note' => 'required',
+            ],
+
+            $messages = [
+                'note.required' => 'tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        
+        $id=Input::get('id');
+        Quest::where('id', $id)
+                ->update([
+                    'note' => Input::get('note'),
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
     }
     public function pesertaProfil($user_id)
     {

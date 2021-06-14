@@ -304,6 +304,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/daily-quest/valid/{quest}', 'AdminController@status_quest')->name('admin.status.quest');
     });
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::post('/daily-quest/note', 'AdminController@note_quest')->name('admin.note.quest');
+
+	});
+});
 
 
 // ROUTES PENDAFTAR
@@ -519,6 +525,12 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::post('/daily-quest/writing', 'FasilController@writing_quest')->name('fasil.writing.quest');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::post('/daily-quest/note', 'FasilController@note_quest')->name('fasil.note.quest');
 
 	});
 });

@@ -374,7 +374,7 @@
                                        </button>
                                     </td>
                                     <td class="project-actions text-right">
-                                       <a class="btn btn-primary btn-sm" href="\admin\dashboard\userProfile\{{$user->Biodata->user_id}}">
+                                       <a class="btn btn-primary btn-sm"  href="{{ route('admin.userprofile', $user->Biodata->user_id) }}">
                                        <i class="fas fa-folder"> </i>
                                        Detail
                                        </a>

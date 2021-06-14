@@ -384,6 +384,21 @@
                               </div>
                            </div>
                            <div class="form-group row">
+                              <label for="note" class="col-md-6 col-form-label text-md-right">{{ __('Note untuk Peserta') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                              <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid="{{$data->id}}" data-myname="{{$peserta}}" data-target="#modal-note"target="_blank">
+                                 <i class="fas fa-info"> </i>
+                                 edit
+                                 </button>
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label for="notePeserta" class="col-md-6 col-form-label text-md-right">{{ __('Note Peserta') }}</label>
+                              <div class="col-md-6 col-form-label ">
+                              <a type="text" >{{$data->note}}</a>
+                              </div>
+                           </div>
+                           <div class="form-group row">
                               <label for="status" class="col-md-6 col-form-label text-md-right"></label>
                               <div class="col-md-6 col-form-label text-md-left">
                                  @if(((($data->writing_check)!=0)&&(($data->video_check)!=0)&&(($data->business_check)!=0)==1)&&($data->status)==0)
@@ -409,7 +424,7 @@
                            <div class="modal-dialog">
                               <div class="modal-content bg-primary">
                                  <div class="modal-header">
-                                    <h4 class="modal-title">Periksa Business Challenge</h4>
+                                    <h4 class="modal-title">Edit Writing Challenge</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -440,15 +455,15 @@
                                           </div>
                                        </div>
                                        <div class="form-group row">
-                                          <label for="note" class="col-md-5 col-form-label text-md-right">{{ __('Note') }}</label>
+                                          <label for="note" class="col-md-5 col-form-label text-md-right">{{ __('note') }}</label>
                                           <div class="col-md-7">
                                              <textarea id="note" type="text" class="form-control" name="note" value="{{ old('note') }}" required autofocus ></textarea>
                                              <small id="passwordHelpBlock" class="form-text text-sucess">
-                                                ada note untuk peserta ?
+                                             catatan untuk peserta
                                              </small>
-                                             @if ($errors->has('video'))
+                                             @if ($errors->has('writing'))
                                              <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $errors->first('video') }}</strong>
+                                             <strong>{{ $errors->first('writing') }}</strong>
                                              </span>
                                              @endif
                                           </div>
@@ -495,54 +510,58 @@
                                     <td>{{ $user->day }}</td>
                                     <td>
                                     @if(($user->video)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                <a type="text" href="{{$user->video}}" target="_blank">Periksa</a>
-                                                   @if(($user->video_check)== 0)
-                                                      <p class="text-danger">sedang diperiksa</p>
-                                                   @endif 
-                                                   @if(($user->video_check)== 1)
-                                                   <p class="text-primary"><b>Quest Done</b></p>
-                                                   <p class="text-success">note : {{ $user->video_writing }}</p>
-                                                   @endif
-                                                   @if(($user->video_check)== 2)
-                                                   <p class="text-danger"><b>Quest Gagal</b></p>
-                                                   <p >note : {{ $user->video_writing }}</p>
-                                                   @endif
-                                                @endif
+                                       <a class="text-danger" type="text" >kosong</a>
+                                       @else    
+                                       <a type="text" href="{{$user->video}}" target="_blank">link video</a>
+                                       @if(($user->video_check)== 0)
+                                       <p class="text-orange">dalam pemeriksaan</p>
+                                       @endif 
+                                       @if(($user->video_check)== 1)
+                                       <p class="text-primary"><b>Quest Done</b></p>
+                                       <p >topik : {{ $user->topik_video }}</p>
+                                       <p >note : {{ $user->komentar_video }}</p>
+                                       @endif
+                                       @if(($user->video_check)== 2)
+                                       <p class="text-danger"><b>Quest Fail</b></p>
+                                       <p >topik : {{ $user->topik_video }}</p>
+                                       <p >note : {{ $user->komentar_video }}</p>
+                                       @endif
+                                       @endif
                                     </td>
                                     <td>
                                     @if(($user->writing)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                   <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
-                                                   @if(($user->writing_check)== 0)
-                                                      <p class="text-danger">sedang diperiksa</p>
-                                                   @endif 
-                                                   @if(($user->writing_check)== 1)
-                                                   <p class="text-primary"><b>Quest Clear</b></p>
-                                                   <p class="text-success">note : {{ $user->topik_writing }}</p>
-                                                   @endif
-                                                   @if(($user->writing_check)== 2)
-                                                   <p class="text-danger"><b>Quest Gagal</b></p>
-                                                   <p >note : {{ $user->topik_writing }}</p>
-                                                   @endif
-                                                @endif
+                                       <a class="text-danger" type="text" >kosong</a>
+                                       @else    
+                                       <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                       @if(($user->writing_check)== 0)
+                                       <p class="text-orange">sedang diperiksa</p>
+                                       @endif 
+                                       @if(($user->writing_check)== 1)
+                                       <p class="text-primary"><b>Quest Clear</b></p>
+                                       <p >topik : {{ $user->topik_writing }}</p>
+                                       <p >note : {{ $user->komentar_writing }}</p>
+                                       @endif
+                                       @if(($user->writing_check)== 2)
+                                       <p class="text-danger"><b>Quest Gagal</b></p>
+                                       <p >topik : {{ $user->topik_writing }}</p>
+                                       <p >note : {{ $user->komentar_writing }}</p>
+                                       @endif
+                                       @endif
                                     </td>
                                     <td>
                                     @if(($user->business)== 'belum mengerjakan')
-                                                   <a class="text-danger" type="text" >kosong</a>
-                                                @else    
-                                                   @if(($user->business_check)== 0)
-                                                      <p class="text-danger">lagi diperiksa</p>
-                                                   @endif 
-                                                   @if(($user->business_check)== 1)
-                                                   <p class="text-success"><b>Quest Complete</b></p>
-                                                   @endif
-                                                   @if(($user->business_check)== 2)
-                                                   <p class="text-danger"><b>Quest Kandas</b></p>
-                                                   @endif
-                                                @endif
+                                       <a class="text-danger" type="text" >kosong</a>
+                                       @else    
+                                       @if(($user->business_check)== 0)
+                                       <p class="text-orange">lagi diperiksa</p>
+                                       @endif 
+                                       @if(($user->business_check)== 1)
+                                       <p class="text-success"><b>Quest Complete</b></p>
+                                       @endif
+                                       @if(($user->business_check)== 2)
+                                       <p class="text-danger"><b>Quest Kandas</b></p>
+                                       @endif
+                                       @endif
                                     </td>
                                     <td>
                                     @if(($user->status)== 0)
@@ -636,6 +655,17 @@
                                              @endif
                                           </div>
                                        </div>
+                                       <div class="form-group row">
+                                       <label for="video_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
+                                       <div class="col-md-7">
+                                          <textarea id="video_komentar" type="text" class="form-control" name="video_komentar" value="{{ old('video_komentar') }}" required autofocus ></textarea>
+                                          @if ($errors->has('video_komentar'))
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $errors->first('video_komentar') }}</strong>
+                                          </span>
+                                          @endif
+                                       </div>
+                                    </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -709,6 +739,17 @@
                                              @endif
                                           </div>
                                        </div>
+                                       <div class="form-group row">
+                                       <label for="writing_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
+                                       <div class="col-md-7">
+                                          <textarea id="writing_komentar" type="text" class="form-control" name="writing_komentar" value="{{ old('writing_komentar') }}" required autofocus ></textarea>
+                                          @if ($errors->has('writing_komentar'))
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $errors->first('writing_komentar') }}</strong>
+                                          </span>
+                                          @endif
+                                       </div>
+                                    </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -866,6 +907,19 @@
              modal.find('.modal-body #id').val(id)
              modal.find('.modal-body #nama').val(nama)
          });
+         $('#modal-note').on('show.bs.modal', function (event) {
+                
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var id = button.data('myid')
+                var nama = button.data('myname')
+              
+                var modal = $(this)
+                
+                modal.find('.modal-body #id').val(id)
+                modal.find('.modal-body #nama').val(nama)
+         
+               
+            });
          $(function () {
              // Summernote
              $('#summernote').summernote()

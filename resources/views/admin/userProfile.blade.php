@@ -1370,61 +1370,65 @@
                                                       <tr>
                                                          <td>{{ $data->day }}</td>
                                                          <td>
-                                                         @if(($data->video)== 'belum mengerjakan')
+                                                            @if(($data->video)== 'belum mengerjakan')
                                                             <a class="text-danger" type="text" >kosong</a>
                                                             @else    
                                                             <a type="text" href="{{$data->video}}" target="_blank">link video</a>
                                                             @if(($data->video_check)== 0)
-                                                            <p class="text-danger">dalam pemeriksaan</p>
+                                                            <p class="text-orange">dalam pemeriksaan</p>
                                                             @endif 
                                                             @if(($data->video_check)== 1)
                                                             <p class="text-primary"><b>Quest Done</b></p>
-                                                   <p class="text-success">note : {{ $data->topik_video }}</p>
-                                                   @endif
-                                                   @if(($data->video_check)== 2)
-                                                   <p class="text-danger"><b>Quest Fail</b></p>
-                                                   <p >note : {{ $data->topik_video }}</p>
+                                                            <p >topik : {{ $data->topik_video }}</p>
+                                                            <p >note : {{ $data->komentar_video }}</p>
+                                                            @endif
+                                                            @if(($data->video_check)== 2)
+                                                            <p class="text-danger"><b>Quest Fail</b></p>
+                                                            <p >topik : {{ $data->topik_video }}</p>
+                                                            <p >note : {{ $data->komentar_video }}</p>
                                                             @endif
                                                             @endif
                                                          </td>
                                                          <td>
-                                                         @if(($data->writing)== 'belum mengerjakan')
+                                                            @if(($data->writing)== 'belum mengerjakan')
                                                             <a class="text-danger" type="text" >kosong</a>
                                                             @else    
-                                                            <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                                            <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($data->id)) }}" >file</a>
                                                             @if(($data->writing_check)== 0)
-                                                            <p class="text-danger">sedang diperiksa</p>
+                                                            <p class="text-orange">sedang diperiksa</p>
                                                             @endif 
                                                             @if(($data->writing_check)== 1)
                                                             <p class="text-primary"><b>Quest Clear</b></p>
-                                                   <p class="text-success">note : {{ $data->topik_writing }}</p>
-                                                   @endif
-                                                   @if(($data->writing_check)== 2)
-                                                   <p class="text-danger"><b>Quest Gagal</b></p>
-                                                   <p >note : {{ $data->topik_writing }}</p>
+                                                            <p >topik : {{ $data->topik_writing }}</p>
+                                                            <p >note : {{ $data->komentar_writing }}</p>
+                                                            @endif
+                                                            @if(($data->writing_check)== 2)
+                                                            <p class="text-danger"><b>Quest Gagal</b></p>
+                                                            <p >topik : {{ $data->topik_writing }}</p>
+                                                            <p >note : {{ $data->komentar_writing }}</p>
                                                             @endif
                                                             @endif
                                                          </td>
                                                          <td>
-                                                         @if(($data->business)== 'belum mengerjakan')
+                                                            @if(($data->business)== 'belum mengerjakan')
                                                             <a class="text-danger" type="text" >kosong</a>
                                                             @else    
                                                             @if(($data->business_check)== 0)
-                                                            <p class="text-danger">lagi diperiksa</p>
+                                                            <p class="text-orange">lagi diperiksa</p>
                                                             @endif 
                                                             @if(($data->business_check)== 1)
                                                             <p class="text-success"><b>Quest Complete</b></p>
-                                                   @endif
-                                                   @if(($data->business_check)== 2)
-                                                   <p class="text-danger"><b>Quest Kandas</b></p>
+                                                            @endif
+                                                            @if(($data->business_check)== 2)
+                                                            <p class="text-danger"><b>Quest Kandas</b></p>
                                                             @endif
                                                             @endif
                                                          </td>
                                                          <td>
-                                                         @if(($data->status)== 0)
+                                                            @if(($data->status)== 0)
                                                             <p class="text-danger"><b>BELUM VALID</b></p>
-                                       @endif @if(($data->status)== 1)
-                                       <p class="text-success"><b>VALID</b></p>
+                                                            @endif @if(($data->status)== 1)
+                                                            <p class="text-success"><b>VALID</b></p>
                                                             @endif
                                                          </td>
                                                          <td class="project-actions text-right">

@@ -1264,10 +1264,12 @@ class AdminController extends Controller
             $request->all(),
             [
                 'writing' => 'required|string|max:255',
+                'writing_komentar' => 'required',
             ],
 
             $messages = [
                 'writing.required' => 'tidak boleh kosong!',
+                'writing_komentar.required' => 'tidak boleh kosong!',
                
             ]
         );
@@ -1283,6 +1285,7 @@ class AdminController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_writing' => Input::get('writing'),
+                    'komentar_writing' => Input::get('writing_komentar'),
                     'writing_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
@@ -1298,10 +1301,12 @@ class AdminController extends Controller
             $request->all(),
             [
                 'video' => 'required|string|max:255',
+                'video_komentar' => 'required',
             ],
 
             $messages = [
                 'video.required' => 'tidak boleh kosong!',
+                'video_komentar.required' => 'tidak boleh kosong!',
                
             ]
         );
@@ -1316,6 +1321,7 @@ class AdminController extends Controller
         Quest::where('id', $id)
                 ->update([
                     'topik_video' => Input::get('video'),
+                    'komentar_video' => Input::get('video_komentar'),
                     'video_check' => Input::get('poin'),
                     'updated_at' => now(),
                 ]);
@@ -1325,12 +1331,12 @@ class AdminController extends Controller
             return Redirect::back()->with('pesan','Operation Successful !');
     }
 
-    public function note(Request $request)
+    public function note_quest(Request $request)
     {
         $validator = Validator::make(
             $request->all(),
             [
-                'note' => 'required|string|max:255',
+                'note' => 'required',
             ],
 
             $messages = [
@@ -1345,17 +1351,17 @@ class AdminController extends Controller
                 ->withInput();
         }
         
+        
         $id=Input::get('id');
         Quest::where('id', $id)
                 ->update([
-                    'topik_video' => Input::get('video'),
-                    'video_check' => 1,
+                    'note' => Input::get('note'),
                     'updated_at' => now(),
                 ]);
         
 
         
-            return Redirect::back()->with('pesan','Operation Successful !');
+        return Redirect::back()->with('pesan','Operation Successful !');
     }
     public function batal_quest($id,$quest){
         switch ($quest) {
