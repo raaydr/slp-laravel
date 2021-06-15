@@ -196,7 +196,7 @@
                                  <p class="text-danger">sudah diperiksa</p>
                               @endif
                               @if(($data->video_check)== 0) 
-                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-video" target="_blank">
+                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid ="{{$data->id}}" data-target="#modal-video" target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                         Ubah Link Video
                                                     </button>
@@ -220,7 +220,7 @@
                                  <p class="text-danger">sudah diperiksa</p>
                               @endif
                               @if(($data->writing_check)== 0) 
-                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-writing" target="_blank">
+                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid ="{{$data->id}}" data-target="#modal-writing"  target="_blank">
                                                         <i class="fas fa-info"> </i>
                                                          Upload Writing
                                                     </button>
