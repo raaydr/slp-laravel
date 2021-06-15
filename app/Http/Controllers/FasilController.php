@@ -418,11 +418,15 @@ class FasilController extends Controller
         $gen = DB::table('control')
             ->where('id', 4)
             ->value('integer');
-
+        if (Peserta::where('gen', $gen)->where('grup', $grup)->where('captain', 1)->exists()) {
+            $captain = 1;
+        }else{
+            $captain = 0;
+        }
         $fasil = Fasil::where('grup', $grup)->first();
         $peserta = Peserta::where('gen',$gen)->where('grup',$grup)->get();
         //dd($fasil);
-        return view('fasil.grup', compact('title', 'user','fasil','peserta'));
+        return view('fasil.grup', compact('title', 'user','fasil','peserta','captain'));
     }
 
     public function detailQuest($uid,$id){
@@ -443,6 +447,40 @@ class FasilController extends Controller
             ->value('nama');
             $daily_quest = Quest::where('user_id', $uid)->get();
             return view('fasil.ubahQuest', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+       
+        
+    }
+    public function pickCaptain($v,$user_id){
+        $id = Crypt::decrypt($user_id);
+        switch ($v) {
+            case '0':
+                Peserta::where('user_id', $id)
+                ->update([
+                    'captain' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
+                break;
+            case '1':
+                Peserta::where('user_id', $id)
+                ->update([
+                    'captain' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
+                break;   
+                 
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
        
         
     }

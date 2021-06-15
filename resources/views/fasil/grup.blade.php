@@ -139,6 +139,13 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="container-fluid">
+               @if(session('pesan'))
+                  <div class="alert alert-success alert-dismissable">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <h4><i class="icon fa fa-check"></i>Success</h4>
+                     {{session('pesan')}}.
+                  </div>
+                  @endif
                   <div class="row mb-2">
                      <div class="col-sm-6">
                         <h1>Pengumuman</h1>
@@ -173,24 +180,44 @@
                            </thead>
                            <tbody>
                               <?php $i = 0; ?>
-                              @foreach ($peserta as $user)
+                              @foreach ($peserta as $member)
                               <?php $i++ ;?>
                               <tr>
                                  <th scope="row">{{ $i }}</th>
-                                 <td>{{ $user->nama }}</td>
+                                 <td>{{ $member->nama }}
+                                 @if(($member->captain)== 1)
+                                 <span class="float-right badge bg-danger">C</span></td>
+                                 @endif
                                  <td>
-                                    @if(($user->aktif)== 0)
+                                    @if(($member->aktif)== 0)
                                     <p class="text-danger">non-aktif</p>
-                                    @endif @if(($user->aktif)== 1)
+                                    @endif @if(($member->aktif)== 1)
                                     <p class="text-success">aktif</p>
                                     @endif
                                  </td>
                                  <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('fasil.peserta.profil', Crypt::encrypt($user->user_id))}}" target="_blank">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('fasil.peserta.profil', Crypt::encrypt($member->user_id))}}" target="_blank">
                                     <i class="fas fa-folder"> </i>
                                     Detail
                                     </a>
+                                    @if(($member->aktif)== 1)
+                                       @if(($captain)== 0)
+                                    
+                                       <a class="btn bg-orange btn-sm" href="{{ route('fasil.grup.captain',[ 0,Crypt::encrypt($member->user_id)])}}">
+                                       <i class="fas ion-person"> </i>
+                                       Captain
+                                       </a>
+                                       @endif
+                                       @if(($member->captain)== 1)
+                                    
+                                       <a class="btn bg-olive btn-sm" href="{{ route('fasil.grup.captain',[ 1,Crypt::encrypt($member->user_id)])}}">
+                                       <i class="fas ion-person"> </i>
+                                       Ganti Captain
+                                       </a>
+                                       @endif         
+                                    @endif
                                  </td>
+                                 
                               </tr>
                               @endforeach
                            </tbody>

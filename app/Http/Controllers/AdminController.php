@@ -210,6 +210,7 @@ class AdminController extends Controller
         $title = 'Admin Peserta Pengelompokkan';
         
         $users = User::where('level', 4)->get();
+        
         $grup1 = Peserta::where('grup',1)->get();
         $grup2 = Peserta::where('grup',2)->get();
         $grup3 = Peserta::where('grup',3)->get();
@@ -1473,5 +1474,50 @@ class AdminController extends Controller
 
         
                 return Redirect::back()->with('pesan','Operation Successful !');
+    }
+
+    public function statusPeserta($v,$id){
+        
+        switch ($v) {
+            case '0':
+                User::where('id', $id)
+                ->update([
+                    'level' => 4,
+                    'updated_at' => now(),
+                ]);
+                Peserta::where('user_id', $id)
+                ->update([
+                    'aktif' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
+                break;
+            case '1':
+                User::where('id', $id)
+                ->update([
+                    'level' => 2,
+                    'updated_at' => now(),
+                ]);
+                Peserta::where('user_id', $id)
+                ->update([
+                    'aktif' => 0,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        return Redirect::back()->with('pesan','Operation Successful !');
+                break;   
+                 
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
+       
+        
     }
 }

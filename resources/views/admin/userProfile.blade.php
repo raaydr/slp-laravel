@@ -1344,6 +1344,15 @@
                                           <!-- /.info-box -->
                                        </div>
                                        <!-- /.col -->
+                                       @if(!empty($user->Peserta->aktif)==0)
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                       <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.peserta.status', [0,$user->Biodata->user_id]) }}">
+                                       <i class="fas ion-person"> </i>
+                                       Aktif
+                                       </a>
+                                       </div>
+                                       <!-- /.col -->
+                                       @endif
                                     </div>
                                     <!-- /.row -->
                                     <div class="row">

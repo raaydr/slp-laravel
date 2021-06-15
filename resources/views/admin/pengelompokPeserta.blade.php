@@ -272,7 +272,7 @@
                                     <th>Domisili</th>
                                     <th>Peminatan</th>
                                     <th>grup</th>
-                                    <th></th>
+                                    <th>status</th>
                                     <th></th>
                                  </tr>
                               </thead>
@@ -359,7 +359,8 @@
                                     <td>
                                        @if(empty($user->Peserta->grup))
                                        <p class="text-danger">Kosong</p>
-                                       @endif @if(!empty($user->Peserta->grup)) @if(($user->Peserta->grup)== 1)
+                                       @endif @if(!empty($user->Peserta->grup)) 
+                                       @if(($user->Peserta->grup)== 1)
                                        <p class="text-primary"><b>Kel-1</b></p>
                                        @endif @if(($user->Peserta->grup)== 2)
                                        <p class="text-success"><b>Kel-2</b></p>
@@ -367,17 +368,37 @@
                                        <p class="text-warning"><b>Kel-3</b></p>
                                        @endif @endif
                                     </td>
+                                    <td>
+                                    @if(!empty($user->Peserta->aktif)== 0)
+                                    <p class="text-danger">non-aktif</p>
+                                    @endif 
+                                    @if(!empty($user->Peserta->aktif)== 1)
+                                    <p class="text-success">aktif</p>
+                                    @endif
+                                    </td>
                                     <td class="project-actions text-right">
-                                       <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
+                                    <button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
                                        <i class="fas fa-info"> </i>
                                        grup
                                        </button>
-                                    </td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-primary btn-sm"  href="{{ route('admin.userprofile', $user->Biodata->user_id) }}">
+                                       <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.userprofile', $user->Biodata->user_id) }}">
                                        <i class="fas fa-folder"> </i>
                                        Detail
                                        </a>
+                                       @if(!empty($user->Peserta->aktif)== 0)
+                                    
+                                       <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.peserta.status', [0,$user->Biodata->user_id]) }}">
+                                       <i class="fas ion-person"> </i>
+                                       Aktif
+                                       </a>
+                                       @endif
+                                       @if(!empty($user->Peserta->aktif)== 1)
+                                    
+                                       <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.peserta.status', [1,$user->Biodata->user_id]) }}">
+                                       <i class="fas ion-person"> </i>
+                                       Gugur
+                                       </a>
+                                       @endif   
                                     </td>
                                  </tr>
                                  @endforeach
@@ -391,7 +412,7 @@
                                     <th>Domisili</th>
                                     <th>Peminatan</th>
                                     <th>grup</th>
-                                    <th></th>
+                                    <th>status</th>
                                     <th></th>
                                  </tr>
                               </tfoot>

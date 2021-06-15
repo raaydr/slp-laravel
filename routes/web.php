@@ -310,6 +310,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Peserta/status/{v}/{id}', 'AdminController@statusPeserta')->name('admin.peserta.status');
+
+	});
+});
 
 
 // ROUTES PENDAFTAR
@@ -566,6 +572,12 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::get('/download/writing//{id}', 'FasilController@download_writing')->name('fasil.download.writing');
+
+	});
+});
+Route::group(['middleware' => 'check-permission:fasil'], function () {
+    Route::group(['prefix' => 'fasil'], function () {
+	Route::get('/grup/pick-captain/{v}/{id}', 'FasilController@pickCaptain')->name('fasil.grup.captain');
 
 	});
 });

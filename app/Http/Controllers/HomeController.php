@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Penilaian;
+use App\Models\Peserta;
 use AdminController;
 use Auth;
 
@@ -46,23 +47,29 @@ class HomeController extends Controller
                 $pertama = DB::table('biodata')->where('user_id', $id)->value('seleksi_pertama');
                 $kedua = DB::table('biodata')->where('user_id', $id)->value('seleksi_kedua');
 
-                if(!empty($kedua)){
-
-                    return view('user.gugur3', compact('title', 'user', 'biodata'));
-                } else if (!empty($pertama)){
-                    $check = DB::table('penilaian_challenge')
-                        ->where('user_id', $id)
-                        ->value('total');
-                    if($check == 0){
-                        return view('user.gugur', compact('title', 'user', 'biodata'));
-                    }else{
-                        $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
-                        $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
-                        return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
-                    }
-                } else {
+                if (Peserta::where('user_id', $id)->exists()) {
                     return view('user.gugur', compact('title', 'user', 'biodata'));
+
+                }else{
+                    if(!empty($kedua)){
+
+                        return view('user.gugur3', compact('title', 'user', 'biodata'));
+                    } else if (!empty($pertama)){
+                        $check = DB::table('penilaian_challenge')
+                            ->where('user_id', $id)
+                            ->value('total');
+                        if($check == 0){
+                            return view('user.gugur', compact('title', 'user', 'biodata'));
+                        }else{
+                            $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
+                            $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
+                            return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
+                        }
+                    } else {
+                        return view('user.gugur', compact('title', 'user', 'biodata'));
+                    }
                 }
+                
                 
                 
                         
