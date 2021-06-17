@@ -283,6 +283,17 @@
                                     </div>
                                  </div>
                                  @endif
+                                 @if(!empty($user->Peserta->aktif)==0)
+                                 <div class="form-group row">
+                                    <label  class="col-md-12 col-form-label text-md-center">Peserta Kembali </label>
+                                    <div class="offset-sm-3 col-sm-10">
+                                    <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.peserta.status', [0,$user->Biodata->user_id]) }}">
+                                       <i class="fas ion-person"> </i>
+                                       Aktif
+                                       </a>
+                                    </div>
+                                 </div>
+                                 @endif
                                  <div class="modal fade" id="modal-danger3">
                                     <div class="modal-dialog">
                                        <div class="modal-content bg-danger">
@@ -372,7 +383,7 @@
                               @if(session('pesan'))
                               <div class="alert alert-warning alert-dismissable md-5">
                                  <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                 <h5><i class="icon fa fa-info"></i>Penilaian</h5>
+                                 <h5><i class="icon fa fa-info"></i>Berhasil</h5>
                                  {{session('pesan')}}.
                               </div>
                               @endif
@@ -1344,15 +1355,6 @@
                                           <!-- /.info-box -->
                                        </div>
                                        <!-- /.col -->
-                                       @if(!empty($user->Peserta->aktif)==0)
-                                       <div class="col-md-4 col-sm-8 col-12">
-                                       <a class="btn btn-primary btn-sm m-2"  href="{{ route('admin.peserta.status', [0,$user->Biodata->user_id]) }}">
-                                       <i class="fas ion-person"> </i>
-                                       Aktif
-                                       </a>
-                                       </div>
-                                       <!-- /.col -->
-                                       @endif
                                     </div>
                                     <!-- /.row -->
                                     <div class="row">
