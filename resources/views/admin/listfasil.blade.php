@@ -246,19 +246,19 @@
                            @if(session('berhasil'))
                            <div class="alert alert-success alert-dismissable md-5">
                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-check"></i>Tambah Grup</h5>
+                              <h5><i class="icon fa fa-check"></i>Fasil</h5>
                               {{session('berhasil')}}.
                            </div>
                            @endif @if(session('pesan'))
                            <div class="alert alert-warning alert-dismissable md-5">
                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-info"></i>Ubah Grup</h5>
+                              <h5><i class="icon fa fa-info"></i>Fasil</h5>
                               {{session('pesan')}}.
                            </div>
                            @endif @if(session('challenge'))
                            <div class="alert alert-danger alert-dismissable md-5">
                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-check"></i>Grup</h5>
+                              <h5><i class="icon fa fa-check"></i>Fasil</h5>
                               {{session('challenge')}}.
                            </div>
                            @endif
@@ -363,6 +363,22 @@
                                        @endif
                                     </td>
                                     <td class="project-actions text-right">
+                                    @if ((($user->Fasil->status)== 1)&&(($user->Fasil->grup)==0)==1)
+                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.fasil.aktivasi', [$user->id,0]) }}">
+                                       <i class="fas fa-exclamation"> </i>
+                                       non-aktif
+                                       </a>
+                                    @endif
+                                    @if ((($user->Fasil->status)== 0)&&(($user->Fasil->grup)==0)==1)
+                                    <a class="btn btn-success btn-sm" href="{{ route('admin.fasil.aktivasi', [$user->id,1]) }}">
+                                       <i class="fas fa-exclamation"> </i>
+                                       aktif
+                                       </a>
+                                    @endif
+                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.fasil.deletegrup', $user->id) }}">
+                                       <i class="fas fa-exclamation"> </i>
+                                       hapus
+                                       </a>
                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-myid="{{$user->Fasil->user_id}}" data-myname="{{$user->Fasil->nama}}" data-target="#modal-grup" target="_blank">
                                        <i class="fas fa-info"> </i>
                                        grup

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePeserta extends Migration
+class CreateTableFasilRecord extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTablePeserta extends Migration
      */
     public function up()
     {
-        Schema::create('peserta', function (Blueprint $table) {
+        Schema::create('fasil_record', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
             $table->boolean('status');
-            $table->boolean('captain');
-            $table->integer('grup')->nullable();
+            $table->boolean('valid');
+            $table->date('awal');
+            $table->date('akhir')->nullable();
+            $table->integer('grup');
             $table->integer('gen');
             
             $table->integer('user_id')->unsigned();   
@@ -34,6 +36,6 @@ class CreateTablePeserta extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peserta');
+        Schema::dropIfExists('fasil_record');
     }
 }

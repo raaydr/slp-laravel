@@ -10,6 +10,7 @@ use App\Models\Control;
 use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
+use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -1103,9 +1104,9 @@ class AdminController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
         $id =  Input::get('user_id');
 
         if (Peserta::where('gen', $gen)->where('user_id', $id)->exists()) {
@@ -1168,17 +1169,81 @@ class AdminController extends Controller
         return back()->withErrors($validator)->withInput();  
         }
         $id =  Input::get('user_id');
-
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
         
         DB::table('fasil')->where('user_id',$id)->update([
                 
                 'grup' => $request->grup,
                 'updated_at'=> now(),
         ]);
-        return redirect()->route('admin.list.fasil')->with('pesan', 'berhasil update');
+        if (FasilRecord::where('gen', $gen)->where('user_id', $id)->where('status', 1)->exists()) {
+            FasilRecord::where('user_id',$id)->update([
+                
+                'grup' => $request->grup,
+                'updated_at'=> now(),
+                
+            ]);
+            return Redirect::back()->with('pesan','Operation Successful !');
+        }else{
+
+            $record = new FasilRecord;
+        $record->nama = Input::get('nama');
+        $record->status =  1;
+        $record->valid = 0;
+        $record->gen = $gen;
+        $record->grup =  Input::get('grup');
+        $record->user_id = Input::get('user_id');
+        $record->awal = now();
+        $record->save();
+        return Redirect::back()->with('pesan','Operation Successful !');
+
+        }
+        
         
     }
+    public function delete_grupFasil($id){
+        $gen = DB::table('control')
+            ->where('id', 4)
+            ->value('integer');
+        Fasil::where('user_id',$id)->update([
+                
+            'grup' => NULL,
+            'updated_at'=> now(),
+        ]);
+        FasilRecord::where('gen', $gen)->where('user_id', $id)->where('status', 1)->update([
+                
+            'status' => 2,
+            'akhir'=> now(),
+            'updated_at'=> now(),
+        ]);
+        return Redirect::back()->with('challenge', 'berhasil menghapus');
+    }
+    public function aktivasi_fasil($id,$r){
+        switch ($r) {
+            case '0':
+            Fasil::where('user_id',$id)->update([
+                
+            'status' => 0,
+            'updated_at'=> now(),
+            ]);
+            return Redirect::back()->with('challenge','Operation Successful !');
+                break;
+            case '1':
+            Fasil::where('user_id',$id)->update([
+                
+            'status' => 1,
+            'updated_at'=> now(),
+            ]);
+            return Redirect::back()->with('berhasil','Operation Successful !');
+                break;   
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
 
+    }
     public function create_controller(Request $request)
     {
 

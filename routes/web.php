@@ -234,6 +234,16 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Fasil/delete-grup/{id}', 'AdminController@delete_grupFasil')->name('admin.fasil.deletegrup');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Fasil/aktivasi/{id}/{r}', 'AdminController@aktivasi_fasil')->name('admin.fasil.aktivasi');
+    });
+});
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
 	Route::get('/ubah-password', 'AdminController@ubah_password')->name('admin.ubah.password');
     });
 });
@@ -257,6 +267,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 	Route::get('/Peserta/delete-grup/{id}', 'AdminController@delete_grup')->name('admin.peserta.deletegrup');
     });
 });
+
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/Peserta/daily-quest', 'AdminController@daily_quest')->name('admin.daily.quest');

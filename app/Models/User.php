@@ -80,5 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Quest');
     }
+    public function fasilRecord()
+    {
+        return $this->hasMany('App\Models\FasilRecord');
+    }
 
 }
