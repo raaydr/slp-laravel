@@ -532,7 +532,7 @@
                                     @if(($user->writing)== 'belum mengerjakan')
                                        <a class="text-danger" type="text" >kosong</a>
                                        @else    
-                                       <a type="text" href="{{ route('fasil.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
+                                       <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($user->id)) }}" >file</a>
                                        @if(($user->writing_check)== 0)
                                        <p class="text-orange">sedang diperiksa</p>
                                        @endif 
