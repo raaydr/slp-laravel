@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use Redirect;
+use DataTables;
 
 class AdminController extends Controller
 {
@@ -94,13 +95,67 @@ class AdminController extends Controller
         return view('admin.antrian', compact('title', 'antrian'));
     }
 
-    public function seleksi1()
+    public function seleksi1(Request $request)
     {
         $title = 'Seleksi Pertama Admin';
-        $seleksiPertama = seleksiPertama::all();
+        $biodata = Biodata::all();
         $users = User::where('level', 2)->get();
+        $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->where('level', 2)->get();
+        if($request->ajax()){
 
-        return view('admin.seleksi1', compact('title', 'users'));
+            return datatables()->of($data)  ->addIndexColumn()
+                ->addIndexColumn()
+                ->addColumn('Seleksi Berkas', function($row){
+                    $ajaib = $row->seleksi_berkas;
+                    if (($ajaib)== 'LULUS'){
+                        
+                        return '<p class="text-success">LULUS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GAGAL</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Challenge', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'LOLOS'){
+                        
+                        return '<p class="text-success">LOLOS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GUGUR</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Interview', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'BERHASIL'){
+                        
+                        return '<p class="text-success">BERHASIL</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">TERELIMINASI</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.userprofile', $row->user_id);
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Seleksi Berkas','Seleksi Challenge','Seleksi Interview', 'action'])
+                ->make(true);
+        }
+
+        return view('admin.seleksi1');
     }
     public function seleksi2()
     {

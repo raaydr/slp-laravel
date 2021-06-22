@@ -246,48 +246,27 @@
                            <table id="example1" class="table table-bordered table-striped">
                               <thead>
                                  <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
+                                    
+                                    <th>Name</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Domisili</th>
                                     <th>Seleksi Berkas</th>
                                     <th>Seleksi Challenge</th>
                                     <th>Seleksi Interview</th>
-                                    <th></th>
+                                    <th>Action</th>
                                  </tr>
                               </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($users as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->Biodata->nama }}</td>
-                                    <td>{{ $user->Biodata->tanggal_lahir }}</td>
-                                    <td>{{ $user->Biodata->alamat_domisili }}</td>
-                                    <td>{{ $user->Biodata->seleksi_berkas }}</td>
-                                    <td>{{ $user->Biodata->seleksi_pertama }}</td>
-                                    <td>{{ $user->Biodata->seleksi_kedua }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->Biodata->user_id) }}">
-                                       <i class="fas fa-folder">
-                                       </i>
-                                       Detail
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
+                              
                               <tfoot>
                                  <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
+                                    
+                                    <th>Name</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Domisili</th>
                                     <th>Seleksi Berkas</th>
                                     <th>Seleksi Challenge</th>
                                     <th>Seleksi Interview</th>
-                                    <th></th>
+                                    <th>Action</th>
                                  </tr>
                               </tfoot>
                            </table>
@@ -339,6 +318,24 @@
          $(function () {
              $("#example1")
                  .DataTable({
+                     processing:true,
+                     serverSide:true,
+                     ajax : {
+                        url : "{{route('admin.eliminasi')}}",
+                        type : 'GET'
+                     },
+                     columns:[
+                        {data:'nama',name:'nama'},
+                        {data:'tanggal_lahir',name:'tanggal_lahir'},
+                        {data:'alamat_domisili',name:'alamat_domisili'},
+                        {data: 'Seleksi Berkas', name: 'Seleksi Berkas', orderable: true, searchable: true},
+                        {data: 'Seleksi Challenge', name: 'Seleksi Challenge', orderable: true, searchable: true},
+                        {data: 'Seleksi Interview', name: 'Seleksi Interview', orderable: true, searchable: true},
+                        {data: 'action', name: 'action', orderable: true, searchable: true},
+                        
+                        
+                     ],
+                     order:[[0,'asc']],
                      responsive: true,
                      lengthChange: false,
                      autoWidth: false,
