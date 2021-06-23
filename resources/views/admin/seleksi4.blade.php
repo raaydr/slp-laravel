@@ -17,6 +17,9 @@
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon">
+      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
    </head>
    <body class="hold-transition sidebar-mini">
       <!-- Site wrapper -->
@@ -240,53 +243,7 @@
                      <div class="card">
                         <div class="card-header">
                            <h3 class="card-title">List Pendaftar Tahap Challenge</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                           @if(session('berhasil'))
-                           <div class="alert alert-success alert-dismissable md-5">
-                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-check"></i>Penilaian</h5>
-                              {{session('berhasil')}}.
-                           </div>
-                           @endif
-                           @if(session('pesan'))
-                           <div class="alert alert-warning alert-dismissable md-5">
-                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-info"></i>Penilaian</h5>
-                              {{session('pesan')}}.
-                           </div>
-                           @endif
-                           @if(session('challenge'))
-                           <div class="alert alert-danger alert-dismissable md-5">
-                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <h5><i class="icon fa fa-check"></i>Penilaian </h5>
-                              {{session('challenge')}}.
-                           </div>
-                           @endif
-                           <table id="example1" class="table table-bordered table-striped">
-                              <thead>
-                                 <tr>
-                                    <th>Rank</th>
-                                    <th>nama</th>
-                                    <th>Writing</th>
-                                    <th>Video</th>
-                                    <th>Business</th>
-                                    <th>extra</th>
-                                    <th>Penjualan</th>
-                                    <th>total</th>
-                                    <th>Penilaian</th>
-                                    <th>Status</th>
-                                    <th>Challenge Writing</th>
-                                    <th>Challenge Video</th>
-                                    <th>Challenge Business</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($data as $check)
-                                 <?php $i++ ;?>
-                                 <div class="modal fade" id="modal-penilaian">
+                           <div class="modal fade" id="modal-penilaian">
                                     <div class="modal-dialog">
                                        <div class="modal-content bg-warning">
                                           <div class="modal-header">
@@ -295,8 +252,8 @@
                                              <span aria-hidden="true">&times;</span>
                                              </button>
                                           </div>
-                                          <form method="POST" action="{{route('admin.challenge.editpenilaian')}}" enctype="multipart/form-data" class="was-validated">
-                                             {{csrf_field()}}
+                                          <form id="form-penilaian-edit" name="form-penilaian-edit"  enctype="multipart/form-data" class="was-validated">
+                                          {{csrf_field()}}
                                              <div class="modal-body">
                                                 <div class="form-group row">
                                                    <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('id') }}</label>
@@ -305,17 +262,6 @@
                                                       @if ($errors->has('user_id'))
                                                       <span class="invalid-feedback" role="alert">
                                                       <strong>{{ $errors->first('user_id') }}</strong>
-                                                      </span>
-                                                      @endif
-                                                   </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                   <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('nama') }}</label>
-                                                   <div class="col-md-7">
-                                                      <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama"   readonly/>
-                                                      @if ($errors->has('nama'))
-                                                      <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $errors->first('nama') }}</strong>
                                                       </span>
                                                       @endif
                                                    </div>
@@ -399,7 +345,7 @@
                                              </div>
                                              <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-outline-light">Save</button>
+                                                <button type="submit" class="btn btn-outline-light" id="tombol-simpan"value="create">Simpan</button>
                                              </div>
                                           </form>
                                        </div>
@@ -407,83 +353,51 @@
                                     </div>
                                     <!-- /.modal-dialog -->
                                  </div>
-                                 <!-- /.modal -->        
+                                 <!-- /.modal -->
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                           @if(session('berhasil'))
+                           <div class="alert alert-success alert-dismissable md-5">
+                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                              <h5><i class="icon fa fa-check"></i>Penilaian</h5>
+                              {{session('berhasil')}}.
+                           </div>
+                           @endif
+                           @if(session('pesan'))
+                           <div class="alert alert-warning alert-dismissable md-5">
+                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                              <h5><i class="icon fa fa-info"></i>Penilaian</h5>
+                              {{session('pesan')}}.
+                           </div>
+                           @endif
+                           @if(session('challenge'))
+                           <div class="alert alert-danger alert-dismissable md-5">
+                              <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                              <h5><i class="icon fa fa-check"></i>Penilaian </h5>
+                              {{session('challenge')}}.
+                           </div>
+                           @endif
+                           <table id="example1" class="table table-bordered table-striped">
+                              <thead>
                                  <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $check->nama }}</td>
-                                    <td>
-                                       {{$check->writing}}
-                                    </td>
-                                    <td>
-                                       {{$check->video}}
-                                    </td>
-                                    <td>
-                                       {{$check->business}}
-                                    </td>
-                                    <td>
-                                       {{$check->point}}
-                                    </td>
-                                    <td>
-                                       {{$check->penjualan}}
-                                    </td>
-                                    <td>
-                                       {{$check->total}}
-                                    </td>
-                                    <td class="project-actions text-right">
-                                       @if(((($check->business) != '0')&&(($check->video)!= '0')&&(($check->writing)!= '0'))== 0)
-                                       <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-writing="{{$check->writing}}"data-point="{{$check->point}}" data-video="{{$check->video}}" data-penjualan="{{$check->penjualan}}"data-seleksi="{{$check->seleksi_pertama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
-                                       <i class="fas fa-info"> </i>
-                                       Ubah Penilaian
-                                       </button>
-                                       @else
-                                       <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid="{{$check->user_id}}" data-myname="{{$check->nama}}" data-writing="{{$check->writing}}"data-point="{{$check->point}}" data-video="{{$check->video}}" data-penjualan="{{$check->penjualan}}"data-seleksi="{{$check->seleksi_pertama}}" data-target="#modal-penilaian"href="{{ route('admin.userprofile', $check->user_id) }}" target="_blank">
-                                       <i class="fas fa-info"> </i>
-                                       Ubah Penilaian
-                                       </button>
-                                       @endif
-                                    </td>
-                                    <td>
-                                       @if(($check->seleksi_pertama)== 'GUGUR')
-                                       <p class="text-danger">GUGUR</p>
-                                       @endif
-                                       @if(($check->seleksi_pertama)== 'LOLOS')
-                                       <p class="text-success">LOLOS</p>
-                                       @endif
-                                       @if(($check->seleksi_pertama)== '')
-                                       <a class="btn btn-danger btn-sm m-2" href="{{ route('admin.challenge.gagal', [$check->user_id,$r]) }}">
-                                       <i class="fas fa-exclamation"> </i>
-                                       Gagal
-                                       </a>
-                                       <a class="btn btn-success btn-sm m-2" href="{{ route('admin.challenge.lulus', [$check->user_id,$check->nama]) }}">
-                                       <i class="fas fa-check"> </i>
-                                       Lulus
-                                       </a>
-                                       @endif
-                                    </td>
-                                    <td>
-                                       @if(($check->url_writing)== '#')
-                                       <a type="text" href="{{$check->url_writing}}" target="_blank">kosong</a>
-                                       @else
-                                       <a type="text" href="{{$check->url_writing}}" target="_blank">check</a>
-                                       @endif
-                                    </td>
-                                    <td>
-                                       @if(($check->url_video)== '#')
-                                       <a type="text" href="{{$check->url_video}}" target="_blank">kosong</a>
-                                       @else
-                                       <a type="text" href="{{$check->url_video}}" target="_blank">check</a>
-                                       @endif
-                                    </td>
-                                    <td>
-                                       @if(($check->url_Business)== '#')
-                                       <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">kosong</a>
-                                       @else
-                                       <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">check</a>
-                                       @endif
-                                    </td>
+                                    <th>Rank</th>
+                                    <th>nama</th>
+                                    <th>Writing</th>
+                                    <th>Video</th>
+                                    <th>Business</th>
+                                    <th>extra</th>
+                                    <th>Penjualan</th>
+                                    <th>total</th>
+                                    <th>Penilaian</th>
+                                    <th>Status</th>
+                                    <th>Challenge Writing</th>
+                                    <th>Challenge Video</th>
+                                    <th>Challenge Business</th>
                                  </tr>
-                                 @endforeach
-                              </tbody>
+                              </thead>
+                                
+                              
                               <tfoot>
                                  <tr>
                                     <th>Rank</th>
@@ -546,10 +460,39 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"
+        integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+
+
       <script>
          $(function () {
              $("#example1")
                  .DataTable({
+                      processing:true,
+                     serverSide:true,
+                     ajax : {
+                        url : "{{route('admin.challenge.rank')}}",
+                        type : 'GET'
+                     },
+                     columns:[            
+                        { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                        {data:'nama',name:'nama'},
+                        {data:'writing',name:'writing'},
+                        {data:'video',name:'video'},
+                        {data:'business',name:'business'},
+                        {data:'point',name:'point'},
+                        {data:'penjualan',name:'penjualan'},
+                        {data:'total',name:'total'},
+                        {data: 'Penilaian', name: 'Penilaian'},
+                        {data: 'Status', name: 'Status', orderable: true, searchable: true},
+                        {data: 'Challenge Writing', name: 'Challenge Writing', orderable: true, searchable: true},
+                        {data: 'Challenge Video', name: 'Challenge Video', orderable: true, searchable: true},
+                        {data: 'Challenge Business', name: 'Challenge Business', orderable: true, searchable: true},
+                        
+                     ],
                      responsive: true,
                      lengthChange: false,
                      autoWidth: false,
@@ -571,23 +514,53 @@
              
              var button = $(event.relatedTarget) // Button that triggered the modal
              var id = button.data('myid')
-             var nama = button.data('myname')
              var writing = button.data('writing') 
              var video = button.data('video') 
              var penjualan = button.data('penjualan') 
-             var point = button.data('point') 
-             var seleksi = button.data('seleksi') 
-             console.log('modal kebuka');
-             console.log(nama);
-             console.log(seleksi);
+             var point = button.data('point')  
              var modal = $(this)
              modal.find('.modal-body #user_id').val(id)
-             modal.find('.modal-body #nama').val(nama)
              modal.find('.modal-body #writing').val(writing)
              modal.find('.modal-body #video').val(video)
              modal.find('.modal-body #penjualan').val(penjualan)
              modal.find('.modal-body #point').val(point)
          });
+         //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
+        //jika id = modal-penilaian panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
+        //jalankan jquery validator terhadap setiap inputan dll dan eksekusi script ajax untuk simpan data
+        if ($("#form-penilaian-edit").length > 0) {
+            $("#form-penilaian-edit").validate({
+                submitHandler: function (form) {
+                    var actionType = $('#tombol-simpan').val();
+                    $('#tombol-simpan').html('Sending..');
+
+                    $.ajax({
+                        data: $('#form-penilaian-edit')
+                            .serialize(), //function yang dipakai agar value pada form-control seperti input, textarea, select dll dapat digunakan pada URL query string ketika melakukan ajax request
+                        url: "{{ route('admin.challenge.editpenilaian') }}", //url simpan data
+                        type: "POST", //karena simpan kita pakai method POST
+                        dataType: 'json', //data tipe kita kirim berupa JSON
+                        success: function (data) { //jika berhasil 
+                            $('#form-penilaian-edit').trigger("reset"); //form reset
+                            $('#modal-penilaian').modal('hide'); //modal hide
+                            $('#tombol-simpan').html('Simpan'); //tombol simpan
+                            var oTable = $('#example1').dataTable(); //inialisasi datatable
+                            oTable.fnDraw(false); //reset datatable
+                            iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                title: 'Data Berhasil Disimpan',
+                                message: '{{ Session('
+                                success ')}}',
+                                position: 'bottomRight'
+                            });
+                        },
+                        error: function (data) { //jika error tampilkan error pada console
+                            console.log('Error:', data);
+                            $('#tombol-simpan').html('Simpan');
+                        }
+                    });
+                }
+            })
+        }
       </script>
    </body>
 </html>

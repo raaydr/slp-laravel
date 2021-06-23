@@ -104,7 +104,7 @@ class AdminController extends Controller
                     ->where('level', 2)->get();
         if($request->ajax()){
 
-            return datatables()->of($data)  ->addIndexColumn()
+            return datatables()->of($data)
                 ->addIndexColumn()
                 ->addColumn('Seleksi Berkas', function($row){
                     $ajaib = $row->seleksi_berkas;
@@ -218,15 +218,104 @@ class AdminController extends Controller
 
         return view('admin.seleksi3', compact('title', 'challenge', 'penilaian','r'));
     }
-    public function rank_challenge(){
+    public function rank_challenge(Request $request){
         $title = 'Admin Rank Challenge';
         $r=1;
         $data = DB::table('penilaian_challenge')
                     ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
                     ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
                     ->orderBy('total', 'DESC')->get();
-        
-
+        if($request->ajax()){
+        $rank=0;
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Penilaian', function($row){
+                    $business = $row->business;
+                    $video = $row->video;
+                    $writing = $row->writing;
+                    $point = $row->point;
+                    $penjualan = $row->penjualan;
+                    $id = $row->user_id;
+                    if(((($business) != 0 )&&(($video)!= 0)&&(($writing)!= 0))== 0){
+                        $route = route('admin.userprofile', $row->user_id);
+                        $actionBtn = '
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian" href='.$route.' target="_blank">
+                                       <i class="fas fa-info"> </i>
+                                       Ubah Penilaian
+                                       </button>';
+                        return $actionBtn;
+                    }else{
+                        $route = route('admin.userprofile', $row->user_id);
+                        $actionBtn = '
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian" href='.$route.' target="_blank">
+                                       <i class="fas fa-info"> </i>
+                                       Ubah Penilaian
+                                       </button>';
+                        return $actionBtn;
+                    }    
+                    
+                })
+                ->addColumn('Status', function($row){
+                    $check = $row->seleksi_pertama;
+                    if(($check)== 'GUGUR'){
+                        return '<p class="text-danger">GUGUR</p>';
+                    }
+                    if(($check)== 'LOLOS'){
+                        return '<p class="text-success">LOLOS</p>';
+                    }
+                    if(($check)== ''){
+                        $gagal = route('admin.challenge.gagal', [$row->user_id,$r]);
+                        $button = '
+                        <a class="btn btn-danger btn-sm m-2" href='.$gagal.'>
+                                       <i class="fas fa-exclamation"> </i>
+                                       Gagal
+                                       </a>';
+                        $button .= '&nbsp;&nbsp;';
+                        $lulus = route('admin.challenge.lulus', [$row->user_id,$row->nama]);
+                        $button = '
+                        <a class="btn btn-success btn-sm m-2" href='.$lulus.'>
+                                       <i class="fas fa-check"> </i>
+                                       Lulus
+                                       </a>';
+                        return $button;
+                    }
+                })
+                ->addColumn('Challenge Writing', function($row){
+                    $w = $row->url_writing;
+                    if (($w)== '#'){
+                        
+                        return '<p type="text-danger" >kosong</p>';    
+                    }else{
+                        
+                        return '<a type="text" href='.$w.' target="_blank">check</a>';  
+                    }
+                })->addColumn('Challenge Video', function($row){
+                    $v = $row->url_video;
+                    if (($v)== '#'){
+                        
+                        return '<p type="text-danger" >kosong</p>';    
+                    }else{
+                        
+                        return '<a type="text" href='.$v.' target="_blank">check</a>';  
+                    }
+                })
+                ->addColumn('Challenge Business', function($row){
+                    $b = $row->url_Business;
+                    $asset= "http://slpindonesia.com/imgPembelian/";
+                    $link= $asset . $b;
+                    if (($b)== '#'){
+                        
+                        return '<p type="text-danger" >kosong</p>';    
+                    }else{
+                        //return $link;
+                        return '<a type="text" href="'.$link.'" target="_blank">check</a>';  
+                    }
+                })
+                ->rawColumns(['Penilaian','Status', 'Challenge Writing', 'Challenge Video', 'Challenge Business'])
+                ->make(true);
+        }
+        //$json=json_encode($data); 
+        //echo $json ;
         return view('admin.seleksi4', compact('title', 'data','r'));
     }
     public function create_fasil(){
@@ -699,14 +788,16 @@ class AdminController extends Controller
             ->where('id', 1)
             ->value('gen');
         
-        
+        $nama = DB::table('biodata')
+            ->where('user_id', $user_id)
+            ->value('nama');
         
         if((($writing<=100)&& ($video<=100)== true)){
             $nbusiness = Input::get('penjualan');
             $business = ($nbusiness / 500000) *100;
             $total = $writing + $video + $business + $point;
-            DB::table('penilaian_challenge')->where('user_id',$user_id)->update([
-                'nama'=> $request->nama,
+            $post   =  DB::table('penilaian_challenge')->where('user_id',$user_id)->update([
+                'nama'=> $nama,
                 'writing'=> $request->writing,
                 'video' => $request->video,
                 'business' => $business,
@@ -717,9 +808,9 @@ class AdminController extends Controller
                 'updated_at'=> now(),
             ]);
             
-            return redirect()->route('admin.challenge.rank')->with('berhasil', 'berhasil  penilaian');
+            return response()->json($post);
         }else{
-            return redirect()->route('admin.challenge.rank')->with('pesan', 'Penilaian melebihi yang seharusnya');
+            return response()->json($post);
         }
         
         
