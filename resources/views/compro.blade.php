@@ -666,7 +666,7 @@
             <div class="contact-phone">
               <i class="ion-ios-telephone-outline"></i>
               <h3>Phone Number</h3>
-              <p><a href="#">+62 812-2015-8656</a></p>
+              <p><a href="#">-</a></p>
             </div>
           </div>
 
@@ -732,7 +732,7 @@
             Jl. Merdeka Raya No.7, RT.1/RW.7, Abadijaya,  <br>
             Kec. Sukmajaya, Kota Depok,<br>
             Jawa Barat 16417 <br>
-              <strong>Phone:</strong> +62 812-2015-8656<br>
+              <strong>Phone:</strong>-<br>
               <strong>Email:</strong> slpyouthcareid@gmail.com<br>
             </p>
 
