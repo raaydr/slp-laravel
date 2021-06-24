@@ -192,6 +192,14 @@
                               </div>
                               
                            </div>
+                           @if(($data->komentar_video)!= '')
+                           <div class="form-group row">
+                                 <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Komentar Video Challenge') }}</label>
+                                 <div class="col-md-2 col-form-label text-md-left">
+                                    <p class="text-success"><b>{{$data->komentar_video}}</b></p>
+                                 </div>     
+                              </div>   
+                           @endif
                            <div class="form-group row">
                               <label for="writing" class="col-md-6 col-form-label text-md-right">{{ __('Upload Writing Challenge ') }}</label>
                               <div class="col-md-2 col-form-label text-md-left">
@@ -205,6 +213,14 @@
                               </div>
                               
                            </div>
+                           @if(($data->komentar_writing)!= '')
+                           <div class="form-group row">
+                                 <label for="video" class="col-md-6 col-form-label text-md-right">{{ __('Komentar Video Challenge') }}</label>
+                                 <div class="col-md-2 col-form-label text-md-left">
+                                    <p class="text-success"><b>{{$data->komentar_writing}}</b></p>
+                                 </div>     
+                              </div>   
+                           @endif
                            <div class="form-group row">
                               <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Upload Business Challenge') }}</label>
                               <div class="col-md-2 col-form-label text-md-left">
