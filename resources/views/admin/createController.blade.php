@@ -67,7 +67,7 @@
          </nav>
          <!-- /.navbar -->
          <!-- Main Sidebar Container -->
-         @include('sidebar')
+         @include('admin.sidebar')
          <!-- Content Wrapper. Contains page content -->
          <div class="content-wrapper">
             <!-- Content Header (Page header) -->
