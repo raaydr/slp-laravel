@@ -255,7 +255,7 @@
                               @if(($data->business)== 'belum mengerjakan')
                               <a class="text-danger" type="text" >kosong</a>
                               @else 
-                              <a type="text" href="{{asset('docWriting')}}/{{$data->business}}" target="_blank">Periksa</a>
+                              <a type="text" href="{{asset('imgBusinessQuest')}}/{{$data->business}}" target="_blank">Periksa</a>
                               @endif
                               @if(($data->business_check)== 1)
                               <span class="float-right badge bg-success"><i class="fas fa-check"> </i></span>
@@ -371,7 +371,7 @@
                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                       <label for="video_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Note Video') }}</label>
+                                       <label for="video_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Komentar Video') }}</label>
                                        <div class="col-md-7">
                                           <textarea id="video_komentar" type="text" class="form-control" name="video_komentar" value="{{ old('video_komentar') }}" required autofocus ></textarea>
                                           @if ($errors->has('video_komentar'))
@@ -455,7 +455,7 @@
                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                       <label for="writing_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Note Writing') }}</label>
+                                       <label for="writing_komentar" class="col-md-5 col-form-label text-md-right">{{ __('Komentar Writing') }}</label>
                                        <div class="col-md-7">
                                           <textarea id="writing_komentar" type="text" class="form-control" name="writing_komentar" value="{{ old('writing_komentar') }}" required autofocus ></textarea>
                                           @if ($errors->has('writing_komentar'))
