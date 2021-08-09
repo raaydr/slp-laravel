@@ -32,6 +32,25 @@ Route::get('/home', function () {
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/b', [App\Http\Controllers\PendaftarController::class, 'insertSeleksi1']);
+
+//Routes Toko
+Route::group(['prefix' => 'shop'], function () {
+    Route::get('/home', function () {
+        return view('shop.shop');
+    })->name('toko');
+    Route::get('/pempek', function () {
+        return view('shop.pempek');
+    })->name('pempek');
+    Route::get('/shine-bride', function () {
+        return view('shop.shinebride');
+    })->name('shinebride');
+    Route::get('/susco-bite', function () {
+        return view('shop.susco');
+    })->name('susco');
+    Route::get('/canva', function () {
+        return view('shop.canva');
+    })->name('canva');
+});
 // ROUTES ADMIN
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
