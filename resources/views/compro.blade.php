@@ -36,7 +36,7 @@
   ======================================================= -->
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
   <!--==========================
     Header
@@ -57,6 +57,7 @@
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Pendaftaran</a></li>
           <li><a href="#portfolio">News</a></li>
+          <li><a href="#blog">Blog</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
@@ -527,6 +528,81 @@
 
       </div>
     </section><!-- #portfolio -->
+    <!--==========================
+      blog Section
+    ============================-->
+    <section id="blog"  class="section-bg" >
+      <div class="container">
+
+        <header class="section-header">
+          <h3 class="section-title">Our Blog Feed</h3>
+        </header>
+
+        <div class="row">
+          <div class="col-lg-12">
+           
+          </div>
+        </div>
+
+        <div class="row portfolio-container">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+            <div class="portfolio-wrap">
+              <figure>
+              <div class="card flex-md-row mb-4 ">
+            <div class="card-body d-flex flex-column align-items-start">
+              
+              <h3 class="mb-0">
+                <a class="text-dark" href="#">Menghilangkan Rasa Gugup</a>
+              </h3>
+              <div class="mb-1 text-muted">Nov 12</div>
+              <p class="card-text mb-auto">Gugup yang biasa disebut juga sebagai grogi, nervous, tegang, adalah hal yang bisa dikendalikan oleh diri sendiri. </p>
+              <a href="{{ route('post') }}">Continue reading</a>
+                
+              </figure>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.1s">
+            <div class="portfolio-wrap">
+            <figure>
+              <div class="card flex-md-row mb-4 ">
+            <div class="card-body d-flex flex-column align-items-start">
+              
+              <h3 class="mb-0">
+                <a class="text-dark" href="#">Featured post</a>
+              </h3>
+              <div class="mb-1 text-muted">Nov 12</div>
+              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+              <a href="#">Continue reading</a>
+                
+              </figure>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s">
+            <div class="portfolio-wrap">
+            <figure>
+              <div class="card flex-md-row mb-4 ">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h3 class="mb-0">
+                <a class="text-dark" href="#">Featured post</a>
+              </h3>
+              <div class="mb-1 text-muted">Nov 12</div>
+              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+              <a href="#">Continue reading</a>
+                
+              </figure>
+            </div>
+          </div>
+
+          
+
+
+          
+
+      </div>
+    </section><!-- #blog -->
 
     <!--==========================
       Clients Section

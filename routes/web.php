@@ -21,6 +21,9 @@ Auth::routes();
 Route::get('/program-beasiswa', function () {
     return view('compro');
 })->name('compro');
+Route::get('/program-beasiswa/post', function () {
+    return view('post');
+})->name('post');
 Route::get('/home', function () {
     return view('home');
 })->name('rumah');
