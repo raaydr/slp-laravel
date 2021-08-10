@@ -79,7 +79,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title pb-30">
+                    <div class="section-title mt-5 pb-30">
                         <h3 class="title mb-15">Shine Bride</h3>
                         <p>💙 Special in Collaboration @silmee.indonesia X @bridetalkid </p>
                             ⁣⁣⁣⁣<br>
