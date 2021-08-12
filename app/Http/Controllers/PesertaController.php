@@ -643,6 +643,7 @@ class PesertaController extends Controller
     public function jualan (){
         $id = Auth::user()->id;
         $nama ="";
+        $detail ="";
         if (Jualan::where('user_id', $id)->exists()){
             $nama = Jualan::where('user_id', $id)->value('nama');
             $nama = str_replace(' ', '_', $nama);

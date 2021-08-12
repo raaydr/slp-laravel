@@ -126,12 +126,14 @@
                               <!-- /.card-body -->
                               <div class="text-center">
                                  <button type="submit" class="btn btn-primary">Submit</button>
+                                 @if($detail != "")
                                  <a href="{{ route('Penjualan', $nama) }}" target="_blank" class="btn btn-success ">check</a>
-                                  
+                                  @enidf
                               </div>
                            </div>
                         </form>
                         <!-- The text field -->
+                        @if($detail != "")
                         <div class="form-group row">
                                  <label for="link" class="col-md-4 col-form-label text-md-right">{{ __('Link Jualan') }}</label>
                                  <div class="col-md-6">
@@ -147,6 +149,7 @@
 
 <!-- The button used to copy the text -->
 <a class="btn btn-primary " onclick="myFunction()">Copy text</a> 
+@enidf
                      </div>
                      <!-- /.card -->
                   </div>
