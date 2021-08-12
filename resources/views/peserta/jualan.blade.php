@@ -128,7 +128,7 @@
                                  <button type="submit" class="btn btn-primary">Submit</button>
                                  @if($detail != "")
                                  <a href="{{ route('Penjualan', $nama) }}" target="_blank" class="btn btn-success ">check</a>
-                                  @enidf
+                                  @endif
                               </div>
                            </div>
                         </form>
@@ -149,7 +149,7 @@
 
 <!-- The button used to copy the text -->
 <a class="btn btn-primary " onclick="myFunction()">Copy text</a> 
-@enidf
+@endif
                      </div>
                      <!-- /.card -->
                   </div>
