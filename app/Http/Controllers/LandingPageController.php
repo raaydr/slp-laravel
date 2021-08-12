@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Jualan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class LandingPageController extends Controller
@@ -22,6 +23,12 @@ class LandingPageController extends Controller
     public function compro(){
         $blog = Blog::latest()->take(3)->get();
         return view('compro',compact('blog'));
+    }
+
+    public function penjualan($nama){
+        $nama = str_replace('_', ' ', $nama);
+        $link = Jualan::where('nama', $nama)->value('link');
+        return view('shop.canva',compact('link'));
     }
     
 

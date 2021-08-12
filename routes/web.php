@@ -54,6 +54,8 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('/canva', function () {
         return view('shop.canva');
     })->name('canva');
+
+    Route::get('/canva/{nama}', 'LandingPageController@Penjualan')->name('Penjualan');
 });
 // ROUTES ADMIN
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -415,6 +417,8 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
 	Route::get('/pengumuman', 'PesertaController@index')->name('peserta.pengumuman');
+    Route::get('/penjualan', 'PesertaController@jualan')->name('peserta.jualan');
+    Route::post('/link-penjualan', 'PesertaController@linkJualan')->name('peserta.linkJualan');
 
 	});
 });

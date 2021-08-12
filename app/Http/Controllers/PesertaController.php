@@ -10,6 +10,7 @@ use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
 use App\Models\Quest;
+use App\Models\Jualan;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Redirect;
 
 class PesertaController extends Controller
 {
@@ -636,5 +638,51 @@ class PesertaController extends Controller
         
         
         return redirect()->route('peserta.business.editquest', [Crypt::encrypt($daily_quest)])->with('pesan', 'berhasil mengubah business challenge');
+    }
+
+    public function jualan (){
+        $id = Auth::user()->id;
+        $nama ="";
+        if (Jualan::where('user_id', $id)->exists()){
+            $nama = Jualan::where('user_id', $id)->value('nama');
+            $nama = str_replace(' ', '_', $nama);
+            $detail = route('Penjualan', $nama) ;
+        }
+        return view('peserta.jualan',compact('nama','detail'));
+    }
+    public function linkJualan(Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            
+            
+            'link' => 'required',
+            
+
+        ],
+
+        $messages = 
+        [
+            'link.required' => 'link tidak boleh kosong!',
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
+        }
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
+        if (Jualan::where('user_id', $id)->exists()){
+            Jualan::where('user_id', $id)->update(['link' => $request->link]);
+        }else{
+        $Jualan = new Jualan;
+        $Jualan->link = $request->link;
+        $Jualan->nama = $user->Biodata->nama;
+        $Jualan->user_id = $id;
+        $Jualan->save();
+        }
+        return Redirect::back()->with('pesan','Pendaftaran membuat link berhasil');
     }
 }

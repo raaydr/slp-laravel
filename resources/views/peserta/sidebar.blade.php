@@ -73,6 +73,19 @@
                                     </p>
                   </a>
             </li>
+
+            <li class="nav-item">
+               @if ( Route::currentRouteName() == "peserta.jualan" )
+                  <a href="{{ route('peserta.jualan') }}" class="nav-link active">
+               @else
+                  <a href="{{ route('peserta.jualan') }}" class="nav-link ">
+               @endif
+               <i class="nav-icon fas ion-person"></i>
+                                    <p>
+                                        Jualan
+                                    </p>
+                  </a>
+            </li>
             
             
          </ul>
