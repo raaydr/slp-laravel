@@ -151,7 +151,7 @@
                                         <p>Untuk Kamu yang butuh design biar Jualan mu terlihat bagus</p><br>
                                         <p>Buat kamu pekerja atau pelajar biar PPTmu makin mantap</p><br>
                                         <p>Atau kamu yang gk bisa design tapi gk mau ribet</p><br>
-                                        <p>Content: 178 hlm (68 hlm materi, 110 hlm dotted page ala Bullet Journal)</p><br>
+                                        
                                     </div>
                                 </div> <!-- single services -->
                                 <div class="single-services text-center mt-30">
