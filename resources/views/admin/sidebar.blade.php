@@ -170,6 +170,41 @@
                </ul>
             </li>
             <li class="nav-item">
+               @if ( Route::currentRouteName() == "admin.buatBlog" || Route::currentRouteName() == "admin.listBlog"|| Route::currentRouteName() == "admin.detailBlog")
+                  <a href="../widgets.html" class="nav-link active">
+               @else
+                  <a href="../widgets.html" class="nav-link ">
+               @endif
+                     <i class="nav-icon fas fa-tachometer-alt"></i>
+                     <p>
+                        Lain-lain
+                        <i class="fas fa-angle-left right"></i>
+                     </p>
+                  </a>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.buatBlog" )
+                        <a href="{{ route('admin.buatBlog') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.buatBlog') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Blog</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.listBlog" )
+                        <a href="{{ route('admin.listBlog') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.listBlog') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>List Blog</p>
+                        </a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.coba" || Route::currentRouteName() == "admin.controller.create" )
                   <a href="../widgets.html" class="nav-link active">
                @else

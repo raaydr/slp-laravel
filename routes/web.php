@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/program-beasiswa', function () {
-    return view('compro');
-})->name('compro');
+
 Route::get('/program-beasiswa/post', function () {
     return view('post');
 })->name('post');
+Route::get('/program-beasiswa/detail-blog/{judul}', 'LandingPageController@detailBlog')->name('detailBlog');
+Route::get('/program-beasiswa', 'LandingPageController@compro')->name('compro');
+Route::post('/program-beasiswa/load-blog', 'LandingPageController@load_data')->name('loadMoreData');
 Route::get('/home', function () {
     return view('home');
 })->name('rumah');
@@ -58,6 +59,11 @@ Route::group(['prefix' => 'shop'], function () {
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/lain-lain/buat-blog', 'AdminController@buatBlog')->name('admin.buatBlog');
+    Route::post('/lain-lain/create-blog', 'AdminController@createBlog')->name('admin.createBlog');
+    Route::get('/lain-lain/list-blog', 'AdminController@listBlog')->name('admin.listBlog');
+    Route::get('/lain-lain/detail-blog/{judul}', 'AdminController@detailBlog')->name('admin.detailBlog');
+    Route::get('/lain-lain/delete-blog/{id}', 'AdminController@deleteBlog')->name('admin.deleteBlog');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

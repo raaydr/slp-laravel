@@ -545,7 +545,7 @@
         </div>
 
         <div class="row portfolio-container">
-
+        @foreach ($blog as $blogs)
           <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
             <div class="portfolio-wrap">
               <figure>
@@ -553,47 +553,20 @@
             <div class="card-body d-flex flex-column align-items-start">
               
               <h3 class="mb-0">
-                <a class="text-dark" href="#">Menghilangkan Rasa Gugup</a>
+                <a class="text-dark" href="#">{{$blogs->judul}}</a>
               </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">Gugup yang biasa disebut juga sebagai grogi, nervous, tegang, adalah hal yang bisa dikendalikan oleh diri sendiri. </p>
-              <a href="{{ route('post') }}">Continue reading</a>
-                
-              </figure>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.1s">
-            <div class="portfolio-wrap">
-            <figure>
-              <div class="card flex-md-row mb-4 ">
-            <div class="card-body d-flex flex-column align-items-start">
               
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
+              <p class="card-text mb-auto">{{$blogs->awalan}}</p>
+              <?php
+                                    $judul = str_replace(' ', '_', $blogs->judul);
+                                    ?>
+              <a href="{{ route('detailBlog',$judul) }}">Continue reading</a>
                 
               </figure>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s">
-            <div class="portfolio-wrap">
-            <figure>
-              <div class="card flex-md-row mb-4 ">
-            <div class="card-body d-flex flex-column align-items-start">
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-                
-              </figure>
-            </div>
+          @endforeach
           </div>
 
           
@@ -867,6 +840,38 @@
 
   <!-- Template Main Javascript File -->
   <script src="{{asset('develop')}}/js/main.js"></script>
+<script>
+  
 
+  $(document).ready(function(){
+ 
+ var _token = $('input[name="_token"]').val();
+
+ load_data('', _token);
+
+ function load_data(id="", _token)
+ {
+  $.ajax({
+   url:"{{ route('loadMoreData') }}",
+   method:"POST",
+   data:{id:id, _token:_token},
+   success:function(data)
+   {
+    $('#load_more_button').remove();
+    $('#post_data').append(data);
+   }
+  })
+ }
+
+ $(document).on('click', '#load_more_button', function(){
+  var id = $(this).data('id');
+  $('#load_more_button').html('<b>Loading...</b>');
+  load_data(id, _token);
+ });
+
+});
+
+
+</script>
 </body>
 </html>

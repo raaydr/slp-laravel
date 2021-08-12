@@ -10,6 +10,7 @@ use App\Models\Control;
 use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
+use App\Models\Blog;
 use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Rules\MatchOldPassword;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Crypt;
 use Auth;
 use Redirect;
 use DataTables;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -1730,5 +1732,92 @@ class AdminController extends Controller
         
        
         
+    }
+
+    public function buatBlog (){
+        
+        return view('admin.buatBlog');
+
+    }
+    public function createBlog (Request $request){
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'judul' => 'required|string|max:255',
+                'awalan' => 'required|string|max:255',
+                'summernote' => 'required',
+                'link_instagram' => 'required',
+                'nama' => 'required',
+            ],
+
+            $messages = [
+                'judul.required' => 'judul tidak boleh kosong!',
+                'judul.max' => 'judul tidak boleh melebihi 255 karakter!',
+                'awalan.required' => 'awalan tidak boleh kosong!',
+                'awalan.max' => 'awalan tidak boleh melebihi 255 karakter!',
+                'summernote.required' => 'awalan tidak boleh kosong!',
+                'link_instagram.required' => 'awalan tidak boleh kosong!',
+                'nama.required' => 'awalan tidak boleh kosong!',
+               
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $blog = new Blog;
+        $blog->nama = $request->nama;
+        $blog->link_instagram = $request->link_instagram;
+        $blog->judul = $request->judul;
+        $blog->awalan = $request->awalan;
+
+        $detail=$request->summernote;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        $blog->artikel = $detail;
+        $blog->publish = 1 ;
+        
+        
+        $blog->save();
+        
+        return Redirect::back()->with('pesan','Pendaftaran membuat kurikulum');
+
+        
+    }
+    public function listBlog(Request $request){
+        $data = Blog::where('publish',1)->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $judul = $row->judul;
+                    $judul = str_replace(' ', '_', $judul);
+                        $detail = route('admin.detailBlog',($judul));
+                        $actionBtn = '
+                        <a class="btn btn-success btn-sm" href='.$detail.' >
+                                           
+                                           Periksa
+                                           </a>';
+                        return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('admin.listBlog');
+    }
+
+    public function detailBlog($judul){
+        $judul = str_replace('_', ' ', $judul);
+        $blog = Blog::where('judul', $judul)->first();
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+        $tanggal = $blog->created_at;
+        $tanggalbaru=Carbon::parse($tanggal)->isoFormat('D MMMM Y');
+        return view('post',compact('blog','tanggalbaru'));
     }
 }

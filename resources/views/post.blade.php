@@ -51,12 +51,44 @@
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1">
-        <a class="link-secondary" href="{{ route('compro') }}">back</a>
+      @if ((app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName())== 'admin.listBlog')
+          <a class="link-secondary" href="{{ route('admin.listBlog') }}">back</a>
+      @else
+          <a class="link-secondary" href="{{ route('compro') }}">back</a>
+      @endif
+        
       </div>
       <div class="col-4 text-center">
         <a class="blog-header-logo text-dark" href="#"><img src="{{asset('develop')}}/img/logo.png" class="img-fluid" alt="Responsive image" width="150" ></a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
+      @auth
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Hapus
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Blog</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Anda yakin ingin menghapus blog ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+        <button type="button" class="btn btn-danger">Ya</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      @endauth
+      
       </div>
     </div>
   </header>
@@ -68,11 +100,12 @@
       
 
       <article class="blog-post">
-        <h2 class="blog-post-title">Menghilangkan Rasa Gugup</h2>
-        <p class="blog-post-meta">January 1, 2021 by <a class="text-success">Admin SLP</a></p>
-
-        <p>Gugup yang biasa disebut juga sebagai grogi, nervous, tegang, adalah hal yang bisa dikendalikan oleh diri sendiri. Berbeda dengan masalah mental seperti cemas berlebih, gugup hanya berlangsung sementara. Lalu, bagaimana cara menghilangkannya?<br><br>1. Menganggap rasa gugup adalah hal yang normal<br><br>Perlahan, latih pikiran untuk menganggap rasa gugup sebagai hal yang normal. Kemudian, latih pikiran untuk menghadapi rasa gugup tersebut. Karena setiap orang pasti memiliki caranya masing-masing, sesuai kebutuhan.<br><br>2. Mempersiapkan sesuatu dengan matang<br><br>Setelah kita melakukan langkah pertama, kita harus mempersiapkan sesuatu dengan cara berlatih dan memahami apa yang akan dihadapi sampai matang. Contohnya, berlatih sebelum jadwal presentasi kuliah tiba. Semakin matang persiapan yang dilakukan, artinya seseorang akan menjadi lebih siap menghadapi situasinya.<br><br>3. Melatih pernapasan<br><br>Setiap orang pasti punya teknik relaksasi masing-masing yang paling ampuh saat menghadapi situasi menegangkan. Namun, melatih pernapasan adalah hal yang sangat perlu. Baik dilakukan ketika sebelum presentasi, maupun saat gugup ketika presentasi berlangsung. Teknik pernapasan yang dapat membantu adalah bernapas dengan diafragma atau diaphragmatic breathing.<br><br>4. Berbicara dengan orang lain<br><br>Langkah ini bisa dilakukan sebelum presentasi kuliah dimulai. Berbagi cerita dengan orang lain bisa mengurangi rasa gugupmu. Beruntung jika teman bicaramu berkomentar dengan hal yang positif, karena bisa memengaruhi suasana hati dan pikiranmu menjadi semakin lebih positif.<br><br>5. Menjaga kontak mata<br><br>Langkah ini bisa dilakukan ketika saat presentasi berlangsung. Jagalah agar kontak mata terus menatap lawan bicara kamu. Hal ini dapat membuat lawan bicara seolah-olah merasakan kontak langsung dengan kamu. Jangan terlalu sering menunduk atau terpaku dengan membaca teks karena hal ini justru dapat meningkatkan rasa gugup yang ada. Melihat ke arah lain yang bukan lawan bicara juga biasanya akan membuat kamu cenderung lupa kalimat.<br><br>Ini tips dari Minslee, kalo kamu bagaimana cara menghilangkannya? Tulis di kolom komentar, ya!</p>
-
+        <h2 class="blog-post-title text-center m-2">{{$blog->judul}}</h2>
+        <p class="blog-post-meta text-center m-3">{{$tanggalbaru}}, By <a class="text-success">{{$blog->nama}}</a></p>
+        <?php
+          echo $blog->artikel ;
+        ?>
+<p class="blog-post-meta text-center m-3"><a class="text-primary"  href="{{$blog->link_instagram}}" target="_blank">Komeng Disini</a></p>
     </div>
 
   </div>
