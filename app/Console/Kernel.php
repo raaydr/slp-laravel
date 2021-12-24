@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
     
     {   
 
-        $schedule->command('sg:ganti-hari')->daily();
-        $schedule->command('sg:daily-quest')->daily(); 
+        //$schedule->command('sg:ganti-hari')->daily();
+        //$schedule->command('sg:daily-quest')->daily(); 
         //$schedule->command('sg:demo-cron')->everyMinute(); 
         
     }
