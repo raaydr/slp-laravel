@@ -254,7 +254,7 @@
                         <div class="card-footer">
                            <!-- /.card-body -->
                            <div class="text-center">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <!--<button type="submit" class="btn btn-primary">Submit</button> -->
                            </div>
                         </div>
                      </form>
