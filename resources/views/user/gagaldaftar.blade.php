@@ -73,25 +73,7 @@
             </nav>
             <!-- /.navbar -->
 
-            <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-light-success elevation-4">
-                <!-- Brand Logo -->
-                <a href="{{asset('template')}}/index3.html" class="brand-link">
-                    <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
-                    <span class="brand-text font-weight-light">Peserta</span>
-                </a>
-
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- SidebarSearch Form -->
-                    
-
-                    <!-- Sidebar Menu -->
-                    
-                    <!-- /.sidebar-menu -->
-                </div>
-                <!-- /.sidebar -->
-            </aside>
+            @include('user.sidebar')
 
             <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

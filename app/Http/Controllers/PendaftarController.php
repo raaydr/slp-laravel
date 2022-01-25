@@ -85,8 +85,11 @@ class PendaftarController extends Controller
         $seleksi = DB::table('seleksiPertama')
             ->where('user_id', $id)
             ->value('checked');
+        $seleksi_pertama = DB::table('control')
+            ->where('nama', 'seleksiPertama')
+            ->value('boolean');
 
-        return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi'));
+        return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama'));
     }
     public function seleksi2()
     {
