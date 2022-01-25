@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('level');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('gen');
 
         });
     }

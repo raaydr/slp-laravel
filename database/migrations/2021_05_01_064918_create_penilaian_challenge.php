@@ -15,6 +15,8 @@ class CreatePenilaianChallenge extends Migration
     {
         Schema::create('penilaian_challenge', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('gen');
+            $table->string('nama');
             
             $table->integer('user_id')->unsigned()->unique();   
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -24,6 +26,7 @@ class CreatePenilaianChallenge extends Migration
             $table->Integer('business')->unsigned();
             $table->Integer('total')->unsigned();
             $table->string('penjualan');
+            $table->integer('point');
             $table->timestamps();
         });
     }

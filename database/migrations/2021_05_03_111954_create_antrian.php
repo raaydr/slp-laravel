@@ -20,6 +20,8 @@ class CreateAntrian extends Migration
             $table->string('nama');
             $table->integer('user_id')->unsigned()->unique();   
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('gen');
+            $table->LongText('note')->nullable();
             $table->timestamps();
         });
     }

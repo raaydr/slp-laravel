@@ -19,5 +19,25 @@ class AddControl extends Seeder
             'boolean'=> FALSE,
 
         ]);
+        DB::table('control')->insert([
+            'nama'=>'quest',
+            'integer'=> 1,
+
+        ]);
+        DB::table('control')->insert([
+            'nama'=>'seleksiPertama',
+            'boolean'=> FALSE,
+
+        ]);
+        DB::table('control')->insert([
+            'nama'=>'gen',
+            'integer'=> 2,
+
+        ]);
+        DB::table('control')->insert([
+            'nama'=>'interview',
+            'integer'=> 1,
+
+        ]);
     }
 }
