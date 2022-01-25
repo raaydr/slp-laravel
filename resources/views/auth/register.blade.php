@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header text-center">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
                <!--<a class="text-center m-2"><b>Semua Form Harus Dilengkapi </b></a>-->
-                <a class="text-center m-2"><b>Pendaftaran sudah ditutup</b></a>
+                
                 <div class="card-body">
                     @if(session()->has('success'))
                     <div class="alert alert-success">{{ session()->get('success') }}</div>
@@ -20,6 +20,11 @@
                             <div class="col-md-6">
                                 <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama" value="{{ old('nama') }}" required autofocus />
 
+                                @if ($errors->has('nama'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('nama') }}</strong>
+                                </span>
+                                @endif
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
@@ -30,7 +35,11 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus />
-
+                                @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
@@ -44,6 +53,11 @@
                                 <small id="passwordHelpBlock" class="form-text text-sucess">
                                     Minimal 8 karakter
                                 </small>
+                                @if ($errors->has('password'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
@@ -54,6 +68,11 @@
 
                             <div class="col-md-5">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autofocus />
+                                @if ($errors->has('password_confirmation'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                                @endif
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Tolong dilengkapi</div>
                             </div>
@@ -271,6 +290,20 @@
                             </ul>
                         </div>
                         @endif
+                        
+    <div class="form-group row">
+        <div class="col-md-6 offset-md-4">
+            {!! NoCaptcha::renderJs() !!}
+            {!! NoCaptcha::display() !!}
+
+            @error('g-recaptcha-response')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
                         @if(($pendaftaran)== TRUE)
                             <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

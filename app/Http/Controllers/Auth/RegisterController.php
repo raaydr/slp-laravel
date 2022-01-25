@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -61,7 +64,8 @@ class RegisterController extends Controller
             ->where('nama', 'pendaftaran')
             ->value('boolean');
 
-        return view('auth.register', compact('pendaftaran'));
+        return view('auth.register', compact('pendaftaran')
+        );
     }
       /**
      * Handle a registration request for the application.
@@ -91,6 +95,7 @@ class RegisterController extends Controller
             'five_pros' => 'required|string',
             'five_cons' => 'required|string',
             'url_foto' => 'required|mimes:jpeg,png,jpg|max:2048',
+            'g-recaptcha-response' => 'required|captcha',
             
 
         ],
@@ -121,9 +126,10 @@ class RegisterController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
         //Table Users
         $user = new User;
         $user->email = Input::get('email');
@@ -162,12 +168,7 @@ class RegisterController extends Controller
         $seleksiPertama->nama = Input::get('nama');
         $seleksiPertama->save();
 
-        //Table userPDF
-        $user_id = $user->id;
-        $userPDF = new userPDF;
-        $userPDF->user_id = $user_id;
-        $userPDF->url_cv = '#';
-        $userPDF->save();
+       
 
         //Table Biodata 
         $user_id = $user->id;
