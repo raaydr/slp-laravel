@@ -88,8 +88,14 @@ class PendaftarController extends Controller
         $seleksi_pertama = DB::table('control')
             ->where('nama', 'seleksiPertama')
             ->value('boolean');
-
-        return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama'));
+        $check = $biodata->seleksi_berkas ;
+        if ($check == 1){
+            return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama'));
+        } else {
+            $title = 'Pengumuman Calon Siswa';
+            return view('user.pengumuman', compact('title', 'user', 'biodata'));
+        }
+        
     }
     public function seleksi2()
     {

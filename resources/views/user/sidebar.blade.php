@@ -3,7 +3,7 @@
                 <!-- Brand Logo -->
                 <a href="/" class="brand-link">
                     <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
-                    <span class="brand-text font-weight-light">Peserta</span>
+                    <span class="brand-text font-weight-light">Pendaftar</span>
                 </a>
 
                 <!-- Sidebar -->
@@ -61,6 +61,7 @@
                                 </a>
                             @endif
                                 <ul class="nav nav-treeview">
+                                    @if($biodata->seleksi_berkas == 1)
                                     <li class="nav-item">
                                     @if ( Route::currentRouteName() == "pendaftar.seleksi1" )
                                         <a href="{{ route('pendaftar.seleksi1') }}" class="nav-link active">
@@ -74,6 +75,8 @@
                                         </a>
                                     @endif
                                     </li>
+                                    @endif
+                                    @if($biodata->seleksi_pertama == 1)
                                     <li class="nav-item">
                                     @if ( Route::currentRouteName() == "pendaftar.ranking.challenge" )
                                         <a href="{{ route('pendaftar.ranking.challenge') }}" class="nav-link active">
@@ -87,6 +90,7 @@
                                         </a>
                                     @endif
                                     </li>
+                                    @endif
                                 </ul>
                             </li>
                             
