@@ -407,6 +407,7 @@ class AdminController extends Controller
             $seleksiPertama->exp_wirausaha = 'Belum pernah';
             $seleksiPertama->omset = 'Tolong diisi';
             $seleksiPertama->nama = $users->nama;
+            $seleksiPertama->checked = 0;
             $seleksiPertama->save();
         }
         
