@@ -8,17 +8,7 @@
 
                 <!-- Sidebar -->
                 <div class="sidebar">
-                    <!-- SidebarSearch Form -->
-                    <div class="form-inline mt-2">
-                        <div class="input-group" data-widget="sidebar-search">
-                            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
-                            <div class="input-group-append">
-                                <button class="btn btn-sidebar">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
@@ -61,7 +51,7 @@
                                 </a>
                             @endif
                                 <ul class="nav nav-treeview">
-                                    @if($biodata->seleksi_berkas == 1)
+                                    @if(($biodata->seleksi_berkas) == "LULUS")
                                     <li class="nav-item">
                                     @if ( Route::currentRouteName() == "pendaftar.seleksi1" )
                                         <a href="{{ route('pendaftar.seleksi1') }}" class="nav-link active">
@@ -76,7 +66,7 @@
                                     @endif
                                     </li>
                                     @endif
-                                    @if($biodata->seleksi_pertama == 1)
+                                    @if(($biodata->seleksi_pertama) == "LOLOS")
                                     <li class="nav-item">
                                     @if ( Route::currentRouteName() == "pendaftar.ranking.challenge" )
                                         <a href="{{ route('pendaftar.ranking.challenge') }}" class="nav-link active">

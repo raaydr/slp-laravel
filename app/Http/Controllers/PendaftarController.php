@@ -89,7 +89,7 @@ class PendaftarController extends Controller
             ->where('nama', 'seleksiPertama')
             ->value('boolean');
         $check = $biodata->seleksi_berkas ;
-        if ($check == 1){
+        if ($check == "LULUS"){
             return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama'));
         } else {
             $title = 'Pengumuman Calon Siswa';
