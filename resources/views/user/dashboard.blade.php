@@ -239,7 +239,9 @@
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#Pertama" data-toggle="tab">More about Me</a></li>
+                                            @if (!empty($biodata->seleksi_berkas))
                                             <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Challenge</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <!-- /.card-header -->
@@ -430,6 +432,7 @@
                                                 
                                             </div>
                                             <!-- /.tab-pane -->
+                                            @if (!empty($biodata->seleksi_berkas))
                                             <div class="tab-pane" id="Kedua">
                                                 <!-- Post -->
                                                 <div class="post">
@@ -706,6 +709,7 @@
                                                 </div>                                                
                                             </div>
                                             <!-- /.tab-pane -->
+                                            @endif
                                         </div>
                                         <!-- /.tab-content -->
                                     </div>

@@ -403,7 +403,9 @@
                               @endif
                               <ul class="nav nav-pills">
                                  <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
+                                 @if(!empty($user->Biodata->seleksi_berkas))
                                  <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
+                                 @endif
                                  @if(!empty($user->Antrian->antrian))
                                  <li class="nav-item"><a class="nav-link" href="#Ketiga" data-toggle="tab">Seleksi Kedua</a></li>
                                  @endif
@@ -505,6 +507,7 @@
                                     <!-- /.modal -->
                                  </div>
                                  <!-- /.tab-pane -->
+                                 @if (!empty($user->Biodata->seleksi_berkas))
                                  <div class="tab-pane" id="Kedua">
                                     <!-- Post -->
                                     <div class="post">
@@ -1110,6 +1113,7 @@
                                     <!-- /.modal -->
                                  </div>
                                  <!-- /.tab-pane -->
+                                 @endif
                                  @if(!empty($user->Antrian->antrian))
                                  <div class="tab-pane" id="Ketiga">
                                     <div class="row">
@@ -1526,7 +1530,12 @@
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
          function rupiah(){
-         var bilangan = {{$user->Penilaian->penjualan}} ;
+         var bilangan = "0";
+         var check = {$user->Biodata->seleksi_berkas};
+         if ((check === "LULUS")){
+            var bilangan = {$user->Penilaian->penjualan};
+         }
+         
          var	number_string = bilangan.toString(),
          sisa 	= number_string.length % 3,
          rupiah 	= number_string.substr(0, sisa),
@@ -1566,7 +1575,8 @@
          //the function body is the same as you have defined sue the textbox object to set the value
          }
          
-         rupiah();
+
+         rupiah();   
          earn();
              $(function () {
                  $("#example1")
