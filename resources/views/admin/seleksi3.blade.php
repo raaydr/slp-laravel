@@ -230,28 +230,28 @@
                                     <td>{{ $check->nama }}</td>
                                     <td>
                                        @if(($check->url_cv)== '#')
-                                       <a type="text" href="{{asset('cvPDF')}}/{{$check->url_cv}}" target="_blank">kosong</a>
+                                       <p class="text-danger" >kosong</p>
                                        @else
                                        <a type="text" href="{{asset('cvPDF')}}/{{$check->url_cv}}" target="_blank">check</a>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($check->url_writing)== '#')
-                                       <a type="text" href="{{$check->url_writing}}" target="_blank">kosong</a>
+                                       <p class="text-danger" >kosong</p>
                                        @else
                                        <a type="text" href="{{$check->url_writing}}" target="_blank">check</a>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($check->url_video)== '#')
-                                       <a type="text" href="{{$check->url_video}}" target="_blank">kosong</a>
+                                       <p class="text-danger" >kosong</p>
                                        @else
                                        <a type="text" href="{{$check->url_video}}" target="_blank">check</a>
                                        @endif
                                     </td>
                                     <td>
                                        @if(($check->url_Business)== '#')
-                                       <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">kosong</a>
+                                       <p class="text-danger" >kosong</p>
                                        @else
                                        <a type="text" href="{{asset('imgPembelian')}}/{{$check->url_Business}}" target="_blank">check</a>
                                        @endif

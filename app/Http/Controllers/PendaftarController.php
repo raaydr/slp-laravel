@@ -223,7 +223,7 @@ class PendaftarController extends Controller
                 'pernah_wirausaha' => $request->pernah_wirausaha,
                 'exp_wirausaha' => $request->exp_wirausaha,
                 'omset' => $request->omset,
-                'checked' => '1',
+                
             ]);
 
         return redirect('pendaftar/seleksi-pertama')->with('pesan', 'Terima Kasih telah mengisi form Challenge');
