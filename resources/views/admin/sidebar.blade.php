@@ -24,7 +24,7 @@
                with font-awesome or any other icon font library -->
             
             <li class="nav-item">
-               @if ( Route::currentRouteName() == "admin.eliminasi" || Route::currentRouteName() == "admin.gagaldaftar" || Route::currentRouteName() == "admin.challenge" || Route::currentRouteName() == "admin.challenge.rank" || Route::currentRouteName() == "admin.interview.antrian" )
+               @if ( Route::currentRouteName() == "admin.eliminasi" || Route::currentRouteName() == "admin.gagaldaftar" || Route::currentRouteName() == "admin.challenge" || Route::currentRouteName() == "admin.challenge.rank" || Route::currentRouteName() == "admin.interview.antrian"||Route::currentRouteName() == "admin.listPendaftar"||Route::currentRouteName() == "admin.informasiPendaftar" )
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -36,6 +36,16 @@
                      </p>
                   </a>
                <ul class="nav nav-treeview">
+               <li class="nav-item">
+               @if ( Route::currentRouteName() == "admin.informasiPendaftar" )
+                        <a href="{{ route('admin.informasiPendaftar') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.informasiPendaftar') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Informasi Pendaftar</p>
+                        </a>
+                  </li>
                <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.listPendaftar" )
                         <a href="{{ route('admin.listPendaftar') }}" class="nav-link active">
