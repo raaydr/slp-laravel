@@ -76,12 +76,12 @@ class AdminController extends Controller
         return view('admin.createController', compact('title'));
     }
 
-    public function index()
+    public function listPendaftar()
     {
-        $title = 'Dashboard Admin';
+        $title = 'List Pendaftar ';
         $users = User::where('level', 1)->where('gen', 2)->orderBy('id', 'ASC')->get();
 
-        return view('admin.dashboard', compact('title', 'users'));
+        return view('admin.listPendaftar', compact('title', 'users'));
     }
     public function antrian_interview()
     {  
@@ -1165,7 +1165,7 @@ class AdminController extends Controller
 
    
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.listPendaftar');
 
     }
 

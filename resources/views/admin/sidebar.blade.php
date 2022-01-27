@@ -22,18 +22,7 @@
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item">
-               @if ( Route::currentRouteName() == "admin.dashboard" )
-                  <a href="{{ route('admin.dashboard') }}" class="nav-link active">
-               @else
-                  <a href="{{ route('admin.dashboard') }}" class="nav-link ">
-               @endif
-                     <i class="nav-icon fas fa-tachometer-alt"></i>
-                     <p>
-                        Dashboard
-                     </p>
-                  </a>
-            </li>
+            
             <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.eliminasi" || Route::currentRouteName() == "admin.gagaldaftar" || Route::currentRouteName() == "admin.challenge" || Route::currentRouteName() == "admin.challenge.rank" || Route::currentRouteName() == "admin.interview.antrian" )
                   <a href="../widgets.html" class="nav-link active">
@@ -47,6 +36,16 @@
                      </p>
                   </a>
                <ul class="nav nav-treeview">
+               <li class="nav-item">
+               @if ( Route::currentRouteName() == "admin.listPendaftar" )
+                        <a href="{{ route('admin.listPendaftar') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.listPendaftar') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>List Pendaftar</p>
+                        </a>
+                  </li>
                   <li class="nav-item">
                      @if ( Route::currentRouteName() == "admin.eliminasi" )
                         <a href="{{ route('admin.eliminasi') }}" class="nav-link active">
