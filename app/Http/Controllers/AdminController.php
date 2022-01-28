@@ -532,6 +532,7 @@ class AdminController extends Controller
                         return '<p class="text-success">LOLOS</p>';
                     }
                     if(($check)== ''){
+                        $r=1;
                         $gagal = route('admin.challenge.gagal', [$row->user_id,$r]);
                         $button = '
                         <a class="btn btn-danger btn-sm m-2" href='.$gagal.'>
@@ -697,9 +698,9 @@ class AdminController extends Controller
     public function seleksi2_lulus($user_id)
     {
         
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
         $penilaian = DB::table('penilaian_challenge')
             ->where('user_id', $user_id)
             ->value('id');
@@ -951,9 +952,9 @@ class AdminController extends Controller
         $writing = Input::get('writing');
         $video = Input::get('video');
         $point = Input::get('point');
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
         
         
         
@@ -1024,9 +1025,9 @@ class AdminController extends Controller
         $nbusiness = Input::get('penjualan');
         $business = ($nbusiness / 500000) *100;
         $total = $writing + $video + $business + $point;
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
         if((($writing<=100)&&($video<=100)== true)){
             $penilaian_challenge = new Penilaian;
             $penilaian_challenge->user_id = Input::get('user_id');
