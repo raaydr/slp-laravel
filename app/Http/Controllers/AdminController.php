@@ -1221,13 +1221,56 @@ class AdminController extends Controller
         return redirect()->route('admin.coba')->with('berhasil', 'ubah pendaftaran');
     }
     public function ubahChallenge (Request $request){
-        DB::table('control')->where('id',3)->update([
+        DB::table('control')->where('nama','seleksiPertama')->update([
             'boolean'=> $request->seleksiPertama,
             'updated_at'=> now(),
             
             
         ]);
-
+        $check=$request->seleksiPertama;
+        switch ($check) {
+            case '0':
+                $gen = DB::table('control')
+                    ->where('nama', 'gen')
+                    ->value('integer');
+                $challenge = seleksiPertama::where('checked', 0)->get();
+                $jumlah=count($challenge);
+                for ($i = 0; $i <= $jumlah-1; $i++) {
+                    $user_id = $challenge[$i]['user_id'];
+                    $nama = $challenge[$i]['nama'];
+                    $pertama = seleksiPertama::where('user_id', $user_id)->first();
+                    if ((($pertama->url_writing) == "#")&&(($pertama->url_writing) == "#")&&(($pertama->url_writing) == "#") == 1){
+                        
+                        User::where('id', $user_id)->update(['level' => '2']);
+                        Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
+                        seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+                        
+                    }
+                    $penilaian_challenge = new Penilaian;
+                        $penilaian_challenge->user_id = $user_id;
+                        $penilaian_challenge->nama = $nama;
+                        $penilaian_challenge->writing = 0;
+                        $penilaian_challenge->video = 0;
+                        $penilaian_challenge->business = 0;
+                        $penilaian_challenge->total = 0;
+                        $penilaian_challenge->penjualan = 0;
+                        $penilaian_challenge->point = 0;
+                        $penilaian_challenge->gen = $gen;
+                        $penilaian_challenge->save();
+                    }
+                    
+                break;
+            case '1':
+                
+                break;   
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
+        
+        
+        
   
 
         return redirect()->route('admin.coba')->with('berhasil', 'ubah tahap challenge');
