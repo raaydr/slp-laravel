@@ -352,9 +352,9 @@ class AdminController extends Controller
     public function antrian_interview()
     {  
         $title = 'Antrian Interview';
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
         //$antrian = Antrian::where('gen', $gen)->orderBy('antrian', 'ASC')->get();
         $antrian = DB::table('antrian_interview')
                     ->join('table_kepribadian', 'table_kepribadian.user_id', '=', 'antrian_interview.user_id')
@@ -1336,16 +1336,19 @@ class AdminController extends Controller
     }
 
     public function generateAntrian(){
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
-        $challenge = Biodata::where('seleksi_pertama', 'LOLOS')->get();
-        $jumlah=count($challenge);
+        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $users = User::where('level', 1)->where('gen', $gen)->get();
+        $jumlah=count($users);
         $penilaian = Penilaian::get();
         $r=0;
         for ($i = 0; $i <= $jumlah-1; $i++) {
-            $user_id = $challenge[$i]['user_id'];
-            $nama = $challenge[$i]['nama'];
+            $user_id = $users[$i]['id'];
+            $nama = DB::table('biodata')
+            ->where('user_id', $user_id)
+            ->value('nama');
             do {
                 $new_antrian = rand(1,$jumlah);                
                 if (Antrian::where('gen', $gen)->where('antrian', $new_antrian)->exists()) {
