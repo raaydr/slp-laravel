@@ -504,23 +504,15 @@ class AdminController extends Controller
                     $point = $row->point;
                     $penjualan = $row->penjualan;
                     $id = $row->user_id;
-                    if(((($business) != 0 )&&(($video)!= 0)&&(($writing)!= 0))== 0){
-                        $route = route('admin.userprofile', $row->user_id);
-                        $actionBtn = '
-                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian" href='.$route.' target="_blank">
-                                       <i class="fas fa-info"> </i>
-                                       Ubah Penilaian
-                                       </button>';
-                        return $actionBtn;
-                    }else{
-                        $route = route('admin.userprofile', $row->user_id);
+                    $route = route('admin.userprofile', $row->user_id);
                         $actionBtn = '
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian" href='.$route.' target="_blank">
                                        <i class="fas fa-info"> </i>
                                        Ubah Penilaian
-                                       </button>';
+                                       </button>
+                                       ';
                         return $actionBtn;
-                    }    
+                    
 
                 })
                 ->addColumn('Status', function($row){
@@ -570,7 +562,7 @@ class AdminController extends Controller
                 })
                 ->addColumn('Challenge Business', function($row){
                     $b = $row->url_Business;
-                    $asset= "http://slpindonesia.com/imgPembelian/";
+                    $asset= "/imgPembelian/";
                     $link= $asset . $b;
                     if (($b)== '#'){
 
