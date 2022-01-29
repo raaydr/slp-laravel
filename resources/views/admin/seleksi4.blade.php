@@ -125,17 +125,13 @@
                                                       <input
                                                          id="writing"
                                                          type="text"
-                                                         class="form-control{{ $errors->has('writing') ? ' is-invalid' : '' }}"
+                                                         class="form-control"
                                                          name="writing"
                                                          value="{{ old('writing') }}"
                                                          required
                                                          autofocus
                                                          />
-                                                      @if ($errors->has('writing'))
-                                                      <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $errors->first('writing') }}</strong>
-                                                      </span>
-                                                      @endif
+                                                     
                                                    </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -313,8 +309,8 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"
-        integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
@@ -382,7 +378,52 @@
         //jika id = modal-penilaian panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
         //jalankan jquery validator terhadap setiap inputan dll dan eksekusi script ajax untuk simpan data
         if ($("#form-penilaian-edit").length > 0) {
+            $.validator.addMethod('minStrict', function (value, el, param) {
+               return value < param;
+            });
             $("#form-penilaian-edit").validate({
+               rules: {
+                  writing: {
+                     required: true,
+                     number: true,
+                     minStrict:101
+
+                  },
+                  video: {
+                     required: true,
+                     number: true,
+                     minStrict:101
+
+                  },
+                  penjualan: {
+                     required: true,
+                     number: true,
+                    
+                  },
+                  point: {
+                     number: true
+
+                  },
+               },
+               messages: {
+                  writing: {
+                     required: 'Tolong Diisi',
+                     number: 'Mohon untuk menginput hanya angka',
+                     minStrict: 'angka terlalu besar'
+                  },
+                  video: {
+                     required: 'Tolong Diisi',
+                     number: 'Mohon untuk menginput hanya angka',
+                     minStrict: 'angka terlalu besar'
+                  },
+                  penjualan: {
+                     required: 'Tolong Diisi',
+                     number: 'Mohon untuk menginput hanya angka'
+                  },
+                  point: {
+                     number: 'Mohon untuk menginput hanya angka'
+                  }
+               },
                 submitHandler: function (form) {
                     var actionType = $('#tombol-simpan').val();
                     $('#tombol-simpan').html('Sending..');

@@ -488,7 +488,7 @@ class AdminController extends Controller
     }
     public function rank_challenge(Request $request){
         $title = 'Admin Rank Challenge';
-        $r=1;
+        
         $data = DB::table('penilaian_challenge')
                     ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
                     ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
@@ -521,7 +521,7 @@ class AdminController extends Controller
                                        </button>';
                         return $actionBtn;
                     }    
-                    
+
                 })
                 ->addColumn('Status', function($row){
                     $check = $row->seleksi_pertama;
@@ -552,19 +552,19 @@ class AdminController extends Controller
                 ->addColumn('Challenge Writing', function($row){
                     $w = $row->url_writing;
                     if (($w)== '#'){
-                        
+
                         return '<p type="text-danger" >kosong</p>';    
                     }else{
-                        
+
                         return '<a type="text" href='.$w.' target="_blank">check</a>';  
                     }
                 })->addColumn('Challenge Video', function($row){
                     $v = $row->url_video;
                     if (($v)== '#'){
-                        
+
                         return '<p type="text-danger" >kosong</p>';    
                     }else{
-                        
+
                         return '<a type="text" href='.$v.' target="_blank">check</a>';  
                     }
                 })
@@ -573,7 +573,7 @@ class AdminController extends Controller
                     $asset= "http://slpindonesia.com/imgPembelian/";
                     $link= $asset . $b;
                     if (($b)== '#'){
-                        
+
                         return '<p type="text-danger" >kosong</p>';    
                     }else{
                         //return $link;
@@ -585,7 +585,8 @@ class AdminController extends Controller
         }
         //$json=json_encode($data); 
         //echo $json ;
-        return view('admin.seleksi4', compact('title', 'data','r'));
+        
+        return view('admin.seleksi4', compact('title', 'data'));
     }
     public function create_fasil(){
         $title = 'Admin Fasil';
@@ -948,22 +949,18 @@ class AdminController extends Controller
         
 
         $penilaian_challenge = new Penilaian;
-        $user_id = Input::get('user_id');
-        $writing = Input::get('writing');
-        $video = Input::get('video');
-        $point = Input::get('point');
+        $user_id = $request->user_id;
+        $writing = $request->writing;
+        $video = $request->video;
+        $point =$request->point;
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        
-        
-        
-        if((($writing<=100)&& ($video<=100)== true)){
-            $nbusiness = Input::get('penjualan');
-            $business = ($nbusiness / 500000) *100;
-            $total = $writing + $video + $business + $point;
+        $nbusiness = $request->penjualan;
+        $business = ($nbusiness / 500000) *100;
+        $total = $writing + $video + $business + $point;
             DB::table('penilaian_challenge')->where('user_id',$user_id)->update([
-                'nama'=> $request->nama,
+                
                 'writing'=> $request->writing,
                 'video' => $request->video,
                 'business' => $business,
@@ -973,11 +970,13 @@ class AdminController extends Controller
                 'penjualan' => $request->penjualan,
                 'updated_at'=> now(),
             ]);
+            return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
             
-            return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil ubah penilaian');
-        }else{
-            return redirect()->route('admin.userprofile', [$user_id])->with('pesan', 'Penilaian melebihi yang seharusnya');
-        }
+        
+        
+        
+            //return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil ubah penilaian');
+       
         
         
     
@@ -1049,8 +1048,7 @@ class AdminController extends Controller
     
 
     }
-    public function challenge_editpenilaian (Request $request)
-    {
+    public function challenge_editpenilaian (Request $request){
         $validator = Validator::make(
             $request->all(),
             [
@@ -1058,44 +1056,39 @@ class AdminController extends Controller
                 'writing' => 'required|numeric',
                 'video' => 'required|numeric',
                 'penjualan' => 'required|numeric',
-                'point' => 'required|numeric',
-
+                'point' => 'numeric',
                 
-
             ],
-
             $messages = [
                 
                 'writing.required' => 'Harus angka !',
+                'writing.numeric' => 'harus angka',
                 'video.required' => 'Harus angka!',
                 'penjualan.required' => 'Harus angka!',
-                'point' => 'required|numeric',
+                'point.numeric' => 'harus angka',
                
-
             ]
         );
-
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput();
         }
         
-
         $penilaian_challenge = new Penilaian;
         $user_id = Input::get('user_id');
         $writing = Input::get('writing');
         $video = Input::get('video');
         $point = Input::get('point');
-        $gen = DB::table('controller')
-            ->where('id', 1)
-            ->value('gen');
-        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+
         $nama = DB::table('biodata')
             ->where('user_id', $user_id)
             ->value('nama');
+
         
-        if((($writing<=100)&& ($video<=100)== true)){
             $nbusiness = Input::get('penjualan');
             $business = ($nbusiness / 500000) *100;
             $total = $writing + $video + $business + $point;
@@ -1104,21 +1097,13 @@ class AdminController extends Controller
                 'writing'=> $request->writing,
                 'video' => $request->video,
                 'business' => $business,
-                'total'=> $total,
-                'gen'=> $gen,
-                'point'=> $request->point,
-                'penjualan' => $request->penjualan,
+                'total' => $total,
+                'penjualan' => $nbusiness,
                 'updated_at'=> now(),
             ]);
-            
-            return response()->json($post);
-        }else{
-            return response()->json($post);
-        }
-        
-        
-    
 
+            return response()->json($post);
+        
     }
 
     public function interview_hadir($user_id)
