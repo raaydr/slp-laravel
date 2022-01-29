@@ -1383,12 +1383,7 @@
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script>
          function rupiah(){
-         var bilangan = "0";
-         var check = {$user->Biodata->seleksi_berkas};
-         if ((check === "LULUS")){
-            var bilangan = {$user->Penilaian->penjualan};
-         }
-         
+         var bilangan = {{$user->Penilaian->penjualan}} ;
          var	number_string = bilangan.toString(),
          sisa 	= number_string.length % 3,
          rupiah 	= number_string.substr(0, sisa),
@@ -1428,8 +1423,7 @@
          //the function body is the same as you have defined sue the textbox object to set the value
          }
          
-
-         rupiah();   
+         rupiah();
          earn();
              $(function () {
                  $("#example1")
@@ -1527,5 +1521,6 @@
          
          })
       </script>
+   
    </body>
 </html>
