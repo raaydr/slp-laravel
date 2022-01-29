@@ -167,18 +167,19 @@
                             <br />
                             Untuk hasilnya, silahkan upload Screenshot bagian Conclusion/Kesimpulan dari Kepribadian kamu dan Upload disini yaa 😋
                             <br />
-                           <!-- <button
+                            @if ($absen == "Tidak Hadir")
+                           <button
                                 class="btn btn-success btn-sm m-4"
                                 data-toggle="modal"
                                 data-myid="{{$nilai->user_id}}"
                                 data-myname="{{$nilai->nama}}"
                                 data-target="#modal-upload"
                                 href="{{ route('pendaftar.kepribadian.pdf', $nilai->user_id) }}"
-                                target="_blank"
-                            >
+                                target="_blank">
                                 <i class="fas fa-check"> </i>
                                 Upload
-                            </button>-->
+                            </button>
+                            @endif
                             @if (!empty($kepribadian->url_kepribadian))
                             <a class="btn btn-primary btn-sm m-4" href="{{asset('teskepribadian')}}/{{$kepribadian->url_kepribadian}}" target="_blank">check</a>
                             @endif

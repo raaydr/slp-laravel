@@ -444,6 +444,9 @@ class PendaftarController extends Controller
         $users = DB::table('users')
             ->where('id', $id)
             ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
         $ranking = Penilaian::where('total', '!=', 0)
             ->orderBy('total', 'DESC')
             ->get();
@@ -455,6 +458,8 @@ class PendaftarController extends Controller
             ->first();
         $antrian = Antrian::where('user_id', $id)
             ->value('antrian');
+        $absen = Antrian::where('user_id', $id)
+            ->value('absen');
         $waktu = "";
             if ((1 <= $antrian) && ($antrian <= 6)){
                 $waktu = "Sabtu 22 mei, jam 10.30 - 11.15";
@@ -478,7 +483,7 @@ class PendaftarController extends Controller
                 $waktu = "Minggu 23 mei, jam  14.30 - 15.15";
             }
 
-        return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu'));
+        return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu','biodata','absen'));
     }
 
     public function uploadKepribadian(Request $request)
