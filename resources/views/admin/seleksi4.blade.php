@@ -317,6 +317,11 @@
 
 
       <script>
+         $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
          $(function () {
              $("#example1")
                  .DataTable({
@@ -374,6 +379,40 @@
              modal.find('.modal-body #penjualan').val(penjualan)
              modal.find('.modal-body #point').val(point)
          });
+         $('body').on('click', '.deleteItem', function() {
+   var Item_id = $(this).data("id");
+   var val = $(this).data("val");
+   var url = '{{ route("admin.keputusanSeleksiPertama",[":id",":val"]) }}';
+   url = url.replace(':id', Item_id);
+   url = url.replace(':val', val);
+   $.ajax({
+   
+      type: "GET",
+   
+      url: url,
+   
+      success: function(data) {
+   
+          iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+              title: 'Data Berhasil Disimpan',
+              message: '{{ Session('
+              success ')}}',
+              position: 'bottomRight'
+          });
+          var oTable = $('#example1').dataTable(); //inialisasi datatable
+          oTable.fnDraw(false); //reset datatable
+   
+      },
+   
+      error: function(data) {
+   
+          console.log('Error:', data);
+   
+      }
+   
+   });
+   
+   });
          //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
         //jika id = modal-penilaian panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
         //jalankan jquery validator terhadap setiap inputan dll dan eksekusi script ajax untuk simpan data

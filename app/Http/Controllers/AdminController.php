@@ -504,13 +504,21 @@ class AdminController extends Controller
                     $point = $row->point;
                     $penjualan = $row->penjualan;
                     $id = $row->user_id;
-                    $route = route('admin.userprofile', $row->user_id);
+                    
                         $actionBtn = '
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian" href='.$route.' target="_blank">
+                        <button class="btn btn-primary btn-sm m-1" data-toggle="modal" data-myid='.$id.' data-writing='.$writing.' data-point='.$point.' data-video='.$video.' data-penjualan='.$penjualan.' data-target="#modal-penilaian"  target="_blank">
                                        <i class="fas fa-info"> </i>
                                        Ubah Penilaian
                                        </button>
                                        ';
+                        $actionBtn = $actionBtn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-val="0" data-original-title="Publish" class="btn btn-danger btn-sm m-2 deleteItem">Gugur</a>';
+                        $actionBtn = $actionBtn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-val="1" data-original-title="Publish" class="btn btn-success btn-sm m-2 deleteItem">Lulus</a>';
+                        $detail = route('admin.userprofile', $row->user_id);
+                        $actionBtn =$actionBtn. '
+                        <a class="btn btn-primary btn-sm m-2" href='.$detail.' >
+                                           <i class="fas fa-folder"> </i>
+                                           Detail
+                                           </a>';
                         return $actionBtn;
                     
 
@@ -523,23 +531,7 @@ class AdminController extends Controller
                     if(($check)== 'LOLOS'){
                         return '<p class="text-success">LOLOS</p>';
                     }
-                    if(($check)== ''){
-                        $r=1;
-                        $gagal = route('admin.challenge.gagal', [$row->user_id,$r]);
-                        $button = '
-                        <a class="btn btn-danger btn-sm m-2" href='.$gagal.'>
-                                       <i class="fas fa-exclamation"> </i>
-                                       Gagal
-                                       </a>';
-                        $button .= '&nbsp;&nbsp;';
-                        $lulus = route('admin.challenge.lulus', [$row->user_id,$row->nama]);
-                        $button = '
-                        <a class="btn btn-success btn-sm m-2" href='.$lulus.'>
-                                       <i class="fas fa-check"> </i>
-                                       Lulus
-                                       </a>';
-                        return $button;
-                    }
+                    
                 })
                 ->addColumn('Challenge Writing', function($row){
                     $w = $row->url_writing;
@@ -579,6 +571,28 @@ class AdminController extends Controller
         //echo $json ;
         
         return view('admin.seleksi4', compact('title', 'data'));
+    }
+    public function keputusanSeleksiPertama($user_id,$val)
+    {
+        
+        switch ($val) {
+            case '0':
+                User::where('id', $user_id)->update(['level' => '2']);
+                Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
+                seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+                return response()->json(['success'=>'Batal Publish Mata Pelatihan']);
+                break;
+            case '1':
+                User::where('id', $user_id)->update(['level' => '1']);
+                Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'LOLOS']);
+                seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
+                return response()->json(['success'=>'Publish Mata Pelatihan']);
+                break;
+            
+                default:
+                echo "Kemenkes";
+                break;
+        }    
     }
     public function create_fasil(){
         $title = 'Admin Fasil';
