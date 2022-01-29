@@ -67,26 +67,6 @@
                         </a>
                   </li>
                   <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.gagaldaftar" )
-                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link active">
-                     @else
-                        <a href="{{ route('admin.gagaldaftar') }}" class="nav-link ">
-                     @endif
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Pendaftar Ulang</p>
-                        </a>
-                  </li>
-                  <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.challenge" )
-                        <a href="{{ route('admin.challenge') }}" class="nav-link active">
-                     @else
-                        <a href="{{ route('admin.challenge') }}" class="nav-link ">
-                     @endif
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Tahap Challenge</p>
-                        </a>
-                  </li>
-                  <li class="nav-item">
                      @if ( Route::currentRouteName() == "admin.challenge.rank" )
                         <a href="{{ route('admin.challenge.rank') }}" class="nav-link active">
                      @else
