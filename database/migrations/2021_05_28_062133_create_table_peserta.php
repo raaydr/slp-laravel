@@ -17,6 +17,7 @@ class CreateTablePeserta extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->boolean('status');
+            $table->boolean('aktif');
             $table->boolean('captain');
             $table->integer('grup')->nullable();
             $table->integer('gen');
