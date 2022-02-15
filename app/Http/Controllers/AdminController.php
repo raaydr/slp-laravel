@@ -909,7 +909,7 @@ class AdminController extends Controller
             $penilaian_challenge->video = Input::get('video');
             $penilaian_challenge->business = $business;
             $penilaian_challenge->total = $total;
-            $penilaian_challenge->point = Input::get('point');
+            $penilaian_challenge->point = $point;
             $penilaian_challenge->penjualan = Input::get('penjualan');
             $penilaian_challenge->save();
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
@@ -972,7 +972,7 @@ class AdminController extends Controller
                 'business' => $business,
                 'total'=> $total,
                 'gen'=> $gen,
-                'point'=> $request->point,
+                'point'=> $point,
                 'penjualan' => $request->penjualan,
                 'updated_at'=> now(),
             ]);
@@ -1103,6 +1103,7 @@ class AdminController extends Controller
                 'writing'=> $request->writing,
                 'video' => $request->video,
                 'business' => $business,
+                'point' => $point,
                 'total' => $total,
                 'penjualan' => $nbusiness,
                 'updated_at'=> now(),
