@@ -607,55 +607,7 @@
                                        </p>
                                     </div>
                                     <!-- /.post -->
-                                    <div class="input-group-append">
-                                       <a data-toggle="modal" data-target="#modal-primary1" class="btn btn-primary m-2">Lulus</a>
-                                       <a data-toggle="modal" data-target="#modal-danger1" class="btn btn-danger m-2">Gagal</a>
-                                    </div>
-                                    <div class="modal fade" id="modal-danger1">
-                                       <div class="modal-dialog">
-                                          <div class="modal-content bg-danger">
-                                             <div class="modal-header">
-                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                             </div>
-                                             <div class="modal-body">
-                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
-                                             </div>
-                                             <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <a href="{{ route('admin.seleksi2.gagal', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
-                                             </div>
-                                          </div>
-                                          <!-- /.modal-content -->
-                                       </div>
-                                       <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
-                                    <!-- /.modal -->
-                                    <div class="modal fade" id="modal-primary1">
-                                       <div class="modal-dialog">
-                                          <div class="modal-content bg-primary">
-                                             <div class="modal-header">
-                                                <h4 class="modal-title">Tahap Seleksi Pertama</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                             </div>
-                                             <div class="modal-body">
-                                                <p>Anda yakin ingin mengeliminasi peserta ?</p>
-                                             </div>
-                                             <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <a href="{{ route('admin.seleksi2.lulus', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
-                                             </div>
-                                          </div>
-                                          <!-- /.modal-content -->
-                                       </div>
-                                       <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
+                                    
                                  </div>
                                  <!-- /.tab-pane -->
                                  @endif
@@ -803,7 +755,7 @@
                                                                </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                               <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                                               <p>Anda yakin ingin meluluskan peserta ?</p>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
