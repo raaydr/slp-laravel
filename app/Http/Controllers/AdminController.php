@@ -567,9 +567,7 @@ class AdminController extends Controller
                 ->rawColumns(['Penilaian','Status', 'Challenge Writing', 'Challenge Video', 'Challenge Business'])
                 ->make(true);
         }
-        //$json=json_encode($data); 
-        //echo $json ;
-        
+
         return view('admin.seleksi4', compact('title', 'data'));
     }
     public function keputusanSeleksiPertama($user_id,$val)
@@ -627,17 +625,119 @@ class AdminController extends Controller
         return view('admin.ubahpassword', compact('title'));
     }
 
-    public function pengelompok_peserta(){
+    public function pengelompok_peserta(Request $request){
         $title = 'Admin Peserta Pengelompokkan';
-        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $data = DB::table('users')
+                    ->join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    //->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    ->where('users.level', 4)
+                    ->where('users.gen', $gen)->get();
         $users = User::where('level', 4)->get();
+        
         
         $grup1 = Peserta::where('grup',1)->get();
         $grup2 = Peserta::where('grup',2)->get();
         $grup3 = Peserta::where('grup',3)->get();
         $grup4 = Peserta::where('grup',4)->get();
         
-
+        if($request->ajax()){
+                return datatables()->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('Umur', function($row){
+                        $bd = $row->tanggal_lahir;
+                        $date = new DateTime($bd);
+                        $now = new DateTime();
+                        $interval = $now->diff($date);
+                        $umur= $interval->y;
+                        return $umur;
+                        
+    
+                    })
+                    ->addColumn('Gender', function($row){
+                        $check = $row->jenis_kelamin;
+                        if(($check)== 'Pria'){
+                            return '<p class="text-primary">Pria</p>';
+                        }
+                        if(($check)== 'Wanita'){
+                            return '<p class="text-success">Wanita</p>';
+                        }
+                        
+                    })
+                    ->addColumn('Grup', function($row){
+                        $check = $row->grup;
+                        if(($check)== '0'){
+                            return '<p class="text-danger">Kosong</p>';
+                        }
+                        if(($check)== '1'){
+                            return '<p class="text-primary"><b>Kel-1</b></p>';
+                        }
+                        if(($check)== '2'){
+                            return '<p class="text-success"><b>Kel-2</b></p>';
+                        }
+                        if(($check)== '3'){
+                            return '<p class="text-warning"><b>Kel-3</b></p>';
+                        }
+                        return 'test';
+                    })->addColumn('Status', function($row){
+                        $v = $row->aktif;
+                        if (($v)== '0'){
+    
+                            return '<p class="text-danger">non-aktif</p>';    
+                        }else{
+    
+                            return '<p class="text-success">aktif</p>';  
+                        }
+                        return 'test';
+                    })
+                    ->addColumn('action', function($row){
+                    $check = $row->aktif;
+                    $detail = route('admin.userprofile', $row->id);
+                    $aktif = route('admin.peserta.status', [0,$row->id]);
+                    $nonaktif = route('admin.peserta.status', [1,$row->id]);
+                    switch ($check) {
+                        case '0':
+                            return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
+                            <i class="fas fa-info"> </i>
+                            grup
+                            </button>
+                            <a class="btn btn-primary btn-sm m-2"  href='.$detail.'>
+                            <i class="fas fa-folder"> </i>
+                            Detail
+                            </a>
+                            <a class="btn btn-primary btn-sm m-2"  href='.$aktif.'>
+                            <i class="fas ion-person"> </i>
+                            Aktif
+                            </a>';  
+                                
+                            break;
+                        case '1':
+                            return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
+                            <i class="fas fa-info"> </i>
+                            grup
+                            </button>
+                            <a class="btn btn-primary btn-sm m-2"  href='.$detail.'>
+                            <i class="fas fa-folder"> </i>
+                            Detail
+                            </a>                         
+                            <a class="btn btn-primary btn-sm m-2"  href='.$nonaktif.'>
+                            <i class="fas ion-person"> </i>
+                            Gugur
+                            </a>';  
+                            break;   
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                    
+                        
+                    })
+                    ->rawColumns(['Umur','Gender', 'Grup', 'Status', 'action'])
+                    ->make(true);
+            }
         return view('admin.pengelompokPeserta', compact('title','users','grup1','grup2','grup3','grup4'));
     }
 // Method LULUS GAGAL
@@ -1444,6 +1544,17 @@ class AdminController extends Controller
             
              
         }else{
+            $data = User::where('id', $user_id)->first();
+            $biodata = Biodata::where('id', $user_id)->first();
+            $user = new Peserta;
+            $user->nama = $biodata['nama'];
+            $user->status =  1;
+            $user->aktif =  1;
+            $user->captain = 0;
+            $user->gen = $data['gen'];
+            $user->grup = 0;
+            $user->user_id =$data['id'];
+            $user->save();
             User::where('id', $user_id)->update(['level' => '4']);
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan');
         }
