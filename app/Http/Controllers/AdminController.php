@@ -667,13 +667,13 @@ class AdminController extends Controller
                             return '<p class="text-danger">Kosong</p>';
                         }
                         if(($check)== '1'){
-                            return '<p class="text-primary"><b>Kel-1</b></p>';
+                            return '<p class="text-primary"><b>Grup 1</b></p>';
                         }
                         if(($check)== '2'){
-                            return '<p class="text-success"><b>Kel-2</b></p>';
+                            return '<p class="text-success"><b>Grup 2</b></p>';
                         }
                         if(($check)== '3'){
-                            return '<p class="text-warning"><b>Kel-3</b></p>';
+                            return '<p class="text-warning"><b>Grup 3</b></p>';
                         }
                         return 'test';
                     })->addColumn('Status', function($row){
@@ -704,7 +704,7 @@ class AdminController extends Controller
                             <i class="fas fa-folder"> </i>
                             Detail
                             </a>
-                            <a class="btn btn-primary btn-sm m-2"  href='.$aktif.'>
+                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'"  href='.$aktif.'>
                             <i class="fas ion-person"> </i>
                             Aktif
                             </a>';  
@@ -719,7 +719,7 @@ class AdminController extends Controller
                             <i class="fas fa-folder"> </i>
                             Detail
                             </a>                         
-                            <a class="btn btn-primary btn-sm m-2"  href='.$nonaktif.'>
+                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" href='.$nonaktif.'>
                             <i class="fas ion-person"> </i>
                             Gugur
                             </a>';  
@@ -2127,29 +2127,31 @@ class AdminController extends Controller
                 ]);
                 Peserta::where('user_id', $id)
                 ->update([
-                    'aktif' => 1,
-                    'updated_at' => now(),
-                ]);
-        
-
-        
-        return Redirect::back()->with('pesan','Operation Successful !');
-                break;
-            case '1':
-                User::where('id', $id)
-                ->update([
-                    'level' => 2,
-                    'updated_at' => now(),
-                ]);
-                Peserta::where('user_id', $id)
-                ->update([
                     'aktif' => 0,
                     'updated_at' => now(),
                 ]);
         
 
         
-        return Redirect::back()->with('pesan','Operation Successful !');
+        //return Redirect::back()->with('pesan','Operation Successful !');
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+                break;
+            case '1':
+                User::where('id', $id)
+                ->update([
+                    'level' => 4,
+                    'updated_at' => now(),
+                ]);
+                Peserta::where('user_id', $id)
+                ->update([
+                    'aktif' => 1,
+                    'updated_at' => now(),
+                ]);
+        
+
+        
+        //return Redirect::back()->with('pesan','Operation Successful !');
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
                 break;   
                  
                 default:

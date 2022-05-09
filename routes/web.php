@@ -355,7 +355,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/Peserta/status/{v}/{id}', 'AdminController@statusPeserta')->name('admin.peserta.status');
+	Route::get('/Peserta/status/{id}', 'AdminController@statusPeserta')->name('admin.peserta.status');
 
 	});
 });

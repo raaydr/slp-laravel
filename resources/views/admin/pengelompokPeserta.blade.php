@@ -299,6 +299,43 @@
                  modal.find(".modal-body #nama").val(nama);
              });
          });
+         $('body').on('click', '.deleteItem', function() {
+         var Item_id = $(this).data("id");
+         var v = $(this).data("v");
+         
+         var url = '{{ route("admin.peserta.status",":v",":id") }}';
+         url = url.replace(':v', v);
+         url = url.replace(':id', Item_id);
+         
+         
+         $.ajax({
+         
+            type: "GET",
+         
+            url: url,
+         
+            success: function(data) {
+         
+                iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                    title: 'Data Berhasil Disimpan',
+                    message: '{{ Session('
+                    success ')}}',
+                    position: 'bottomRight'
+                });
+                var oTable = $('#example1').dataTable(); //inialisasi datatable
+                oTable.fnDraw(false); //reset datatable
+         
+            },
+         
+            error: function(data) {
+         
+                console.log('Error:', data);
+         
+            }
+         
+         });
+         
+         });
          if ($("#form-grup").length > 0) {            
             $("#form-grup").validate({
                 submitHandler: function (form) {
