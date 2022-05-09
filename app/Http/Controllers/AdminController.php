@@ -638,12 +638,6 @@ class AdminController extends Controller
                     ->where('users.gen', $gen)->get();
         $users = User::where('level', 4)->get();
         
-        
-        $grup1 = Peserta::where('grup',1)->get();
-        $grup2 = Peserta::where('grup',2)->get();
-        $grup3 = Peserta::where('grup',3)->get();
-        $grup4 = Peserta::where('grup',4)->get();
-        
         if($request->ajax()){
                 return datatables()->of($data)
                     ->addIndexColumn()
@@ -697,10 +691,12 @@ class AdminController extends Controller
                     $check = $row->aktif;
                     $detail = route('admin.userprofile', $row->id);
                     $aktif = route('admin.peserta.status', [0,$row->id]);
+                    $id = $row->user_id;
+                    $nama = $row->nama;
                     $nonaktif = route('admin.peserta.status', [1,$row->id]);
                     switch ($check) {
                         case '0':
-                            return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
+                            return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid='.$id.' data-myname='.$nama.' data-target="#modal-grup" target="_blank">
                             <i class="fas fa-info"> </i>
                             grup
                             </button>
@@ -715,7 +711,7 @@ class AdminController extends Controller
                                 
                             break;
                         case '1':
-                            return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid="{{$user->Biodata->user_id}}" data-myname="{{$user->Biodata->nama}}" data-target="#modal-grup" target="_blank">
+                            return  '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid='.$id.' data-myname='.$nama.' data-target="#modal-grup" target="_blank">
                             <i class="fas fa-info"> </i>
                             grup
                             </button>
@@ -738,7 +734,7 @@ class AdminController extends Controller
                     ->rawColumns(['Umur','Gender', 'Grup', 'Status', 'action'])
                     ->make(true);
             }
-        return view('admin.pengelompokPeserta', compact('title','users','grup1','grup2','grup3','grup4'));
+        return view('admin.pengelompokPeserta', compact('title','users'));
     }
 // Method LULUS GAGAL
     public function seleksi1_lulus($user_id)
@@ -1702,34 +1698,15 @@ class AdminController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-        $gen = DB::table('control')
-            ->where('id', 4)
-            ->value('integer');
-        $id =  Input::get('user_id');
-
-        if (Peserta::where('gen', $gen)->where('user_id', $id)->exists()) {
+        $id =  $request->user_id;
             DB::table('peserta')->where('user_id',$id)->update([
                 
                 'grup' => $request->grup,
                 'updated_at'=> now(),
             ]);
-            return redirect()->route('admin.peserta.pengelompok')->with('pesan', 'berhasil update');
-        } else{
-             //Table Peserta
-            $user = new Peserta;
-            $user->nama = Input::get('nama');
-            $user->aktif =  1;
-            $user->captain = 0;
-            $user->gen = $gen;
-            $user->grup =  Input::get('grup');
-            $user->user_id = Input::get('user_id');
-            $user->video_clear =  0;
-            $user->writing_clear =  0;
-            $user->business_clear =  0;
-            $user->hasil_clear =  0;
-            $user->save();
-            return redirect()->route('admin.peserta.pengelompok')->with('berhasil', 'berhasil menambahkan grup');
-        }
+            return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+            //return redirect()->route('admin.peserta.pengelompok')->with('pesan', 'berhasil update'); 
+
         
     }
 

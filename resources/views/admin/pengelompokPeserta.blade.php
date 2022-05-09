@@ -17,6 +17,8 @@
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
    </head>
    <body class="hold-transition sidebar-mini">
       <!-- Site wrapper -->
@@ -124,7 +126,7 @@
                                              <span aria-hidden="true">&times;</span>
                                              </button>
                                           </div>
-                                          <form method="POST" action="{{route('admin.peserta.addgrup')}}" enctype="multipart/form-data" class="was-validated">
+                                          <form id="form-grup"  enctype="multipart/form-data" class="was-validated">
                                              {{csrf_field()}}
                                              <div class="modal-body">
                                                 <div class="form-group row">
@@ -159,17 +161,13 @@
                                                             <option value="3">Grup 3</option>
                                                          </select>
                                                       </div>
-                                                      @if ($errors->has('writing'))
-                                                      <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $errors->first('writing') }}</strong>
-                                                      </span>
-                                                      @endif
+                                                      
                                                    </div>
                                                 </div>
                                              </div>
                                              <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-outline-light">Save</button>
+                                                <button type="submit" class="btn btn-outline-light" id="tombol-simpan">Save</button>
                                              </div>
                                           </form>
                                        </div>
@@ -203,186 +201,6 @@
                                     <th>Grup</th>
                                     <th>status</th>
                                     <th>action</th>
-                                 </tr>
-                              </tfoot>
-                           </table>
-                        </div>
-                        <!-- /.card-body -->
-                     </div>
-                     <!-- /.card -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-4">
-                     <div class="card">
-                        <div class="card-header">
-                           <h3 class="card-title">Grup 1</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                           <table id="example2" class="table table-bordered table-striped">
-                              <thead>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($grup1 as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->nama }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
-                                       <i class="fas fa-exclamation"> </i>
-                                       hapus
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
-                              <tfoot>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </tfoot>
-                           </table>
-                        </div>
-                        <!-- /.card-body -->
-                     </div>
-                     <!-- /.card -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-4">
-                     <div class="card">
-                        <div class="card-header">
-                           <h3 class="card-title">Grup2</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                           <table id="example3" class="table table-bordered table-striped">
-                              <thead>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($grup2 as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->nama }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
-                                       <i class="fas fa-exclamation"> </i>
-                                       hapus
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
-                              <tfoot>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </tfoot>
-                           </table>
-                        </div>
-                        <!-- /.card-body -->
-                     </div>
-                     <!-- /.card -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-4">
-                     <div class="card">
-                        <div class="card-header">
-                           <h3 class="card-title">Grup3</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                           <table id="example4" class="table table-bordered table-striped">
-                              <thead>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($grup3 as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->nama }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
-                                       <i class="fas fa-exclamation"> </i>
-                                       hapus
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
-                              <tfoot>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </tfoot>
-                           </table>
-                        </div>
-                        <!-- /.card-body -->
-                     </div>
-                     <!-- /.card -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-4">
-                     <div class="card">
-                        <div class="card-header">
-                           <h3 class="card-title">Grup dummy</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                           <table id="example4" class="table table-bordered table-striped">
-                              <thead>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($grup4 as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->nama }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-danger btn-sm" href="{{ route('admin.peserta.deletegrup', $user->user_id) }}">
-                                       <i class="fas fa-exclamation"> </i>
-                                       hapus
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
-                              <tfoot>
-                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th></th>
                                  </tr>
                               </tfoot>
                            </table>
@@ -430,7 +248,19 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+
+
       <script>
+         $.ajaxSetup({
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
          $(function () {
             $("#example1")
                  .DataTable({
@@ -459,42 +289,6 @@
                  .buttons()
                  .container()
                  .appendTo("#example1_wrapper .col-md-6:eq(0)");
-             $("#example2").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: false,
-                 info: false,
-                 autoWidth: false,
-                 responsive: true,
-             });
-             $("#example3").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: false,
-                 info: false,
-                 autoWidth: false,
-                 responsive: true,
-             });
-             $("#example4").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: false,
-                 info: false,
-                 autoWidth: false,
-                 responsive: true,
-             });
-             $("#example5").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: false,
-                 info: false,
-                 autoWidth: false,
-                 responsive: true,
-             });
              $("#modal-grup").on("show.bs.modal", function (event) {
                  var button = $(event.relatedTarget); // Button that triggered the modal
                  var id = button.data("myid");
@@ -505,6 +299,39 @@
                  modal.find(".modal-body #nama").val(nama);
              });
          });
+         if ($("#form-grup").length > 0) {            
+            $("#form-grup").validate({
+                submitHandler: function (form) {
+                    var actionType = $('#tombol-simpan').val();
+                    $('#tombol-simpan').html('Sending..');
+
+                    $.ajax({
+                        data: $('#form-grup')
+                            .serialize(), //function yang dipakai agar value pada form-control seperti input, textarea, select dll dapat digunakan pada URL query string ketika melakukan ajax request
+                        url: "{{ route('admin.peserta.addgrup') }}", //url simpan data
+                        type: "POST", //karena simpan kita pakai method POST
+                        dataType: 'json', //data tipe kita kirim berupa JSON
+                        success: function (data) { //jika berhasil 
+                            $('#form-grup').trigger("reset"); //form reset
+                            $('#modal-grup').modal('hide'); //modal hide
+                            $('#tombol-simpan').html('Simpan'); //tombol simpan
+                            var oTable = $('#example1').dataTable(); //inialisasi datatable
+                            oTable.fnDraw(false); //reset datatable
+                            iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                title: 'Data Berhasil Disimpan',
+                                message: '{{ Session('
+                                success ')}}',
+                                position: 'bottomRight'
+                            });
+                        },
+                        error: function (data) { //jika error tampilkan error pada console
+                            console.log('Error:', data);
+                            $('#tombol-simpan').html('Simpan');
+                        }
+                    });
+                }
+            })
+        }
       </script>
    </body>
 </html>

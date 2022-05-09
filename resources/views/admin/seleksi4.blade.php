@@ -310,9 +310,9 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
 
@@ -380,39 +380,39 @@
              modal.find('.modal-body #point').val(point)
          });
          $('body').on('click', '.deleteItem', function() {
-   var Item_id = $(this).data("id");
-   var val = $(this).data("val");
-   var url = '{{ route("admin.keputusanSeleksiPertama",[":id",":val"]) }}';
-   url = url.replace(':id', Item_id);
-   url = url.replace(':val', val);
-   $.ajax({
+                  var Item_id = $(this).data("id");
+                  var val = $(this).data("val");
+                  var url = '{{ route("admin.keputusanSeleksiPertama",[":id",":val"]) }}';
+                  url = url.replace(':id', Item_id);
+                  url = url.replace(':val', val);
+                  $.ajax({
+                  
+                     type: "GET",
+                  
+                     url: url,
+            
+                  success: function(data) {
+            
+                  iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                     title: 'Data Berhasil Disimpan',
+                     message: '{{ Session('
+                     success ')}}',
+                     position: 'bottomRight'
+                  });
+                  var oTable = $('#example1').dataTable(); //inialisasi datatable
+                  oTable.fnDraw(false); //reset datatable
+            
+               },
+            
+               error: function(data) {
+            
+                  console.log('Error:', data);
+            
+               }
+            
+            });
    
-      type: "GET",
-   
-      url: url,
-   
-      success: function(data) {
-   
-          iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
-              title: 'Data Berhasil Disimpan',
-              message: '{{ Session('
-              success ')}}',
-              position: 'bottomRight'
-          });
-          var oTable = $('#example1').dataTable(); //inialisasi datatable
-          oTable.fnDraw(false); //reset datatable
-   
-      },
-   
-      error: function(data) {
-   
-          console.log('Error:', data);
-   
-      }
-   
-   });
-   
-   });
+         });
          //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
         //jika id = modal-penilaian panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
         //jalankan jquery validator terhadap setiap inputan dll dan eksekusi script ajax untuk simpan data
