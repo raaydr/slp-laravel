@@ -690,10 +690,10 @@ class AdminController extends Controller
                     ->addColumn('action', function($row){
                     $check = $row->aktif;
                     $detail = route('admin.userprofile', $row->id);
-                    $aktif = route('admin.peserta.status', [0,$row->id]);
+                    
                     $id = $row->user_id;
                     $nama = $row->nama;
-                    $nonaktif = route('admin.peserta.status', [1,$row->id]);
+                    
                     switch ($check) {
                         case '0':
                             return '<button class="btn btn-success btn-sm m-2" data-toggle="modal" data-myid='.$id.' data-myname='.$nama.' data-target="#modal-grup" target="_blank">
@@ -704,7 +704,7 @@ class AdminController extends Controller
                             <i class="fas fa-folder"> </i>
                             Detail
                             </a>
-                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'"  href='.$aktif.'>
+                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" >
                             <i class="fas ion-person"> </i>
                             Aktif
                             </a>';  
@@ -719,7 +719,7 @@ class AdminController extends Controller
                             <i class="fas fa-folder"> </i>
                             Detail
                             </a>                         
-                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" href='.$nonaktif.'>
+                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" >
                             <i class="fas ion-person"> </i>
                             Gugur
                             </a>';  
@@ -2116,8 +2116,10 @@ class AdminController extends Controller
                 return Redirect::back()->with('pesan','Operation Successful !');
     }
 
-    public function statusPeserta($v,$id){
-        
+    public function statusPeserta($id){
+        $v = DB::table('peserta')
+        ->where('user_id', $id)
+        ->value('aktif');
         switch ($v) {
             case '0':
                 User::where('id', $id)
@@ -2127,7 +2129,7 @@ class AdminController extends Controller
                 ]);
                 Peserta::where('user_id', $id)
                 ->update([
-                    'aktif' => 0,
+                    'aktif' => 1,
                     'updated_at' => now(),
                 ]);
         
@@ -2144,7 +2146,7 @@ class AdminController extends Controller
                 ]);
                 Peserta::where('user_id', $id)
                 ->update([
-                    'aktif' => 1,
+                    'aktif' => 0,
                     'updated_at' => now(),
                 ]);
         

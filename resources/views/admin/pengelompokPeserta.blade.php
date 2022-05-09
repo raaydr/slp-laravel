@@ -301,10 +301,8 @@
          });
          $('body').on('click', '.deleteItem', function() {
          var Item_id = $(this).data("id");
-         var v = $(this).data("v");
          
-         var url = '{{ route("admin.peserta.status",":v",":id") }}';
-         url = url.replace(':v', v);
+         var url = '{{ route("admin.peserta.status",":id") }}';
          url = url.replace(':id', Item_id);
          
          
