@@ -359,7 +359,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 
 	});
 });
+Route::group(['middleware' => 'check-permission:admin'], function () {
+    Route::group(['prefix' => 'admin'], function () {
+	Route::get('/Target-Tugas/Pembuatan', 'AdminController@PembuatanTargetTugas')->name('admin.targetTugas.pembuatan');
 
+	});
+});
 
 // ROUTES PENDAFTAR
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {

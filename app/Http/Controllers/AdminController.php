@@ -2251,4 +2251,15 @@ class AdminController extends Controller
         $tanggalbaru=Carbon::parse($tanggal)->isoFormat('D MMMM Y');
         return view('post',compact('blog','tanggalbaru'));
     }
+
+    public function PembuatanTargetTugas()
+    {
+        $title = 'Pembuatan Target Tugas';
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        
+
+        return view('admin.pembuatanTargetTugas', compact('title', 'gen'));
+    }
 }
