@@ -146,6 +146,16 @@
                         </a>
                   </li>
                   <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.targetTugas.pembuatan" )
+                        <a href="{{ route('admin.targetTugas.pembuatan') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.targetTugas.pembuatan') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Pembuatan Target</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
                      @if ( Route::currentRouteName() == "admin.PemeriksaanTugasWriting" )
                         <a href="{{ route('admin.PemeriksaanTugasWriting') }}" class="nav-link active">
                      @else

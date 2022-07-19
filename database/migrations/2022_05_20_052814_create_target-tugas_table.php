@@ -15,11 +15,11 @@ class CreateTargetTugasTable extends Migration
     {
         Schema::create('target_tugas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('target');
-            $table->string('jenis');
+            $table->string('judul');
             $table->text('keterangan');
-            $table->integer('jumlah');
+            $table->string('tipe_tugas');
             $table->integer('gen');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

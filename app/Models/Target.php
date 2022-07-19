@@ -13,7 +13,7 @@ class Target extends Model
         'target',
         'keterangan',
         'jumlah',
-        'jenis',
+        'tipe_tugas',
         'gen',
         
         

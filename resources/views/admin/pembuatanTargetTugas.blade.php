@@ -28,7 +28,7 @@
       <!-- Site wrapper -->
       <div class="wrapper">
          <!-- Navbar -->
-         <nav class="main-header navbar navbar-expand navbar-orange navbar-dark">
+         <nav class="main-header navbar navbar-expand navbar-success navbar-dark">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                <li class="nav-item">
