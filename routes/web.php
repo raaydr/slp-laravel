@@ -66,6 +66,8 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/lain-lain/list-blog', 'AdminController@listBlog')->name('admin.listBlog');
     Route::get('/lain-lain/detail-blog/{judul}', 'AdminController@detailBlog')->name('admin.detailBlog');
     Route::get('/lain-lain/delete-blog/{id}', 'AdminController@deleteBlog')->name('admin.deleteBlog');
+    Route::get('/Pemeriksaan-Tugas/Writing', 'AdminController@PemeriksaanTugasWriting')->name('admin.PemeriksaanTugasWriting');
+    Route::get('/Pemeriksaan-Tugas/Writing/ID', 'AdminController@PemeriksaanTugasWritingDetail')->name('admin.PemeriksaanTugasWritingDetail');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

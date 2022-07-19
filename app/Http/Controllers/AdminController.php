@@ -2262,4 +2262,36 @@ class AdminController extends Controller
 
         return view('admin.pembuatanTargetTugas', compact('title', 'gen'));
     }
+
+    public function PemeriksaanTugasWriting()
+    {
+        $title = 'Pemeriksaan Tugas Writing';
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        
+
+        return view('admin.PemeriksaanTugasWriting', compact('title', 'gen'));
+    }
+    public function PemeriksaanTugasWritingDetail()
+    {
+       
+        
+
+        $title = 'Pemeriksaan Tugas Writing Detail';
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        
+        $user = User::where('id', 2)
+            ->first();
+        $quest = 0;
+        
+            $data = 0;
+            $peserta =0;
+            $daily_quest = 0;
+            return view('admin.PemeriksaanTugasWritingDetail', compact('title', 'user', 'quest','data','peserta','daily_quest'));
+    }
+
+
 }

@@ -145,6 +145,26 @@
                            <p>Daily Quest</p>
                         </a>
                   </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.PemeriksaanTugasWriting" )
+                        <a href="{{ route('admin.PemeriksaanTugasWriting') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.PemeriksaanTugasWriting') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>contoh periksa tugas</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.PemeriksaanTugasWritingDetail" )
+                        <a href="{{ route('admin.PemeriksaanTugasWritingDetail') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.PemeriksaanTugasWritingDetail') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>contoh detail</p>
+                        </a>
+                  </li>
                </ul>
             </li>
             <li class="nav-item">

@@ -11,3 +11,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/public/cvPDF
+/public/docWriting
+/public/imgBusinessQuest
+/public/imgdaftar
+/public/imgfasil
+/public/imgPembelian
+/public/teskepribadian
