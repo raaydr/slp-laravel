@@ -10,7 +10,7 @@
       <!-- Font Awesome -->
       <link rel="stylesheet" href="{{asset('template')}}/plugins/fontawesome-free/css/all.min.css" />
       <!-- Ionicons -->
-      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+      <link href="{{asset('ionicons')}}/css/ionicons.min.css" rel="stylesheet">
       <!-- DataTables -->
       <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
       <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
@@ -20,8 +20,7 @@
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
-        integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
+      <link href="{{asset('iziToast')}}/dist/css/iziToast.min.css" rel="stylesheet" />
       <style>.note-group-select-from-files {
   display: none;
 }
@@ -343,10 +342,10 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
-        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+     
+      <script src="{{asset('iziToast')}}/dist/js/iziToast.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/dist/additional-methods.min.js" crossorigin="anonymous"></script>
       <script>
           $.ajaxSetup({
                headers: {
@@ -371,11 +370,6 @@
             // Summernote
             $('#summernote').summernote()
 
-            // CodeMirror
-            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-               mode: "htmlmixed",
-               theme: "monokai"
-            });
          })
          $(document).ready(function() {
                if ($("#formTarget").length > 0) {
