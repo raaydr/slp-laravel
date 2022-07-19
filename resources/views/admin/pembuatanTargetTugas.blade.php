@@ -4,6 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>SLP Indonesia</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}" />
       <!-- Google Font: Source Sans Pro -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
       <!-- Font Awesome -->
@@ -19,6 +20,8 @@
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
       <style>.note-group-select-from-files {
   display: none;
 }
@@ -110,19 +113,19 @@
                      </div>
                      <!-- /.card-header -->
                      <!-- form start -->
-                     <form action="{{ route('peserta.upload.quest') }}" method="POST" enctype="multipart/form-data" >
-                        @csrf
+                     <form id="formTarget" enctype="multipart/form-data" >
+                     @csrf  
                         <div class="card-body">
                            <div class="form-group row">
-                              <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
+                              <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('Judul') }}</label>
                               <div class="col-md-6">
-                                 <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" >
+                                 <input id="judul" type="text" class="form-control" name="judul" value="{{ old('judul') }}" >
                                  <small id="passwordHelpBlock" class="form-text text-sucess">
                                  contoh : Target Daily Video
                                  </small>
-                                 @if ($errors->has('nama'))
+                                 @if ($errors->has('judul'))
                                  <span class="invalid-feedback" role="alert">
-                                 <strong>{{ $errors->first('nama') }}</strong>
+                                 <strong>{{ $errors->first('judul') }}</strong>
                                  </span>
                                  @endif
                               </div>
@@ -134,45 +137,43 @@
                                  <small id="passwordHelpBlock" class="form-text text-sucess">
                                  contoh : 60 . artinya dikerjakan sebanyak 60 kali karena 2 bulan
                                  </small>
-                                 @if ($errors->has('nama'))
+                                 @if ($errors->has('jumlah'))
                                  <span class="invalid-feedback" role="alert">
-                                 <strong>{{ $errors->first('nama') }}</strong>
+                                 <strong>{{ $errors->first('jumlah') }}</strong>
                                  </span>
                                  @endif
                               </div>
                            </div>
                            <div class="form-group row">
-                            <label for="jenis" class="col-md-4 col-form-label text-md-right">{{ __('Jenis') }}</label>
+                            <label for="tipe_tugas" class="col-md-4 col-form-label text-md-right">{{ __('tugas') }}</label>
                             <div class="col-md-7">
                                 <div class="custom-control custom-radio custom-control-inline mt-2">
-                                    <input type="radio" id="customRadioInline1" name="sumber_produk" class="custom-control-input" value="Creative Writing" required autofocus />
+                                    <input type="radio" id="customRadioInline1" name="tipe_tugas" class="custom-control-input" value="Creative Writing" required autofocus />
                                     <label class="custom-control-label" for="customRadioInline1">Creative Writing</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="sumber_produk" class="custom-control-input" value="Public Speaking" required autofocus />
+                                    <input type="radio" id="customRadioInline2" name="tipe_tugas" class="custom-control-input" value="Public Speaking" required autofocus />
                                     <label class="custom-control-label" for="customRadioInline2">Public Speaking</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline3" name="sumber_produk" class="custom-control-input" value="Business" required autofocus />
+                                    <input type="radio" id="customRadioInline3" name="tipe_tugas" class="custom-control-input" value="Business" required autofocus />
                                     <label class="custom-control-label" for="customRadioInline3">Business</label>
                                 </div>
                                 
                             </div>
                         </div>
                         <div class="form-group row">
-                                            <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
-                                            <div class="col-md-6">
-                                                <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan" value="{{ old('keterangan') }}"  required autofocus></textarea>
-                                                <small id="passwordHelpBlock" class="form-text text-sucess">
-                                 Penjelasan tentang target
-                                 </small> 
-                                                @if ($errors->has('keterangan'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('keterangan') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                        </div>
+                           <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
+                           <div class="col-md-6">
+                              <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"   required autofocus></textarea>
+                                 <small id="passwordHelpBlock" class="form-text text-sucess">Penjelasan tentang target</small> 
+                                    @if ($errors->has('keterangan'))
+                                    <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $errors->first('keterangan') }}</strong>
+                                    </span>
+                                    @endif
+                           </div>
+                        </div>
                            <div class="form-group row">
                               <label for="gen" class="col-md-4 col-form-label text-md-right">{{ __('generasi') }}</label>
                               <div class="col-md-6">
@@ -189,7 +190,8 @@
                         <div class="card-footer">
                            <!-- /.card-body -->
                            <div class="text-center">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                           <button class="btn btn-success btn-submit" id="simpanBTN">Submit</button>
+                           <div id="load" class="spinner-border text-primary"></div>
                            </div>
                         </div>
                      </form>
@@ -341,7 +343,16 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
       <script>
+          $.ajaxSetup({
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
          $(function () {
              $("#example1")
                  .DataTable({
@@ -353,28 +364,156 @@
                  .buttons()
                  .container()
                  .appendTo("#example1_wrapper .col-md-6:eq(0)");
-             $("#example2").DataTable({
-                 paging: true,
-                 lengthChange: false,
-                 searching: false,
-                 ordering: true,
-                 info: true,
-                 autoWidth: false,
-                 responsive: true,
-             });
          });
-         
+         $('#load').hide();
         
          $(function () {
-    // Summernote
-    $('#summernote').summernote()
+            // Summernote
+            $('#summernote').summernote()
 
-    // CodeMirror
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+               mode: "htmlmixed",
+               theme: "monokai"
+            });
+         })
+         $(document).ready(function() {
+               if ($("#formTarget").length > 0) {
+                  $("#formTarget").validate({
+                        rules: {
+                           judul: {
+                              required: true
+                              
+                           },
+                           jumlah: {
+                              required: true,
+                              
+                           },
+                     
+                           summernote: {
+                              required: true,
+                              
+                           },
+                           gen: {
+                              required: true,
+                              
+                           }
+                           
+                        },
+                        messages: {
+                           judul: {
+                              required: 'Tolong Diisi'
+                           },
+                           jumlah: {
+                              required: 'Tolong Diisi',
+                              
+                             
+                           },
+                           
+                           summernote: {
+                              required: 'Tolong Diisi'
+                           },
+                           gen: {
+                              required: 'Tolong Diisi',
+                              
+                           },
+                           
+                        },
+                        submitHandler: function(form) {
+                           var actionType = $('#simpanBTN').val();
+                           $('#simpanBTN').html('Sending..');
+                           $('#load').show();
+                           var form = $("#formTarget").closest("form");
+                           var formData = new FormData(form[0]);
+                           $.ajax({
+                              xhr: function() {
+                                       var xhr = new window.XMLHttpRequest();
+                                       xhr.upload.addEventListener("progress", function(evt) {
+                                          if (evt.lengthComputable) {
+                                                var percentComplete = Math.round(((evt.loaded / evt.total) * 100));
+                                                $(".progress-bar").width(percentComplete + '%');
+                                                $(".progress-bar").html(percentComplete+'%');
+                                          }
+                                       }, false);
+                                       return xhr;
+                                    },
+                              data: formData,
+                              url: "{{ route('admin.AddTargetTugas') }}", //url simpan data
+                              type: "POST", //karena simpan kita pakai method POST
+                              dataType: 'json', //data tipe kita kirim berupa JSON
+                              processData: false,
+                              contentType: false,
+                              success: function(data) { //jika berhasil
+                                 switch(data.status){
+                                    case 0 :
+                                          $('#load').hide();
+                                          $('#simpanBTN').html('Submit');
+                                          $('#simpanBTN').show();
+                                          var oTable = $('#example1').dataTable(); //inialisasi datatable
+                                          oTable.fnDraw(false); //reset datatable
+                                          iziToast.error({
+                                             title: 'Error',
+                                             message: data.error,
+                                          });
+                                          console.log('Error:', "periksa");
+                                          break;
+                                       case 1 :
+                                          $('#load').hide();
+                                          $('#simpanBTN').html('Submit'); //tombol simpan
+                                          $('#simpanBTN').show();
+                                          document.getElementById("formTarget").reset();
+                                          $('#summernote').summernote('code', ''); 
+                                          var oTable = $('#example1').dataTable(); //inialisasi datatable
+                                          oTable.fnDraw(false); //reset datatable
+                                          //$('#uploadStatus').html('<p style="color:#28A74B;">File Berhasil diupload!</p>');
+                                          iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                             title: 'Data Berhasil Disimpan',
+                                             message: '{{ Session('
+                                             success ')}}',
+                                             position: 'bottomRight'
+                                          });
+                                          break;
+                                       default:
+                                    // code block
+            
+                                 } 
+                                    
+                              },
+                              error: function(data) { //jika error tampilkan error pada console
+                                    $('#load').hide();
+                                    $('#judul').val("");
+                                    $('#jumlah').val("");
+                                    $('#gen').val("");
+                                    $('#tipe_tugas').val("");
+                                    
+                                    $('#simpanBTN').html('Submit'); //tombol simpan
+                                    iziToast.error({
+                                       title: 'Error',
+                                       message: 'Illegal operation',
+                                    });
+                                    console.log('Error:', "Data kosong");
+            
+                              }
+                           });
+                        }
+                  })
+               }
+            
+               function printErrorMsg(msg) {
+            
+                  $(".print-error-msg").find("ul").html('');
+            
+                  $(".print-error-msg").css('display', 'block');
+            
+                  $.each(msg, function(key, value) {
+            
+                        $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+            
+                  });
+            
+               }
+   
+   });
       </script>
    </body>
 </html>

@@ -13,6 +13,7 @@ use App\Models\Fasil;
 use App\Models\Blog;
 use App\Models\FasilRecord;
 use App\Models\Quest;
+use App\Models\Target;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -2254,6 +2255,7 @@ class AdminController extends Controller
 
     public function PembuatanTargetTugas()
     {
+        
         $title = 'Pembuatan Target Tugas';
         $gen = DB::table('control')
             ->where('nama', 'gen')
@@ -2261,6 +2263,57 @@ class AdminController extends Controller
         
 
         return view('admin.pembuatanTargetTugas', compact('title', 'gen'));
+
+        
+    }
+
+    public function AddTargetTugas(Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            'judul' => 'required|string|max:255',
+            'keterangan' => 'required',
+            'tipe_tugas' => 'required|string',
+            'gen' => 'required|integer',
+            'jumlah' => 'required|numeric',
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'judul.required' => 'Judul tidak boleh kosong!',
+            'keterangan.required' => 'keterangan tidak boleh kosong !',
+            'tipe_tugas.required' => 'tipe tugas tidak boleh kosong',
+            'gen.required' => 'generasi tidak boleh kosong',
+            
+            'jumlah.numeric' => 'jumlah harus berupa angka',
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+            return response()->json(['status'=>0, 'msg'=>'periksa input','error'=>$validator->errors()->all()]);
+        }
+        
+        
+
+        $detail=$request->keterangan;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+
+        
+        $target = new Target;
+        $target->judul = $request->judul;
+        $target->keterangan = $detail;
+        $target->tipe_tugas = $request->tipe_tugas;
+        $target->jumlah = $request->jumlah;
+        $target->gen = $request->gen;
+        $target->save();
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
     }
 
     public function PemeriksaanTugasWriting()

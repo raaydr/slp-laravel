@@ -68,6 +68,9 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/lain-lain/delete-blog/{id}', 'AdminController@deleteBlog')->name('admin.deleteBlog');
     Route::get('/Pemeriksaan-Tugas/Writing', 'AdminController@PemeriksaanTugasWriting')->name('admin.PemeriksaanTugasWriting');
     Route::get('/Pemeriksaan-Tugas/Writing/ID', 'AdminController@PemeriksaanTugasWritingDetail')->name('admin.PemeriksaanTugasWritingDetail');
+
+    // Rute Target
+    Route::post('/Target-Tugas/add', 'AdminController@AddTargetTugas')->name('admin.AddTargetTugas');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
