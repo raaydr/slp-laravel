@@ -75,7 +75,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
-	Route::get('/Controller/control', 'AdminController@coba')->name('admin.coba');
+	Route::get('/Controller/control', 'AdminController@control')->name('admin.control');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

@@ -21,9 +21,8 @@
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
       <link href="{{asset('iziToast')}}/dist/css/iziToast.min.css" rel="stylesheet" />
-      <style>.note-group-select-from-files {
-  display: none;
-}
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+      <style>.note-group-select-from-files {display: none;}
       </style>
    </head>
    <body class="hold-transition sidebar-mini">
@@ -56,6 +55,13 @@
                   {{ Auth::user()->Biodata->nama }}
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a
+                        class="dropdown-item"
+                        href="{{ route('admin.ubah.password') }}"
+                        
+                        >
+                     {{ __('Ubah Password') }}
+                     </a>
                      <a
                         class="dropdown-item"
                         href="{{ route('logout') }}"
@@ -66,7 +72,7 @@
                      </a>
                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
-                     </form>
+                     </form>                     
                   </div>
                </li>
                @endguest
@@ -76,10 +82,12 @@
           <!-- Main Sidebar Container -->
           @include('sidebar.sidebarAdmin')
           <!-- Content Wrapper. Contains page content -->
-          @yield('content')
+          <div class="content-wrapper">
+                @yield('content')
                 <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
                     <i class="fas fa-chevron-up"></i>
                 </a>
+            </div>
          <!-- /.content-wrapper -->
          <footer class="main-footer">
             <div class="float-right d-none d-sm-block"></div>
@@ -118,4 +126,5 @@
       <script src="{{asset('iziToast')}}/dist/js/iziToast.min.js" crossorigin="anonymous"></script>
       <script src="{{asset('jquery-validation')}}/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
       <script src="{{asset('jquery-validation')}}/dist/additional-methods.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
       @yield('script') 

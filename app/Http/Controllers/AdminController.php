@@ -47,9 +47,9 @@ class AdminController extends Controller
      */
 
 // VIEW 
-    public function coba()
+    public function control()
     {
-        $title = 'coba Admin';
+        $title = 'control Admin';
         $pendaftaran = DB::table('control')
             ->where('id', 1)
             ->get();
@@ -67,7 +67,7 @@ class AdminController extends Controller
             ->get();            
         
 
-        return view('admin.coba', compact('title', 'pendaftaran', 'quest', 'seleksiPertama', 'gen', 'interview'));
+        return view('admin.control', compact('title', 'pendaftaran', 'quest', 'seleksiPertama', 'gen', 'interview'));
     }
     public function view_create_controller()
     {
@@ -1307,7 +1307,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'ubah pendaftaran');
+        return redirect()->route('admin.control')->with('berhasil', 'ubah pendaftaran');
     }
     public function ubahChallenge (Request $request){
         DB::table('control')->where('nama','seleksiPertama')->update([
@@ -1362,7 +1362,7 @@ class AdminController extends Controller
         
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'ubah tahap challenge');
+        return redirect()->route('admin.control')->with('berhasil', 'ubah tahap challenge');
     }
     public function gateQuest (Request $request){
         DB::table('control')->where('id',2)->update([
@@ -1374,7 +1374,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'mengubah daily quest');
+        return redirect()->route('admin.control')->with('berhasil', 'mengubah daily quest');
     }
     public function resetQuest (Request $request){
         DB::table('control')->where('id',2)->update([
@@ -1386,7 +1386,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'reset daily quest');
+        return redirect()->route('admin.control')->with('berhasil', 'reset daily quest');
     }
     public function nextGen (Request $request){
         $gen = DB::table('control')
@@ -1402,7 +1402,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'ubah ke generasi selanjutnya');
+        return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi selanjutnya');
     }
     public function preGen (Request $request){
         $gen = DB::table('control')
@@ -1418,7 +1418,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'ubah ke generasi selanjutnya');
+        return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi selanjutnya');
     }
     public function resetInterview (Request $request){
         DB::table('control')->where('id',5)->update([
@@ -1430,7 +1430,7 @@ class AdminController extends Controller
 
   
 
-        return redirect()->route('admin.coba')->with('berhasil', 'reset antrian interview');
+        return redirect()->route('admin.control')->with('berhasil', 'reset antrian interview');
     }
 
     public function generateAntrian(){
@@ -1577,8 +1577,8 @@ class AdminController extends Controller
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
    
-
-        return redirect()->route('admin.listPendaftar');
+        return redirect()->route('admin.ubah.password')->with('berhasil', 'berhasil ubah password');
+        //return redirect()->route('admin.listPendaftar');
 
     }
 

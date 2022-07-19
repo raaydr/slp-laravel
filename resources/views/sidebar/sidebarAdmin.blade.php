@@ -213,7 +213,7 @@
                </ul>
             </li>
             <li class="nav-item">
-               @if ( Route::currentRouteName() == "admin.coba" || Route::currentRouteName() == "admin.controller.create" )
+               @if ( Route::currentRouteName() == "admin.control" || Route::currentRouteName() == "admin.controller.create" )
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -226,10 +226,10 @@
                   </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.coba" )
-                        <a href="{{ route('admin.coba') }}" class="nav-link active">
+                     @if ( Route::currentRouteName() == "admin.control" )
+                        <a href="{{ route('admin.control') }}" class="nav-link active">
                      @else
-                        <a href="{{ route('admin.coba') }}" class="nav-link ">
+                        <a href="{{ route('admin.control') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Control</p>
