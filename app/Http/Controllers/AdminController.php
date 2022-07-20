@@ -340,15 +340,77 @@ class AdminController extends Controller
         //return dd($informasi);
         return view('admin.informasiPendaftar', compact('title', 'users','informasi'));
     }
-    public function listPendaftar()
+    public function listPendaftar(Request $request)
     {
         $title = 'List Pendaftar ';
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $users = User::where('level', 1)->where('gen', $gen)->orderBy('id', 'ASC')->get();
+        $data =   $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->where('level', 1)->get();
+        if($request->ajax()){
 
-        return view('admin.listPendaftar', compact('title', 'users'));
+            return datatables()->of($data)
+                
+                ->addColumn('Umur', function($row){
+                    $bd = $row->tanggal_lahir;
+                    $date = new DateTime($bd);
+                    $now = new DateTime();
+                    $interval = $now->diff($date);
+                    $umur= $interval->y;
+                    return $umur;
+                    
+
+                })
+                ->addColumn('Seleksi Berkas', function($row){
+                    $ajaib = $row->seleksi_berkas;
+                    if (($ajaib)== 'LULUS'){
+                        
+                        return '<p class="text-success">LULUS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GAGAL</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Challenge', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'LOLOS'){
+                        
+                        return '<p class="text-success">LOLOS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GUGUR</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Interview', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'BERHASIL'){
+                        
+                        return '<p class="text-success">BERHASIL</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">TERELIMINASI</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.userprofile', $row->id);
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Umur','Seleksi Berkas','Seleksi Challenge','Seleksi Interview', 'action'])
+                ->make(true);
+        }
+        return view('admin.listPendaftar');
     }
     public function antrian_interview()
     {  

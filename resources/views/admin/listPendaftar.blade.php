@@ -30,9 +30,9 @@
                            <table id="example1" class="table table-bordered table-striped">
                               <thead>
                                  <tr>
-                                    <th>No</th>
+                                    
                                     <th>Nama</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>Umur</th>
                                     <th>Domisili</th>
                                     <th>Gender</th>
                                     <th>Peminatan</th>
@@ -42,40 +42,17 @@
                                     <th></th>
                                  </tr>
                               </thead>
-                              <tbody>
-                                 <?php $i = 0; ?>
-                                 @foreach ($users as $user)
-                                 <?php $i++ ;?>
-                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ $user->Biodata->nama }}</td>
-                                    <td>{{ $user->Biodata->tanggal_lahir }}</td>
-                                    <td>{{ $user->Biodata->domisili }}</td>
-                                    <td>{{ $user->Biodata->jenis_kelamin }}</td>
-                                    <td>{{ $user->Biodata->minatprogram }}</td>
-                                    <td>{{ $user->Biodata->seleksi_berkas }}</td>
-                                    <td>{{ $user->Biodata->seleksi_pertama }}</td>
-                                    <td>{{ $user->Biodata->seleksi_kedua }}</td>
-                                    <td class="project-actions text-right">
-                                       <a class="btn btn-primary btn-sm" href="{{ route('admin.userprofile', $user->Biodata->user_id) }}" target="_blank">
-                                       <i class="fas fa-folder"> </i>
-                                       Detail
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                              </tbody>
                               <tfoot>
                                  <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Domisili</th>
-                                    <th>Gender</th>
-                                    <th>Peminatan</th>
-                                    <th>Seleksi Berkas</th>
-                                    <th>Seleksi Challenge</th>
-                                    <th>Seleksi Interview</th>
+                                    
+                                    <th><input type="text" placeholder="Search"  style="width: 100%"  /></th>
+                                    <th><input type="text" style="width: 30%" /></th>
+                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
+                                    <th><input type="text" style="width: 50%"/></th>
+                                    <th><input type="text" placeholder="Search"  style="width: 60%"/></th>
+                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
+                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
+                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
                                     <th></th>
                                  </tr>
                               </tfoot>
@@ -94,12 +71,50 @@
 @section('script')
       <script>
          $(function () {
-             $("#example1")
+            
+            
+ 
+            $("#example1")
                  .DataTable({
+                     processing:true,
+                     serverSide:true,
+                     ajax : {
+                        url : "{{route('admin.listPendaftar')}}",
+                        type : 'GET'
+                     },
+                     columns:[
+                        
+                        {data:'nama',name:'nama',searchable: true},
+                        {data: 'Umur', name: 'Umur', orderable: true, searchable: true},
+                        {data: 'domisili', name: 'domisili', orderable: true, searchable: true},
+                        {data: 'jenis_kelamin', name: 'jenis_kelamin', orderable: true, searchable: true},
+                        {data: 'minatprogram', name: 'minatprogram', orderable: true, searchable: true},
+                        {data: 'Seleksi Berkas', name: 'Seleksi Berkas', orderable: true, searchable: true},
+                        {data: 'Seleksi Challenge', name: 'Seleksi Challenge', orderable: true, searchable: true},
+                        {data: 'Seleksi Interview', name: 'Seleksi Interview', orderable: true, searchable: true},
+                        {data: 'action', name: 'action'},
+                        
+                        
+                     ],
+                     order:[[0,'asc']],
                      responsive: true,
                      lengthChange: false,
                      autoWidth: false,
                      buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                     initComplete: function () {
+                           // Apply the search
+                           this.api()
+                              .columns()
+                              .every(function () {
+                                 var that = this;
+               
+                                 $('input', this.footer()).on('keyup change clear', function () {
+                                       if (that.search() !== this.value) {
+                                          that.search(this.value).draw();
+                                       }
+                                 });
+                              });
+                     },
                  })
                  .buttons()
                  .container()
