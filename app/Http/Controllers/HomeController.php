@@ -36,7 +36,7 @@ class HomeController extends Controller
                 return redirect()->action('\App\Http\Controllers\AdminController@informasiPendaftar');
                 break;
             case '1':
-                return redirect()->action('\App\Http\Controllers\PendaftarController@pengumuman');
+                return redirect()->action('\App\Http\Controllers\PendaftarController@index');
                 break;   
             case '2':
                 $title = 'Calon Siswa Gugur';
