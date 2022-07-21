@@ -149,7 +149,7 @@
                               @if(session('berhasil'))
                               <div class="alert alert-success alert-dismissable md-5">
                                  <button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                 <h5><i class="icon fa fa-check"></i>Penilaian</h5>
+                                 <h5><i class="icon fa fa-check"></i>Seleksi</h5>
                                  {{session('berhasil')}}.
                               </div>
                               @endif
@@ -231,8 +231,10 @@
                                     </div>
                                     <!-- /.post -->
                                     <div class="input-group-append">
+                                    @if ((!empty($user->Biodata->seleksi_berkas)) && (empty($user->Biodata->seleksi_pertama)))
                                        <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
                                        <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
+                                    @endif
                                     </div>
                                     <div class="modal fade" id="modal-primary">
                                        <div class="modal-dialog">
@@ -926,48 +928,27 @@
       <script src="{{asset('template')}}/plugins/sparklines/sparkline.js"></script>
       <script>
          function rupiah(){
-         var bilangan = {{$user->Penilaian->penjualan}} ;
-         var	number_string = bilangan.toString(),
-         sisa 	= number_string.length % 3,
-         rupiah 	= number_string.substr(0, sisa),
-         ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
-         
-         if (ribuan) {
-         separator = sisa ? '.' : '';
-         rupiah += separator + ribuan.join('.');
-         }
-         
-         // Cetak hasil
-         
-             
-         
-         $("omset").text("Rp "+rupiah)
-         
-         //the function body is the same as you have defined sue the textbox object to set the value
-         }
-         function earn(){
-         var bilangan = {{$hasil_business}} ;
-         var	number_string = bilangan.toString(),
-         sisa 	= number_string.length % 3,
-         rupiah 	= number_string.substr(0, sisa),
-         ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
-         
-         if (ribuan) {
-         separator = sisa ? '.' : '';
-         rupiah += separator + ribuan.join('.');
-         }
-         
-         // Cetak hasil
-         
-             
-         
-         $("earn").text("Rp "+rupiah)
+               var bilangan = {{$penjualan}};
+               var	number_string = bilangan.toString(),
+               sisa 	= number_string.length % 3,
+               rupiah 	= number_string.substr(0, sisa),
+               ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+               
+               if (ribuan) {
+                  separator = sisa ? '.' : '';
+                  rupiah += separator + ribuan.join('.');
+               }
+               
+               // Cetak hasil
+               
+                  
+               
+               $("omset").text("Rp "+rupiah)
          
          //the function body is the same as you have defined sue the textbox object to set the value
          }
-         
          rupiah();
-         earn();
+         
              $(function () {
                  $("#example1")
                      .DataTable({

@@ -24,7 +24,7 @@
                                 <br>
                                 nanti diklik trus pilih "open in bla bla", soalnya kamu masih belum buka dibrowser
                                 <li><a class="text-primary">Kalau masih gk bisa(biasanya yang pake HP nih bukanya), coba buka pakai laptop </li>
-                                <li><a class="text-primary">Masih gk bisa ? saya yang panik, langsung kasih tau aja di grup whatsapp cari aja Reynaldi.</li>
+                                <li><a class="text-primary">Masih gk bisa ? langsung kasih tau aja di grup whatsapp atau hubungi admin.</li>
                                 
                 </ol>
             </p>

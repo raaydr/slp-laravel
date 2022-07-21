@@ -347,7 +347,7 @@ class AdminController extends Controller
             ->where('nama', 'gen')
             ->value('integer');
         $data =   $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
-        ->where('level', 1)->get();
+        ->where('level', 1)->orderBy('users.id', 'ASC')->get();
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -402,7 +402,7 @@ class AdminController extends Controller
                     
                 })
                 ->addColumn('action', function($row){
-                    $detail = route('admin.userprofile', $row->id);
+                    $detail = route('admin.userprofile', $row->user_id);
                     $actionBtn = '
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';
@@ -502,42 +502,16 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         $user = User::where('id', $user_id)->first();
-        $quest = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');
-        $video_challenge = 0;
-        $writing_challenge = 0;
-        $business_challenge = 0;
-        $hasil_business = 0;
-        $record = Quest::where('user_id', $user_id)->where('status', 1)->get();
-        $daily_quest = Quest::where('user_id', $user_id)->get();
-        $jumlah=count($record);
-        for ($i = 0; $i <= $jumlah-1; $i++) {
-            $v = $record[$i]['video_check'];
-            if($v==1){
-                $video_challenge = $video_challenge + $v;
-            }
-            $w = $record[$i]['writing_check'];
-            if($w==1){
-                $writing_challenge = $writing_challenge + $w;
-            }
-            $b = $record[$i]['business_check'];
-            if($b==1){
-                $business_challenge = $business_challenge + $b;
-                $h = $record[$i]['hasil'];
-                $hasil_business = $hasil_business + $h;
-            }
-
-          }
-        $rate_video = ($video_challenge / $quest) *100;
-        $rate_writing = ($writing_challenge / $quest) *100;
-        $rate_business = ($business_challenge / $quest) *100;
-        $rate_hasil = ($hasil_business / 2000000) *100;
+       
         
-        
+        if ((Penilaian::where('user_id', $user_id))->exists()){
+            $penjualan = Penilaian::where('user_id', $user_id)->value('penjualan');
+            
+        }else {
+            $penjualan = 0;
+        }
 
-        return view('admin.userProfile', compact('title', 'user','daily_quest','quest','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
-        'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
+        return view('admin.userProfile', compact('title', 'user','penjualan'));
     }
     public function challenge(){
         $title = 'Admin Seleksi Challenge';
@@ -844,7 +818,7 @@ class AdminController extends Controller
             $seleksiPertama->save();
         }
         
-        return redirect()->route('admin.userprofile', [$user_id]);
+        return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan seleksi berkas');
         
     }
 
@@ -857,7 +831,7 @@ class AdminController extends Controller
         seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
         $users=User::find($user_id)->biodata;
         
-        return redirect()->route('admin.userprofile', [$user_id]);
+        return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil menggagalkan seleksi berkas');
         
     }
 
@@ -1390,7 +1364,7 @@ class AdminController extends Controller
                     $user_id = $challenge[$i]['user_id'];
                     $nama = $challenge[$i]['nama'];
                     $pertama = seleksiPertama::where('user_id', $user_id)->first();
-                    if ((($pertama->url_writing) == "#")&&(($pertama->url_writing) == "#")&&(($pertama->url_writing) == "#") == 1){
+                    if ((($pertama->url_writing) == "#")&&(($pertama->url_video) == "#")&&(($pertama->url_Business) == "#") == 1){
                         
                         User::where('id', $user_id)->update(['level' => '2']);
                         Biodata::where('user_id', $user_id)->update(['seleksi_pertama' => 'GUGUR']);
@@ -1500,33 +1474,65 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $users = User::where('level', 1)->where('gen', $gen)->get();
-        $jumlah=count($users);
-        $penilaian = Penilaian::get();
-        $r=0;
-        for ($i = 0; $i <= $jumlah-1; $i++) {
+        if ((Antrian::where('gen', $gen))->exists()){
+            
+            $users = User::where('level', 1)->where('gen', $gen)->get();
+            $jumlah=count($users);
+            for ($i = 0; $i <= $jumlah-1; $i++) {
             $user_id = $users[$i]['id'];
             $nama = DB::table('biodata')
             ->where('user_id', $user_id)
-            ->value('nama');
-            do {
-                $new_antrian = rand(1,$jumlah);                
-                if (Antrian::where('gen', $gen)->where('antrian', $new_antrian)->exists()) {
-                    $ulang = 0;
+            ->value('nama');         
+           
+                if (Antrian::where('gen', $gen)->where('user_id', $user_id)->exists()) {
+           
                 }else{
-                    $ulang = 2;
+                    $check = Antrian::where('gen', $gen)->max('antrian');
+                    $new_antrian = $check + 1;
+                    $antrian_interview = new Antrian;
+                    $antrian_interview->user_id = $user_id;
+                    $antrian_interview->nama = $nama;
+                    $antrian_interview->antrian = $new_antrian;
+                    $antrian_interview->absen = "Tidak Hadir";
+                    $antrian_interview->gen = $gen;
+                    $antrian_interview->save();                
                 }
-                } while ($ulang < 1);
+           
             
-                $antrian_interview = new Antrian;
-                $antrian_interview->user_id = $user_id;
-                $antrian_interview->nama = $nama;
-                $antrian_interview->antrian = $new_antrian;
-                $antrian_interview->absen = "Tidak Hadir";
-                $antrian_interview->gen = $gen;
-                $antrian_interview->save();
+                
 
-          } 
+            }
+            
+        }else{
+            $users = User::where('level', 1)->where('gen', $gen)->get();
+            $jumlah=count($users);
+            $penilaian = Penilaian::get();
+            $r=0;
+            for ($i = 0; $i <= $jumlah-1; $i++) {
+                $user_id = $users[$i]['id'];
+                $nama = DB::table('biodata')
+                ->where('user_id', $user_id)
+                ->value('nama');
+                do {
+                    $new_antrian = rand(1,$jumlah);                
+                    if (Antrian::where('gen', $gen)->where('antrian', $new_antrian)->exists()) {
+                        $ulang = 0;
+                    }else{
+                        $ulang = 2;
+                    }
+                    } while ($ulang < 1);
+                
+                    $antrian_interview = new Antrian;
+                    $antrian_interview->user_id = $user_id;
+                    $antrian_interview->nama = $nama;
+                    $antrian_interview->antrian = $new_antrian;
+                    $antrian_interview->absen = "Tidak Hadir";
+                    $antrian_interview->gen = $gen;
+                    $antrian_interview->save();
+    
+              } 
+        }            
+        
           return redirect()->route('admin.interview.antrian')->with('berhasil', 'sukses');
     }
     public function antrianNote (Request $request)
