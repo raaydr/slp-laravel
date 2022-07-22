@@ -673,13 +673,14 @@ class PesertaController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
+        $link = 'https://wa.me/'.($request->link);
         $id = Auth::user()->id;
         $user = User::where('id', $id)->first();
         if (Jualan::where('user_id', $id)->exists()){
-            Jualan::where('user_id', $id)->update(['link' => $request->link]);
+            Jualan::where('user_id', $id)->update(['link' => $link]);
         }else{
         $Jualan = new Jualan;
-        $Jualan->link = $request->link;
+        $Jualan->link = $link;
         $Jualan->nama = $user->Biodata->nama;
         $Jualan->user_id = $id;
         $Jualan->save();

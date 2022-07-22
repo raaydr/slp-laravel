@@ -134,6 +134,12 @@
                            </div>
                            <!-- /.card-header -->
                            <div class="card-body">
+                              <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+                              <p class="text-muted">
+                                 {{$biodata->email}}
+                              </p>
+
+                              <hr />
                               <strong><i class="fas fa-book mr-1"></i> No.Handphone</strong>
                               <p class="text-muted">
                                  {{$user->Biodata->phonenumber}}
