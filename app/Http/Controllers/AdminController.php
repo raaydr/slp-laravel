@@ -389,7 +389,7 @@ class AdminController extends Controller
                     
                 })
                 ->addColumn('Seleksi Interview', function($row){
-                    $ajaib = $row->seleksi_pertama;
+                    $ajaib = $row->seleksi_kedua;
                     if (($ajaib)== 'BERHASIL'){
                         
                         return '<p class="text-success">BERHASIL</p>';    
@@ -671,9 +671,9 @@ class AdminController extends Controller
                     ->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')
                     //->join('peserta', 'peserta.user_id', '=', 'users.id')
-                    ->where('users.level', 4)
+                    ->where('users.level', 2)->orWhere('users.level', 4)
                     ->where('users.gen', $gen)->get();
-        $users = User::where('level', 4)->get();
+        
         
         if($request->ajax()){
                 return datatables()->of($data)
@@ -726,7 +726,7 @@ class AdminController extends Controller
                     })
                     ->addColumn('action', function($row){
                     $check = $row->aktif;
-                    $detail = route('admin.userprofile', $row->id);
+                    $detail = route('admin.userprofile', $row->user_id);
                     
                     $id = $row->user_id;
                     $nama = $row->nama;
@@ -771,7 +771,7 @@ class AdminController extends Controller
                     ->rawColumns(['Umur','Gender', 'Grup', 'Status', 'action'])
                     ->make(true);
             }
-        return view('admin.pengelompokPeserta', compact('title','users'));
+        return view('admin.pengelompokPeserta', compact('title'));
     }
 // Method LULUS GAGAL
     public function seleksi1_lulus($user_id)
@@ -1609,17 +1609,23 @@ class AdminController extends Controller
             
              
         }else{
-            $data = User::where('id', $user_id)->first();
-            $biodata = Biodata::where('id', $user_id)->first();
-            $user = new Peserta;
-            $user->nama = $biodata['nama'];
-            $user->status =  1;
-            $user->aktif =  1;
-            $user->captain = 0;
-            $user->gen = $data['gen'];
-            $user->grup = 0;
-            $user->user_id =$data['id'];
-            $user->save();
+
+            if ((Peserta::where('user_id', $user_id))->exists()){
+                Peserta::where('user_id', $user_id)->update(['aktif' => '1']);
+            } else{
+                $data = User::where('id', $user_id)->first();
+                $biodata = Biodata::where('user_id', $user_id)->first();
+                $user = new Peserta;
+                $user->nama = $biodata['nama'];
+                $user->status =  1;
+                $user->aktif =  1;
+                $user->captain = 0;
+                $user->gen = $data['gen'];
+                $user->grup = 0;
+                $user->user_id =$data['id'];
+                $user->save();
+                
+            }
             User::where('id', $user_id)->update(['level' => '4']);
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil meluluskan');
         }
@@ -2210,12 +2216,13 @@ class AdminController extends Controller
             case '1':
                 User::where('id', $id)
                 ->update([
-                    'level' => 4,
+                    'level' => 2,
                     'updated_at' => now(),
                 ]);
                 Peserta::where('user_id', $id)
                 ->update([
                     'aktif' => 0,
+                    'status' => 0,
                     'updated_at' => now(),
                 ]);
         

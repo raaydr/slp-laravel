@@ -132,7 +132,7 @@
                         <a href="{{ route('admin.peserta.pengelompok') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
-                           <p>Pengelompokkan</p>
+                           <p>List Peserta</p>
                         </a>
                   </li>
                   <li class="nav-item">

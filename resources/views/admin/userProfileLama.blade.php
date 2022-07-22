@@ -3,16 +3,6 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="container-fluid">
-               @if ((app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName())== ('admin.listPendaftar'))
-                     <a class="btn btn-info btn-sm mb-3" href="{{ route('admin.listPendaftar') }}" >
-                        <i class="fas fa-arrow-left"></i> kembali
-                     </a>
-               @endif
-               @if ((app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName())== ('admin.peserta.pengelompok'))
-                     <a class="btn btn-info btn-sm mb-3" href="{{ route('admin.peserta.pengelompok') }}" >
-                        <i class="fas fa-arrow-left"></i> kembali
-                     </a>
-               @endif
                   <div class="row mb-2">
                      <div class="col-sm-6">
                         <h1>Profile</h1>
@@ -70,7 +60,7 @@
                                  @endif
                                  @if((($user->Biodata->seleksi_kedua)=="BERHASIL")&&(($user->level)==1)== 1)
                                  <div class="form-group row">
-                                    <label  class="col-md-12 col-form-label text-md-center">Terima Awardee</label>
+                                    <label  class="col-md-12 col-form-label text-md-center">Stadium general </label>
                                     <div class="offset-sm-2 col-sm-10">
                                        <a  data-toggle="modal" data-target="#modal-primary3" class="btn btn-primary" >Lulus</a>
                                        <a data-toggle="modal" data-target="#modal-danger3" class="btn btn-danger">Gagal</a>
@@ -81,7 +71,7 @@
                                     <div class="modal-dialog">
                                        <div class="modal-content bg-danger">
                                           <div class="modal-header">
-                                             <h4 class="modal-title">Penerimaan Awardee</h4>
+                                             <h4 class="modal-title">Stadium General</h4>
                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                              </button>
@@ -104,13 +94,13 @@
                                     <div class="modal-dialog">
                                        <div class="modal-content bg-primary">
                                           <div class="modal-header">
-                                             <h4 class="modal-title">Penerimaan Awardee</h4>
+                                             <h4 class="modal-title">Stadium General</h4>
                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                              </button>
                                           </div>
                                           <div class="modal-body">
-                                             <p>Anda yakin ingin meluluskan pendaftar ?</p>
+                                             <p>Anda yakin ingin meluluskan peserta ?</p>
                                           </div>
                                           <div class="modal-footer justify-content-between">
                                              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -661,10 +651,8 @@
                                                    </div>
                                                    <div class="form-group row">
                                                       <div class="offset-sm-2 col-sm-10">
-                                                      @if ((!empty($user->Biodata->seleksi_kedua)) && (($user->level) == 1))
                                                          <a  data-toggle="modal" data-target="#modal-primary2" class="btn btn-primary" >Lulus</a>
                                                          <a data-toggle="modal" data-target="#modal-danger2" class="btn btn-danger">Gagal</a>
-                                                      @endif
                                                       </div>
                                                    </div>
                                                    <div class="modal fade" id="modal-danger2">
@@ -726,7 +714,194 @@
                                  @endif
                                  @if(!empty($user->Peserta->id))
                                  <div class="tab-pane " id="Keempat">
-                                    
+                                    <div class="row">
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-info">
+                                             <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Writing Rate</span>
+                                                <span class="info-box-number">{{$writing_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_writing}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_writing}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-success">
+                                             <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Business Rate</span>
+                                                <span class="info-box-number">{{$business_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_business}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_business}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-danger">
+                                             <span class="info-box-icon"><i class="fas fa-comments"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Video Rate</span>
+                                                <span class="info-box-number">{{$video_challenge}}x passed challenge</span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_video}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_video}}% until {{$quest}} days
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                       <div class="col-md-4 col-sm-8 col-12">
+                                          <div class="info-box bg-gradient-orange">
+                                             <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
+                                             <div class="info-box-content">
+                                                <span class="info-box-text">Profit</span>
+                                                <span class="info-box-number">
+                                                   <earn></earn>
+                                                </span>
+                                                <div class="progress">
+                                                   <div class="progress-bar" style="width: {{$rate_hasil}}%"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                {{$rate_hasil}}% until Rp 2.000.000
+                                                </span>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                          </div>
+                                          <!-- /.info-box -->
+                                       </div>
+                                       <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                    <div class="row">
+                                       <div class="col-12">
+                                          <div class="card">
+                                             <div class="card-header">
+                                                <h3 class="card-title">List Daily Quest</h3>
+                                             </div>
+                                             <!-- /.card-header -->
+                                             <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped table-responsive">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      @foreach ($daily_quest as $data)
+                                                      <tr>
+                                                         <td>{{ $data->day }}</td>
+                                                         <td>
+                                                            @if(($data->video)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{$data->video}}" target="_blank">link video</a>
+                                                            @if(($data->video_check)== 0)
+                                                            <p class="text-orange">dalam pemeriksaan</p>
+                                                            @endif 
+                                                            @if(($data->video_check)== 1)
+                                                            <p class="text-primary"><b>Quest Done</b></p>
+                                                            <p >topik : {{ $data->topik_video }}</p>
+                                                            <p >note : {{ $data->komentar_video }}</p>
+                                                            @endif
+                                                            @if(($data->video_check)== 2)
+                                                            <p class="text-danger"><b>Quest Fail</b></p>
+                                                            <p >topik : {{ $data->topik_video }}</p>
+                                                            <p >note : {{ $data->komentar_video }}</p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->writing)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            <a type="text" href="{{ route('admin.download.writing', Crypt::encrypt($data->id)) }}" >file</a>
+                                                            @if(($data->writing_check)== 0)
+                                                            <p class="text-orange">sedang diperiksa</p>
+                                                            @endif 
+                                                            @if(($data->writing_check)== 1)
+                                                            <p class="text-primary"><b>Quest Clear</b></p>
+                                                            <p >topik : {{ $data->topik_writing }}</p>
+                                                            <p >note : {{ $data->komentar_writing }}</p>
+                                                            @endif
+                                                            @if(($data->writing_check)== 2)
+                                                            <p class="text-danger"><b>Quest Gagal</b></p>
+                                                            <p >topik : {{ $data->topik_writing }}</p>
+                                                            <p >note : {{ $data->komentar_writing }}</p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->business)== 'belum mengerjakan')
+                                                            <a class="text-danger" type="text" >kosong</a>
+                                                            @else    
+                                                            @if(($data->business_check)== 0)
+                                                            <p class="text-orange">lagi diperiksa</p>
+                                                            @endif 
+                                                            @if(($data->business_check)== 1)
+                                                            <p class="text-success"><b>Quest Complete</b></p>
+                                                            @endif
+                                                            @if(($data->business_check)== 2)
+                                                            <p class="text-danger"><b>Quest Kandas</b></p>
+                                                            @endif
+                                                            @endif
+                                                         </td>
+                                                         <td>
+                                                            @if(($data->status)== 0)
+                                                            <p class="text-danger"><b>BELUM VALID</b></p>
+                                                            @endif @if(($data->status)== 1)
+                                                            <p class="text-success"><b>VALID</b></p>
+                                                            @endif
+                                                         </td>
+                                                         <td class="project-actions text-right">
+                                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.detail.quest', [$user->id,$data->id])}}" target="_blank">
+                                                            <i class="fas fa-folder"> </i>
+                                                            Detail
+                                                            </a>
+                                                         </td>
+                                                      </tr>
+                                                      @endforeach
+                                                   </tbody>
+                                                   <tfoot>
+                                                      <tr>
+                                                         <th>Hari</th>
+                                                         <th>Public Speaking</th>
+                                                         <th>Writing</th>
+                                                         <th>Business</th>
+                                                         <th>status</th>
+                                                         <th></th>
+                                                      </tr>
+                                                   </tfoot>
+                                                </table>
+                                             </div>
+                                             <!-- /.card-body -->
+                                          </div>
+                                          <!-- /.card -->
+                                       </div>
+                                    </div>
                                  </div>
                                  <!-- /.row -->
                                  <!-- /.tab-pane -->
