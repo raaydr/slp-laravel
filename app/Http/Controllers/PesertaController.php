@@ -11,6 +11,7 @@ use App\Models\Peserta;
 use App\Models\Fasil;
 use App\Models\Quest;
 use App\Models\Jualan;
+use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -686,5 +687,36 @@ class PesertaController extends Controller
         $Jualan->save();
         }
         return Redirect::back()->with('pesan','Pendaftaran membuat link berhasil');
+    }
+
+    public function ubah_password(){
+        $title = 'peserta ubah password';
+        
+        
+
+        return view('peserta.ubahpassword', compact('title'));
+    }
+    public function change_password(Request $request)
+
+    {
+
+        $request->validate([
+
+            'current_password' => ['required', new MatchOldPassword],
+
+            'new_password' => ['required'],
+
+            'new_confirm_password' => ['same:new_password'],
+
+        ]);
+
+   
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+   
+        return redirect()->route('peserta.ubah.password')->with('berhasil', 'berhasil ubah password');
+        
+
     }
 }

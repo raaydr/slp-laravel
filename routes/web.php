@@ -431,7 +431,8 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 	Route::get('/pengumuman', 'PesertaController@index')->name('peserta.pengumuman');
     Route::get('/penjualan', 'PesertaController@jualan')->name('peserta.jualan');
     Route::post('/link-penjualan', 'PesertaController@linkJualan')->name('peserta.linkJualan');
-
+    Route::get('/ubah-password', 'PesertaController@ubah_password')->name('peserta.ubah.password');
+    Route::post('/change-password', 'PesertaController@change_password')->name('peserta.change.password');
 	});
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
