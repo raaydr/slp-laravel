@@ -180,7 +180,9 @@
                                              <div class="row">
                                                 <!-- /.col -->
                                                 <div class="col-12 justify">
+                                                   @if($boolean == 1)
                                                    <button type="submit" class="btn btn-primary btn-block">Input</button>
+                                                   @endif
                                                 </div>
                                                 <!-- /.col -->
                                              </div>

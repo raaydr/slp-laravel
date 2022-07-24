@@ -2479,10 +2479,18 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
+        $genMax = Target::where('status', 1)
+            ->max('gen');
         $target = Target::where('id', $id)->first();
+
+        if(($gen == $target->gen)&&($genMax == $target->gen)){
+            $boolean = 1;
+        }else{
+            $boolean = 0;
+        }
         $tanggal_mulai = $target->mulai;
         $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
-        return view('admin.detailTargetTugas', compact('title', 'gen','target','tanggal_mulai'));
+        return view('admin.detailTargetTugas', compact('title', 'gen','target','tanggal_mulai','boolean'));
     }
 
     public function EditTargetTugas(Request $request, $id){
