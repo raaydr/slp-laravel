@@ -85,6 +85,27 @@
                               </div>
                            </div>
                            <div class="form-group row">
+                                 <label for="mulai" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Mulai') }}</label>
+                                 <div class="col-md-6">
+                                                <div class="input-group date">
+                                                   <div class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-th"></span>
+                                                   </div>
+                                                   <input placeholder="masukkan tanggal pembuatan" type="text" class="form-control datepicker" name="mulai" required autofocus />
+                                                   <div class="input-group-append">
+                                                      <div class="input-group-text">
+                                                         <span class="far fa-calendar-alt"></span>
+                                                      </div>
+                                                   </div>
+                                                   @error('tanggal_pembuatan')
+                                                   <span class="invalid-feedback" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                                   </span>
+                                                   @enderror
+                                                </div>
+                                             </div>
+                                          </div>
+                           <div class="form-group row">
                               <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
                               <div class="col-md-6">
                                  <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"   required autofocus></textarea>
@@ -135,78 +156,11 @@
                                                    <th>Nama</th>
                                                    <th>Jenis</th>
                                                    <th>Jumlah</th>
-                                                   <th>Gen</th>
+                                                   <th>Generasi</th>
                                                    <th>action</th>
                                              </tr>
                                           </thead>
                                           <tbody>
-                                          <tr>
-                                             <td>1</td>
-                                             <td>Daily vlog</td>
-                                             <td>Public Speaking</td>
-                                             <td>60</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-                                             </tr>
-                                             <tr>
-                                             <td>2</td>
-                                             <td>Daily Writing</td>
-                                             <td>Creative Writing</td>
-                                             <td>30</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-                                             </tr>
-                                             <tr>
-                                             <td>3</td>
-                                             <td>Entrepeneur Bulan 1</td>
-                                             <td>Business</td>
-                                             <td>3.000.0000</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-                                             </tr>
-                                             <tr>
-                                             <td>4</td>
-                                             <td>Daily vlog</td>
-                                             <td>Public Speaking</td>
-                                             <td>60</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-                                             </tr>
-                                             <tr>
-                                             <td>5</td>
-                                             <td>Daily vlog</td>
-                                             <td>Public Speaking</td>
-                                             <td>60</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-                                             </tr>
-                                             <tr>
-                                             <td>6</td>
-                                             <td>Daily vlog</td>
-                                             <td>Public Speaking</td>
-                                             <td>60</td>
-                                             <td>2</td>
-                                             <td>
-                                                <button type="submit" class="btn btn-primary">edit</button>
-                                                <button  class="btn btn-danger">delete</button>
-                                             </td>
-
-                                          </tr>
                                           </tbody>
                                           <tfoot>
                                              <tr>
@@ -214,7 +168,7 @@
                                                    <th>Nama</th>
                                                    <th>Jenis</th>
                                                    <th>Jumlah</th>
-                                                   <th>Gen</th>
+                                                   <th>Generasi</th>
                                                    <th>action</th>
                                              </tr>
                                           </tfoot>
@@ -239,25 +193,93 @@
                }
             });
          $(function () {
-             $("#example1")
+            $("#example1")
                  .DataTable({
+                     processing:true,
+                     serverSide:true,
+                     ajax : {
+                        url : "{{route('admin.targetTugas.pembuatan')}}",
+                        type : 'GET'
+                     },
+                     columns:[
+                        {data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                        {data:'judul',name:'judul',orderable: true,searchable: true},
+                        {data: 'tipe_tugas', name: 'tipe_tugas', orderable: true, searchable: true},
+                        {data: 'jumlah', name: 'jumlah', orderable: true, searchable: true},
+                        {data: 'gen', name: 'gen', orderable: true, searchable: true},
+                        
+                        {data: 'action', name: 'action'},
+                        
+                        
+                     ],
+                     order:[[0,'asc']],
                      responsive: true,
                      lengthChange: false,
                      autoWidth: false,
-                     
+                     buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                     initComplete: function () {
+                           // Apply the search
+                           this.api()
+                              .columns()
+                              .every(function () {
+                                 var that = this;
+               
+                                 $('input', this.footer()).on('keyup change clear', function () {
+                                       if (that.search() !== this.value) {
+                                          that.search(this.value).draw();
+                                       }
+                                 });
+                              });
+                     },
                  })
                  .buttons()
                  .container()
                  .appendTo("#example1_wrapper .col-md-6:eq(0)");
          });
          $('#load').hide();
-        
          $(function () {
+            $(".datepicker").datepicker({
+              format: 'mm/dd/yy',
+              autoclose: true,
+              todayHighlight: true,
+          });
             // Summernote
             $('#summernote').summernote()
 
-         })
+         })     
          $(document).ready(function() {
+            $('body').on('click', '.deleteItem', function() {
+            var Item_id = $(this).data("id");
+            var url = '{{ route("admin.DeleteTargetTugas",[":id"]) }}';
+            url = url.replace(':id', Item_id);
+            $.ajax({
+   
+                        type: "GET",
+                     
+                        url: url,
+                     
+                        success: function(data) {
+                     
+                           iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                              title: 'Data Berhasil Disimpan',
+                              message: '{{ Session('
+                              success ')}}',
+                              position: 'bottomRight'
+                           });
+                           var oTable = $('#example1').dataTable(); //inialisasi datatable
+                           oTable.fnDraw(false); //reset datatable
+                     
+                        },
+                     
+                        error: function(data) {
+                     
+                           console.log('Error:', data);
+                     
+                        }
+                     
+            });
+                     
+                     });
                if ($("#formTarget").length > 0) {
                   $("#formTarget").validate({
                         rules: {

@@ -2328,20 +2328,68 @@ class AdminController extends Controller
         return view('post',compact('blog','tanggalbaru'));
     }
 
-    public function PembuatanTargetTugas()
+    public function PembuatanTargetTugas(Request $request)
     {
         
         $title = 'Pembuatan Target Tugas';
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        
+        $data =   $data = Target::where('status', 1)->orderBy('gen', 'ASC')->get();
+            if($request->ajax()){
+    
+                return datatables()->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $detail = route('admin.DetailTargetTugas', $row->id);
+                        $id = $row->id;
+                        $b = '
+                        <a class="btn btn-primary btn-sm" href='.$detail.'>
+                        <i class="fas fa-folder"></i>detail</a>';
+                        $actionBtn = $b.' 
+                            <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-danger btn-sm">Hapus</a></dl>
+                                                            <div class="modal fade" id="modal-danger">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content bg-danger">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Penolakan</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">    
+                                                                                <p>Apa anda yakin ingin menghapus Target Tugas ini ?</p>
+                                                                                <div class="modal-footer justify-content-between">
+                                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-dismiss="modal" data-original-title="Delete" class="btn btn-outline-light deleteItem">Delete</a>
+                                                                                </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /.modal-content -->
+                                                                </div>
+                                                                <!-- /.modal-dialog -->
+                                                            </div>
+                                                            <!-- /.modal -->';
+                        return $actionBtn;
+                    })->rawColumns(['action'])
+                    ->make(true);
+            }
 
         return view('admin.pembuatanTargetTugas', compact('title', 'gen'));
 
         
     }
-
+    public function DeleteTargetTugas($id)
+    {
+        Target::where('id', $id)->update([
+            'status' => 0,
+            'updated_at' => now(),
+            ]
+        );
+        return response()->json(['success'=>'Hapus Target Tugas']);
+        
+    }
     public function AddTargetTugas(Request $request){
         $validator = Validator::make($request->all(), 
         [   
@@ -2350,6 +2398,7 @@ class AdminController extends Controller
             'tipe_tugas' => 'required|string',
             'gen' => 'required|integer',
             'jumlah' => 'required|numeric',
+            'mulai' => 'required|date',
             
             
 
@@ -2363,6 +2412,7 @@ class AdminController extends Controller
             'gen.required' => 'generasi tidak boleh kosong',
             
             'jumlah.numeric' => 'jumlah harus berupa angka',
+            
             
 
 
@@ -2387,6 +2437,8 @@ class AdminController extends Controller
         $target->tipe_tugas = $request->tipe_tugas;
         $target->jumlah = $request->jumlah;
         $target->gen = $request->gen;
+        $target->mulai = $request->mulai;
+        $target->status = 1;
         $target->save();
         return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
     }
@@ -2421,5 +2473,90 @@ class AdminController extends Controller
             return view('admin.PemeriksaanTugasWritingDetail', compact('title', 'user', 'quest','data','peserta','daily_quest'));
     }
 
+    public function DetailTargetTugas($id)
+    {
+        $title = 'Detail Target Tugas';
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $target = Target::where('id', $id)->first();
+        $tanggal_mulai = $target->mulai;
+        $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+        return view('admin.detailTargetTugas', compact('title', 'gen','target','tanggal_mulai'));
+    }
 
+    public function EditTargetTugas(Request $request, $id){
+        $validator = Validator::make($request->all(), 
+        [   
+            'judul' => 'nullable|string|regex:/^[\w ]+$/|max:255',
+            'jumlah' => 'nullable|integer',
+            'gen' => 'nullable|integer',
+            'keterangan' => 'nullable',
+            'mulai' => 'nullable',
+            
+            
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            
+            'judul.string' => 'Tolong isi dengan benar',
+            'judul.regex' => 'Tolong isi hanya dengan alphabet dan angka',
+         
+
+
+        ]);     
+
+        if($validator->fails()){
+            return back()->withErrors($validator)->withInput();    
+        }
+            $id = $request->id;
+            $targetLama = Target::where('id', $id)->first();
+            $judul_new = $request->judul;
+            $jumlah_new = $request->jumlah;
+            $gen_new = $request->gen;
+            $mulai_new = $request->mulai;
+            
+    
+            if($judul_new == NULL){
+                $judul_new = $targetLama->judul;    
+            }
+            if($jumlah_new == NULL){
+                $jumlah_new = $targetLama->jumlah;    
+            }
+            if($gen_new == NULL){
+                $gen_new = $targetLama->gen;    
+            }
+            if($mulai_new == NULL){
+                $mulai_new = $targetLama->mulai;
+                    
+            }
+            $mulai_new=Carbon::parse($mulai_new)->format('Y/m/d');
+            $detail=$request->keterangan;
+            if (!empty($detail)){
+                $dom = new \DomDocument();
+                $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                $detail = $dom->saveHTML();
+                $keterangan_new = $detail;
+            } else{
+                $keterangan_new = $targetLama->keterangan;  
+            }
+           
+                Target::where('id', $id)->update([
+                    'judul' => $judul_new,
+                    'jumlah' => $jumlah_new,
+                    'gen' => $gen_new,
+                    'mulai' => $mulai_new,
+                    'keterangan' => $keterangan_new,
+                    'updated_at' => now(),
+                    ]
+                );
+                
+            
+                return Redirect::back()->with('pesan','berhasil');
+        
+    }
 }

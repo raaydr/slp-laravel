@@ -20,6 +20,8 @@ class CreateTargetTugasTable extends Migration
             $table->string('tipe_tugas');
             $table->integer('gen');
             $table->integer('jumlah');
+            $table->boolean('status');
+            $table->date('mulai');
             $table->timestamps();
         });
     }

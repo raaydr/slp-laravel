@@ -14,6 +14,7 @@ class Target extends Model
         'keterangan',
         'jumlah',
         'tipe_tugas',
+        'mulai',
         'gen',
         
         
@@ -36,6 +37,7 @@ class Target extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'mulai' => 'datetime',
 
 
     ];
