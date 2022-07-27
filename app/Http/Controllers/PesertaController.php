@@ -10,6 +10,7 @@ use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
 use App\Models\Quest;
+use App\Models\Target;
 use App\Models\Jualan;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Auth;
+use DateTime;
+use Carbon\Carbon;
 use Redirect;
 
 class PesertaController extends Controller
@@ -719,4 +722,44 @@ class PesertaController extends Controller
         
 
     }
+
+    public function TugasWritingPeserta()
+    {
+        $title = 'Tugas Writing';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('users')
+            ->where('id', $id)
+            ->get();
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $target = Target::where('gen', $gen)->where('status', 1)->get();
+        return view('peserta.tugasWriting', compact('title', 'user','biodata','target'));
+    }
+
+    public function inputTugasWriting($id)
+    {
+        $title = 'Tugas Writing';
+        $target = Target::where('id', $id)->first();
+        $mulai = $target->mulai;
+        
+        $now = Carbon::now(); // today
+        
+        if ($now <= $mulai ) {
+            $start = 0;
+          } else {
+            $start = 1;
+          }
+        return view('peserta.inputTugasWriting', compact('title','target','start'));
+    }
+
+    public function bug ($id){
+        $target = Target::where('id', $id)->first();
+        return "sukses";
+    }
+
+
 }

@@ -437,6 +437,13 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::post('/link-penjualan', 'PesertaController@linkJualan')->name('peserta.linkJualan');
     Route::get('/ubah-password', 'PesertaController@ubah_password')->name('peserta.ubah.password');
     Route::post('/change-password', 'PesertaController@change_password')->name('peserta.change.password');
+    Route::get('/Tugas-Writing', 'PesertaController@TugasWritingPeserta')->name('peserta.TugasWritingPeserta');
+    Route::get('/Tugas-Writing/input/{id}', 'PesertaController@inputTugasWriting')->name('peserta.InputTugasWriting');
+    Route::get('/bug/{id}', 'PesertaController@inputTugasWriting')->name('peserta.bug');
+
+
+    //Tugas Peserta
+    Route::post('/Tugas-Writing/add/{target}', 'TugasController@addTugasWriting')->name('peserta.addTugasWriting');
 	});
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {

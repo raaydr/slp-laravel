@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Target extends Model
 {
     use HasFactory;
     protected $table = 'target_tugas';
     protected $fillable = [
-        'target',
+        'judul',
         'keterangan',
         'jumlah',
         'tipe_tugas',
@@ -37,8 +38,12 @@ class Target extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'mulai' => 'datetime',
+        
+        
 
 
     ];
+    public function setDateAttribute( $value ) {
+        $this->attributes['mulai'] = Carbon::parse($value)->isoFormat('D MMMM Y');
+      }
 }

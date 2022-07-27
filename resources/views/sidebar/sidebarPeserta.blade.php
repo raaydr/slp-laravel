@@ -37,6 +37,31 @@
                   </a>
             </li>
             <li class="nav-item">
+               @if ( Route::currentRouteName() == "peserta.TugasWritingPeserta")
+                  <a href="../widgets.html" class="nav-link active">
+               @else
+                  <a href="../widgets.html" class="nav-link ">
+               @endif
+                     <i class="nav-icon fas ion-person"></i>
+                     <p>
+                        Tugas
+                        <i class="fas fa-angle-left right"></i>
+                     </p>
+                  </a>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "peserta.TugasWritingPeserta" )
+                        <a href="{{ route('peserta.TugasWritingPeserta') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('peserta.TugasWritingPeserta') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Tugas Writing </p>
+                        </a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item">
                @if ( Route::currentRouteName() == "peserta.daily.quest" )
                   <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
                @else

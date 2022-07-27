@@ -2291,7 +2291,7 @@ class AdminController extends Controller
         
         $blog->save();
         
-        return Redirect::back()->with('pesan','Pendaftaran membuat kurikulum');
+        return Redirect::back()->with('pesan','berhasil');
 
         
     }

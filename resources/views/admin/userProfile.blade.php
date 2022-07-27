@@ -136,7 +136,7 @@
                            <div class="card-body">
                               <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
                               <p class="text-muted">
-                                 {{$biodata->email}}
+                              {{$user->Biodata->email}}
                               </p>
 
                               <hr />

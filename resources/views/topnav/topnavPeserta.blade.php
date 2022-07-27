@@ -16,7 +16,9 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
+        @yield('head') 
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
+        
         <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
     </head>
     <body class="hold-transition sidebar-mini">
