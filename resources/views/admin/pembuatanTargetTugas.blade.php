@@ -57,7 +57,7 @@
                                  <div class="col-md-6">
                                     <input id="jumlah" type="text" class="form-control" name="jumlah" value="{{ old('jumlah') }}" >
                                     <small id="passwordHelpBlock" class="form-text text-sucess">
-                                    contoh : 60 . artinya dikerjakan sebanyak 60 kali karena 2 bulan
+                                    contoh : 60 . artinya dikerjakan sebanyak 60 kali karena 2 bulan. Atau 0 karena dinilai dari hasil akhirnya.
                                     </small>
                                     @if ($errors->has('jumlah'))
                                     <span class="invalid-feedback" role="alert">

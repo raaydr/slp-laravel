@@ -17,12 +17,15 @@ class CreateTugasWriting extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->text('writing');
-            $table->text('keterangan')->nullable();;
+            $table->text('keterangan')->nullable();
+            $table->string('target_tugas');
             $table->integer('target_tugasID');
             $table->string('kelompok_writing')->nullable();
             $table->text('note')->nullable();
             $table->boolean('valid');
             $table->integer('user_id');
+            $table->integer('gen');
+            $table->integer('check_id')->nullable();
             $table->timestamps();
         });
     }

@@ -70,11 +70,22 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Pemeriksaan-Tugas/Writing/ID', 'AdminController@PemeriksaanTugasWritingDetail')->name('admin.PemeriksaanTugasWritingDetail');
 
 
-    // Rute Target
+    // Rute Target Tugas
     Route::post('/Target-Tugas/add', 'AdminController@AddTargetTugas')->name('admin.AddTargetTugas');
     Route::get('/Target-Tugas/detail/{id}', 'AdminController@DetailTargetTugas')->name('admin.DetailTargetTugas');
     Route::post('/Target-Tugas/edit/{id}', 'AdminController@EditTargetTugas')->name('admin.EditTargetTugas');
     Route::get('/Target-Tugas/delete/{id}', 'AdminController@DeleteTargetTugas')->name('admin.DeleteTargetTugas');
+
+
+    //Rute Tugas
+    Route::get('/Validasi-Tugas', 'TugasController@validasiTugas')->name('admin.validasiTugas');
+    Route::get('/Tabel-Writing', 'TugasController@tabelTugasWriting')->name('admin.tabelTugasWriting');
+    Route::get('/Detail-Tugas-Writing/{id}', 'TugasController@detailTugasWriting')->name('admin.detailTugasWriting');
+    Route::post('/Note-Tugas/{tugas}/{target}', 'TugasController@noteTugas')->name('admin.noteTugas');
+    Route::get('/Check-Tugas/{tugas}/{target}/{val}', 'TugasController@checkTugas')->name('admin.checkTugas');
+    Route::get('/test-table', 'TugasController@testTabel')->name('admin.testTabel');
+    Route::get('/test-table1', 'TugasController@testTabel1')->name('admin.testTabel1');
+    Route::get('/tes-btn', 'TugasController@testbtn')->name('admin.testbtn');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

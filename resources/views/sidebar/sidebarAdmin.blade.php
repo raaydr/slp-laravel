@@ -113,7 +113,13 @@
                </ul>
             </li>
             <li class="nav-item">
-               @if ( Route::currentRouteName() == "admin.peserta.pengelompok" || Route::currentRouteName() == "admin.daily.quest")
+               @if ( Route::currentRouteName() == "admin.peserta.pengelompok" 
+               || Route::currentRouteName() == "admin.daily.quest"
+               || Route::currentRouteName() == "admin.targetTugas.pembuatan"
+               || Route::currentRouteName() == "admin.PemeriksaanTugasWriting"
+               || Route::currentRouteName() == "admin.validasiTugas"
+               || Route::currentRouteName() == "admin.PemeriksaanTugasWritingDetail")
+               
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -153,6 +159,16 @@
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Pembuatan Target</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.validasiTugas" )
+                        <a href="{{ route('admin.validasiTugas') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.validasiTugas') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Validasi Tugas </p>
                         </a>
                   </li>
                   <li class="nav-item">

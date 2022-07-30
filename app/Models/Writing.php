@@ -17,11 +17,14 @@ class Writing extends Model
         'judul',
         'writing',
         'keterangan',
+        'target_tugas',
         'target_tugasID',
         'kelompok_writing',
         'note',
         'valid',
         'user_id',
+        'gen',
+        'check_id',
 
         
         
