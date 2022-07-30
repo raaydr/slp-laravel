@@ -448,9 +448,14 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::post('/link-penjualan', 'PesertaController@linkJualan')->name('peserta.linkJualan');
     Route::get('/ubah-password', 'PesertaController@ubah_password')->name('peserta.ubah.password');
     Route::post('/change-password', 'PesertaController@change_password')->name('peserta.change.password');
-    Route::get('/Tugas-Writing', 'PesertaController@TugasWritingPeserta')->name('peserta.TugasWritingPeserta');
-    Route::get('/Tugas-Writing/input/{id}', 'PesertaController@inputTugasWriting')->name('peserta.InputTugasWriting');
     Route::get('/bug/{id}', 'PesertaController@inputTugasWriting')->name('peserta.bug');
+
+    //Target Peserta
+    Route::get('/Tugas-Writing', 'TargetController@TargetTugasWriting')->name('target.TargetTugasWriting');
+    Route::get('/Tugas-Speaking', 'TargetController@TargetTugasSpeaking')->name('target.TargetTugasSpeaking');
+    Route::get('/Tugas-Entrepreneur', 'TargetController@TargetTugasEntrepreneur')->name('target.TargetTugasEntrepreneur');
+    Route::get('/Tugas-Writing/input/{id}', 'TargetController@inputTugasWriting')->name('target.InputTugasWriting');
+    
 
 
     //Tugas Peserta

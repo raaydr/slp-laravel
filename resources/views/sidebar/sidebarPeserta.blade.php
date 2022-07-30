@@ -37,7 +37,11 @@
                   </a>
             </li>
             <li class="nav-item">
-               @if ( Route::currentRouteName() == "peserta.TugasWritingPeserta")
+               @if (( Route::currentRouteName() == "target.TargetTugasWriting")
+               ||( Route::currentRouteName() == "target.TargetTugasSpeaking")
+               ||( Route::currentRouteName() == "target.TargetTugasEntrepreneur")
+               ||( Route::currentRouteName() == "target.InputTugasWriting")
+               )
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -50,13 +54,39 @@
                   </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     @if ( Route::currentRouteName() == "peserta.TugasWritingPeserta" )
-                        <a href="{{ route('peserta.TugasWritingPeserta') }}" class="nav-link active">
+                     @if (( Route::currentRouteName() == "target.TargetTugasWriting" )
+                     ||( Route::currentRouteName() == "target.InputTugasWriting")
+                     )
+                        <a href="{{ route('target.TargetTugasWriting') }}" class="nav-link active">
                      @else
-                        <a href="{{ route('peserta.TugasWritingPeserta') }}" class="nav-link ">
+                        <a href="{{ route('target.TargetTugasWriting') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Tugas Writing </p>
+                        </a>
+                  </li>
+               </ul>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "target.TargetTugasSpeaking" )
+                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Tugas Speaking </p>
+                        </a>
+                  </li>
+               </ul>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "target.TargetTugasEntrepreneur" )
+                        <a href="{{ route('target.TargetTugasEntrepreneur') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('target.TargetTugasEntrepreneur') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Tugas Entrepreneur </p>
                         </a>
                   </li>
                </ul>

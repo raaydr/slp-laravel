@@ -736,14 +736,20 @@ class PesertaController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->get();
+        $jumlah=count($target);
+        for ($i = 0; $i <= $jumlah-1; $i++) {
+            $tanggal = $target[$i]['mulai'];
+            $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
+            $target[$i]['mulai']= $tanggal;
+        }
         return view('peserta.tugasWriting', compact('title', 'user','biodata','target'));
     }
 
     public function inputTugasWriting($id)
     {
         $title = 'Tugas Writing';
-        $target = Target::where('id', $id)->first();
+        $target = Target::where('id', $id)-> first();
         $mulai = $target->mulai;
         
         $now = Carbon::now(); // today

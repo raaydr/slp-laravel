@@ -38,12 +38,12 @@ class Target extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'updated_at' => 'datetime',
+        
         
         
 
 
     ];
-    public function setDateAttribute( $value ) {
-        $this->attributes['mulai'] = Carbon::parse($value)->isoFormat('D MMMM Y');
-      }
+   
 }

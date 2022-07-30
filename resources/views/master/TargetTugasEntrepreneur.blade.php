@@ -1,16 +1,15 @@
-@extends('topnav.topnavPeserta')
-@section('content')
+
                  <!-- Content Header (Page header) -->
-            <section class="content-header">
+                 <section class="content-header">
                <div class="container-fluid">
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>TARGET TUGAS WRITING</h1>
+                        <h1>TARGET TUGAS ENTREPRENEUR</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="#">Tugas</a></li>
-                           <li class="breadcrumb-item active">Target Writing</li>
+                           <li class="breadcrumb-item active">Target Entrepreneur</li>
                         </ol>
                      </div>
                   </div>
@@ -45,7 +44,7 @@
                               </div>
                            </div>
                            <div class="card-footer">
-                                <a class="btn btn-primary" href="{{ route('peserta.InputTugasWriting',$target_tugas->id) }}">Input</a>
+                                <a class="btn btn-primary" href="{{ route('target.InputTugasWriting',$target_tugas->id) }}">Kerjakan</a>
                               </div>
                         </div>
                         @endforeach
@@ -56,7 +55,3 @@
                <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
-@endsection
-@section('script')
-     
-@endsection
