@@ -15,6 +15,7 @@ use App\Models\Quest;
 use App\Models\Target;
 use App\Models\Writing;
 use App\Models\Speaking;
+use App\Models\Entrepreneur;
 use App\Models\Jualan;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -42,7 +43,8 @@ class TugasController extends Controller
                 'kelompok_writing' => 'nullable|string|max:255',
                 'keterangan' => 'required',
                 'url_link' => 'nullable',
-                'url_file' => 'mimes:doc,pdf,docx,zip,pdf|max:10240',
+                'url_file' => 'mimes:doc,pdf,docx,zip|max:10240',
+                
                 
                 
             ],
@@ -259,6 +261,13 @@ class TugasController extends Controller
                     'updated_at'=> now(),
                 ]);
                 break;
+            case 'Entrepreneur':
+                Entrepreneur::where('id',$tugas_id)->update([
+                
+                    'note' => $request->note,
+                    'updated_at'=> now(),
+                ]);
+                break;
                 default:
                 echo "SLP INDONESIA";
                 break;
@@ -313,6 +322,30 @@ class TugasController extends Controller
                 ]);
             } else {
                 Speaking::where('id',$tugas_id)->update([    
+                    'valid' => $val,
+                    'check_id' => $id,
+                    'updated_at'=> now(),
+                ]);
+            }
+            
+                break;
+            case 'Entrepreneur':
+            if($val == 2){
+                $file = Entrepreneur::where('id', $tugas_id)->value('entrepreneur');
+                $data = json_decode($file);
+                
+                foreach($data as $image)
+                {
+                    File::delete('entrepreneur/' . $image);
+                }
+                Entrepreneur::where('id',$tugas_id)->update([
+                    'entrepreneur' => "kosong",
+                    'valid' => $val,
+                    'check_id' => $id,
+                    'updated_at'=> now(),
+                ]);
+            } else {
+                Entrepreneur::where('id',$tugas_id)->update([    
                     'valid' => $val,
                     'check_id' => $id,
                     'updated_at'=> now(),
@@ -500,6 +533,180 @@ class TugasController extends Controller
                 break;
         }
         
+        
+    }
+
+    public function addTugasEntrepreneur (Request $request, $id){
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'judul' => 'required|string',
+                'jenis_produk' => 'required|string',
+                'sumber_produk' => 'required|string',
+                'profit' => 'required',
+                'keterangan' => 'required',
+                'url_file' => 'required',
+                'url_file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+                
+                
+            ],
+
+            $messages = [
+                'judul.required' => 'judul tidak boleh kosong!',
+                'jenis_produk.required' => 'jenis produk tidak boleh kosong!',
+                'sumber_produk.required' => 'sumber produk tidak boleh kosong!',
+                'profit.required' => 'profit tidak boleh kosong!',
+                'url_file.required' => 'Bukti transfer tidak boleh kosong!',
+                'judul.required' => 'judul tidak boleh kosong!',
+                'keterangan.required' => 'awalan tidak boleh kosong!',
+                'url_file.image' => 'Format foto tidak mendukung! Gunakan jpeg,jpg,png.',
+                
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+       
+        $user_id = Auth::user()->id;
+
+        $tugas = new Entrepreneur;
+        $tugas->judul = $request->judul;
+        $profit = $request->profit;
+        $harga_str = preg_replace("/[^0-9]/", "", $profit);
+        $profit = (int) $harga_str;
+        $tugas->profit = $profit;
+        $tugas->jenis_produk = $request->jenis_produk;
+        $tugas->sumber_produk = $request->sumber_produk;
+        $detail=$request->keterangan;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        $tugas->keterangan = $detail;
+        $tugas->user_id = $user_id;
+        $tugas->target_tugasID = $id;
+        $tugas->target_tugas = Target::where('id', $id)->value('judul');
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        $tugas->gen = $gen;
+        $tugas->valid = 0 ;
+            $count = 1;
+            foreach($request->file('url_file') as $image)
+            {
+                $namaFile = $request->judul;
+                $current_timestamp = now()->timestamp;
+                $namaFile = $namaFile.$count.'_'.$current_timestamp.'.'.$image->getClientOriginalExtension() ;
+                $fileName = preg_replace("/\s+/", "", $namaFile);
+                $destinationPath = public_path().'/entrepreneur/' ;
+                $image->move($destinationPath,$fileName);
+                $data[] = $fileName;
+                $count++;  
+            }
+        $tugas->entrepreneur =json_encode($data);
+        
+        $tugas->save();
+        
+       return Redirect::back()->with('pesan','Pengisian Tugas Berhasil');
+
+        
+        
+    }
+    public function detailTugasEntrepreneur($id)
+    {
+        $title = 'Detail Tugas Speaking ';
+        $id = Crypt::decrypt($id);
+        $tugas = Entrepreneur::where('id', $id)->first();
+        $target =Target::where('id',$tugas->target_tugasID)->first();
+        $peserta =Peserta::where('user_id',$tugas->user_id)->first();
+        $boolean = 0;
+        if($tugas->entrepreneur == "kosong"){
+            $boolean = 2;
+        }
+        $tanggal_mulai = $target->mulai;
+        $penjualan = $tugas->profit;
+        $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                //admin
+                return view('admin.detailTugasEntrepreneur',compact('title','tugas','target','boolean','tanggal_mulai','peserta','penjualan'));
+                break;
+            case '4':
+                //peserta
+                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                break;   
+            case '5':
+                //fasil
+                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                break;   
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
+        
+    }
+
+    public function tabelTugasEntrepreneur(Request $request)
+    {
+        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $data = DB::table('peserta')
+        ->where('peserta.gen', $gen)
+        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')
+        ->where('valid', 0)->orWhere('valid', 1)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Grup', function($row){
+                    $check = $row->grup;
+                    if(($check)== '0'){
+                        return '<p class="text-danger">Kosong</p>';
+                    }
+                    if(($check)== '1'){
+                        return '<p class="text-primary"><b>Grup 1</b></p>';
+                    }
+                    if(($check)== '2'){
+                        return '<p class="text-success"><b>Grup 2</b></p>';
+                    }
+                    if(($check)== '3'){
+                        return '<p class="text-warning"><b>Grup 3</b></p>';
+                    }
+                    return 'test';
+                })
+                ->addColumn('Status', function($row){
+                    $status = $row->valid;
+                    switch ($status) {
+                        case '0':
+                            return '<p class="text-warning"><b>Belum Diperiksa</b></p>';
+                            break;
+                        case '1':
+                            return '<p class="text-success"><b>Valid</b></p>';
+                            break;
+                        case '2':
+                            return '<p class="text-danger"><b>Invalid</b></p>';
+                            break;                               
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.detailTugasEntrepreneur', Crypt::encrypt($row->id));
+                    
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Status','Grup', 'action'])
+                ->make(true);
+        }
         
     }
     public function testTabel1(Request $request)

@@ -81,8 +81,10 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Validasi-Tugas', 'TugasController@validasiTugas')->name('admin.validasiTugas');
     Route::get('/Tabel-Writing', 'TugasController@tabelTugasWriting')->name('admin.tabelTugasWriting');
     Route::get('/Tabel-Speaking', 'TugasController@tabelTugasSpeaking')->name('admin.tabelTugasSpeaking');
+    Route::get('/Tabel-Entrepreneur', 'TugasController@tabelTugasEntrepreneur')->name('admin.tabelTugasEntrepreneur');
     Route::get('/Detail-Tugas-Writing/{id}', 'TugasController@detailTugasWriting')->name('admin.detailTugasWriting');
     Route::get('/Detail-Tugas-Speaking/{id}', 'TugasController@detailTugasSpeaking')->name('admin.detailTugasSpeaking');
+    Route::get('/Detail-Tugas-Entrepreneur/{id}', 'TugasController@detailTugasEntrepreneur')->name('admin.detailTugasEntrepreneur');
     Route::post('/Note-Tugas/{tugas}/{target}', 'TugasController@noteTugas')->name('admin.noteTugas');
     Route::get('/Check-Tugas/{tugas}/{target}/{val}', 'TugasController@checkTugas')->name('admin.checkTugas');
     Route::get('/test-table', 'TugasController@testTabel')->name('admin.testTabel');
@@ -458,12 +460,14 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::get('/Tugas-Entrepreneur', 'TargetController@TargetTugasEntrepreneur')->name('target.TargetTugasEntrepreneur');
     Route::get('/Tugas-Writing/input/{id}', 'TargetController@inputTugasWriting')->name('target.InputTugasWriting');
     Route::get('/Tugas-Speaking/input/{id}', 'TargetController@inputTugasSpeaking')->name('target.InputTugasSpeaking');
+    Route::get('/Tugas-Entrepreneur/input/{id}', 'TargetController@inputTugasEntrepreneur')->name('target.InputTugasEntrepreneur');
     
 
 
     //Tugas Peserta
     Route::post('/Tugas-Writing/add/{target}', 'TugasController@addTugasWriting')->name('peserta.addTugasWriting');
     Route::post('/Tugas-Speaking/add/{target}', 'TugasController@addTugasSpeaking')->name('peserta.addTugasSpeaking');
+    Route::post('/Tugas-Entrepreneur/add/{target}', 'TugasController@addTugasEntrepreneur')->name('peserta.addTugasEntrepreneur');
 	});
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {

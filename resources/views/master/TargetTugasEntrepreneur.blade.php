@@ -44,7 +44,7 @@
                               </div>
                            </div>
                            <div class="card-footer">
-                                <a class="btn btn-primary" href="{{ route('target.InputTugasWriting',$target_tugas->id) }}">Kerjakan</a>
+                                <a class="btn btn-primary" href="{{ route('target.InputTugasEntrepreneur',$target_tugas->id) }}">Kerjakan</a>
                               </div>
                         </div>
                         @endforeach

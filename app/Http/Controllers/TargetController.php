@@ -123,6 +123,19 @@ class TargetController extends Controller
 
         return view('peserta.inputTugasSpeaking', compact('target','start'));
     }
+    public function inputTugasEntrepreneur($id){
+        $target = Target::where('id', $id)-> first();
+        $mulai = $target->mulai;
+        
+        $now = Carbon::now(); // today
+        
+        if ($now <= $mulai ) {
+            $start = 0;
+          } else {
+            $start = 1;
+          }
 
+        return view('peserta.inputTugasEntrepreneur', compact('target','start'));
+    }
 
 }
