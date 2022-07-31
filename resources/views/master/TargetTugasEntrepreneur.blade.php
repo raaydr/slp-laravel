@@ -24,7 +24,7 @@
                         <?php $i = 0; ?>
                             @foreach ($target as $target_tugas)
                         <?php $i++ ;?>
-                        <div class="card card-primary card-outline">
+                        <div class="card card-orange card-outline">
                            <a class="d-block w-100" data-toggle="collapse" href="#collapse-{{$i}}">
                               <div class="card-header">
                                  <h4 class="card-title w-100">

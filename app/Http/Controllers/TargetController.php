@@ -82,14 +82,14 @@ class TargetController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $tanggal = $target[$i]['mulai'];
             $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
             $target[$i]['mulai']= $tanggal;
         }
-        return view('peserta.TargetTugasWriting', compact('title', 'user','biodata','target'));
+        return view('peserta.TargetTugasEntrepreneur', compact('title', 'user','biodata','target'));
     }
 
     public function inputTugasWriting($id)

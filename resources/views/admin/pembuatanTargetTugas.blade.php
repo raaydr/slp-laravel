@@ -78,8 +78,8 @@
                                        <label class="custom-control-label" for="customRadioInline2">Public Speaking</label>
                                  </div>
                                  <div class="custom-control custom-radio custom-control-inline">
-                                       <input type="radio" id="customRadioInline3" name="tipe_tugas" class="custom-control-input" value="Business" required autofocus />
-                                       <label class="custom-control-label" for="customRadioInline3">Business</label>
+                                       <input type="radio" id="customRadioInline3" name="tipe_tugas" class="custom-control-input" value="Entrepreneur" required autofocus />
+                                       <label class="custom-control-label" for="customRadioInline3">Entrepreneur</label>
                                  </div>
                                  
                               </div>
@@ -239,7 +239,7 @@
          $('#load').hide();
          $(function () {
             $(".datepicker").datepicker({
-              format: 'mm/dd/yy',
+              format: 'yyyy-mm-dd',
               autoclose: true,
               todayHighlight: true,
           });
