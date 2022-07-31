@@ -57,25 +57,17 @@ class TargetController extends Controller
     }
     public function TargetTugasSpeaking()
     {
-        $title = 'Tugas Writing';
-        $id = Auth::user()->id;
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->first();
-        $biodata = DB::table('users')
-            ->where('id', $id)
-            ->get();
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $tanggal = $target[$i]['mulai'];
             $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
             $target[$i]['mulai']= $tanggal;
         }
-        return view('peserta.TargetTugasWriting', compact('title', 'user','biodata','target'));
+        return view('peserta.TargetTugasSpeaking', compact('target'));
     }
     public function TargetTugasEntrepreneur()
     {
@@ -102,7 +94,6 @@ class TargetController extends Controller
 
     public function inputTugasWriting($id)
     {
-        $title = 'Tugas Writing';
         $target = Target::where('id', $id)-> first();
         $mulai = $target->mulai;
         
@@ -113,7 +104,25 @@ class TargetController extends Controller
           } else {
             $start = 1;
           }
-        return view('peserta.inputTugasWriting', compact('title','target','start'));
+        
+        
+        return view('peserta.inputTugasWriting', compact('target','start'));
     }
+
+    public function inputTugasSpeaking($id){
+        $target = Target::where('id', $id)-> first();
+        $mulai = $target->mulai;
+        
+        $now = Carbon::now(); // today
+        
+        if ($now <= $mulai ) {
+            $start = 0;
+          } else {
+            $start = 1;
+          }
+
+        return view('peserta.inputTugasSpeaking', compact('target','start'));
+    }
+
 
 }

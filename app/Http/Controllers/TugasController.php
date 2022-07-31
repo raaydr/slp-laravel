@@ -14,6 +14,7 @@ use App\Models\Fasil;
 use App\Models\Quest;
 use App\Models\Target;
 use App\Models\Writing;
+use App\Models\Speaking;
 use App\Models\Jualan;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -40,7 +41,7 @@ class TugasController extends Controller
                 'judul' => 'required|string',
                 'kelompok_writing' => 'nullable|string|max:255',
                 'keterangan' => 'required',
-                'url_link' => 'nullable|regex:/([A-Z""])\w+/|max:255',
+                'url_link' => 'nullable',
                 'url_file' => 'mimes:doc,pdf,docx,zip,pdf|max:10240',
                 
                 
@@ -175,12 +176,18 @@ class TugasController extends Controller
         $target =Target::where('id',$tugas->target_tugasID)->first();
         $peserta =Peserta::where('user_id',$tugas->user_id)->first();
         $asset= "/writing/";
-        $file= $asset . $tugas->writing;
+        $url= $tugas->writing;
+        $file= $asset . $url;
         if (file_exists(public_path($file))) {
             $boolean = 1;
-          }else{
+          } 
+        elseif($url == "kosong"){
+            $boolean = 2;
+        }
+        else{
             $boolean = 0;
-          }
+        }
+            
         $tanggal_mulai = $target->mulai;
         $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
         $level = Auth::user()->level;
@@ -245,10 +252,13 @@ class TugasController extends Controller
                     'updated_at'=> now(),
                 ]);
                 break;
-            case '1':
-
-            
-                break;   
+            case 'Public Speaking':
+                Speaking::where('id',$tugas_id)->update([
+                
+                    'note' => $request->note,
+                    'updated_at'=> now(),
+                ]);
+                break;
                 default:
                 echo "SLP INDONESIA";
                 break;
@@ -266,17 +276,50 @@ class TugasController extends Controller
         
         switch ($tipe_tugas) {
             case 'Creative Writing':
-                Writing::where('id',$tugas_id)->update([
                 
+                if($val == 2){
+                    $file = Writing::where('id', $tugas_id)->value('writing');
+                    File::delete('writing/' . $file);
+                    Writing::where('id',$tugas_id)->update([
+                        'writing' => "kosong",
+                        'valid' => $val,
+                        'check_id' => $id,
+                        'updated_at'=> now(),
+                    ]);
+                } else {
+                    Writing::where('id',$tugas_id)->update([    
+                        'valid' => $val,
+                        'check_id' => $id,
+                        'updated_at'=> now(),
+                    ]);
+                }
+                
+                
+                break;
+           case 'Public Speaking':
+            if($val == 2){
+                $file = Speaking::where('id', $tugas_id)->value('speaking');
+                $data = json_decode($file);
+                
+                foreach($data as $image)
+                {
+                    File::delete('speaking/' . $image);
+                }
+                Speaking::where('id',$tugas_id)->update([
+                    'speaking' => "kosong",
                     'valid' => $val,
                     'check_id' => $id,
                     'updated_at'=> now(),
                 ]);
-                break;
-            case '1':
-
+            } else {
+                Speaking::where('id',$tugas_id)->update([    
+                    'valid' => $val,
+                    'check_id' => $id,
+                    'updated_at'=> now(),
+                ]);
+            }
             
-                break;   
+                break;
                 default:
                 echo "SLP INDONESIA";
                 break;
@@ -285,76 +328,178 @@ class TugasController extends Controller
     
 
     }
-    public function testTabel(Request $request)
+    
+    public function addTugasSpeaking (Request $request, $id){
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'judul' => 'required|string',
+                'jumlah_peserta' => 'nullable|string|max:255',
+                'keterangan' => 'required',
+                'url_link' => 'nullable',
+                'url_file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+                
+                
+            ],
+
+            $messages = [
+                'judul.required' => 'judul tidak boleh kosong!',
+                'keterangan.required' => 'awalan tidak boleh kosong!',
+                
+                
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+       
+        $user_id = Auth::user()->id;
+
+        $tugas = new Speaking;
+        $tugas->judul = $request->judul;
+        $tugas->jumlah_peserta = $request->jumlah_peserta;
+        $detail=$request->keterangan;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        $tugas->keterangan = $detail;
+        $tugas->user_id = $user_id;
+        $tugas->target_tugasID = $id;
+        $tugas->target_tugas = Target::where('id', $id)->value('judul');
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        $tugas->gen = $gen;
+        $tugas->valid = 0 ;
+        if($request->hasFile('url_file')) 
+            {
+
+            $count = 1;
+            foreach($request->file('url_file') as $image)
+            {
+              
+
+                $namaFile = $request->judul;
+                $namaFile = $namaFile.$count.'_'.time().'.'.$image->getClientOriginalExtension() ;
+                $fileName = preg_replace("/\s+/", "", $namaFile);
+                $destinationPath = public_path().'/speaking/' ;
+                $image->move($destinationPath,$fileName);
+                $data[] = $fileName;
+                $count++;  
+            }
+                $tugas->speaking =json_encode($data);
+            }else{
+                $tugas->speaking = $request->url_link;
+                
+            }
+        
+        
+        $tugas->save();
+        
+       return Redirect::back()->with('pesan','Pengisian Tugas Berhasil');
+
+        
+        
+    }
+
+    public function tabelTugasSpeaking(Request $request)
     {
         
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data =   $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
-        ->where('level', 2)->orderBy('users.id', 'ASC')->get();
+        $data = DB::table('peserta')
+        ->where('peserta.gen', $gen)
+        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')
+        ->where('valid', 0)->orWhere('valid', 1)->orderBy('tugas_speaking.id', 'ASC')->get();
         if($request->ajax()){
 
             return datatables()->of($data)
-            ->addIndexColumn()
-                ->addColumn('Umur', function($row){
-                    $bd = $row->tanggal_lahir;
-                    $date = new DateTime($bd);
-                    $now = new DateTime();
-                    $interval = $now->diff($date);
-                    $umur= $interval->y;
-                    return $umur;
-                    
-
-                })
-                ->addColumn('Seleksi Berkas', function($row){
-                    $ajaib = $row->seleksi_berkas;
-                    if (($ajaib)== 'LULUS'){
-                        
-                        return '<p class="text-success">LULUS</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">GAGAL</p>';  
+                ->addIndexColumn()
+                ->addColumn('Grup', function($row){
+                    $check = $row->grup;
+                    if(($check)== '0'){
+                        return '<p class="text-danger">Kosong</p>';
                     }
-                    
-                    
-                    
-                })
-                ->addColumn('Seleksi Challenge', function($row){
-                    $ajaib = $row->seleksi_pertama;
-                    if (($ajaib)== 'LOLOS'){
-                        
-                        return '<p class="text-success">LOLOS</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">GUGUR</p>';  
+                    if(($check)== '1'){
+                        return '<p class="text-primary"><b>Grup 1</b></p>';
                     }
-                    
-                    
-                    
-                })
-                ->addColumn('Seleksi Interview', function($row){
-                    $ajaib = $row->seleksi_kedua;
-                    if (($ajaib)== 'BERHASIL'){
-                        
-                        return '<p class="text-success">BERHASIL</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">TERELIMINASI</p>';  
+                    if(($check)== '2'){
+                        return '<p class="text-success"><b>Grup 2</b></p>';
                     }
-                    
-                    
-                    
+                    if(($check)== '3'){
+                        return '<p class="text-warning"><b>Grup 3</b></p>';
+                    }
+                    return 'test';
+                })
+                ->addColumn('Status', function($row){
+                    $status = $row->valid;
+                    switch ($status) {
+                        case '0':
+                            return '<p class="text-warning"><b>Belum Diperiksa</b></p>';
+                            break;
+                        case '1':
+                            return '<p class="text-success"><b>Valid</b></p>';
+                            break;
+                        case '2':
+                            return '<p class="text-danger"><b>Invalid</b></p>';
+                            break;                               
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
                 })
                 ->addColumn('action', function($row){
-                    $detail = route('admin.userprofile', $row->user_id);
+                    $detail = route('admin.detailTugasSpeaking', Crypt::encrypt($row->id));
+                    
                     $actionBtn = '
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';
                     return $actionBtn;
-                })->rawColumns(['Umur','Seleksi Berkas','Seleksi Challenge','Seleksi Interview', 'action'])
+                })->rawColumns(['Status','Grup', 'action'])
                 ->make(true);
         }
+        
+    }
+
+    public function detailTugasSpeaking($id)
+    {
+        $title = 'Detail Tugas Speaking ';
+        $id = Crypt::decrypt($id);
+        $tugas = Speaking::where('id', $id)->first();
+        $target =Target::where('id',$tugas->target_tugasID)->first();
+        $peserta =Peserta::where('user_id',$tugas->user_id)->first();
+        if($tugas->speaking == "kosong"){
+            $boolean = 2;
+        }else{
+            $regex = '/\\[[^\\]]*]/i';
+            $boolean = preg_match($regex, $tugas->speaking);
+        }
+        
+        $tanggal_mulai = $target->mulai;
+        $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                //admin
+                return view('admin.detailTugasSpeaking',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
+                break;
+            case '4':
+                //peserta
+                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                break;   
+            case '5':
+                //fasil
+                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                break;   
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
         
     }
     public function testTabel1(Request $request)
@@ -429,6 +574,78 @@ class TugasController extends Controller
         }
         
     }
+    public function testTabel(Request $request)
+    {
+        
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $data =   $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->where('level', 2)->orderBy('users.id', 'ASC')->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+            ->addIndexColumn()
+                ->addColumn('Umur', function($row){
+                    $bd = $row->tanggal_lahir;
+                    $date = new DateTime($bd);
+                    $now = new DateTime();
+                    $interval = $now->diff($date);
+                    $umur= $interval->y;
+                    return $umur;
+                    
+
+                })
+                ->addColumn('Seleksi Berkas', function($row){
+                    $ajaib = $row->seleksi_berkas;
+                    if (($ajaib)== 'LULUS'){
+                        
+                        return '<p class="text-success">LULUS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GAGAL</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Challenge', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'LOLOS'){
+                        
+                        return '<p class="text-success">LOLOS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GUGUR</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Interview', function($row){
+                    $ajaib = $row->seleksi_kedua;
+                    if (($ajaib)== 'BERHASIL'){
+                        
+                        return '<p class="text-success">BERHASIL</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">TERELIMINASI</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.userprofile', $row->user_id);
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Umur','Seleksi Berkas','Seleksi Challenge','Seleksi Interview', 'action'])
+                ->make(true);
+        }
+    }
+    
     
     public function testbtn(){
         return Redirect::back()->with('pesan','berhasil');

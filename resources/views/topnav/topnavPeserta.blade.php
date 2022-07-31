@@ -18,6 +18,7 @@
         <!-- Theme style -->
         @yield('head') 
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
+        <script src="{{asset('jquery')}}/jquery.js"></script>
         
         <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
     </head>

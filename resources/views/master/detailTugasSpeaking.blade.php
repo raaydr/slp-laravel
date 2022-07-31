@@ -7,12 +7,12 @@
                      </a>
                   <div class="row mb-2">
                      <div class="col-sm-6">
-                        <h1>Detail Tugas Writing</h1>
+                        <h1>Detail Tugas Speaking</h1>
                      </div>
                      <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="/">{{getMyPermission(Auth::user()->level)}}</a></li>
-                           <li class="breadcrumb-item active">Detail tugas writing</li>
+                           <li class="breadcrumb-item active">Detail tugas speaking</li>
                         </ol>
                      </div>
                   </div>
@@ -48,7 +48,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                            <div class="card-header">
-                              <h3 class="card-title">Tugas Writing</h3>
+                              <h3 class="card-title">Tugas Speaking</h3>
                            </div>
                            <!-- /.card-header -->
                            <!-- form start -->
@@ -103,28 +103,43 @@
                                  
                               </div>
                               <div class="form-group row">
-                                 <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Tugas Writing') }}</label>
-                                    <div class="col-md-2 col-form-label text-md-left">
-
-                                       
-                                       @if($boolean == 1)
-                                       <a class="btn btn-success btn-sm mb-3" href="{{asset('writing')}}/{{$tugas->writing}}" target="_blank">download</a>
-                                       @elseif($boolean == 2)
+                                 <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Tugas Speaking') }}</label>
+                                    <div class="col-md-6 col-form-label text-md-left">
+                                       <div class="col-12">
+                                       @if($boolean == 2)
                                        <a class="text-danger"><b>Kosong</b></a>
+                                       @elseif($boolean == 1)
+                                          <div class="card card-primary">
+                                             <div class="card-header">
+                                                <h4 class="card-title">File Speaking</h4>
+                                             </div>
+                                             <div class="card-body">
+                                                <div class="row">
+                                                @foreach(json_decode($tugas->speaking) as $image)
+                                                   <div class="col-sm-2">
+                                                   <a href="{{ asset('/speaking/'.$image) }}" data-toggle="lightbox" data-title="{{$tugas->judul}}" data-gallery="gallery">
+                                                      <img src="{{ asset('/speaking/'.$image) }}" class="img-fluid mb-2" alt="white sample"/>
+                                                   </a>
+                                                   </div>
+                                                @endforeach
+                                                </div>
+                                             </div>
                                        @else
-                                       <a class="btn btn-success btn-sm mb-3"  href="{{$tugas->writing}}" target="_blank">buka</a>
+                                       <a class="btn btn-success btn-sm mb-3"  href="{{$tugas->speaking}}" target="_blank">buka</a>
                                        @endif
+                                          </div>
+                                       </div>
                                     </div>
                                     
                               </div>
                            
                               <div class="form-group row">
-                                 <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Kelompok Writing') }}</label>
+                                 <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Jumlah Peserta') }}</label>
                                  <div class="col-md-6 col-form-label ">
                                  @if($tugas->kelompok_writing == NULL)
                                  <a class="text"><b>Kosong</b></a>
                                  @else
-                                 <a class="text"><b>{{$tugas->kelompok_writing}}</b></a>
+                                 <a class="text"><b>{{$tugas->jumlah_peserta}}</b></a>
                                  @endif
                                  </div>
                               </div>

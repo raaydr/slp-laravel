@@ -55,9 +55,9 @@
                         <!-- /.card-body -->
                      </div>
                      <!-- /.card -->
-                     <div class="card-success">
+                     <div class="card-success ">
                         <div class="card-header">
-                           <h3 class="card-title">List Pendaftar yang BELUM Tereliminasi</h3>
+                           <h3 class="card-title">List Tugas Speaking Peserta</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -66,13 +66,10 @@
                                  <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Umur</th>
-                                    <th>Domisili</th>
-                                    <th>Gender</th>
-                                    <th>Peminatan</th>
-                                    <th>Seleksi Berkas</th>
-                                    <th>Seleksi Challenge</th>
-                                    <th>Seleksi Interview</th>
+                                    <th>Grup</th>
+                                    <th>Target Tugas</th>
+                                    <th>Judul</th>
+                                    <th>Status</th>
                                     <th></th>
                                  </tr>
                               </thead>
@@ -82,10 +79,7 @@
                                     <th><input type="text" placeholder="Search"  style="width: 100%"  /></th>
                                     <th><input type="text" style="width: 30%" /></th>
                                     <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
-                                    <th><input type="text" style="width: 50%"/></th>
-                                    <th><input type="text" placeholder="Search"  style="width: 60%"/></th>
-                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
-                                    <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
+                                    <th><input type="text" style="width: 100%"/></th>
                                     <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
                                     <th></th>
                                  </tr>
@@ -194,19 +188,16 @@
                      processing:true,
                      serverSide:true,
                      ajax : {
-                        url : "{{route('admin.testTabel')}}",
+                        url : "{{route('admin.tabelTugasSpeaking')}}",
                         type : 'GET'
                      },
                      columns:[
                         { data: 'DT_RowIndex', name: 'DT_RowIndex'},
                         {data:'nama',name:'nama',searchable: true},
-                        {data: 'Umur', name: 'Umur', orderable: true, searchable: true},
-                        {data: 'domisili', name: 'domisili', orderable: true, searchable: true},
-                        {data: 'jenis_kelamin', name: 'jenis_kelamin', orderable: true, searchable: true},
-                        {data: 'minatprogram', name: 'minatprogram', orderable: true, searchable: true},
-                        {data: 'Seleksi Berkas', name: 'Seleksi Berkas', orderable: true, searchable: true},
-                        {data: 'Seleksi Challenge', name: 'Seleksi Challenge', orderable: true, searchable: true},
-                        {data: 'Seleksi Interview', name: 'Seleksi Interview', orderable: true, searchable: true},
+                        {data: 'Grup', name: 'Grup', orderable: true, searchable: true},
+                        {data: 'target_tugas', name: 'target_tugas', orderable: true, searchable: true},
+                        {data: 'judul', name: 'judul', orderable: true, searchable: true},
+                        {data: 'Status', name: 'Status', orderable: true, searchable: true},
                         {data: 'action', name: 'action'},
                         
                         

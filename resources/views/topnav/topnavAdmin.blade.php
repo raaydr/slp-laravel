@@ -19,6 +19,7 @@
       <link rel="stylesheet" href="{{asset('template')}}/plugins/summernote/summernote-bs4.min.css">
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
+      <link rel="stylesheet" href="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.css">
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
       <link href="{{asset('iziToast')}}/dist/css/iziToast.min.css" rel="stylesheet" />
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
@@ -117,6 +118,7 @@
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+      <script src="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
       <!-- Summernote -->
       <script src="{{asset('template')}}/plugins/summernote/summernote-bs4.min.js"></script>
       <!-- AdminLTE App -->
