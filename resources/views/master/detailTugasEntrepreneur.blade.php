@@ -183,7 +183,7 @@
                                  @endif
                                  </div>
                               </div>
-                              @if ((Auth::user()->level) != 4)
+                              @if ((Auth::user()->level) == 0)
                               <div class="form-group row">
                                  <label for="jenis_produk" class="col-md-6 col-form-label text-md-right">{{ __('Action') }}</label>
                                  <div class="col-md-6 col-form-label ">
