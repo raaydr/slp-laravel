@@ -712,7 +712,71 @@ class TugasController extends Controller
 
     public function raporTugasWriting()
     {
-        return view('peserta.raporTugasWriting');
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $user_id = Auth::user()->id;
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
+        $jumlah_target=count($target);
+        $rapor =[];
+        for ($i = 0; $i <= $jumlah_target-1; $i++) {
+            
+            $target_id = $target[$i]['id'];
+            $target_jumlah = $target[$i]['jumlah'];
+
+
+            if ($target_jumlah == 0){
+                $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                latest('created_at')->first();
+                $terakhir= $last->created_at;
+                $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                $dalam['terakhir'] = $tanggal_akhir;
+                $jumlah_clear=count($tugas_clear);
+                $dalam['judul'] = $target[$i]['judul'];
+                $dalam['capai'] = 100;
+                $dalam['target'] = 0;
+                $dalam['jumlah'] = $jumlah_clear;
+                $dalam['boolean'] = 0 ;
+                $rapor[$i] = $dalam;
+
+            }else{
+                
+                $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                $jumlah_clear=count($tugas_clear);
+                $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                latest('created_at')->first();
+                $terakhir= $last->created_at;
+                $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                $dalam['terakhir'] = $tanggal_akhir;
+
+                if ($jumlah_clear >= $target_jumlah){
+
+                    $dalam['judul'] = $target[$i]['judul'];
+                    $dalam['capai'] = 100;
+                    $dalam['target'] = $target_jumlah;
+                    $dalam['jumlah'] = $jumlah_clear;
+                    $dalam['boolean'] = 1 ;
+                    $rapor[$i] = $dalam;
+
+                }else{
+                    $dalam['judul'] = $target[$i]['judul'];
+                    
+                    $dalam['target'] = $target_jumlah;
+                    $dalam['jumlah'] = $jumlah_clear;
+                    $a = ($jumlah_clear/$target_jumlah)*100;
+                    $a = floor($a);
+                    $dalam['capai'] = $a;
+                    $dalam['boolean'] = 1 ;
+                    $rapor[$i] = $dalam;
+                }
+                
+            }
+            
+            
+        }
+        //dd($rapor);
+        return view('peserta.raporTugasWriting',compact('tugas_clear','target','rapor'));
     }
 
     public function raporTugasEntrepreneur()
@@ -769,14 +833,6 @@ class TugasController extends Controller
             $rapor[$i] = $dalam;
             
         }
-        //dd($rapor);
-        
-
-        
-        
-        
-        
-        //$all_tugas = Entrepreneur::where('user_id', $user_id)->get();
         return view('peserta.raporTugasEntrepreneur',compact('tugas_clear','target','rapor'));
     }
     public function testTabel1(Request $request)
