@@ -4,12 +4,12 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Rapor Tugas Writing</h1>
+                                <h1>Rapor Tugas Speaking</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="/">Rapor</a></li>
-                                    <li class="breadcrumb-item active">Writing</li>
+                                    <li class="breadcrumb-item active">Speaking</li>
                                 </ol>
                             </div>
                         </div>
@@ -35,14 +35,14 @@
                         @if(($hasil['boolean'])==0)
                         <div class="col-md-4 col-sm-6 col-12">
                            <!-- small card -->
-                           <div class="small-box bg-success">
+                           <div class="small-box bg-primary">
                            <div class="inner">
                               <h3>{{$hasil['jumlah']}}</h3>
 
                               <p>{{$hasil['judul']}}</p>
                            </div>
                            <div class="icon">
-                              <i class="fas fa-book"></i>
+                              <i class="fas fa-comments"></i>
                            </div>
                            <a  class="small-box-footer">
                               Terakhir Input :  {{$hasil['terakhir']}}
@@ -53,8 +53,8 @@
                         @if(($hasil['boolean'])==1)
                         <!-- ./col -->
                         <div class="col-md-4 col-sm-6 col-12">
-                            <div class="info-box bg-primary">
-                            <span class="info-box-icon"><i class="fas fa-book"></i></span>
+                            <div class="info-box bg-success">
+                            <span class="info-box-icon"><i class="fas fa-comments"></i></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">{{$hasil['judul']}}</span>

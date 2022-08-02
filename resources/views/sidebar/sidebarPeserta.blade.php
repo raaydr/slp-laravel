@@ -96,6 +96,7 @@
             <li class="nav-item">
                @if (( Route::currentRouteName() == "peserta.raporTugasWriting")
                ||( Route::currentRouteName() == "peserta.raporTugasEntrepreneur")
+               ||( Route::currentRouteName() == "peserta.raporTugasSpeaking")
                )
                   <a href="../widgets.html" class="nav-link active">
                @else
@@ -123,14 +124,13 @@
                </ul>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     @if (( Route::currentRouteName() == "target.TargetTugasSpeaking" )
-                     ||( Route::currentRouteName() == "target.InputTugasSpeaking"))
-                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link active">
+                     @if (( Route::currentRouteName() == "peserta.raporTugasSpeaking"))
+                        <a href="{{ route('peserta.raporTugasSpeaking') }}" class="nav-link active">
                      @else
-                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link ">
+                        <a href="{{ route('peserta.raporTugasSpeaking') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
-                           <p>Tugas Speaking </p>
+                           <p>Rapor Speaking </p>
                         </a>
                   </li>
                </ul>

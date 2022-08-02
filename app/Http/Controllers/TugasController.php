@@ -719,66 +719,139 @@ class TugasController extends Controller
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
         $jumlah_target=count($target);
         $rapor =[];
-        for ($i = 0; $i <= $jumlah_target-1; $i++) {
+        if ((Writing::where('user_id', $user_id)->where('valid', 1)->exists())){
+            for ($i = 0; $i <= $jumlah_target-1; $i++) {
             
-            $target_id = $target[$i]['id'];
-            $target_jumlah = $target[$i]['jumlah'];
-
-
-            if ($target_jumlah == 0){
-                $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
-                $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
-                latest('created_at')->first();
-                $terakhir= $last->created_at;
-                $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
-                $dalam['terakhir'] = $tanggal_akhir;
-                $jumlah_clear=count($tugas_clear);
-                $dalam['judul'] = $target[$i]['judul'];
-                $dalam['capai'] = 100;
-                $dalam['target'] = 0;
-                $dalam['jumlah'] = $jumlah_clear;
-                $dalam['boolean'] = 0 ;
-                $rapor[$i] = $dalam;
-
-            }else{
-                
-                $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
-                $jumlah_clear=count($tugas_clear);
-                $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
-                latest('created_at')->first();
-                $terakhir= $last->created_at;
-                $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
-                $dalam['terakhir'] = $tanggal_akhir;
-
-                if ($jumlah_clear >= $target_jumlah){
-
+                $target_id = $target[$i]['id'];
+                $target_jumlah = $target[$i]['jumlah'];
+    
+    
+                if ($target_jumlah == 0){
+                    $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                    $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                    latest('created_at')->first();
+                    $terakhir= $last->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    $dalam['terakhir'] = $tanggal_akhir;
+                    $jumlah_clear=count($tugas_clear);
                     $dalam['judul'] = $target[$i]['judul'];
                     $dalam['capai'] = 100;
-                    $dalam['target'] = $target_jumlah;
+                    $dalam['target'] = 0;
                     $dalam['jumlah'] = $jumlah_clear;
-                    $dalam['boolean'] = 1 ;
+                    $dalam['boolean'] = 0 ;
                     $rapor[$i] = $dalam;
-
+    
                 }else{
-                    $dalam['judul'] = $target[$i]['judul'];
                     
-                    $dalam['target'] = $target_jumlah;
-                    $dalam['jumlah'] = $jumlah_clear;
-                    $a = ($jumlah_clear/$target_jumlah)*100;
-                    $a = floor($a);
-                    $dalam['capai'] = $a;
-                    $dalam['boolean'] = 1 ;
-                    $rapor[$i] = $dalam;
+                    $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                    $jumlah_clear=count($tugas_clear);
+                    $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                    latest('created_at')->first();
+                    $terakhir= $last->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    $dalam['terakhir'] = $tanggal_akhir;
+    
+                    if ($jumlah_clear >= $target_jumlah){
+    
+                        $dalam['judul'] = $target[$i]['judul'];
+                        $dalam['capai'] = 100;
+                        $dalam['target'] = $target_jumlah;
+                        $dalam['jumlah'] = $jumlah_clear;
+                        $dalam['boolean'] = 1 ;
+                        $rapor[$i] = $dalam;
+    
+                    }else{
+                        $dalam['judul'] = $target[$i]['judul'];
+                        
+                        $dalam['target'] = $target_jumlah;
+                        $dalam['jumlah'] = $jumlah_clear;
+                        $a = ($jumlah_clear/$target_jumlah)*100;
+                        $a = floor($a);
+                        $dalam['capai'] = $a;
+                        $dalam['boolean'] = 1 ;
+                        $rapor[$i] = $dalam;
+                    }
+                    
                 }
                 
+                
             }
-            
-            
         }
+        
         //dd($rapor);
-        return view('peserta.raporTugasWriting',compact('tugas_clear','target','rapor'));
+        return view('peserta.raporTugasWriting',compact('target','rapor'));
     }
-
+    public function raporTugasSpeaking()
+    {
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $user_id = Auth::user()->id;
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->orderBy('mulai', 'ASC')->get();
+        $jumlah_target=count($target);
+        $rapor =[];
+        if ((Speaking::where('user_id', $user_id)->where('valid', 1)->exists())){
+            for ($i = 0; $i <= $jumlah_target-1; $i++) {
+            
+                $target_id = $target[$i]['id'];
+                $target_jumlah = $target[$i]['jumlah'];
+    
+    
+                if ($target_jumlah == 0){
+                    $tugas_clear = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                    $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->  
+                    latest('created_at')->first();
+                    $terakhir= $last->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    $dalam['terakhir'] = $tanggal_akhir;
+                    $jumlah_clear=count($tugas_clear);
+                    $dalam['judul'] = $target[$i]['judul'];
+                    $dalam['capai'] = 100;
+                    $dalam['target'] = 0;
+                    $dalam['jumlah'] = $jumlah_clear;
+                    $dalam['boolean'] = 0 ;
+                    $rapor[$i] = $dalam;
+    
+                }else{
+                    
+                    $tugas_clear = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
+                    $jumlah_clear=count($tugas_clear);
+                    $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                    latest('created_at')->first();
+                    $terakhir= $last->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    $dalam['terakhir'] = $tanggal_akhir;
+    
+                    if ($jumlah_clear >= $target_jumlah){
+    
+                        $dalam['judul'] = $target[$i]['judul'];
+                        $dalam['capai'] = 100;
+                        $dalam['target'] = $target_jumlah;
+                        $dalam['jumlah'] = $jumlah_clear;
+                        $dalam['boolean'] = 1 ;
+                        $rapor[$i] = $dalam;
+    
+                    }else{
+                        $dalam['judul'] = $target[$i]['judul'];
+                        
+                        $dalam['target'] = $target_jumlah;
+                        $dalam['jumlah'] = $jumlah_clear;
+                        $a = ($jumlah_clear/$target_jumlah)*100;
+                        $a = floor($a);
+                        $dalam['capai'] = $a;
+                        $dalam['boolean'] = 1 ;
+                        $rapor[$i] = $dalam;
+                    }
+                    
+                }
+                
+                
+            }
+        }
+        
+        //dd($rapor);
+        return view('peserta.raporTugasSpeaking',compact('target','rapor'));
+    }
     public function raporTugasEntrepreneur()
     {
         $gen = DB::table('control')
@@ -787,53 +860,57 @@ class TugasController extends Controller
         $user_id = Auth::user()->id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
         $jumlah_target=count($target);
-        $tugas_clear = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->get();
-        $jumlah_tugas_clear=count($tugas_clear);
-        $jumlah_tugas = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->sum('profit');
-        $sum = 0;
-        for ($i = 0; $i <= $jumlah_target-1; $i++) {
-            $jumlah = $tugas_clear[$i]['profit'];
-            $sum = $sum + $jumlah;
-        }
-        
-        
         $rapor =[];
-        for ($i = 0; $i <= $jumlah_target-1; $i++) {
-            
-            $target_profit = $target[$i]['jumlah'];
-            $dalam['judul'] = $target[$i]['judul'];
-            $dalam['jumlah'] = number_format($target_profit, 0, '', '.');
-
-            if ($jumlah_tugas > $target_profit){
-
-                $dalam['target'] = 0;
-                $dalam['target_tercapai'] = 100;
-                $dalam['capai'] = number_format($target_profit, 0, '', '.');
-                
-                $jumlah_tugas = $jumlah_tugas - $target_profit;
-                number_format($jumlah_tugas, 0, '', '.');
-                $dalam['sisa_profit'] = $jumlah_tugas;
-            }else{
-                
-
-                $sisa = $target_profit - $jumlah_tugas ;
-                $b = number_format($jumlah_tugas, 0, '', '.');
-                
-                $dalam['capai'] = $b;
-                number_format($sisa, 0, '', '.');
-                $dalam['target'] = $sisa;
-                $a = ($jumlah_tugas/$target_profit)*100;
-                $a = floor($a);
-                $a=number_format($a, 0, '', '.');
-                $dalam['target_tercapai'] = $a;
-                
-                $dalam['sisa_profit'] = 0;
+        if ((Entrepreneur::where('user_id', $user_id)->where('valid', 1)->exists())){
+            $tugas_clear = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->get();
+            $jumlah_tugas_clear=count($tugas_clear);
+            $jumlah_tugas = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->sum('profit');
+            $sum = 0;
+            for ($i = 0; $i <= $jumlah_target-1; $i++) {
+                $jumlah = $tugas_clear[$i]['profit'];
+                $sum = $sum + $jumlah;
             }
             
-            $rapor[$i] = $dalam;
             
+            
+            for ($i = 0; $i <= $jumlah_target-1; $i++) {
+                
+                $target_profit = $target[$i]['jumlah'];
+                $dalam['judul'] = $target[$i]['judul'];
+                $dalam['jumlah'] = number_format($target_profit, 0, '', '.');
+    
+                if ($jumlah_tugas > $target_profit){
+    
+                    $dalam['target'] = 0;
+                    $dalam['target_tercapai'] = 100;
+                    $dalam['capai'] = number_format($target_profit, 0, '', '.');
+                    
+                    $jumlah_tugas = $jumlah_tugas - $target_profit;
+                    number_format($jumlah_tugas, 0, '', '.');
+                    $dalam['sisa_profit'] = $jumlah_tugas;
+                }else{
+                    
+    
+                    $sisa = $target_profit - $jumlah_tugas ;
+                    $b = number_format($jumlah_tugas, 0, '', '.');
+                    
+                    $dalam['capai'] = $b;
+                    number_format($sisa, 0, '', '.');
+                    $dalam['target'] = $sisa;
+                    $a = ($jumlah_tugas/$target_profit)*100;
+                    $a = floor($a);
+                    $a=number_format($a, 0, '', '.');
+                    $dalam['target_tercapai'] = $a;
+                    
+                    $dalam['sisa_profit'] = 0;
+                }
+                
+                $rapor[$i] = $dalam;
+                
+            }
         }
-        return view('peserta.raporTugasEntrepreneur',compact('tugas_clear','target','rapor'));
+        
+        return view('peserta.raporTugasEntrepreneur',compact('target','rapor'));
     }
     public function testTabel1(Request $request)
     {

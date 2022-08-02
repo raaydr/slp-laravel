@@ -466,12 +466,14 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 
     //Tugas Peserta
     Route::get('/Tabel-Writing', 'TugasController@tabelTugasWriting')->name('peserta.tabelTugasWriting');
+    Route::get('/Tabel-Speaking', 'TugasController@tabelTugasSpeaking')->name('peserta.tabelTugasSpeaking');
     Route::get('/Tabel-Entrepreneur', 'TugasController@tabelTugasEntrepreneur')->name('peserta.tabelTugasEntrepreneur');
     Route::post('/Tugas-Writing/add/{target}', 'TugasController@addTugasWriting')->name('peserta.addTugasWriting');
     Route::post('/Tugas-Speaking/add/{target}', 'TugasController@addTugasSpeaking')->name('peserta.addTugasSpeaking');
     Route::post('/Tugas-Entrepreneur/add/{target}', 'TugasController@addTugasEntrepreneur')->name('peserta.addTugasEntrepreneur');
     Route::get('/Rapor-Tugas/Writing', 'TugasController@raporTugasWriting')->name('peserta.raporTugasWriting');
     Route::get('/Rapor-Tugas/Entrepreneur', 'TugasController@raporTugasEntrepreneur')->name('peserta.raporTugasEntrepreneur');
+    Route::get('/Rapor-Tugas/Speaking', 'TugasController@raporTugasSpeaking')->name('peserta.raporTugasSpeaking');
 	});
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
