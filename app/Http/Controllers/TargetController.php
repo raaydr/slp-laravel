@@ -46,7 +46,7 @@ class TargetController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $tanggal = $target[$i]['mulai'];
@@ -60,7 +60,7 @@ class TargetController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $tanggal = $target[$i]['mulai'];
@@ -82,7 +82,7 @@ class TargetController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->get();
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $tanggal = $target[$i]['mulai'];

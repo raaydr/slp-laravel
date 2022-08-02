@@ -47,7 +47,7 @@
                @else
                   <a href="../widgets.html" class="nav-link ">
                @endif
-                     <i class="nav-icon fas ion-person"></i>
+                     <i class="nav-icon fas fa-edit"></i>
                      <p>
                         Tugas
                         <i class="fas fa-angle-left right"></i>
@@ -94,14 +94,68 @@
                </ul>
             </li>
             <li class="nav-item">
+               @if (( Route::currentRouteName() == "peserta.raporTugasWriting")
+               ||( Route::currentRouteName() == "peserta.raporTugasEntrepreneur")
+               )
+                  <a href="../widgets.html" class="nav-link active">
+               @else
+                  <a href="../widgets.html" class="nav-link ">
+               @endif
+                     <i class="nav-icon fas fa-book"></i>
+                     <p>
+                        Rapor
+                        <i class="fas fa-angle-left right"></i>
+                     </p>
+                  </a>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if (( Route::currentRouteName() == "peserta.raporTugasWriting" )
+                     ||( Route::currentRouteName() == "peserta.raporTugasWriting")
+                     )
+                        <a href="{{ route('peserta.raporTugasWriting') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('peserta.raporTugasWriting') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Rapor Writing </p>
+                        </a>
+                  </li>
+               </ul>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if (( Route::currentRouteName() == "target.TargetTugasSpeaking" )
+                     ||( Route::currentRouteName() == "target.InputTugasSpeaking"))
+                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Tugas Speaking </p>
+                        </a>
+                  </li>
+               </ul>
+               <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "peserta.raporTugasEntrepreneur")
+                        <a href="{{ route('peserta.raporTugasEntrepreneur') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('peserta.raporTugasEntrepreneur') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Rapor Entrepreneur </p>
+                        </a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item">
                @if ( Route::currentRouteName() == "peserta.daily.quest" )
                   <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
                @else
                   <a href="{{ route('peserta.daily.quest') }}" class="nav-link ">
                @endif
-               <i class="nav-icon fas fa-tachometer-alt"></i>
+               <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                Daily Quest
+                                Rapor Tugas
                                 </p>
                   </a>
             </li>

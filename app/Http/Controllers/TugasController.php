@@ -709,6 +709,76 @@ class TugasController extends Controller
         }
         
     }
+
+    public function raporTugasWriting()
+    {
+        return view('peserta.raporTugasWriting');
+    }
+
+    public function raporTugasEntrepreneur()
+    {
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $user_id = Auth::user()->id;
+        $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
+        $jumlah_target=count($target);
+        $tugas_clear = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->get();
+        $jumlah_tugas_clear=count($tugas_clear);
+        $jumlah_tugas = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->sum('profit');
+        $sum = 0;
+        for ($i = 0; $i <= $jumlah_target-1; $i++) {
+            $jumlah = $tugas_clear[$i]['profit'];
+            $sum = $sum + $jumlah;
+        }
+        
+        
+        $rapor =[];
+        for ($i = 0; $i <= $jumlah_target-1; $i++) {
+            
+            $target_profit = $target[$i]['jumlah'];
+            $dalam['judul'] = $target[$i]['judul'];
+            $dalam['jumlah'] = number_format($target_profit, 0, '', '.');
+
+            if ($jumlah_tugas > $target_profit){
+
+                $dalam['target'] = 0;
+                $dalam['target_tercapai'] = 100;
+                $dalam['capai'] = number_format($target_profit, 0, '', '.');
+                
+                $jumlah_tugas = $jumlah_tugas - $target_profit;
+                number_format($jumlah_tugas, 0, '', '.');
+                $dalam['sisa_profit'] = $jumlah_tugas;
+            }else{
+                
+
+                $sisa = $target_profit - $jumlah_tugas ;
+                $b = number_format($jumlah_tugas, 0, '', '.');
+                
+                $dalam['capai'] = $b;
+                number_format($sisa, 0, '', '.');
+                $dalam['target'] = $sisa;
+                $a = ($jumlah_tugas/$target_profit)*100;
+                $a = floor($a);
+                $a=number_format($a, 0, '', '.');
+                $dalam['target_tercapai'] = $a;
+                
+                $dalam['sisa_profit'] = 0;
+            }
+            
+            $rapor[$i] = $dalam;
+            
+        }
+        //dd($rapor);
+        
+
+        
+        
+        
+        
+        //$all_tugas = Entrepreneur::where('user_id', $user_id)->get();
+        return view('peserta.raporTugasEntrepreneur',compact('tugas_clear','target','rapor'));
+    }
     public function testTabel1(Request $request)
     {
         
