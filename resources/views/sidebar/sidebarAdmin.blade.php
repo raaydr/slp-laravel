@@ -229,7 +229,9 @@
                </ul>
             </li>
             <li class="nav-item">
-               @if ( Route::currentRouteName() == "admin.control" || Route::currentRouteName() == "admin.controller.create" )
+               @if ( Route::currentRouteName() == "admin.control" 
+               || Route::currentRouteName() == "admin.controller.create" 
+               || Route::currentRouteName() == "admin.PembuatanLaporan" )
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -259,6 +261,16 @@
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Create-control</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.PembuatanLaporan" )
+                        <a href="{{ route('admin.PembuatanLaporan') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.PembuatanLaporan') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Pembuatan Laporan</p>
                         </a>
                   </li>
                </ul>

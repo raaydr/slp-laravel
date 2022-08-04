@@ -170,7 +170,7 @@
                                                       <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                    </div>
                                                 </div>
-                                                <div class="clone ">
+                                                <div class="clone">
                                                    <div class="control-group input-group" style="margin-top:10px">
                                                       <input type="file" name="url_file[]" class="form-control">
                                                       <div class="input-group-btn"> 
@@ -232,7 +232,7 @@
             <!-- /.content -->
 @endsection
 @section('script')
-         <script src="{{asset('template')}}/plugins/summernote/summernote-bs4.min.js"></script>
+      <script src="{{asset('template')}}/plugins/summernote/summernote-bs4.min.js"></script>
       <script>
          $(function () {
             $('#summernote').summernote()
@@ -297,6 +297,7 @@
             });
             $("body").on("click",".btn-danger",function(){ 
                $(this).parents(".control-group").remove();
+               cloneLimit--;
             });
          });
 

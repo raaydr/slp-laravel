@@ -22,6 +22,7 @@
       <link rel="stylesheet" href="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.css">
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
       <link href="{{asset('iziToast')}}/dist/css/iziToast.min.css" rel="stylesheet" />
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
       <style>.note-group-select-from-files {display: none;}
       </style>

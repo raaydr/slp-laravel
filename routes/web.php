@@ -90,6 +90,15 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/test-table', 'TugasController@testTabel')->name('admin.testTabel');
     Route::get('/test-table1', 'TugasController@testTabel1')->name('admin.testTabel1');
     Route::get('/tes-btn', 'TugasController@testbtn')->name('admin.testbtn');
+
+    
+    //Laporan
+    Route::get('/Laporan', 'LaporanController@PembuatanLaporan')->name('admin.PembuatanLaporan');
+    Route::post('/Laporan/add', 'LaporanController@AddLaporan')->name('admin.AddLaporan');
+    Route::get('/Laporan/detail/{id}', 'LaporanController@DetailLaporan')->name('admin.DetailLaporan');
+    Route::post('/Laporan/edit/{id}', 'LaporanController@EditLaporan')->name('admin.EditLaporan');
+    Route::get('/Laporan/delete/{id}', 'LaporanController@DeleteLaporan')->name('admin.DeleteLaporan');
+
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -123,6 +132,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
 	Route::get('/gagal-daftar', 'AdminController@seleksi2')->name('admin.gagaldaftar');
     });
+
 });
 
 Route::group(['middleware' => 'check-permission:admin'], function () {

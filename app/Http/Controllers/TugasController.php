@@ -32,6 +32,7 @@ use Auth;
 use DateTime;
 use Carbon\Carbon;
 use Redirect;
+use PDF;
 
 class TugasController extends Controller
 {
@@ -196,6 +197,7 @@ class TugasController extends Controller
         switch ($level) {
             case '0':
                 //admin
+                
                 return view('admin.detailTugasWriting',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
                 break;
             case '4':
@@ -1058,6 +1060,25 @@ class TugasController extends Controller
     
     
     public function testbtn(){
-        return Redirect::back()->with('pesan','berhasil');
+        
+            
+        //return Redirect::back()->with('pesan','berhasil');
+        $peserta = User::where('level', 4)->get();
+        //$peserta = DB::table('users')->where('level', 1)->orWhere('level', 4)->get();
+        $jumlah_peserta = count($peserta);
+        $array = [];
+        for ($i = 0; $i <= $jumlah_peserta - 1; $i++) {
+            
+            $level = $peserta[$i]['level'];
+            $id = $peserta[$i]['id'];
+
+            $a['i']=$level;
+            $a['b']=$id;
+
+          $array[$i]=$a;
+        }
+        return $array;
+
+        //dd($jumlah_peserta);
     }
 }

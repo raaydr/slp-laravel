@@ -30,6 +30,7 @@ use Redirect;
 use DataTables;
 use DateTime;
 use Carbon\Carbon;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -510,7 +511,8 @@ class AdminController extends Controller
         }else {
             $penjualan = 0;
         }
-
+        
+        
         return view('admin.userProfile', compact('title', 'user','penjualan'));
     }
     public function challenge(){
@@ -1611,7 +1613,7 @@ class AdminController extends Controller
         }else{
 
             if ((Peserta::where('user_id', $user_id))->exists()){
-                Peserta::where('user_id', $user_id)->update(['aktif' => '1']);
+                Peserta::where('user_id', $user_id)->update(['aktif' => '4']);
             } else{
                 $data = User::where('id', $user_id)->first();
                 $biodata = Biodata::where('user_id', $user_id)->first();
@@ -2335,7 +2337,7 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data =   $data = Target::where('status', 1)->orderBy('gen', 'ASC')->get();
+        $data = Target::where('status', 1)->orderBy('gen', 'ASC')->get();
             if($request->ajax()){
     
                 return datatables()->of($data)
