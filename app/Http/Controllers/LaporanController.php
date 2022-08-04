@@ -184,32 +184,35 @@ class LaporanController extends Controller
     public function DetailLaporan($id)
     {
         $title = 'Detail Laporan ';
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
-        $genMax = Laporan::where('status', 1)
-            ->max('gen');
-        $Laporan = Laporan::where('id', $id)->first();
-
-        if(($gen == $Laporan->gen)&&($genMax == $Laporan->gen)){
-            $boolean = 1;
-        }else{
-            $boolean = 0;
-        }
-        $tanggal_mulai = $Laporan->mulai;
+        $laporan = Laporan::where('id', $id)->first();
+        $tanggal_mulai = $laporan->tanggal_kegiatan;
         $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
-        return view('admin.detailLaporanTugas', compact('title', 'gen','Laporan','tanggal_mulai','boolean'));
+        
+        $mulai=date_format($laporan->time_start, 'G:i');
+        $akhir=date_format($laporan->time_end, 'G:i');
+        return view('admin.detailLaporan', compact('title','laporan','tanggal_mulai','mulai','akhir'));
     }
 
+    public function EditLaporanForm($id){
+        $title = 'edit Laporan ';
+        $laporan = Laporan::where('id', $id)->first();
+        $tanggal_mulai = $laporan->tanggal_kegiatan;
+        $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+        
+        $mulai=date_format($laporan->time_start, 'G:i');
+        $akhir=date_format($laporan->time_end, 'G:i');
+        return view('admin.editLaporan', compact('title','laporan','tanggal_mulai','mulai','akhir'));
+    }
     public function EditLaporan(Request $request, $id){
         $validator = Validator::make($request->all(), 
         [   
-            'judul' => 'nullable|string|regex:/^[\w ]+$/|max:255',
-            'jumlah' => 'nullable|integer',
-            'gen' => 'nullable|integer',
-            'keterangan' => 'nullable',
-            'mulai' => 'nullable',
-            
+            'judul' => 'nullable|string|max:255',
+            'date' => 'nullable|date',
+            'time_start' => 'nullable',
+            'time_end' => 'nullable',
+            'tipe_kegiatan' => 'string',
+            'tempat' => 'nullable',
+            'guest' => 'nullable|string',
             
             
             
@@ -218,61 +221,54 @@ class LaporanController extends Controller
 
         $messages = 
         [
+        
             
-            'judul.string' => 'Tolong isi dengan benar',
-            'judul.regex' => 'Tolong isi hanya dengan alphabet dan angka',
-         
+            
 
 
-        ]);     
-
-        if($validator->fails()){
-            return back()->withErrors($validator)->withInput();    
+        ]);    
+  
+        if($validator->fails())
+        {
+        return back()->withErrors($validator)->withInput();  
         }
-            $id = $request->id;
-            $LaporanLama = Laporan::where('id', $id)->first();
-            $judul_new = $request->judul;
-            $jumlah_new = $request->jumlah;
-            $gen_new = $request->gen;
-            $mulai_new = $request->mulai;
-            
-    
-            if($judul_new == NULL){
-                $judul_new = $LaporanLama->judul;    
-            }
-            if($jumlah_new == NULL){
-                $jumlah_new = $LaporanLama->jumlah;    
-            }
-            if($gen_new == NULL){
-                $gen_new = $LaporanLama->gen;    
-            }
-            if($mulai_new == NULL){
-                $mulai_new = $LaporanLama->mulai;
-                    
-            }
-            $mulai_new=Carbon::parse($mulai_new)->format('Y/m/d');
-            $detail=$request->keterangan;
-            if (!empty($detail)){
-                $dom = new \DomDocument();
-                $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $detail = $dom->saveHTML();
-                $keterangan_new = $detail;
-            } else{
-                $keterangan_new = $LaporanLama->keterangan;  
-            }
-           
-                Laporan::where('id', $id)->update([
-                    'judul' => $judul_new,
-                    'jumlah' => $jumlah_new,
-                    'gen' => $gen_new,
-                    'mulai' => $mulai_new,
-                    'keterangan' => $keterangan_new,
-                    'updated_at' => now(),
-                    ]
-                );
-                
-            
-                return Redirect::back()->with('pesan','berhasil');
+
+        $laporanBaru = array();
+        
+        if($request->judul != null){
+            $judul = $request->judul;
+            $laporanBaru['judul'] = $judul;
+        }
+        if($request->date != null){
+            $date = $request->date;
+            $laporanBaru['tanggal_kegiatan'] = $date;
+        }
+        if($request->time_start!= null){
+            $time_start =  $request->time_start;
+            $laporanBaru['time_start'] = $time_start;
+        }
+        if($request->time_end!= null){
+            $time_end = $request->time_end;
+            $laporanBaru['time_end'] = $time_end;
+        }
+        if($request->tipe_kegiatan != null){
+            $tipe_kegiatan = $request->tipe_kegiatan;
+            $laporanBaru['tipe_kegiatan'] = $tipe_kegiatan;
+        }
+        if($request->tempat != null){
+            $tempat = $request->tempat;
+            $laporanBaru['tempat'] = $tempat;
+        }
+        if($request->guest != null){
+            $guest = $request->guest;
+            $laporanBaru['guest'] = $guest;
+        }
+        
+        $laporanBaru['updated_at'] = now();
+
+        Laporan::where('id', $id )->update($laporanBaru);
+
+        return Redirect::back()->with('pesan','Laporan Baru Tersimpan');;
         
     }
 
