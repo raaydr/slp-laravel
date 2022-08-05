@@ -138,10 +138,11 @@
                                              <div class="card-body">
                                                 <div class="row">
                                                 @foreach(json_decode($tugas->entrepreneur) as $image)
-                                                   <div class="col-sm-2">
+                                                   <div class="col-sm-4">
                                                    <a href="{{ asset('/entrepreneur/'.$image) }}" data-toggle="lightbox" data-title="{{$tugas->judul}}" data-gallery="gallery">
                                                       <img src="{{ asset('/entrepreneur/'.$image) }}" class="img-fluid mb-2" alt="white sample"/>
                                                    </a>
+                                                   
                                                    </div>
                                                 @endforeach
                                                 </div>
@@ -151,17 +152,6 @@
                                        </div>
                                     </div>
                                     
-                              </div>
-                           
-                              <div class="form-group row">
-                                 <label for="sumber_produk" class="col-md-6 col-form-label text-md-right">{{ __('Jumlah Peserta') }}</label>
-                                 <div class="col-md-6 col-form-label ">
-                                 @if($tugas->kelompok_writing == NULL)
-                                 <a class="text"><b>Kosong</b></a>
-                                 @else
-                                 <a class="text"><b>{{$tugas->jumlah_peserta}}</b></a>
-                                 @endif
-                                 </div>
                               </div>
                               <div class="form-group row">
                                  <label for="jenis_produk" class="col-md-6 col-form-label text-md-right">{{ __('Keterangan') }}</label>

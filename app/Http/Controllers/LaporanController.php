@@ -15,6 +15,8 @@ use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Models\Target;
 use App\Models\Laporan;
+use App\Models\Dokumentasi;
+use App\Models\DokumentasiPembayaran;
 use App\Models\Absensi;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -310,6 +312,97 @@ class LaporanController extends Controller
             return Redirect::back()->with('pesan','berhasil');
     
 
+    }
+
+    public function dokumentasiKegiatanLaporan(Request $request,$id)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'url_foto' => 'required|mimes:jpeg,png,jpg|max:5120',
+            ],
+
+            $messages = [
+                'url_foto.required' => 'foto tidak boleh kosong!',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
+            ]
+        );
+
+        if ($validator->fails()) {
+            //return Redirect::back()->with('pesan','salah');
+            return back()->withErrors($validator)->withInput();
+        }
+        if ($gambar = $request->hasFile('url_foto')) {
+            $namaFile = Laporan::where('id', $id)->value('judul');
+            $count=0;
+            foreach($request->file('url_foto') as $image)
+            {
+
+                $namaFile = $namaFile.$count.'_'.time().'.'.$image->getClientOriginalExtension() ;
+                $fileName = preg_replace("/\s+/", "", $namaFile);
+                $destinationPath = public_path().'/dokumentasi-kegiatan/' ;
+                $image->move($destinationPath,$fileName);
+                
+
+                $dokumentasi = new Dokumentasi;
+                $dokumentasi->url_foto = $namaFile;
+                $dokumentasi->laporan_id = $id;
+                $dokumentasi->save();  
+                $count=0;
+            }
+        }
+
+        
+
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+    }
+
+    public function dokumentasiPembayaran(Request $request,$id)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'judul' => 'required|string|max:255',
+                'pembayaran' => 'required',
+                'url_foto' => 'required|mimes:jpeg,png,jpg|max:5120',
+            ],
+
+            $messages = [
+                'url_foto.required' => 'foto tidak boleh kosong!',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
+            ]
+        );
+
+        if ($validator->fails()) {
+            //return Redirect::back()->with('pesan','salah');
+            return back()->withErrors($validator)->withInput();
+        }
+        $laporan = new DokumentasiPembayaran;
+        $laporan->judul = $request->judul;
+        $laporan->laporan_id = $id;
+        $laporan->status = 1;
+        $pembayaran = $request->pembayaran;
+        $harga_str = preg_replace("/[^0-9]/", "", $pembayaran);
+        $pembayaran = (int) $harga_str;
+        $laporan->pembayaran = $pembayaran;
+        if ($gambar = $request->hasFile('url_foto')) {
+                $image = $request->file('url_foto');
+                $namaFile = $request->judul;
+                $namaFile = $namaFile.'_'.time().'.'.$image->getClientOriginalExtension() ;
+                $fileName = preg_replace("/\s+/", "", $namaFile);
+                $destinationPath = public_path().'/dokumentasi-pembayaran/' ;
+                $image->move($destinationPath,$fileName);
+                $laporan->url_foto = $namaFile;
+                
+                $laporan->save();  
+                
+        }
+
+        
+
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
     }
 
 }

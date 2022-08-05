@@ -258,46 +258,50 @@
          });
          var rupiah = document.getElementById("profit");
          profit.addEventListener("keyup", function(e) {
-         // tambahkan 'Rp.' pada saat form di ketik
-         // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-         rupiah.value = formatRupiah(this.value, "Rp. ");
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            rupiah.value = formatRupiah(this.value, "Rp. ");
          });
          
          /* Fungsi formatRupiah */
          function formatRupiah(angka, prefix) {
-         var number_string = angka.replace(/[^,\d]/g, "").toString(),
-         split = number_string.split(","),
-         sisa = split[0].length % 3,
-         rupiah = split[0].substr(0, sisa),
-         ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-         
-         // tambahkan titik jika yang di input sudah menjadi angka ribuan
-         if (ribuan) {
-         separator = sisa ? "." : "";
-         rupiah += separator + ribuan.join(".");
-         }
-         
-         rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-         return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+            split = number_string.split(","),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+            separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+            }
+            
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
          }
          $(function () {
             // Summernote
             $('#summernote').summernote()
 
          })
+         $( ".clone" ).hide();
          $(document).ready(function() {
+            
             var cloneLimit = 1;
             $(".btn-success").click(function(){ 
-               if(cloneLimit < 3){
+               if(cloneLimit < 4){
                   var html = $(".clone").html();
                   $(".increment").after(html);
                   cloneLimit++;
+                  console.log(cloneLimit);
                }
                
             });
             $("body").on("click",".btn-danger",function(){ 
                $(this).parents(".control-group").remove();
                cloneLimit--;
+               console.log(cloneLimit);
             });
          });
 

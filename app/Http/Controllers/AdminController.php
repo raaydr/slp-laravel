@@ -1217,10 +1217,10 @@ class AdminController extends Controller
         }
         
         $penilaian_challenge = new Penilaian;
-        $user_id = Input::get('user_id');
-        $writing = Input::get('writing');
-        $video = Input::get('video');
-        $point = Input::get('point');
+        $user_id = $request->user_id;
+        $writing = $request->writing ;
+        $video = $request->video ;
+        $point = $request->point ;
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
@@ -1230,7 +1230,7 @@ class AdminController extends Controller
             ->value('nama');
 
         
-            $nbusiness = Input::get('penjualan');
+            $nbusiness = $request->penjualan ;
             $business = ($nbusiness / 500000) *100;
             $total = $writing + $video + $business + $point;
             $post   =  DB::table('penilaian_challenge')->where('user_id',$user_id)->update([
