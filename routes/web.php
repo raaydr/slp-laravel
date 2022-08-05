@@ -99,6 +99,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Laporan/form/{id}', 'LaporanController@EditLaporanForm')->name('admin.EditLaporanForm');
     Route::post('/Laporan/edit/{id}', 'LaporanController@EditLaporan')->name('admin.EditLaporan');
     Route::get('/Laporan/delete/{id}', 'LaporanController@DeleteLaporan')->name('admin.DeleteLaporan');
+    Route::post('/Laporan-keterangan/add/{id}', 'LaporanController@noteLaporan')->name('admin.noteLaporan');
 
     });
 });

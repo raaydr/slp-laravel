@@ -84,7 +84,7 @@
                            <div class="card-footer">
                               <!-- /.card-body -->
                            <a type="button" href="{{route('admin.EditLaporanForm',$laporan->id)}}" class="btn btn-outline-primary m-2"><i class="fa fa-edit"></i> Edit Laporan</a>
-                           <button type="button" class="btn btn-outline-success m-2"><i class="fa fa-edit"></i> Keterangan Laporan</button>
+                           <button  class="btn btn-outline-success m-2" data-toggle="modal" data-tugas_id="{{ $laporan->id}}" data-target="#modal-note"target="_blank"><i class="fa fa-edit"></i> Keterangan Laporan</button>
                            <button type="button" class="btn btn-outline-danger m-2"><i class="fa fa-camera"></i> Dokumentasi Acara</button>
                            <button type="button" class="btn btn-outline-info m-2"><i class="fa fa-camera"></i> Dokumentasi Pembayaran</button>
                   
@@ -152,6 +152,43 @@
                               <!-- /.card -->
                            </div>
                   <!-- /.row -->
+                  <div class="modal fade" id="modal-note">
+                                    <div class="modal-dialog">
+                                       <div class="modal-content ">
+                                          <div class="modal-header bg-info">
+                                             <h4 class="modal-title">Laporan Kegiatan</h4>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                             </button>
+                                          </div>
+                                          <form method="POST" action="{{route('admin.noteLaporan',$laporan->id)}}" enctype="multipart/form-data" class="was-validated">
+                                          @csrf  
+                                             <div class="modal-body">
+                                             <div class="col-md-12">
+                                             <div class="form-group row">
+                                                   <label for="keterangan" class="col-md-4 col-form-label ">{{ __('keterangan') }}</label>
+                                                   <div class="col-md-12">
+                                                      <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"    autofocus></textarea>
+                                                         <small id="passwordHelpBlock" class="form-text text-sucess">Laporan saat kegiatan berlangsung</small> 
+                                                            @if ($errors->has('keterangan'))
+                                                            <span class="invalid-feedback" role="alert">
+                                                               <strong>{{ $errors->first('keterangan') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             </div>
+                                             <div class="modal-footer  justify-content-between">
+                                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-outline-success">Save</button>
+                                             </div>
+                                          </form>
+                                       </div>
+                                       <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                 </div>
                </div>
                <!-- /.container-fluid -->
             </section>

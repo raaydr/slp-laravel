@@ -272,4 +272,44 @@ class LaporanController extends Controller
         
     }
 
+    public function noteLaporan (Request $request,$id)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'keterangan' => 'required',
+                
+
+                
+
+            ],
+
+            $messages = [
+                
+                'keterangan.required' => 'tolong dilengkapi',
+                
+               
+
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $detail=$request->keterangan;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
+        Laporan::where('id',$id)->update([
+                
+            'keterangan' => $detail,
+            'updated_at'=> now(),
+        ]);
+            return Redirect::back()->with('pesan','berhasil');
+    
+
+    }
+
 }
