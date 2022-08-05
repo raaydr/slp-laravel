@@ -189,10 +189,11 @@ class LaporanController extends Controller
         $laporan = Laporan::where('id', $id)->first();
         $tanggal_mulai = $laporan->tanggal_kegiatan;
         $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
-        
+        $dokumentasi = Dokumentasi::where('laporan_id', $id)->where('status', 1)->get();
         $mulai=date_format($laporan->time_start, 'G:i');
         $akhir=date_format($laporan->time_end, 'G:i');
-        return view('admin.detailLaporan', compact('title','laporan','tanggal_mulai','mulai','akhir'));
+        //dd($dokumentasi);
+        return view('admin.detailLaporan', compact('title','laporan','tanggal_mulai','mulai','akhir','dokumentasi'));
     }
 
     public function EditLaporanForm($id){
@@ -319,7 +320,8 @@ class LaporanController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'url_foto' => 'required|mimes:jpeg,png,jpg|max:5120',
+                'url_foto' => 'required',
+                'url_foto.*' => 'image|mimes:jpeg,png,jpg,pdf|max:5120'
             ],
 
             $messages = [
@@ -333,29 +335,31 @@ class LaporanController extends Controller
             //return Redirect::back()->with('pesan','salah');
             return back()->withErrors($validator)->withInput();
         }
+        $namaFile = Laporan::where('id', $id)->value('judul');
+        $count=0;
         if ($gambar = $request->hasFile('url_foto')) {
-            $namaFile = Laporan::where('id', $id)->value('judul');
-            $count=0;
+            
             foreach($request->file('url_foto') as $image)
             {
 
-                $namaFile = $namaFile.$count.'_'.time().'.'.$image->getClientOriginalExtension() ;
-                $fileName = preg_replace("/\s+/", "", $namaFile);
+                $namaFileRILL = $namaFile.$count.'_'.time().'.'.$image->getClientOriginalExtension() ;
+                $fileName = preg_replace("/\s+/", "", $namaFileRILL);
                 $destinationPath = public_path().'/dokumentasi-kegiatan/' ;
                 $image->move($destinationPath,$fileName);
                 
 
                 $dokumentasi = new Dokumentasi;
-                $dokumentasi->url_foto = $namaFile;
+                $dokumentasi->url_foto = $namaFileRILL;
                 $dokumentasi->laporan_id = $id;
+                $dokumentasi->status = 1;
                 $dokumentasi->save();  
-                $count=0;
+                $count++;
             }
         }
 
         
-
-        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+        return Redirect::back()->with('pesan','Berhasil Upload Dokumentasi Kegiatan');
+        //return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
     }
 
     public function dokumentasiPembayaran(Request $request,$id)
@@ -365,12 +369,12 @@ class LaporanController extends Controller
             [
                 'judul' => 'required|string|max:255',
                 'pembayaran' => 'required',
-                'url_foto' => 'required|mimes:jpeg,png,jpg|max:5120',
+                'url_foto' => 'required|mimes:jpeg,png,jpg,pdf|max:5120',
             ],
 
             $messages = [
                 'url_foto.required' => 'foto tidak boleh kosong!',
-                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png,pdf.',
                 'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
             ]
         );
@@ -403,6 +407,73 @@ class LaporanController extends Controller
         
 
         return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+    }
+
+    public function tabelDokumentasiPembayaran(Request $request, $id)
+    {
+        $data = DokumentasiPembayaran::where('laporan_id', $id)->where('status', 1)->get();
+        if($request->ajax()){
+    
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Pembayaran', function($row){
+                    $pembayaran = $row->pembayaran;
+                    $pembayaran = number_format($pembayaran, 0, '', '.');
+                    
+                        return $pembayaran;
+                })
+                ->addColumn('action', function($row){
+                    $b = $row->url_foto;
+                    $a = $row->judul;
+                    $asset= "/dokumentasi-pembayaran/";
+                    $detail=  $asset.$b;
+                    $id = $row->id;
+                    $b = '<a href='.$detail.' class="btn btn-outline-primary" target="_blank">detail</a>';
+                    $c = '<img src='.$detail.' alt="tes" width=50 class="img-thumbnail">';
+                    $actionBtn =$b.' 
+                        <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-outline-danger">Hapus</a></dl>
+                                                        <div class="modal fade" id="modal-danger">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content bg-danger">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Penolakan</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">    
+                                                                            <p>Apa anda yakin ingin menghapus Pembayaran ini ?</p>
+                                                                            <div class="modal-footer justify-content-between">
+                                                                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                            <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-dismiss="modal" data-original-title="Delete" class="btn btn-outline-light deleteItem">Delete</a>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->';
+                    return $actionBtn;
+                })->rawColumns(['Pembayaran','action'])
+                ->make(true);
+        }
+        
+    }
+
+    public function DeleteDokumentasiPembayaran($id)
+    {
+        $file = DokumentasiPembayaran::where('id', $id)->value('url_foto');
+        File::delete('dokumentasi-pembayaran/' . $file);
+        DokumentasiPembayaran::where('id', $id)->update([
+            'url_foto' => "kosong",
+            'status' => 0,
+            'updated_at' => now(),
+            ]
+        );
+        return response()->json(['success'=>'Hapus Bukti Pembayaran ']);
+        
     }
 
 }

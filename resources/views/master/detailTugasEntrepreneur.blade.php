@@ -128,27 +128,28 @@
                                  <label for="business" class="col-md-6 col-form-label text-md-right">{{ __('Tugas Entrepreneur') }}</label>
                                     <div class="col-md-6 col-form-label text-md-left">
                                        <div class="col-12">
-                                       @if($boolean == 2)
-                                       <a class="text-danger"><b>Kosong</b></a>
-                                       @else
-                                          <div class="card card-primary">
-                                             <div class="card-header">
-                                                <h4 class="card-title">File Speaking</h4>
-                                             </div>
-                                             <div class="card-body">
-                                                <div class="row">
-                                                @foreach(json_decode($tugas->entrepreneur) as $image)
-                                                   <div class="col-sm-4">
-                                                   <a href="{{ asset('/entrepreneur/'.$image) }}" data-toggle="lightbox" data-title="{{$tugas->judul}}" data-gallery="gallery">
-                                                      <img src="{{ asset('/entrepreneur/'.$image) }}" class="img-fluid mb-2" alt="white sample"/>
-                                                   </a>
-                                                   
-                                                   </div>
-                                                @endforeach
+                                          @if($boolean == 2)
+                                          <a class="text-danger"><b>Kosong</b></a>
+                                          @else
+                                             <div class="card card-primary">
+                                                <div class="card-header">
+                                                   <h4 class="card-title">File Speaking</h4>
                                                 </div>
+                                                <div class="card-body">
+                                                   <div class="row">
+                                                      @foreach(json_decode($tugas->entrepreneur) as $image)
+                                                         <div class="col-sm-4">
+                                                            <a href="{{ asset('/entrepreneur/'.$image) }}" data-toggle="lightbox" data-title="{{$tugas->judul}}" data-gallery="gallery">
+                                                               <img src="{{ asset('/entrepreneur/'.$image) }}" class="img-fluid mb-2" alt="white sample"/>
+                                                            </a>
+                                                         
+                                                         </div>
+                                                      @endforeach
+                                                   </div>
+                                                </div>
+                                          
                                              </div>
-                                       @endif
-                                          </div>
+                                          @endif
                                        </div>
                                     </div>
                                     

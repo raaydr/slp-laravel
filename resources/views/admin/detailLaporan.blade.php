@@ -117,41 +117,59 @@
          </div>
       </div>
    </div>
-   <div class="col-12">
-      <div class="card">
-         <div class="card-header">
-            <h3 class="card-title">Target Tugas List</h3>
+   <div class="row">
+      <div class="col-7">
+         <div class="card">
+            <div class="card-header">
+               <h3 class="card-title">Bukti Pembayaran</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+               <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                     <tr>
+                        <th>no</th>
+                        <th>Judul</th>
+                        <th>Pembayaran</th>
+                        <th>action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th>no</th>
+                        <th>Judul</th>
+                        <th>Pembayaran</th>
+                        <th>action</th>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+            <!-- /.card-body -->
          </div>
-         <!-- /.card-header -->
-         <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-               <thead>
-                  <tr>
-                     <th>no</th>
-                     <th>Judul</th>
-                     <th>Tanggal Kegiatan</th>
-                     <th>Tipe Kegiatan</th>
-                     <th>Guest</th>
-                     <th>action</th>
-                  </tr>
-               </thead>
-               <tbody>
-               </tbody>
-               <tfoot>
-                  <tr>
-                     <th>no</th>
-                     <th>Judul</th>
-                     <th>Tanggal Kegiatan</th>
-                     <th>Tipe Kegiatan</th>
-                     <th>Guest</th>
-                     <th>action</th>
-                  </tr>
-               </tfoot>
-            </table>
-         </div>
-         <!-- /.card-body -->
+         <!-- /.card -->
       </div>
-      <!-- /.card -->
+      <div class="col-5">
+         <div class="card card-primary">
+                                                   <div class="card-header">
+                                                      <h4 class="card-title">Dokumentasi Kegiatan</h4>
+                                                   </div>
+                                                   <div class="card-body">
+                                                      <div class="row">
+                                                         @foreach($dokumentasi as $image)
+                                                            <div class="col-sm-6">
+                                                               <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
+                                                                  <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" class="img-fluid mb-2" alt="white sample"/>
+                                                               </a>
+                                                            
+                                                            </div>
+                                                         @endforeach
+                                                      </div>
+                                                   </div>
+                                             
+                                                </div>
+      </div>
    </div>
    <!-- /.row -->
    <div class="modal fade" id="modal-note">
@@ -205,8 +223,8 @@
                <div class="modal-body">
                   <div class="row">
                      <div class="form-group row">
-                        <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
-                        <div class="col-md-7">
+                        <label for="url_foto" class="col-md-3 col-form-label ">{{ __('Upload Foto') }}</label>
+                        <div class="col-md-9">
                            <div class="input-group control-group increment" >
                               <input type="file" name="url_foto[]" class="form-control">
                               <div class="input-group-btn"> 
@@ -343,15 +361,13 @@
               processing:true,
               serverSide:true,
               ajax : {
-                 url : "{{route('admin.PembuatanLaporan')}}",
+                 url : "{{route('admin.tabelDokumentasiPembayaran',$laporan->id)}}",
                  type : 'GET'
               },
               columns:[
                  {data: 'DT_RowIndex', name: 'DT_RowIndex' },
                  {data:'judul',name:'judul',orderable: true,searchable: true},
-                 {data: 'tanggal_kegiatan', name: 'tanggal_kegiatan', orderable: true, searchable: true},
-                 {data: 'tipe_kegiatan', name: 'tipe_kegiatan', orderable: true, searchable: true},
-                 {data: 'guest', name: 'guest', orderable: true, searchable: true},
+                 {data: 'Pembayaran', name: 'Pembayaran', orderable: true, searchable: true},
                  
                  {data: 'action', name: 'action'},
                  
@@ -419,7 +435,7 @@
    $(document).ready(function() {
      $('body').on('click', '.deleteItem', function() {
      var Item_id = $(this).data("id");
-     var url = '{{ route("admin.DeleteLaporan",[":id"]) }}';
+     var url = '{{ route("admin.DeleteDokumentasiPembayaran",[":id"]) }}';
      url = url.replace(':id', Item_id);
      $.ajax({
    
@@ -533,6 +549,8 @@
                                  $('#simpanBTN').show();
                                  document.getElementById("formMedia").reset(); 
                                  $(".progress-bar").width('0%');
+                                 var oTable = $('#example1').dataTable(); //inialisasi datatable
+                                 oTable.fnDraw(false); //reset datatable
                                  //$('#uploadStatus').html('<p style="color:#28A74B;">File Berhasil diupload!</p>');
                                  iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
                                     title: 'Data Berhasil Disimpan',
@@ -576,20 +594,36 @@
         }
    
    });
+   $( ".clone" ).hide();
+   $(function () {
+                $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+                });
+
+                $('.filter-container').filterizr({gutterPixels: 3});
+                $('.btn[data-filter]').on('click', function() {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+                });
+            })
    $(document).ready(function() {
-     var cloneLimit = 1;
+     
      $(".btn-success").click(function(){ 
-        if(cloneLimit < 3){
+        
            var html = $(".clone").html();
            $(".increment").after(html);
-           cloneLimit++;
-        }
+           
+        
         
      });
      $("body").on("click",".btn-danger",function(){ 
         $(this).parents(".control-group").remove();
-        cloneLimit--;
+        
      });
    });
+   
 </script>
 @endsection
