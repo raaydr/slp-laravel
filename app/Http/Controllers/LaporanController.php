@@ -479,5 +479,19 @@ class LaporanController extends Controller
         return response()->json(['success'=>'Hapus Bukti Pembayaran ']);
         
     }
+    public function DeleteDokumentasiKegiatan(Request $request)
+    {
+        $id = $request->dokumen_id;
+        $file = Dokumentasi::where('id', $id)->value('url_foto');
+        File::delete('dokumentasi-kegiatan/' . $file);
+        Dokumentasi::where('id', $id)->update([
+            'url_foto' => "kosong",
+            'status' => 0,
+            'updated_at' => now(),
+            ]
+        );
+        return Redirect::back()->with('pesan','Berhasil Delete Dokumentasi Kegiatan');
+        
+    }
 
 }

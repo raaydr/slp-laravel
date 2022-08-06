@@ -104,6 +104,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::post('/Laporan-dokumentasi-Pembayaran/add/{id}', 'LaporanController@dokumentasiPembayaran')->name('admin.dokumentasiPembayaran');
     Route::get('/Laporan/Tabel-Dokumentasi-Pembayaran/{id}', 'LaporanController@tabelDokumentasiPembayaran')->name('admin.tabelDokumentasiPembayaran');
     Route::get('/Laporan-Dokumentasi-Pembayaran/delete/{id}', 'LaporanController@DeleteDokumentasiPembayaran')->name('admin.DeleteDokumentasiPembayaran');
+    Route::get('/Laporan-Dokumentasi-Kegiatan/delete/', 'LaporanController@DeleteDokumentasiKegiatan')->name('admin.DeleteDokumentasiKegiatan');
 
     });
 });

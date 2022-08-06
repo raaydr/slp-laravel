@@ -152,20 +152,51 @@
          </div>
          <!-- /.card -->
       </div>
-      <div class="col-5">
+      <div class="col-5"id="accordion1">
          <div class="card card-primary">
-            <div class="card-header">
-               <h4 class="card-title">Dokumentasi Kegiatan</h4>
-            </div>
-            <div class="card-body">
-               <div class="row">
-                  @foreach($dokumentasi as $image)
-                  <div class="col-sm-6">
-                     <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
-                     <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" class="img-fluid mb-2" alt="white sample"/>
-                     </a>
+            <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
+               <div class="card-header">
+                  <h4 class="card-title">Dokumentasi Kegiatan</h4>
+               </div>
+            </a>
+            <div id="collapseTwo" class="collapse show" data-parent="#accordion1">
+               <div class="card-body">
+                  <div class="row">
+                     @foreach($dokumentasi as $image)
+                     <div class="col-sm-6">
+                        <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
+                        <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" width="100"  class="img-fluid mb-1" alt="white sample"/>
+                        </a>
+                        <a data-toggle="modal" data-target="#modal-delete" data-myid="{{$image->id}}"  class="btn btn-outline-danger btn-sm">Hapus</a></dl>
+                                                        <div class="modal fade" id="modal-delete">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content bg-danger">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Penolakan</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <form method="GET" action="{{route('admin.DeleteDokumentasiKegiatan')}}" enctype="multipart/form-data">
+                                                                    <div class="modal-body">    
+                                                                            <p>Apa anda yakin ingin menghapus Dokumentasi ini ?</p>
+                                                                            <input type="hidden" id="dokumen_id" name="dokumen_id" >
+                                                                            <div class="modal-footer justify-content-between">
+                                                                              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                              <button type="submit" class="btn btn-outline-light">Delete</button>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->
+                     </div>
+                     @endforeach
                   </div>
-                  @endforeach
                </div>
             </div>
          </div>
@@ -624,6 +655,13 @@
         
      });
    });
-   
+   $('#modal-delete').on('show.bs.modal', function (event) {
+             
+             var button = $(event.relatedTarget) // Button that triggered the modal
+             var id = button.data('myid')
+             var modal = $(this)
+             modal.find('.modal-body #dokumen_id').val(id)
+             
+         });
 </script>
 @endsection
