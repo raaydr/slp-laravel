@@ -188,4 +188,28 @@ class AbsensiController extends Controller
             return response()->json(['success'=>'Berhasil menambahkan keterangan absensi']);
     }
 
+    public function AbsensiKegiatan(Request $request)
+    {
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+            $data = Laporan::where('gen', $gen)->where('status', 1)->orderBy('created_at', 'ASC')->get();
+            if($request->ajax()){
+    
+                return datatables()->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $detail = route('admin.DetailAbsensi', $row->id);
+                        $id = $row->id;
+                        $b = '
+                        <a class="btn btn-primary btn-sm" href='.$detail.'>
+                        <i class="fas fa-user"></i>Absensi</a>';
+                        return $b;
+                    })->rawColumns(['action'])
+                    ->make(true);
+            }
+        
+        return view('admin.AbsensiKegiatan');
+        
+    }
 }

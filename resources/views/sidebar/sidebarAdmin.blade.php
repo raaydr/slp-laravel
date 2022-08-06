@@ -114,7 +114,7 @@
             </li>
             <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.peserta.pengelompok" 
-               || Route::currentRouteName() == "admin.daily.quest"
+               || Route::currentRouteName() == "admin.AbsensiKegiatan"
                || Route::currentRouteName() == "admin.targetTugas.pembuatan"
                || Route::currentRouteName() == "admin.PemeriksaanTugasWriting"
                || Route::currentRouteName() == "admin.validasiTugas"
@@ -126,7 +126,7 @@
                @endif
                      <i class="nav-icon fas ion-person"></i>
                      <p>
-                        Peserta
+                        Pembinaan
                         <i class="fas fa-angle-left right"></i>
                      </p>
                   </a>
@@ -142,13 +142,13 @@
                         </a>
                   </li>
                   <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.daily.quest" )
-                        <a href="{{ route('admin.daily.quest') }}" class="nav-link active">
+                     @if ( Route::currentRouteName() == "admin.AbsensiKegiatan" )
+                        <a href="{{ route('admin.AbsensiKegiatan') }}" class="nav-link active">
                      @else
-                        <a href="{{ route('admin.daily.quest') }}" class="nav-link ">
+                        <a href="{{ route('admin.AbsensiKegiatan') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
-                           <p>Daily Quest</p>
+                           <p>Absensi Kegiatan</p>
                         </a>
                   </li>
                   <li class="nav-item">

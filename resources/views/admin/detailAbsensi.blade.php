@@ -3,6 +3,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
    <div class="container-fluid">
+   <a class="btn btn-info btn-sm mb-3" onclick="goBack()" >
+                        <i class="fas fa-arrow-left"></i> kembali
+                     </a>
       <div class="row mb-2">
          <div class="col-sm-6">
             <h1>Detail Absensi</h1>
@@ -178,6 +181,9 @@
 @section('script')
 <script>
    $('#load').hide();
+   function goBack() {
+        window.history.back();
+        }
    $.ajaxSetup({
         headers: {
            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
