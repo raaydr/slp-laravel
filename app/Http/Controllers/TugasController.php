@@ -372,23 +372,22 @@ class TugasController extends Controller
                 'jumlah_peserta' => 'nullable|string|max:255',
                 'keterangan' => 'required',
                 'url_link' => 'nullable',
-                'url_file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+                'url_file.*' => 'image|mimes:jpeg,png,jpg,pdf|max:5120'
                 
                 
             ],
 
             $messages = [
                 'judul.required' => 'judul tidak boleh kosong!',
-                'keterangan.required' => 'awalan tidak boleh kosong!',
+                'keterangan.required' => 'Keterangan tidak boleh kosong!',
                 
                 
             ]
         );
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            return Redirect::back()->withErrors($validator)->with('error','Format harus jpg,jpeg,png, pdf dan maksimal size file 5 mb');
+            //return back()->withErrors($validator)->withInput();
         }
        
         $user_id = Auth::user()->id;

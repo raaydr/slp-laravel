@@ -54,6 +54,13 @@
                      {{session('pesan')}}.
                   </div>
                   @endif
+                  @if(session('error'))
+                  <div class="alert alert-danger alert-dismissable">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <h4><i class="icon fa fa-info"></i>Error</h4>
+                     {{session('error')}}.
+                  </div>
+                  @endif
                   <div class="col-md-12">
                      <!-- general form elements -->
                      
@@ -73,7 +80,7 @@
                                              <div class="col-md-12">
                                                 <label for="exampleInputEmail1">Judul Tugas</label>
                                                 <div class="input-group mb-3">
-                                                   <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" autocomplete="judul" autofocus></input>
+                                                   <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" autocomplete="judul" required autofocus></input>
                                                    <div class="input-group-append">
                                                       <div class="input-group-text">
                                                          <span class=""></span>
@@ -165,7 +172,7 @@
                                              <div class="col-md-12" id="file">
                                                 <label for="exampleInputEmail1">Upload File</label>
                                                 <div class="input-group control-group increment" >
-                                                   <input type="file" name="url_file[]" class="form-control">
+                                                   <input type="file" name="url_file[]" class="form-control"required autofocus>
                                                    <div class="input-group-btn"> 
                                                       <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                    </div>

@@ -54,6 +54,13 @@
                      {{session('pesan')}}.
                   </div>
                   @endif
+                  @if(session('error'))
+                  <div class="alert alert-danger alert-dismissable">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <h4><i class="icon fa fa-info"></i>Error</h4>
+                     {{session('error')}}.
+                  </div>
+                  @endif
                   <div class="col-md-12">
                      <!-- general form elements -->
                      
@@ -73,7 +80,7 @@
                                              <div class="col-md-12">
                                                 <label for="exampleInputEmail1">Judul Tugas</label>
                                                 <div class="input-group mb-3">
-                                                   <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" autocomplete="judul" autofocus></input>
+                                                   <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" autocomplete="judul" required autofocus></input>
                                                    <div class="input-group-append">
                                                       <div class="input-group-text">
                                                          <span class=""></span>
@@ -106,14 +113,14 @@
                                                 </div>
                                              </div>
                                              <div class="col-md-12" id="file">
-                                                <label for="exampleInputEmail1">Upload File</label>
+                                             <label for="exampleInputEmail1">Upload File</label>
                                                 <div class="input-group control-group increment" >
                                                    <input type="file" name="url_file[]" class="form-control">
                                                    <div class="input-group-btn"> 
                                                       <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                    </div>
                                                 </div>
-                                                <div class="clone ">
+                                                <div class="clone">
                                                    <div class="control-group input-group" style="margin-top:10px">
                                                       <input type="file" name="url_file[]" class="form-control">
                                                       <div class="input-group-btn"> 
@@ -126,7 +133,7 @@
                                                    <strong>{{ $message }}</strong>
                                                    </span>
                                                    @enderror
-                                                <small class="text-primary">format harus jpeg,jpg,png berukuran maksimal 5 mb</small>
+                                                <small class="text-primary">format harus jpeg,jpg,png,pdf berukuran maksimal 5 mb</small>
                                              </div>
                                              <div class="col-md-12" id="link">
                                                 <label for="exampleInputEmail1">Upload URL</label>
@@ -166,7 +173,7 @@
                                              <div class="form-group row">
                                                    <label for="keterangan" class="col-md-4 col-form-label ">{{ __('keterangan') }}</label>
                                                    <div class="col-md-12">
-                                                      <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"    autofocus></textarea>
+                                                      <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"    required autofocus></textarea>
                                                          <small id="passwordHelpBlock" class="form-text text-sucess">Keterangan tugas yang dikerjakan</small> 
                                                             @if ($errors->has('keterangan'))
                                                             <span class="invalid-feedback" role="alert">
@@ -258,7 +265,7 @@
             }
          });
          $("#jenis_media").trigger("change");
-         
+         $( ".clone" ).hide();
          $(document).ready(function() {
             var cloneLimit = 1;
             $(".btn-success").click(function(){ 
@@ -271,6 +278,7 @@
             });
             $("body").on("click",".btn-danger",function(){ 
                $(this).parents(".control-group").remove();
+               cloneLimit--;
             });
          });
 
