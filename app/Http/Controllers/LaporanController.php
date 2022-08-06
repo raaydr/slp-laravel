@@ -326,14 +326,18 @@ class LaporanController extends Controller
 
             $messages = [
                 'url_foto.required' => 'foto tidak boleh kosong!',
-                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png.',
+                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
                 'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
             ]
         );
 
         if ($validator->fails()) {
-            //return Redirect::back()->with('pesan','salah');
-            return back()->withErrors($validator)->withInput();
+            $error = $validator->errors()->all();
+            
+            return Redirect::back()->with('error','Format harus jpg,jpeg,png, pdf dan maksimal size file 5mb');
+            //return response()->json(['status'=>0, 'msg'=>'tolong sesuai format','error'=>$validator->errors()->all()]);
+            //return back()->withErrors($validator->errors()->all())->withInput();
+            //return $error;
         }
         $namaFile = Laporan::where('id', $id)->value('judul');
         $count=0;

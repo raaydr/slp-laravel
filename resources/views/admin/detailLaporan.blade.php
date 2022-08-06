@@ -26,11 +26,13 @@
       {{session('pesan')}}.
    </div>
    @endif
-   @error('url_foto')
-   <span class="invalid-feedback" role="alert">
-   <strong>{{ $message }}</strong>
-   </span>
-   @enderror
+   @if(session('error'))
+   <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-info"></i>Error</h4>
+      {{session('error')}}.
+   </div>
+   @endif
    <div class="row">
       <div class="col-6">
          <!-- general form elements -->
@@ -152,23 +154,21 @@
       </div>
       <div class="col-5">
          <div class="card card-primary">
-                                                   <div class="card-header">
-                                                      <h4 class="card-title">Dokumentasi Kegiatan</h4>
-                                                   </div>
-                                                   <div class="card-body">
-                                                      <div class="row">
-                                                         @foreach($dokumentasi as $image)
-                                                            <div class="col-sm-6">
-                                                               <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
-                                                                  <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" class="img-fluid mb-2" alt="white sample"/>
-                                                               </a>
-                                                            
-                                                            </div>
-                                                         @endforeach
-                                                      </div>
-                                                   </div>
-                                             
-                                                </div>
+            <div class="card-header">
+               <h4 class="card-title">Dokumentasi Kegiatan</h4>
+            </div>
+            <div class="card-body">
+               <div class="row">
+                  @foreach($dokumentasi as $image)
+                  <div class="col-sm-6">
+                     <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
+                     <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" class="img-fluid mb-2" alt="white sample"/>
+                     </a>
+                  </div>
+                  @endforeach
+               </div>
+            </div>
+         </div>
       </div>
    </div>
    <!-- /.row -->
@@ -211,14 +211,14 @@
    </div>
    <div class="modal fade" id="modal-foto">
       <div class="modal-dialog">
-         <div class="modal-content bg-primary">
+         <div class="modal-content bg-info">
             <div class="modal-header">
                <h4 class="modal-title">Dokumentasi Kegiatan</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <form method="POST" action="{{route('admin.dokumentasiKegiatanLaporan',$laporan->id)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('admin.dokumentasiKegiatanLaporan',$laporan->id)}}" enctype="multipart/form-data" class="was-validated">
                @csrf  
                <div class="modal-body">
                   <div class="row">
@@ -226,7 +226,7 @@
                         <label for="url_foto" class="col-md-3 col-form-label ">{{ __('Upload Foto') }}</label>
                         <div class="col-md-9">
                            <div class="input-group control-group increment" >
-                              <input type="file" name="url_foto[]" class="form-control">
+                              <input type="file" name="url_foto[]" class="form-control" required autofocus>
                               <div class="input-group-btn"> 
                                  <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                               </div>
@@ -241,10 +241,10 @@
                            </div>
                            @error('url_foto')
                            <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
+                           <strong>{{ $errors->first('url_foto') }}</strong>
                            </span>
                            @enderror
-                           <small class="text-primary">format harus jpeg,jpg,png berukuran maksimal 5 mb</small>
+                           <small class="text">format harus jpeg,jpg,png berukuran maksimal 5 mb</small>
                         </div>
                      </div>
                   </div>
@@ -271,66 +271,66 @@
             <form id="formMedia" enctype="multipart/form-data" class="was-validated">
                @csrf     
                <div class="modal-body">
-                     <div class="form-group row">
-                        <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('Judul Pembayaran') }}</label>
-                        <div class="col-md-8">
-                           <input
-                              id="judul"
-                              type="text"
-                              class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}"
-                              name="judul"
-                              value="{{ old('judul') }}"
-                              required
-                              autofocus
-                              /></input>
-                           @if ($errors->has('judul'))
-                           <span class="invalid-feedback" role="alert">
-                           <strong>{{ $errors->first('judul') }}</strong>
-                           </span>
-                           @endif
-                        </div>
+                  <div class="form-group row">
+                     <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('Judul Pembayaran') }}</label>
+                     <div class="col-md-8">
+                        <input
+                           id="judul"
+                           type="text"
+                           class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}"
+                           name="judul"
+                           value="{{ old('judul') }}"
+                           required
+                           autofocus
+                           /></input>
+                        @if ($errors->has('judul'))
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('judul') }}</strong>
+                        </span>
+                        @endif
                      </div>
-                     <div class="form-group row">
-                        <label for="pembayaran" class="col-md-4 col-form-label text-md-right">{{ __('Pembayaran') }}</label>
-                        <div class="col-md-8">
-                           <input
-                              id="pembayaran"
-                              type="text"
-                              class="form-control{{ $errors->has('pembayaran') ? ' is-invalid' : '' }}"
-                              name="pembayaran"
-                              value="{{ old('pembayaran') }}"
-                              required
-                              autofocus
-                              /></input>
-                           @if ($errors->has('pembayaran'))
-                           <span class="invalid-feedback" role="alert">
-                           <strong>{{ $errors->first('pembayaran') }}</strong>
-                           </span>
-                           @endif
-                        </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="pembayaran" class="col-md-4 col-form-label text-md-right">{{ __('Pembayaran') }}</label>
+                     <div class="col-md-8">
+                        <input
+                           id="pembayaran"
+                           type="text"
+                           class="form-control{{ $errors->has('pembayaran') ? ' is-invalid' : '' }}"
+                           name="pembayaran"
+                           value="{{ old('pembayaran') }}"
+                           required
+                           autofocus
+                           /></input>
+                        @if ($errors->has('pembayaran'))
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('pembayaran') }}</strong>
+                        </span>
+                        @endif
                      </div>
-                     <div class="form-group row">
-                        <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
-                        <div class="col-md-8">
-                           <input
-                              id="url_foto"
-                              type="file"
-                              class="form-control{{ $errors->has('url_foto') ? ' is-invalid' : '' }}"
-                              name="url_foto"
-                              value="{{ old('url_foto') }}"
-                              required
-                              autofocus
-                              /></input>
-                           <small id="passwordHelpBlock" class="form-text text-sucess">
-                           Format harus jpg,png,jpeg dan ukuran 5 mb
-                           </small>
-                           @if ($errors->has('url_foto'))
-                           <span class="invalid-feedback" role="alert">
-                           <strong>{{ $errors->first('url_foto') }}</strong>
-                           </span>
-                           @endif
-                        </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
+                     <div class="col-md-8">
+                        <input
+                           id="url_foto"
+                           type="file"
+                           class="form-control{{ $errors->has('url_foto') ? ' is-invalid' : '' }}"
+                           name="url_foto"
+                           value="{{ old('url_foto') }}"
+                           required
+                           autofocus
+                           /></input>
+                        <small id="passwordHelpBlock" class="form-text text-sucess">
+                        Format harus jpg,png,jpeg dan ukuran 5 mb
+                        </small>
+                        @if ($errors->has('url_foto'))
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('url_foto') }}</strong>
+                        </span>
+                        @endif
                      </div>
+                  </div>
                </div>
                <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -348,7 +348,7 @@
 @endsection
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
 <script>
    $.ajaxSetup({
         headers: {
@@ -473,7 +473,7 @@
             $.validator.addMethod('filesize', function (value, element, param) {
                return this.optional(element) || (element.files[0].size <= param * 1000000)
             }, 'File size must be less than {0} MB');
-
+   
             $("#formMedia").validate({
                   rules: {
                     judul: {
@@ -572,7 +572,7 @@
                                  message: 'Illegal operation',
                               });
                               console.log('Error:', "Data kosong");
-
+   
                         }
                      });
                   }
@@ -602,7 +602,7 @@
                     alwaysShowClose: true
                 });
                 });
-
+   
                 $('.filter-container').filterizr({gutterPixels: 3});
                 $('.btn[data-filter]').on('click', function() {
                 $('.btn[data-filter]').removeClass('active');
