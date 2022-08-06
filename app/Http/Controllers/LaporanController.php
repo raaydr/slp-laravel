@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
+use PDF;
 use Redirect;
 use DataTables;
 use DateTime;
@@ -493,5 +494,87 @@ class LaporanController extends Controller
         return Redirect::back()->with('pesan','Berhasil Delete Dokumentasi Kegiatan');
         
     }
+
+    public function downloadLaporan($id)
+{
+	$data = Laporan::where('gen', 2)->where('status', 1)->orderBy('created_at', 'ASC')->get();
+    $logo = "/shop/assets/images/logo.png";
+    $laporan = Laporan::where('id', $id)->first();
+    $tanggal_mulai = $laporan->tanggal_kegiatan;
+    $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+    
+    
+    
+
+    $pembayaran = DokumentasiPembayaran::where('laporan_id', $id)->where('status', 1)->get();
+    $jumlah_pembayaran = count($pembayaran);
+    $total_pembayaran = 0;
+            for ($i = 0; $i <= $jumlah_pembayaran-1; $i++) {
+                $jumlah = $pembayaran[$i]['pembayaran'];
+                $total_pembayaran = $total_pembayaran + $jumlah;
+
+                $pembayaran[$i]['pembayaran'] = number_format($jumlah, 0, '', '.');
+
+                $foto = $pembayaran[$i]['url_foto'];
+                $asset= "/dokumentasi-pembayaran/";
+                $detail=  $asset.$foto;
+                $pembayaran[$i]['url_foto']= $detail;
+
+                
+            }
+
+    $dokumentasi = Dokumentasi::where('laporan_id', $id)->where('status', 1)->get();
+    $jumlah_dokumentasi = count($dokumentasi);
+    
+            for ($i = 0; $i <= $jumlah_dokumentasi-1; $i++) {                
+                $foto = $dokumentasi[$i]['url_foto'];
+                $asset= "/dokumentasi-kegiatan/";
+                $detail=  $asset.$foto;
+                $dokumentasi[$i]['url_foto']= $detail;
+
+                
+            }
+
+    $hadir = Absensi::where('laporan_id', $id)->where('absen', 1)->get();
+    $jumlah_hadir = count($hadir);
+
+    $absensi = Absensi::where('laporan_id', $id)->get();
+    $jumlah_absensi = count($absensi);
+    
+            for ($i = 0; $i <= $jumlah_absensi-1; $i++) {                
+                $absen = $absensi[$i]['absen'];
+                switch ($absen) {
+                    case '0':
+                        $absensi[$i]['absen'] = "Belum Hadir";
+                        break;
+                    case '1':
+                        $absensi[$i]['absen'] = "Hadir";
+                        break;
+                    case '2':
+                        $absensi[$i]['absen'] = "Tidak Hadir";
+                        break;                               
+                        default:
+                        echo "SLP INDONESIA";
+                        break;
+                }
+                
+            }
+
+    $total_pembayaran= number_format($total_pembayaran, 0, '', '.');
+    $mulai=date_format($laporan->time_start, 'G:i');
+    $akhir=date_format($laporan->time_end, 'G:i');
+	$pdf = PDF::loadview('admin.downloadLaporan',['data'=>$data,'logo'=>$logo,'laporan'=>$laporan
+    ,'tanggal_mulai'=>$tanggal_mulai
+    ,'mulai'=>$mulai
+    ,'akhir'=>$akhir
+    ,'jumlah_hadir'=>$jumlah_hadir
+    ,'total_pembayaran'=>$total_pembayaran
+    ,'pembayaran'=>$pembayaran
+    ,'dokumentasi'=>$dokumentasi
+    ,'absensi'=>$absensi]);
+	return $pdf->stream();
+    //return view('admin.downloadLaporan', compact('data','logo','laporan','tanggal_mulai','mulai','akhir','dokumentasi'));
+    
+}
 
 }

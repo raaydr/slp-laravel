@@ -105,6 +105,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Laporan/Tabel-Dokumentasi-Pembayaran/{id}', 'LaporanController@tabelDokumentasiPembayaran')->name('admin.tabelDokumentasiPembayaran');
     Route::get('/Laporan-Dokumentasi-Pembayaran/delete/{id}', 'LaporanController@DeleteDokumentasiPembayaran')->name('admin.DeleteDokumentasiPembayaran');
     Route::get('/Laporan-Dokumentasi-Kegiatan/delete/', 'LaporanController@DeleteDokumentasiKegiatan')->name('admin.DeleteDokumentasiKegiatan');
+    Route::get('/Laporan-Dokumentasi-Kegiatan/cetak/{id}', 'LaporanController@downloadLaporan')->name('admin.downloadLaporan');
 
     //Absensi
     Route::get('/Absensi-Kegiatan', 'AbsensiController@AbsensiKegiatan')->name('admin.AbsensiKegiatan');

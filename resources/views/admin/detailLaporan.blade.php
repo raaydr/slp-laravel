@@ -94,6 +94,8 @@
                <a data-toggle="modal" data-target="#modal-foto" class="btn btn-outline-danger m-2"><i class="fa fa-camera"></i> Dokumentasi Acara</a>
                <a data-toggle="modal" data-target="#modal-bukti" class="btn btn-outline-info m-2"><i class="fa fa-camera"></i> Dokumentasi Pembayaran</a>
                <a type="button" href="{{route('admin.DetailAbsensi',$laporan->id)}}" class="btn btn-outline-warning m-2"><i class="fa fa-user"></i> Absensi Kegiatan</a>
+               <a type="button" href="{{route('admin.downloadLaporan',$laporan->id)}}" class="btn btn-outline-dark m-2" target="_blank"><i class="fa fa-edit"></i> Cetak Laporan</a>
+               
             </div>
             </form>
          </div>
