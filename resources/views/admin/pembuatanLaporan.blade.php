@@ -141,12 +141,6 @@
                               <div id="load" class="spinner-border text-primary"></div>
                               </div>
                            </div>
-
-                           <a class="btn btn-success btn-sm" href="{{ route('admin.testbtn') }}" >
-                                       <i class="fas fa-check">
-                                       </i>
-                                       Hadir
-                                       </a>
                         </form>
                      </div>
                      <!-- /.card -->

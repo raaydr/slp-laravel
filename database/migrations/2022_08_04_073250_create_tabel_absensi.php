@@ -19,7 +19,7 @@ class CreateTabelAbsensi extends Migration
             $table->string('grup')->nullable();
             $table->text('note')->nullable();
             $table->boolean('absen');
-            $table->integer('user_Id');
+            $table->integer('user_id');
             $table->integer('laporan_id');
             $table->timestamps();
         });

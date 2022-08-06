@@ -93,6 +93,7 @@
                <button  class="btn btn-outline-success m-2" data-toggle="modal" data-tugas_id="{{ $laporan->id}}" data-target="#modal-note"target="_blank"><i class="fa fa-edit"></i> Keterangan Laporan</button>
                <a data-toggle="modal" data-target="#modal-foto" class="btn btn-outline-danger m-2"><i class="fa fa-camera"></i> Dokumentasi Acara</a>
                <a data-toggle="modal" data-target="#modal-bukti" class="btn btn-outline-info m-2"><i class="fa fa-camera"></i> Dokumentasi Pembayaran</a>
+               <a type="button" href="{{route('admin.DetailAbsensi',$laporan->id)}}" class="btn btn-outline-warning m-2"><i class="fa fa-user"></i> Absensi Kegiatan</a>
             </div>
             </form>
          </div>
@@ -662,6 +663,6 @@
              var modal = $(this)
              modal.find('.modal-body #dokumen_id').val(id)
              
-         });
+   });
 </script>
 @endsection
