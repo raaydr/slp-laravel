@@ -160,6 +160,7 @@
                                                    <th>Tanggal Kegiatan</th>
                                                    <th>Tipe Kegiatan</th>
                                                    <th>Guest</th>
+                                                   <th>Angkatan</th>
                                                    <th>action</th>
                                              </tr>
                                           </thead>
@@ -172,6 +173,7 @@
                                                    <th>Tanggal Kegiatan</th>
                                                    <th>Tipe Kegiatan</th>
                                                    <th>Guest</th>
+                                                   <th>Angkatan</th>
                                                    <th>action</th>
                                              </tr>
                                           </tfoot>
@@ -205,9 +207,10 @@
                      columns:[
                         {data: 'DT_RowIndex', name: 'DT_RowIndex' },
                         {data:'judul',name:'judul',orderable: true,searchable: true},
-                        {data: 'tanggal_kegiatan', name: 'tanggal_kegiatan', orderable: true, searchable: true},
+                        {data: 'Tanggal', name: 'Tanggal', orderable: true, searchable: true},
                         {data: 'tipe_kegiatan', name: 'tipe_kegiatan', orderable: true, searchable: true},
                         {data: 'guest', name: 'guest', orderable: true, searchable: true},
+                        {data: 'gen', name: 'gen', orderable: true, searchable: true},
                         
                         {data: 'action', name: 'action'},
                         

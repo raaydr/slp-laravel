@@ -271,7 +271,7 @@
                         <a href="{{ route('admin.PembuatanLaporan') }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
-                           <p>Pembuatan Laporan</p>
+                           <p>Laporan</p>
                         </a>
                   </li>
                   <li class="nav-item">

@@ -46,11 +46,19 @@ class LaporanController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = Laporan::where('gen', $gen)->where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $data = Laporan::where('status', 1)->orderBy('created_at', 'ASC')->get();
             if($request->ajax()){
     
                 return datatables()->of($data)
                     ->addIndexColumn()
+                    ->addColumn('Tanggal', function($row){
+                        
+                        $tanggal_mulai = $row->tanggal_kegiatan;
+                        $tanggal_mulai=Carbon::parse($tanggal_mulai)->isoFormat('D MMMM Y');
+
+                        return $tanggal_mulai;
+                        
+                    })
                     ->addColumn('action', function($row){
                         $detail = route('admin.DetailLaporan', $row->id);
                         $id = $row->id;
@@ -83,7 +91,7 @@ class LaporanController extends Controller
                                                             </div>
                                                             <!-- /.modal -->';
                         return $actionBtn;
-                    })->rawColumns(['action'])
+                    })->rawColumns(['Tanggal','action'])
                     ->make(true);
             }
         
