@@ -501,7 +501,7 @@ class PesertaController extends Controller
         }
         
     
-        $id = Input::get('id');
+        $id =$request->id;
         $hari = DB::table('daily_quest')
             ->where('id', $id)
             ->value('day');

@@ -132,8 +132,8 @@ class RegisterController extends Controller
             ->value('integer');
         //Table Users
         $user = new User;
-        $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
         $user->level = 1;
         $user->gen = $gen;
         $user->save();
@@ -146,18 +146,18 @@ class RegisterController extends Controller
         $user_id = $user->id;
         $biodata = new Biodata;
         $biodata->user_id = $user_id;
-        $biodata->nama = Input::get('nama');
-        $biodata->email = Input::get('email');
-        $biodata->jenis_kelamin = Input::get('jenis_kelamin');
-        $biodata->tanggal_lahir = Input::get('tanggal_lahir');
-        $biodata->domisili = Input::get('domisili');
-        $biodata->alamat_domisili = Input::get('alamat_domisili');
-        $biodata->phonenumber = Input::get('phonenumber');
-        $biodata->aktivitas = Input::get('aktivitas');
-        $biodata->minatprogram = Input::get('minatprogram');
-        $biodata->alasanBeasiswa = Input::get('alasanBeasiswa');
-        $biodata->five_pros = Input::get('five_pros');
-        $biodata->five_cons = Input::get('five_cons');
+        $biodata->nama = $request->nama;
+        $biodata->email = $request->email;
+        $biodata->jenis_kelamin = $request->jenis_kelamin;
+        $biodata->tanggal_lahir = $request->tanggal_lahir;
+        $biodata->domisili = $request->domisili;
+        $biodata->alamat_domisili = $request->alamat_domisili;
+        $biodata->phonenumber = $request->phonenumber;
+        $biodata->aktivitas = $request->aktivitas;
+        $biodata->minatprogram = $request->minatprogram;
+        $biodata->alasanBeasiswa = $request->alasanBeasiswa;
+        $biodata->five_pros = $request->five_pros;
+        $biodata->five_cons = $request->five_cons;
         if($file = $request->hasFile('url_foto')) 
             {
             $namaFile = $user->id;

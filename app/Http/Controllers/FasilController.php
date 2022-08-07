@@ -140,12 +140,12 @@ class FasilController extends Controller
         DB::table('fasil')
          ->where('user_id', $id)
          ->update([
-            'nama' => Input::get('nama'),
-            'jenis_kelamin' => Input::get('jenis_kelamin'),
-            'instagram' => Input::get('instagram'),
-            'phonenumber' => Input::get('phonenumber'),
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'instagram' => $request->instagram,
+            'phonenumber' => $request->phonenumber,
             'prestasi' => $detail,
-            'quotes' => Input::get('quotes'),
+            'quotes' => $request->quotes,
              'updated_at' => now(),
          ]);
         

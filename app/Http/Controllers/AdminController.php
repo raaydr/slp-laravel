@@ -1025,11 +1025,11 @@ class AdminController extends Controller
 
         
         
-        $writing = Input::get('writing');
-        $video = Input::get('video');
-        $user_id = Input::get('user_id');
-        $point = Input::get('point');
-        $nbusiness = Input::get('penjualan');
+        $writing =$request->writing;
+        $video = $request->video;
+        $user_id = $request->user_id;
+        $point = $request->point;
+        $nbusiness = $request->penjualan;
         $business = ($nbusiness / 500000) *100;
         $total = $writing + $video + $business + $point;
         $gen = DB::table('controller')
@@ -1037,15 +1037,15 @@ class AdminController extends Controller
             ->value('gen');
         if((($writing<=100)&&($video<=100)== true)){
             $penilaian_challenge = new Penilaian;
-            $penilaian_challenge->user_id = Input::get('user_id');
-            $penilaian_challenge->nama = Input::get('nama');
+            $penilaian_challenge->user_id = $user_id ;
+            $penilaian_challenge->nama = $request->nama;
             $penilaian_challenge->gen = $gen;
-            $penilaian_challenge->writing = Input::get('writing');
-            $penilaian_challenge->video = Input::get('video');
+            $penilaian_challenge->writing = $writing;
+            $penilaian_challenge->video = $video;
             $penilaian_challenge->business = $business;
             $penilaian_challenge->total = $total;
             $penilaian_challenge->point = $point;
-            $penilaian_challenge->penjualan = Input::get('penjualan');
+            $penilaian_challenge->penjualan = $request->penjualan;
             $penilaian_challenge->save();
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.userprofile', [$user_id])->with('berhasil', 'berhasil  penilaian');
@@ -1157,12 +1157,11 @@ class AdminController extends Controller
         
 
         
-        
-        $writing = Input::get('writing');
-        $video = Input::get('video');
-        $user_id = Input::get('user_id');
-        $point = Input::get('point');
-        $nbusiness = Input::get('penjualan');
+        $writing =$request->writing;
+        $video = $request->video;
+        $user_id = $request->user_id;
+        $point = $request->point;
+        $nbusiness = $request->penjualan;
         $business = ($nbusiness / 500000) *100;
         $total = $writing + $video + $business + $point;
         $gen = DB::table('control')
@@ -1170,15 +1169,15 @@ class AdminController extends Controller
             ->value('integer');
         if((($writing<=100)&&($video<=100)== true)){
             $penilaian_challenge = new Penilaian;
-            $penilaian_challenge->user_id = Input::get('user_id');
-            $penilaian_challenge->nama = Input::get('nama');
+            $penilaian_challenge->user_id = $user_id ;
+            $penilaian_challenge->nama = $request->nama;
             $penilaian_challenge->gen = $gen;
-            $penilaian_challenge->writing = Input::get('writing');
-            $penilaian_challenge->video = Input::get('video');
+            $penilaian_challenge->writing = $writing;
+            $penilaian_challenge->video = $video;
             $penilaian_challenge->business = $business;
             $penilaian_challenge->total = $total;
-            $penilaian_challenge->point = Input::get('point');
-            $penilaian_challenge->penjualan = Input::get('penjualan');
+            $penilaian_challenge->point = $point;
+            $penilaian_challenge->penjualan = $request->penjualan;
             $penilaian_challenge->save();
             seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
             return redirect()->route('admin.challenge')->with('berhasil', 'berhasil  penilaian');
@@ -1570,9 +1569,9 @@ class AdminController extends Controller
         
 
         $penilaian_challenge = new Penilaian;
-        $user_id = Input::get('user_id');
+        $user_id = $request->user_id;
         
-        $note = Input::get('note');
+        $note = $request->note;
         
         
         
@@ -1719,8 +1718,8 @@ class AdminController extends Controller
 
         //Table Users
         $user = new User;
-        $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
         $user->level = 5;
         $user->gen = 0;
         $user->save();
@@ -1820,7 +1819,7 @@ class AdminController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-        $id =  Input::get('user_id');
+        $id =  $request->user_id;
         $gen = DB::table('control')
             ->where('id', 4)
             ->value('integer');
@@ -1841,12 +1840,12 @@ class AdminController extends Controller
         }else{
 
             $record = new FasilRecord;
-        $record->nama = Input::get('nama');
+        $record->nama = $request->nama;
         $record->status =  1;
         $record->valid = 0;
         $record->gen = $gen;
-        $record->grup =  Input::get('grup');
-        $record->user_id = Input::get('user_id');
+        $record->grup =  $request->grup;
+        $record->user_id = $request->user_id;
         $record->awal = now();
         $record->save();
         return Redirect::back()->with('pesan','Operation Successful !');
@@ -1923,11 +1922,11 @@ class AdminController extends Controller
 
         //Table control
         $controller = new Control;
-        $controller->nama = Input::get('nama');
-        $controller->string = Input::get('string');
-        $controller->boolean = Input::get('boolean');
-        $controller->integer = Input::get('integer');
-        $controller->date = Input::get('date');
+        $controller->nama = $request->nama;
+        $controller->string = $request->string;
+        $controller->boolean = $request->boolean;
+        $controller->integer = $request->integer;
+        $controller->date = $request->date;
         $controller->save();
         
         return redirect()->route('admin.controller.create')->with('pesan', 'Controller terbuat');
@@ -1999,12 +1998,12 @@ class AdminController extends Controller
         }
         
         
-        $id=Input::get('id');
+        $id=$request->id;
         Quest::where('id', $id)
                 ->update([
-                    'topik_writing' => Input::get('writing'),
-                    'komentar_writing' => Input::get('writing_komentar'),
-                    'writing_check' => Input::get('poin'),
+                    'topik_writing' => $request->writing,
+                    'komentar_writing' => $request->writing_komentar,
+                    'writing_check' => $request->poin,
                     'updated_at' => now(),
                 ]);
         
@@ -2035,12 +2034,12 @@ class AdminController extends Controller
                 ->withInput();
         }
         
-        $id=Input::get('id');
+        $id=$request->id;
         Quest::where('id', $id)
                 ->update([
-                    'topik_video' => Input::get('video'),
-                    'komentar_video' => Input::get('video_komentar'),
-                    'video_check' => Input::get('poin'),
+                    'topik_video' => $request->video,
+                    'komentar_video' => $request->video_komentar,
+                    'video_check' => $request->poin,
                     'updated_at' => now(),
                 ]);
         
@@ -2070,10 +2069,10 @@ class AdminController extends Controller
         }
         
         
-        $id=Input::get('id');
+        $id=$request->id;
         Quest::where('id', $id)
                 ->update([
-                    'note' => Input::get('note'),
+                    'note' => $request->note,
                     'updated_at' => now(),
                 ]);
         
