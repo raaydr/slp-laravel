@@ -83,7 +83,7 @@ class HomeController extends Controller
                             
                 break;
             case '4':
-                return redirect()->action('\App\Http\Controllers\PesertaController@index');
+                return redirect()->route('peserta.Pengumuman');
                                 
                 break;
             case '5':

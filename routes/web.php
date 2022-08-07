@@ -114,6 +114,10 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Absensi/check/{id}/{val}', 'AbsensiController@checkAbsensi')->name('admin.checkAbsensi');
     Route::post('/Absensi/note-add/', 'AbsensiController@noteAbsensi')->name('admin.noteAbsensi');
 
+    //Pengumuman
+    Route::get('/Pembuatan-Pengumuman', 'PengumumanController@PembuatanPengumuman')->name('admin.PembuatanPengumuman');
+    Route::post('/Pembuatan-Pengumuman/add', 'PengumumanController@AddPengumuman')->name('admin.AddPengumuman');
+    Route::get('/Pembuatan-Pengumuman/delete/{id}', 'PengumumanController@DeletePengumuman')->name('admin.DeletePengumuman');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
@@ -419,11 +423,9 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::get('/dashboard', 'PendaftarController@index')->name('pendaftar.dashboard');
-	});
-});
-Route::group(['middleware' => 'check-permission:pendaftar'], function () {
-    Route::group(['prefix' => 'pendaftar'], function () {
-	Route::get('/pengumuman', 'PendaftarController@pengumuman')->name('pendaftar.pengumuman');
+
+    //pengumuman
+    Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('pendaftar.Pengumuman');
 	});
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {
@@ -499,6 +501,9 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::get('/Rapor-Tugas/Writing', 'TugasController@raporTugasWriting')->name('peserta.raporTugasWriting');
     Route::get('/Rapor-Tugas/Entrepreneur', 'TugasController@raporTugasEntrepreneur')->name('peserta.raporTugasEntrepreneur');
     Route::get('/Rapor-Tugas/Speaking', 'TugasController@raporTugasSpeaking')->name('peserta.raporTugasSpeaking');
+
+    //Pengumuman
+    Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('peserta.Pengumuman');
 	});
 });
 Route::group(['middleware' => 'check-permission:peserta'], function () {
