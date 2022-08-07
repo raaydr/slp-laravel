@@ -886,6 +886,7 @@ class TugasController extends Controller
     public function raporTugasWriting($id)
     {
         $user = User::where('id', $id)->first();
+        $biodata = Biodata::where('user_id',$id)->first();
         $gen = $user->gen;
         $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
@@ -951,11 +952,12 @@ class TugasController extends Controller
         }
         
         //dd($rapor);
-        return view('peserta.raporTugasWriting',compact('target','rapor','id'));
+        return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
     }
     public function raporTugasSpeaking($id)
     {
         $user = User::where('id', $id)->first();
+        $biodata = Biodata::where('user_id',$id)->first();
         $gen = $user->gen;
         $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->orderBy('mulai', 'ASC')->get();
@@ -1021,11 +1023,12 @@ class TugasController extends Controller
         }
         
         //dd($rapor);
-        return view('peserta.raporTugasSpeaking',compact('target','rapor','id'));
+        return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
     }
     public function raporTugasEntrepreneur($id)
     {
         $user = User::where('id', $id)->first();
+        $biodata = Biodata::where('user_id',$id)->first();
         $gen = $user->gen;
         $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
@@ -1080,7 +1083,7 @@ class TugasController extends Controller
             }
         }
         
-        return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id'));
+        return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
     }
     public function testTabel1(Request $request)
     {
