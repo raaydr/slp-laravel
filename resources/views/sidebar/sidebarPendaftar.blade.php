@@ -85,7 +85,7 @@
                             </li>
                             
                             <li class="nav-item">
-                            @if ( Route::currentRouteName() == "pendaftar.pengumuman" )
+                            @if ( Route::currentRouteName() == "pendaftar.Pengumuman" )
                                 <a href="{{ route('pendaftar.pengumuman') }}" class="nav-link active">
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>

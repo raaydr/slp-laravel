@@ -425,7 +425,7 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 	Route::get('/dashboard', 'PendaftarController@index')->name('pendaftar.dashboard');
 
     //pengumuman
-    Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('pendaftar.Pengumuman');
+    Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('pendaftar.pengumuman');
 	});
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {

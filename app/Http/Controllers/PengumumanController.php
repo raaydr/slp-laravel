@@ -216,8 +216,15 @@ class PengumumanController extends Controller
                 }
         switch ($level) {
             case '1':
+                $id = Auth::user()->id;
+                $user = DB::table('users')
+                    ->where('id', $id)
+                    ->first();
+                $biodata = DB::table('biodata')
+                    ->where('user_id', $id)
+                    ->first();
                 
-                return view('pendaftar.pengumuman',compact('data'));
+                return view('user.pengumuman',compact('data','biodata','user'));
                 break;
             case '4':
                 
