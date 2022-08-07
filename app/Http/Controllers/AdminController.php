@@ -346,7 +346,7 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data =   $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+        $data = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
         ->where('level', 1)->orderBy('users.id', 'ASC')->get();
         if($request->ajax()){
 
@@ -430,8 +430,10 @@ class AdminController extends Controller
     {
         $title = 'Seleksi Pertama Admin';
         $biodata = Biodata::all();
-        $users = User::where('level', 2)->get();
-        $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        $data = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->where('level', 2)->get();
         if($request->ajax()){
 
@@ -526,8 +528,10 @@ class AdminController extends Controller
     }
     public function rank_challenge(Request $request){
         $title = 'Admin Rank Challenge';
-        
-        $data = DB::table('penilaian_challenge')
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        $data = DB::table('penilaian_challenge')->where('gen',$gen)
                     ->join('seleksiPertama', 'seleksiPertama.user_id', '=', 'penilaian_challenge.user_id')
                     ->join('biodata', 'biodata.user_id', '=', 'penilaian_challenge.user_id')
                     ->orderBy('total', 'DESC')->get();
