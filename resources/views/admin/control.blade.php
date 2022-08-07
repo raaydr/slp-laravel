@@ -27,6 +27,13 @@
                      {{session('berhasil')}}.
                   </div>
                   @endif
+                  @if(session('error'))
+                  <div class="alert alert-danger alert-dismissable">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <h4><i class="icon fa fa-info"></i>Error</h4>
+                     {{session('error')}}.
+                  </div>
+                  @endif
                   <div class="row">
                      <div class="col-md-6">
                         @foreach($pendaftaran as $control)
@@ -73,18 +80,14 @@
                            <div class="card-body">
                               <!-- Minimal style -->
                               <div class="row">
-                                 <div class="col-sm-6">
-                                    <!-- checkbox -->
-                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.all.gagal') }}"> <i class="fas fa-info"> </i>Gagal </a>
-                                    <label for="radioSuccess1"> tidak mengerjakan challenge </label>
-                                 </div>
-                                 <div class="col-sm-6">
-                                    <!-- radio -->
-                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.generate.antrian') }}">
+                              <div class="form-group row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                    <button class="btn btn-outline-primary" href="{{ route('admin.generate.antrian') }}">
                                     <i class="fas fa-check"> </i>
                                     antrian
-                                    </a>
-                                    <label for="radioSuccess1"> Membuat antrian kalau udah di lulusin </label>
+                                    </button>
+                                    <label for="radioSuccess1"> Membuat antrian Seleksi Interview </label>
+                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -94,55 +97,6 @@
                         <!-- /.card -->
                      </div>
                      <!-- /.col (right) -->
-                     <div class="col-md-6">
-                        @foreach($quest as $control)
-                        <div class="card card-danger">
-                           <div class="card-header">
-                              <h3 class="card-title">Daily Quest</h3>
-                           </div>
-                           <div class="card-body">
-                              <form method="POST" action="{{ route('admin.gate.quest') }}" enctype="multipart/form-data">
-                                 {{csrf_field()}}
-                                 <div class="form-group row">
-                                    <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('Hari ke - ') }}</label>
-                                    <div class="col-md-7">
-                                       <input id="user_id" type="text" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" name="user_id" value="{{$control->integer}}"  readonly />
-                                       @if ($errors->has('user_id'))
-                                       <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $errors->first('user_id') }}</strong>
-                                       </span>
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="form-group row">
-                                    <label for="quest" class="col-md-4 col-form-label text-md-right">{{ __('Daily Quest') }}</label>
-                                    <div class="col-md-7">
-                                       <div class="custom-control custom-radio custom-control-inline mt-2">
-                                          <input type="radio" id="customRadioInline3" name="quest" class="custom-control-input" value="1" {{ ($control->boolean== True)? "checked" : "" }}>
-                                          <label class="custom-control-label" for="customRadioInline3">BUKA</label>
-                                       </div>
-                                       <div class="custom-control custom-radio custom-control-inline">
-                                          <input type="radio" id="customRadioInline4" name="quest" class="custom-control-input" value="0" {{ ($control->boolean== False)? "checked" : "" }}>
-                                          <label class="custom-control-label" for="customRadioInline4">TUTUP</label>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
-                                       <button type="submit" class="btn btn-primary">
-                                       {{ __('Ubah') }}
-                                       </button>
-                                       <a type="button" class="btn btn-primary" href="{{ route('admin.reset.quest') }}">
-                                       {{ __('Reset') }}
-                                       </a>
-                                    </div>
-                                 </div>
-                              </form>
-                              @endforeach
-                           </div>
-                        </div>
-                        <!-- /.card -->
-                     </div>
                      <!-- /.col (left) -->
                      <div class="col-md-6">
                         @foreach($seleksiPertama as $control)
@@ -200,12 +154,7 @@
                               </div>
                               <div class="form-group row mb-0">
                                  <div class="col-md-6 offset-md-4">
-                                    <a type="button" class="btn btn-primary" href="{{ route('admin.pre.gen') }}">
-                                    {{ __('Before') }}
-                                    </a>
-                                    <a type="button" class="btn btn-primary" href="{{ route('admin.next.gen') }}">
-                                    {{ __('Next') }}
-                                    </a>
+                                 <a type="button" href="{{route('admin.NewGate')}}" class="btn btn-outline-dark" ><i class="fa fa-user"></i>Angkatan Baru</a>
                                  </div>
                               </div>
                            </div>
@@ -214,37 +163,7 @@
                      
                      <!-- /.card -->
                      </div>
-                     <!-- /.col (left) -->
-                     <div class="col-md-6">
-                        @foreach($interview as $control)
-                        <div class="card card-success">
-                           <div class="card-header">
-                              <h3 class="card-title">Antrian Interview</h3>
-                           </div>
-                           <div class="card-body">
-                              <div class="form-group row">
-                                 <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('Antrian ke - ') }}</label>
-                                 <div class="col-md-7">
-                                    <input id="user_id" type="text" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" name="user_id" value="{{$control->integer}}"  readonly />
-                                    @if ($errors->has('user_id'))
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('user_id') }}</strong>
-                                    </span>
-                                    @endif
-                                 </div>
-                              </div>
-                              <div class="form-group row mb-0">
-                                 <div class="col-md-6 offset-md-4">
-                                    <a type="button" class="btn btn-primary" href="{{ route('admin.reset.interview') }}">
-                                    {{ __('Reset') }}
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           @endforeach
-                        </div>
-                     </div>
-                     <!-- /.card -->
+                     
                   </div>
                
                </div>

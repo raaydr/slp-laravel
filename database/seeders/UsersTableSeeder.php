@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'nimda@slpindonesia.com',
             'password'=>bcrypt('isiadalah0'),
             'level'=>0,
-            'gen'=>0,
+            'gen'=>1,
         ]);
     }
 }

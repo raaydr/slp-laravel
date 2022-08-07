@@ -1427,35 +1427,48 @@ class AdminController extends Controller
     }
     public function nextGen (Request $request){
         $gen = DB::table('control')
-            ->where('id', 4)
+            ->where('nama', 'gen')
             ->value('integer');
-        $gen = $gen + 1;
-        DB::table('control')->where('id',4)->update([
-            'integer'=> $gen++,
-            'updated_at'=> now(),
+        $genReal = User::where('id', 1 )->value('gen');
+        
+
+        if($gen<$genReal){
+            $gen = $gen + 1;
+            DB::table('control')->where('nama','gen')->update([
+                'integer'=> $gen,
+                'updated_at'=> now(),
+                
+                
+            ]);
             
-            
-        ]);
+            return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi selanjutnya');
+        }else{
+            return redirect()->route('admin.control')->with('error', 'belum ada generasi selanjutnya');
+        }
+        
 
   
 
-        return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi selanjutnya');
+        
     }
     public function preGen (Request $request){
         $gen = DB::table('control')
-            ->where('id', 4)
+            ->where('nama', 'gen')
             ->value('integer');
-        $gen = $gen-1;
-        DB::table('control')->where('id',4)->update([
-            'integer'=> $gen,
-            'updated_at'=> now(),
-            
-            
-        ]);
+        if($gen > 1){
+            $gen = $gen - 1;
+            DB::table('control')->where('nama','gen')->update([
+                'integer'=> $gen,
+                'updated_at'=> now(),
+                
+                
+            ]);
 
-  
-
-        return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi selanjutnya');
+            return redirect()->route('admin.control')->with('berhasil', 'ubah ke generasi sebelumnya');
+        }else{
+            return redirect()->route('admin.control')->with('error', 'belum ada generasi sebelumnya');
+        }
+        
     }
     public function resetInterview (Request $request){
         DB::table('control')->where('id',5)->update([
@@ -1821,7 +1834,7 @@ class AdminController extends Controller
         }
         $id =  $request->user_id;
         $gen = DB::table('control')
-            ->where('id', 4)
+            ->where('nama', 'gen')
             ->value('integer');
         
         DB::table('fasil')->where('user_id',$id)->update([
@@ -2567,5 +2580,60 @@ class AdminController extends Controller
             
                 return Redirect::back()->with('pesan','berhasil');
         
+    }
+
+    public function NewGate(){
+
+        //preparation for ritual
+
+        $pendaftaran = Control::where('nama', 'pendaftaran')->value('boolean');
+        $seleksi_pertama = Control::where('nama', 'seleksiPertama')->value('boolean');
+        
+        $genReal = User::where('id', 1 )->value('gen');
+
+        $maxgen = User::where('id','!=',1)->max('gen');
+        // action
+
+        if($maxgen == $genReal){
+
+            $data = FasilRecord::where('gen', $genReal)->get();
+            $jumlah_data = count($data);
+        
+                for ($i = 0; $i <= $jumlah_data-1; $i++) {                
+                    $id = $data[$i]['id'];
+                    FasilRecord::where('id', $id)->update([
+                
+                        'status' => 3,
+                        'akhir'=> now(),
+                        'updated_at'=> now(),
+                    ]);
+                
+                }
+            $gen = $maxgen + 1;
+            Control::where('nama', 'pendaftaran')->update([
+                'boolean' => 1,           
+                'updated_at' => now(),
+                ]
+            );
+            Control::where('nama', 'seleksiPertama')->update([
+                'boolean' => 1,           
+                'updated_at' => now(),
+                ]
+            );
+            Control::where('nama', 'gen')->update([
+                'integer' => $gen,           
+                'updated_at' => now(),
+                ]
+            );
+
+            User::where('id', 1)->update([
+                'gen' => $gen,           
+                'updated_at' => now(),
+                ]
+            );
+            return redirect()->route('admin.control')->with('berhasil', 'Membuka Generasi Baru');
+        }else{
+            return redirect()->route('admin.control')->with('error', 'Tidak Bisa Membuka Generasi Baru');
+        }   
     }
 }

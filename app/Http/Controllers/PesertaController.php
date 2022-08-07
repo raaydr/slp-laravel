@@ -9,6 +9,7 @@ use App\Models\Control;
 use App\Models\Antrian;
 use App\Models\Peserta;
 use App\Models\Fasil;
+use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Models\Target;
 use App\Models\Jualan;
@@ -63,8 +64,8 @@ class PesertaController extends Controller
         $grup = DB::table('peserta')
             ->where('user_id', $id)
             ->value('grup');
-
-        $fasil = Fasil::where('grup', $grup)->first();
+        $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->orWhere('status',3)->where('grup',$grup)->value('user_id');
+        $fasil = Fasil::where('user_id', $fasil_id)->first();
         $peserta = Peserta::where('grup',$grup)->get();
         //dd($fasil);
         return view('peserta.grup', compact('title', 'user','fasil','peserta'));

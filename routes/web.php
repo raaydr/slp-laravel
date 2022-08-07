@@ -118,6 +118,10 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Pembuatan-Pengumuman', 'PengumumanController@PembuatanPengumuman')->name('admin.PembuatanPengumuman');
     Route::post('/Pembuatan-Pengumuman/add', 'PengumumanController@AddPengumuman')->name('admin.AddPengumuman');
     Route::get('/Pembuatan-Pengumuman/delete/{id}', 'PengumumanController@DeletePengumuman')->name('admin.DeletePengumuman');
+
+
+    //NEW GATE
+    Route::get('/Control/New-Gate', 'AdminController@NewGate')->name('admin.NewGate');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

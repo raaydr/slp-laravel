@@ -31,7 +31,7 @@ class AddControl extends Seeder
         ]);
         DB::table('control')->insert([
             'nama'=>'gen',
-            'integer'=> 2,
+            'integer'=> 1,
 
         ]);
         DB::table('control')->insert([
