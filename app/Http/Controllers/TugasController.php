@@ -119,9 +119,8 @@ class TugasController extends Controller
             ->where('nama', 'gen')
             ->value('integer');
         $data = DB::table('peserta')
-        ->where('peserta.gen', $gen)
-        ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')
-        ->where('valid', 0)->orWhere('valid', 1)->orderBy('tugas_writing.id', 'ASC')->get();
+        ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')->where('tugas_writing.gen', $gen)
+        ->where('valid', 0)->orderBy('tugas_writing.id', 'ASC')->get();
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -447,8 +446,8 @@ class TugasController extends Controller
             ->value('integer');
         $data = DB::table('peserta')
         ->where('peserta.gen', $gen)
-        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')
-        ->where('valid', 0)->orWhere('valid', 1)->orderBy('tugas_speaking.id', 'ASC')->get();
+        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')->where('tugas_speaking.gen', $gen)
+        ->where('valid', 0)->orderBy('tugas_speaking.id', 'ASC')->get();
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -659,8 +658,8 @@ class TugasController extends Controller
             ->value('integer');
         $data = DB::table('peserta')
         ->where('peserta.gen', $gen)
-        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')
-        ->where('valid', 0)->orWhere('valid', 1)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')->where('tugas_entrepreneur.gen', $gen)
+        ->where('valid', 0)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
         if($request->ajax()){
 
             return datatables()->of($data)

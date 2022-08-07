@@ -2352,7 +2352,7 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = Target::where('status', 1)->orderBy('gen', 'ASC')->get();
+        $data = Target::where('status', 1)->orderBy('gen', 'DESC')->get();
             if($request->ajax()){
     
                 return datatables()->of($data)

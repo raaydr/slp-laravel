@@ -171,28 +171,9 @@
                            <p>Validasi Tugas </p>
                         </a>
                   </li>
-                  <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.PemeriksaanTugasWriting" )
-                        <a href="{{ route('admin.PemeriksaanTugasWriting') }}" class="nav-link active">
-                     @else
-                        <a href="{{ route('admin.PemeriksaanTugasWriting') }}" class="nav-link ">
-                     @endif
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>contoh periksa tugas</p>
-                        </a>
-                  </li>
-                  <li class="nav-item">
-                     @if ( Route::currentRouteName() == "admin.PemeriksaanTugasWritingDetail" )
-                        <a href="{{ route('admin.PemeriksaanTugasWritingDetail') }}" class="nav-link active">
-                     @else
-                        <a href="{{ route('admin.PemeriksaanTugasWritingDetail') }}" class="nav-link ">
-                     @endif
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>contoh detail</p>
-                        </a>
-                  </li>
                </ul>
             </li>
+            <!-- 
             <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.buatBlog" || Route::currentRouteName() == "admin.listBlog"|| Route::currentRouteName() == "admin.detailBlog")
                   <a href="../widgets.html" class="nav-link active">
@@ -227,7 +208,7 @@
                         </a>
                   </li>
                </ul>
-            </li>
+            </li> -->
             <li class="nav-item">
                @if ( Route::currentRouteName() == "admin.control" 
                || Route::currentRouteName() == "admin.controller.create" 
@@ -254,6 +235,7 @@
                            <p>Control</p>
                         </a>
                   </li>
+                  <!-- 
                   <li class="nav-item">
                      @if ( Route::currentRouteName() == "admin.controller.create" )
                         <a href="{{ route('admin.controller.create') }}" class="nav-link active">
@@ -263,7 +245,7 @@
                            <i class="far fa-circle nav-icon"></i>
                            <p>Create-control</p>
                         </a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                      @if ( Route::currentRouteName() == "admin.PembuatanLaporan" )
                         <a href="{{ route('admin.PembuatanLaporan') }}" class="nav-link active">
