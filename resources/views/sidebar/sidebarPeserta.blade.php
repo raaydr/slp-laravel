@@ -147,6 +147,7 @@
                   </li>
                </ul>
             </li>
+            <!---
             <li class="nav-item">
                @if ( Route::currentRouteName() == "peserta.daily.quest" )
                   <a href="{{ route('peserta.daily.quest') }}" class="nav-link active">
@@ -171,7 +172,7 @@
                                     </p>
                   </a>
             </li>
-
+            -->
             <li class="nav-item">
                @if ( Route::currentRouteName() == "peserta.dashboard" )
                   <a href="{{ route('peserta.dashboard') }}" class="nav-link active">
@@ -191,7 +192,7 @@
                @else
                   <a href="{{ route('peserta.jualan') }}" class="nav-link ">
                @endif
-               <i class="nav-icon fas ion-person"></i>
+               <i class="nav-icon fas fa-info"></i>
                                     <p>
                                         Jualan
                                     </p>
