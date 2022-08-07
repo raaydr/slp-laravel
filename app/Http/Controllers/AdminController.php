@@ -2599,7 +2599,7 @@ class AdminController extends Controller
 
         if($maxgen == $genReal){
 
-            $data = FasilRecord::where('gen', $genReal)->get();
+            $data = FasilRecord::where('status', 1)->where('gen', $genReal)->get();
             $jumlah_data = count($data);
         
                 for ($i = 0; $i <= $jumlah_data-1; $i++) {                
@@ -2608,6 +2608,13 @@ class AdminController extends Controller
                 
                         'status' => 3,
                         'akhir'=> now(),
+                        'updated_at'=> now(),
+                    ]);
+
+                    $user_id = $data[$i]['user_id'];
+                    Fasil::where('user_id', $user_id)->update([
+                
+                        'grup' => NULL,
                         'updated_at'=> now(),
                     ]);
                 
