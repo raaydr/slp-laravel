@@ -201,9 +201,7 @@ class PengumumanController extends Controller
     {
         $id = Auth::user()->id;
         $level= Auth::user()->level;
-        $gen = DB::table('control')
-        ->where('nama', 'gen')
-        ->value('integer');
+        $gen= Auth::user()->gen;
         $data = Pengumuman::where('gen', $gen)->where('level', $level)
         ->where('status', 1)->whereDate('tanggal_diumumkan', '<=', Carbon::today())->orderBy('tanggal_diumumkan', 'DESC')->get();
         $jumlah_data = count($data);
@@ -227,8 +225,16 @@ class PengumumanController extends Controller
                 return view('user.pengumuman',compact('data','biodata','user'));
                 break;
             case '4':
+                $id = Auth::user()->id;
+                $user = DB::table('users')
+                    ->where('id', $id)
+                    ->first();
+                $biodata = DB::table('biodata')
+                    ->where('user_id', $id)
+                    ->first();
                 
-                return view('peserta.pengumuman',compact('data'));
+                return view('peserta.pengumuman',compact('data','biodata','user'));
+                break;
                 break;                               
                 default:
                 echo "SLP INDONESIA";
