@@ -12,6 +12,9 @@ use App\Models\Fasil;
 use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Models\Target;
+use App\Models\Laporan;
+use App\Models\Absensi;
+use App\Models\Dokumentasi;
 use App\Models\Jualan;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
@@ -386,14 +389,54 @@ class PesertaController extends Controller
     public function dashboard()
     {
         $title = 'Dashboard Calon Siswa';
-        $id = Auth::user()->id;
-        $user = User::where('id', $id)
+        $user_id = Auth::user()->id;
+        $user = User::where('id', $user_id)
             ->first();
+        $gen = Auth::user()->gen;
         $biodata = DB::table('biodata')
-            ->where('user_id', $id)
+            ->where('user_id', $user_id)
             ->first();
-        $seleksiPertama = User::find($id)->seleksiPertama;
-        return view('peserta.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama'));
+        $seleksiPertama = User::find($user_id)->seleksiPertama;
+
+        $data = Laporan::where('status', 1)->where('gen', $gen)->orderBy('created_at', 'ASC')->get();
+        $kegiatan =[];
+        $jumlah_data = count($data);
+    
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {                
+                $laporan_id = $data[$i]['id'];
+                $tanggal_kegiatan = $data[$i]['tanggal_kegiatan'];
+                $tanggal_kegiatan=Carbon::parse($tanggal_kegiatan)->isoFormat('D MMMM Y');
+                $kehadiran = Absensi::where('laporan_id', $laporan_id)->where('user_id', $user_id)->value('absen');
+                switch ($kehadiran) {
+                    case '0':
+                        $laporan['absen'] = "Belum Hadir";
+                        break;
+                    case '1':
+                        $laporan['absen'] = "Hadir";
+                        break;
+                    case '2':
+                        $laporan['absen'] = "Tidak Hadir";
+                        break;                               
+                }
+
+                $dokumentasi = Dokumentasi::where('laporan_id', $laporan_id)->where('status', 1)->get();
+                $jumlah_dokumentasi = count($dokumentasi);
+                $foto = [];
+                for ($j = 0; $j <= $jumlah_dokumentasi-1; $j++) {
+                    $fileName = $dokumentasi[$j]['url_foto'];
+                    $foto[$j] = $fileName;
+                    
+                }
+                $laporan['foto']=json_encode($foto);
+                $laporan['judul']=$data[$i]['judul'];
+                $laporan['tanggal_kegiatan']=$tanggal_kegiatan;
+                $kegiatan[$i] = $laporan;
+
+                
+            }
+
+        //dd($kegiatan);
+        return view('peserta.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama','kegiatan'));
     }
     public function editfoto(Request $request)
     {

@@ -1,4 +1,7 @@
 @extends('topnav.topnavPeserta')
+@section('head')
+<link rel="stylesheet" href="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.css">
+@endsection
 @section('content')
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
@@ -161,9 +164,10 @@
                                                 <!-- The timeline -->
                                                 <div class="timeline timeline-inverse">
                                                     <!-- timeline time label -->
+                                                    @foreach($kegiatan as $event)
                                                     <div class="time-label">
                                                         <span class="bg-orange">
-                                                            5 Juni 2021
+                                                        {{  $event['tanggal_kegiatan'] }}
                                                         </span>
                                                     </div>
                                                     <!-- /.timeline-label -->
@@ -172,131 +176,37 @@
                                                         <i class="fas fa-comments bg-primary"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">Stadium General</a></h3>
+                                                            <h3 class="timeline-header"><a href="#">Kegiatan : {{  $event['judul'] }}</a></h3>
 
                                                             <div class="timeline-body">
-                                                                Stadium General
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            3 Juli 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-comments bg-orange"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
-                                                            <div class="timeline-body">
+                                                            <h6>Kamu {{  $event['absen'] }} di kegiatan ini</h6>
+                                                            
+                                                            <div class="card card-primary">
+                                                                    <div class="card-header">
+                                                                    <h4 class="card-title">Dokumentasi Kegiatan</h4>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                    <div class="row">
+                                                                        @foreach(json_decode($event['foto']) as $image)
+                                                                        <div class="col-2">
+                                                                            <a href="{{ asset('/dokumentasi-kegiatan/'.$image) }}" data-toggle="lightbox" data-title="{{  $event['judul'] }}" data-gallery="gallery">
+                                                                            <img src="{{ asset('/dokumentasi-kegiatan/'.$image) }}" class="img-fluid m-1" width="50" alt="white sample"/>
+                                                                            </a>
+                                                                        
+                                                                        </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    </div>
+                                                            
+                                                                </div>
                                                                 
+                                                            
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- END timeline item -->
-
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-primary">
-                                                            7 Agustus 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-comments bg-success"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
-                                                            <div class="timeline-body">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-orange">
-                                                            4 September 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-comments bg-primary"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
-                                                            <div class="timeline-body">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            9 Oktober 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-comments bg-orange"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
-                                                            <div class="timeline-body">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-primary">
-                                                            6 November 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-envelope bg-success"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">slp</a></h3>
-                                                            <div class="timeline-body">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-danger">
-                                                           Graduate
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-envelope bg-success"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Graduate</a></h3>
-                                                            <div class="timeline-body">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-
+                                                    @endforeach
+                                                   
                                                     <div>
                                                         <i class="far fa-clock bg-gray"></i>
                                                     </div>
@@ -363,5 +273,21 @@
                 <!-- /.content -->
                 @endsection
 @section('script')
-     
+<script src="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+     <script>
+        $(function () {
+                $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+                });
+
+                $('.filter-container').filterizr({gutterPixels: 3});
+                $('.btn[data-filter]').on('click', function() {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+                });
+            })
+     </script>
 @endsection 
