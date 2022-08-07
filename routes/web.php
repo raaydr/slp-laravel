@@ -486,9 +486,9 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::get('/bug/{id}', 'PesertaController@inputTugasWriting')->name('peserta.bug');
 
     //Target Peserta
-    Route::get('/Tugas-Writing', 'TargetController@TargetTugasWriting')->name('target.TargetTugasWriting');
-    Route::get('/Tugas-Speaking', 'TargetController@TargetTugasSpeaking')->name('target.TargetTugasSpeaking');
-    Route::get('/Tugas-Entrepreneur', 'TargetController@TargetTugasEntrepreneur')->name('target.TargetTugasEntrepreneur');
+    Route::get('/Tugas-Writing/{id}', 'TargetController@TargetTugasWriting')->name('target.TargetTugasWriting');
+    Route::get('/Tugas-Speaking/{id}', 'TargetController@TargetTugasSpeaking')->name('target.TargetTugasSpeaking');
+    Route::get('/Tugas-Entrepreneur{id}', 'TargetController@TargetTugasEntrepreneur')->name('target.TargetTugasEntrepreneur');
     Route::get('/Tugas-Writing/input/{id}', 'TargetController@inputTugasWriting')->name('target.InputTugasWriting');
     Route::get('/Tugas-Speaking/input/{id}', 'TargetController@inputTugasSpeaking')->name('target.InputTugasSpeaking');
     Route::get('/Tugas-Entrepreneur/input/{id}', 'TargetController@inputTugasEntrepreneur')->name('target.InputTugasEntrepreneur');

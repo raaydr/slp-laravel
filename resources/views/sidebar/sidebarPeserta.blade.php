@@ -58,9 +58,9 @@
                      @if (( Route::currentRouteName() == "target.TargetTugasWriting" )
                      ||( Route::currentRouteName() == "target.InputTugasWriting")
                      )
-                        <a href="{{ route('target.TargetTugasWriting') }}" class="nav-link active">
+                        <a href="{{ route('target.TargetTugasWriting',Auth::user()->id ) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('target.TargetTugasWriting') }}" class="nav-link ">
+                        <a href="{{ route('target.TargetTugasWriting',Auth::user()->id ) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Tugas Writing </p>
@@ -71,9 +71,9 @@
                   <li class="nav-item">
                      @if (( Route::currentRouteName() == "target.TargetTugasSpeaking" )
                      ||( Route::currentRouteName() == "target.InputTugasSpeaking"))
-                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link active">
+                        <a href="{{ route('target.TargetTugasSpeaking',Auth::user()->id ) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('target.TargetTugasSpeaking') }}" class="nav-link ">
+                        <a href="{{ route('target.TargetTugasSpeaking',Auth::user()->id ) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Tugas Speaking </p>
@@ -83,9 +83,9 @@
                <ul class="nav nav-treeview">
                   <li class="nav-item">
                      @if ( Route::currentRouteName() == "target.TargetTugasEntrepreneur" )
-                        <a href="{{ route('target.TargetTugasEntrepreneur') }}" class="nav-link active">
+                        <a href="{{ route('target.TargetTugasEntrepreneur',Auth::user()->id ) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('target.TargetTugasEntrepreneur') }}" class="nav-link ">
+                        <a href="{{ route('target.TargetTugasEntrepreneur',Auth::user()->id ) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Tugas Entrepreneur </p>

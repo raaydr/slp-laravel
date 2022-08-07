@@ -33,19 +33,15 @@ use Redirect;
 class TargetController extends Controller
 {
     //
-    public function TargetTugasWriting()
+    public function TargetTugasWriting($id)
     {
         $title = 'Tugas Writing';
-        $id = Auth::user()->id;
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->first();
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $biodata = DB::table('users')
             ->where('id', $id)
             ->get();
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
@@ -53,13 +49,13 @@ class TargetController extends Controller
             $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
             $target[$i]['mulai']= $tanggal;
         }
-        return view('peserta.TargetTugasWriting', compact('title', 'user','biodata','target'));
+        return view('peserta.TargetTugasWriting', compact('target'));
     }
-    public function TargetTugasSpeaking()
+    public function TargetTugasSpeaking($id)
     {
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
@@ -69,19 +65,14 @@ class TargetController extends Controller
         }
         return view('peserta.TargetTugasSpeaking', compact('target'));
     }
-    public function TargetTugasEntrepreneur()
+    public function TargetTugasEntrepreneur($id)
     {
-        $title = 'Tugas Writing';
-        $id = Auth::user()->id;
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->first();
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $biodata = DB::table('users')
             ->where('id', $id)
             ->get();
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
         $jumlah=count($target);
         for ($i = 0; $i <= $jumlah-1; $i++) {
@@ -89,7 +80,7 @@ class TargetController extends Controller
             $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
             $target[$i]['mulai']= $tanggal;
         }
-        return view('peserta.TargetTugasEntrepreneur', compact('title', 'user','biodata','target'));
+        return view('peserta.TargetTugasEntrepreneur', compact('target'));
     }
 
     public function inputTugasWriting($id)
