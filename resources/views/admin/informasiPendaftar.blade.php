@@ -63,15 +63,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-3 col-sm-6 col-12">
-                  <div class="info-box shadow-lg">
-                    <span class="info-box-icon bg-danger"><i class="fas fa-user-check"></i></span>
-
-                    <div class="info-box-content">
-                      <span class="info-box-text">Super Admin</span>
-                      <span class="info-box-number"></span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
+                  
                   <!-- /.info-box -->
                 </div>
                 <!-- /.col -->

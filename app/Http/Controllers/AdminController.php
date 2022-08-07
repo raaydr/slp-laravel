@@ -84,9 +84,8 @@ class AdminController extends Controller
         $gen = DB::table('control')
         ->where('nama', 'gen')
         ->value('integer');
-        $users = User::where('level', 1)->orWhere('level', 2)->where('gen', $gen)->get();
+        $users = User::where('gen', $gen)->whereBetween('level', [1,2])->get();
         $jumlah=count($users);
-        
         $Pria = 0;
         $Wanita = 0;
         $childboy=0;$oldman=0;$dewasaman=0;$meanman=0;$meanrataman=0;
