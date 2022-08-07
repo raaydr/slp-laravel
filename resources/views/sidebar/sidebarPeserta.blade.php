@@ -113,9 +113,9 @@
                      @if (( Route::currentRouteName() == "peserta.raporTugasWriting" )
                      ||( Route::currentRouteName() == "peserta.raporTugasWriting")
                      )
-                        <a href="{{ route('peserta.raporTugasWriting') }}" class="nav-link active">
+                        <a href="{{ route('peserta.raporTugasWriting', Auth::user()->id ) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('peserta.raporTugasWriting') }}" class="nav-link ">
+                        <a href="{{ route('peserta.raporTugasWriting',Auth::user()->id ) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Rapor Writing </p>
@@ -125,9 +125,9 @@
                <ul class="nav nav-treeview">
                   <li class="nav-item">
                      @if (( Route::currentRouteName() == "peserta.raporTugasSpeaking"))
-                        <a href="{{ route('peserta.raporTugasSpeaking') }}" class="nav-link active">
+                        <a href="{{ route('peserta.raporTugasSpeaking',Auth::user()->id ) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('peserta.raporTugasSpeaking') }}" class="nav-link ">
+                        <a href="{{ route('peserta.raporTugasSpeaking',Auth::user()->id ) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Rapor Speaking </p>
@@ -137,9 +137,9 @@
                <ul class="nav nav-treeview">
                   <li class="nav-item">
                      @if ( Route::currentRouteName() == "peserta.raporTugasEntrepreneur")
-                        <a href="{{ route('peserta.raporTugasEntrepreneur') }}" class="nav-link active">
+                        <a href="{{ route('peserta.raporTugasEntrepreneur',Auth::user()->id) }}" class="nav-link active">
                      @else
-                        <a href="{{ route('peserta.raporTugasEntrepreneur') }}" class="nav-link ">
+                        <a href="{{ route('peserta.raporTugasEntrepreneur',Auth::user()->id) }}" class="nav-link ">
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Rapor Entrepreneur </p>

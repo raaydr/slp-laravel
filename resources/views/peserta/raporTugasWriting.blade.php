@@ -14,7 +14,7 @@
                      processing:true,
                      serverSide:true,
                      ajax : {
-                        url : "{{route('peserta.tabelTugasWriting')}}",
+                        url : "{{route('peserta.tabelTugasWritingPeserta',$id)}}",
                         type : 'GET'
                      },
                      columns:[

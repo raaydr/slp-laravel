@@ -170,6 +170,64 @@ class TugasController extends Controller
         }
         
     }
+    public function tabelTugasWritingPeserta(Request $request,$id)
+    {
+        
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
+        $data = DB::table('peserta')->where('peserta.user_id',$user_id)
+        ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')
+        ->orderBy('tugas_writing.id', 'ASC')->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Grup', function($row){
+                    $check = $row->grup;
+                    if(($check)== '0'){
+                        return '<p class="text-danger">Kosong</p>';
+                    }
+                    if(($check)== '1'){
+                        return '<p class="text-primary"><b>Grup 1</b></p>';
+                    }
+                    if(($check)== '2'){
+                        return '<p class="text-success"><b>Grup 2</b></p>';
+                    }
+                    if(($check)== '3'){
+                        return '<p class="text-warning"><b>Grup 3</b></p>';
+                    }
+                    return 'test';
+                })
+                ->addColumn('Status', function($row){
+                    $status = $row->valid;
+                    switch ($status) {
+                        case '0':
+                            return '<p class="text-warning"><b>Belum Diperiksa</b></p>';
+                            break;
+                        case '1':
+                            return '<p class="text-success"><b>Valid</b></p>';
+                            break;
+                        case '2':
+                            return '<p class="text-danger"><b>Invalid</b></p>';
+                            break;                               
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.detailTugasWriting', Crypt::encrypt($row->id));
+                    
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Status','Grup', 'action'])
+                ->make(true);
+        }
+        
+    }
     public function detailTugasWriting($id)
     {
         $title = 'Detail Tugas Writing ';
@@ -497,6 +555,64 @@ class TugasController extends Controller
         }
         
     }
+    public function tabelTugasSpeakingPeserta(Request $request,$id)
+    {
+        
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
+        $data = DB::table('peserta')->where('peserta.user_id',$user_id)
+        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')
+        ->orderBy('tugas_speaking.id', 'ASC')->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Grup', function($row){
+                    $check = $row->grup;
+                    if(($check)== '0'){
+                        return '<p class="text-danger">Kosong</p>';
+                    }
+                    if(($check)== '1'){
+                        return '<p class="text-primary"><b>Grup 1</b></p>';
+                    }
+                    if(($check)== '2'){
+                        return '<p class="text-success"><b>Grup 2</b></p>';
+                    }
+                    if(($check)== '3'){
+                        return '<p class="text-warning"><b>Grup 3</b></p>';
+                    }
+                    return 'test';
+                })
+                ->addColumn('Status', function($row){
+                    $status = $row->valid;
+                    switch ($status) {
+                        case '0':
+                            return '<p class="text-warning"><b>Belum Diperiksa</b></p>';
+                            break;
+                        case '1':
+                            return '<p class="text-success"><b>Valid</b></p>';
+                            break;
+                        case '2':
+                            return '<p class="text-danger"><b>Invalid</b></p>';
+                            break;                               
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.detailTugasSpeaking', Crypt::encrypt($row->id));
+                    
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Status','Grup', 'action'])
+                ->make(true);
+        }
+        
+    }
 
     public function detailTugasSpeaking($id)
     {
@@ -709,13 +825,69 @@ class TugasController extends Controller
         }
         
     }
-
-    public function raporTugasWriting()
+    public function tabelTugasEntrepreneurPeserta(Request $request,$id)
     {
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
-        $user_id = Auth::user()->id;
+        
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
+        $data = DB::table('peserta')->where('peserta.user_id',$user_id)
+        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')
+        ->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Grup', function($row){
+                    $check = $row->grup;
+                    if(($check)== '0'){
+                        return '<p class="text-danger">Kosong</p>';
+                    }
+                    if(($check)== '1'){
+                        return '<p class="text-primary"><b>Grup 1</b></p>';
+                    }
+                    if(($check)== '2'){
+                        return '<p class="text-success"><b>Grup 2</b></p>';
+                    }
+                    if(($check)== '3'){
+                        return '<p class="text-warning"><b>Grup 3</b></p>';
+                    }
+                    return 'test';
+                })
+                ->addColumn('Status', function($row){
+                    $status = $row->valid;
+                    switch ($status) {
+                        case '0':
+                            return '<p class="text-warning"><b>Belum Diperiksa</b></p>';
+                            break;
+                        case '1':
+                            return '<p class="text-success"><b>Valid</b></p>';
+                            break;
+                        case '2':
+                            return '<p class="text-danger"><b>Invalid</b></p>';
+                            break;                               
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.detailTugasEntrepreneur', Crypt::encrypt($row->id));
+                    
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Status','Grup', 'action'])
+                ->make(true);
+        }
+        
+    }
+    public function raporTugasWriting($id)
+    {
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Creative Writing")->orderBy('mulai', 'ASC')->get();
         $jumlah_target=count($target);
         $rapor =[];
@@ -779,14 +951,13 @@ class TugasController extends Controller
         }
         
         //dd($rapor);
-        return view('peserta.raporTugasWriting',compact('target','rapor'));
+        return view('peserta.raporTugasWriting',compact('target','rapor','id'));
     }
-    public function raporTugasSpeaking()
+    public function raporTugasSpeaking($id)
     {
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
-        $user_id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Public Speaking")->orderBy('mulai', 'ASC')->get();
         $jumlah_target=count($target);
         $rapor =[];
@@ -850,14 +1021,13 @@ class TugasController extends Controller
         }
         
         //dd($rapor);
-        return view('peserta.raporTugasSpeaking',compact('target','rapor'));
+        return view('peserta.raporTugasSpeaking',compact('target','rapor','id'));
     }
-    public function raporTugasEntrepreneur()
+    public function raporTugasEntrepreneur($id)
     {
-        $gen = DB::table('control')
-            ->where('nama', 'gen')
-            ->value('integer');
-        $user_id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
+        $gen = $user->gen;
+        $user_id = $id;
         $target = Target::where('gen', $gen)->where('status', 1)->where('tipe_tugas', "Entrepreneur")->orderBy('mulai', 'ASC')->get();
         $jumlah_target=count($target);
         $rapor =[];
@@ -910,7 +1080,7 @@ class TugasController extends Controller
             }
         }
         
-        return view('peserta.raporTugasEntrepreneur',compact('target','rapor'));
+        return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id'));
     }
     public function testTabel1(Request $request)
     {
