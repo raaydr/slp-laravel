@@ -11,22 +11,36 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
-                     <li class="nav-item">
+                        <li class="nav-item">
+                     @if ( Route::currentRouteName() == "fasil.grup" )
+                        <a href="{{ route('fasil.grup') }}" class="nav-link active">
+                     @else
                         <a href="{{ route('fasil.grup') }}" class="nav-link ">
-                           <i class="nav-icon fas fa-th"></i>
-                           <p>
-                              Grup
-                           </p>
+                     @endif
+                     <i class="nav-icon fas fa-th"></i>
+                           <p>Grup </p>
                         </a>
-                     </li>
-                     <li class="nav-item">
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "fasil.dashboard" )
+                        <a href="{{ route('fasil.dashboard') }}" class="nav-link active">
+                     @else
                         <a href="{{ route('fasil.dashboard') }}" class="nav-link ">
-                           <i class="nav-icon fas ion-person"></i>
-                           <p>
-                              Profile
-                           </p>
+                     @endif
+                     <i class="nav-icon fas fa-user"></i>
+                           <p>Profile </p>
                         </a>
-                     </li>
+                  </li>
+                     <li class="nav-item">
+                     @if ( Route::currentRouteName() == "fasil.validasiTugas" )
+                        <a href="{{ route('fasil.validasiTugas') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('fasil.validasiTugas') }}" class="nav-link ">
+                     @endif
+                     <i class="nav-icon fas fa-edit"></i>
+                           <p>Validasi Tugas </p>
+                        </a>
+                  </li>
                   </ul>
                </nav>
                <!-- /.sidebar-menu -->

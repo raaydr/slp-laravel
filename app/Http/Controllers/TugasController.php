@@ -108,8 +108,19 @@ class TugasController extends Controller
     public function validasiTugas()
     {
         $title = 'List Pendaftar ';
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                return view('admin.validasiTugas');
+                break;
+            case '5':
+                return view('fasil.validasiTugas');
+                break;
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
         
-        return view('admin.validasiTugas');
     }
 
     public function tabelTugasWriting(Request $request)
@@ -118,9 +129,30 @@ class TugasController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = DB::table('peserta')
-        ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')->where('tugas_writing.gen', $gen)
-        ->where('valid', 0)->orderBy('tugas_writing.id', 'ASC')->get();
+        $level = Auth::user()->level;
+            switch ($level) {
+                case '0':
+                    $data = DB::table('peserta')
+                    ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')
+                    ->where('tugas_writing.gen', $gen)
+                    ->where('valid', 0)->orderBy('tugas_writing.id', 'ASC')->get();
+                    break;
+                case '5':
+                    $id = Auth::user()->id;
+                    $grup = Fasil::where('user_id',$id)->value('grup');
+                        $data = DB::table('peserta')
+                        ->where('peserta.grup', $grup)
+                        ->join('tugas_writing', 'tugas_writing.user_id', '=', 'peserta.user_id')
+                        ->where('tugas_writing.gen', $gen)
+                        ->where('valid', 0)->orderBy('tugas_writing.id', 'ASC')->get();
+                    
+                    
+                    break;
+                    default:
+                    echo "SLP INDONESIA";
+                    break;
+            }
+        
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -159,7 +191,19 @@ class TugasController extends Controller
                     }
                 })
                 ->addColumn('action', function($row){
-                    $detail = route('admin.detailTugasWriting', Crypt::encrypt($row->id));
+                    $level = Auth::user()->level;
+                    switch ($level) {
+                        case '0':
+                            $detail = route('admin.detailTugasWriting', Crypt::encrypt($row->id));
+                            break;
+                        case '5':
+                            $detail = route('fasil.detailTugasWriting', Crypt::encrypt($row->id));
+                            break;                             
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                    
                     
                     $actionBtn = '
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
@@ -259,11 +303,11 @@ class TugasController extends Controller
                 break;
             case '4':
                 //peserta
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('peserta.detailTugasWriting',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
                 break;   
             case '5':
                 //fasil
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('fasil.detailTugasWriting',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
                 break;   
                 default:
                 echo "SLP INDONESIA";
@@ -502,10 +546,29 @@ class TugasController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = DB::table('peserta')
-        ->where('peserta.gen', $gen)
-        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')->where('tugas_speaking.gen', $gen)
-        ->where('valid', 0)->orderBy('tugas_speaking.id', 'ASC')->get();
+            $level = Auth::user()->level;
+            switch ($level) {
+                case '0':
+                    $data = DB::table('peserta')
+                    ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')
+                    ->where('tugas_speaking.gen', $gen)
+                    ->where('valid', 0)->orderBy('tugas_speaking.id', 'ASC')->get();
+                    break;
+                case '5':
+                    $id = Auth::user()->id;
+                    $grup = Fasil::where('user_id',$id)->value('grup');
+                        $data = DB::table('peserta')
+                        ->where('peserta.grup', $grup)
+                        ->join('tugas_speaking', 'tugas_speaking.user_id', '=', 'peserta.user_id')
+                        ->where('tugas_speaking.gen', $gen)
+                        ->where('valid', 0)->orderBy('tugas_speaking.id', 'ASC')->get();
+                    
+                    
+                    break;
+                    default:
+                    echo "SLP INDONESIA";
+                    break;
+            }
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -544,7 +607,19 @@ class TugasController extends Controller
                     }
                 })
                 ->addColumn('action', function($row){
-                    $detail = route('admin.detailTugasSpeaking', Crypt::encrypt($row->id));
+                    $level = Auth::user()->level;
+                    switch ($level) {
+                        case '0':
+                            $detail = route('admin.detailTugasSpeaking', Crypt::encrypt($row->id));
+                            break;
+                        case '5':
+                            $detail = route('fasil.detailTugasSpeaking', Crypt::encrypt($row->id));
+                            break;                             
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
+                    
                     
                     $actionBtn = '
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
@@ -638,11 +713,11 @@ class TugasController extends Controller
                 break;
             case '4':
                 //peserta
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('peserta.detailTugasSpeaking',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
                 break;   
             case '5':
                 //fasil
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('fasil.detailTugasSpeaking',compact('title','tugas','target','boolean','tanggal_mulai','peserta'));
                 break;   
                 default:
                 echo "SLP INDONESIA";
@@ -752,11 +827,11 @@ class TugasController extends Controller
                 break;
             case '4':
                 //peserta
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('peserta.detailTugasEntrepreneur',compact('title','tugas','target','boolean','tanggal_mulai','peserta','penjualan'));
                 break;   
             case '5':
                 //fasil
-                return view('admin.detailTugasWriting',compact('title','tugas','target','boolean'));
+                return view('fasil.detailTugasEntrepreneur',compact('title','tugas','target','boolean','tanggal_mulai','peserta','penjualan'));
                 break;   
                 default:
                 echo "SLP INDONESIA";
@@ -772,10 +847,29 @@ class TugasController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = DB::table('peserta')
-        ->where('peserta.gen', $gen)
-        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')->where('tugas_entrepreneur.gen', $gen)
-        ->where('valid', 0)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+            $level = Auth::user()->level;
+            switch ($level) {
+                case '0':
+                    $data = DB::table('peserta')
+                    ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')
+                    ->where('tugas_entrepreneur.gen', $gen)
+                    ->where('valid', 0)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+                    break;
+                case '5':
+                    $id = Auth::user()->id;
+                    $grup = Fasil::where('user_id',$id)->value('grup');
+                        $data = DB::table('peserta')
+                        ->where('peserta.grup', $grup)
+                        ->join('tugas_entrepreneur', 'tugas_entrepreneur.user_id', '=', 'peserta.user_id')
+                        ->where('tugas_entrepreneur.gen', $gen)
+                        ->where('valid', 0)->orderBy('tugas_entrepreneur.id', 'ASC')->get();
+                    
+                    
+                    break;
+                    default:
+                    echo "SLP INDONESIA";
+                    break;
+            }
         if($request->ajax()){
 
             return datatables()->of($data)
@@ -814,8 +908,18 @@ class TugasController extends Controller
                     }
                 })
                 ->addColumn('action', function($row){
-                    $detail = route('admin.detailTugasEntrepreneur', Crypt::encrypt($row->id));
-                    
+                    $level = Auth::user()->level;
+                    switch ($level) {
+                        case '0':
+                            $detail = route('admin.detailTugasEntrepreneur', Crypt::encrypt($row->id));
+                            break;
+                        case '5':
+                            $detail = route('fasil.detailTugasEntrepreneur', Crypt::encrypt($row->id));
+                            break;                             
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }
                     $actionBtn = '
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';

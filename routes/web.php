@@ -631,6 +631,15 @@ Route::group(['middleware' => 'check-permission:fasil'], function () {
 
 
     //Tugas
+    Route::get('/Validasi-Tugas', 'TugasController@validasiTugas')->name('fasil.validasiTugas');
+    Route::get('/Tabel-Writing', 'TugasController@tabelTugasWriting')->name('fasil.tabelTugasWriting');
+    Route::get('/Tabel-Speaking', 'TugasController@tabelTugasSpeaking')->name('fasil.tabelTugasSpeaking');
+    Route::get('/Tabel-Entrepreneur', 'TugasController@tabelTugasEntrepreneur')->name('fasil.tabelTugasEntrepreneur');
+    Route::get('/Detail-Tugas-Writing/{id}', 'TugasController@detailTugasWriting')->name('fasil.detailTugasWriting');
+    Route::get('/Detail-Tugas-Speaking/{id}', 'TugasController@detailTugasSpeaking')->name('fasil.detailTugasSpeaking');
+    Route::get('/Detail-Tugas-Entrepreneur/{id}', 'TugasController@detailTugasEntrepreneur')->name('fasil.detailTugasEntrepreneur');
+    Route::post('/Note-Tugas/{tugas}/{target}', 'TugasController@noteTugas')->name('fasil.noteTugas');
+    Route::get('/Check-Tugas/{tugas}/{target}/{val}', 'TugasController@checkTugas')->name('fasil.checkTugas');
     Route::get('/Rapor-Tugas/Writing/{id}', 'TugasController@raporTugasWriting')->name('fasil.raporTugasWriting');
     Route::get('/Rapor-Tugas/Entrepreneur/{id}', 'TugasController@raporTugasEntrepreneur')->name('fasil.raporTugasEntrepreneur');
     Route::get('/Rapor-Tugas/Speaking/{id}', 'TugasController@raporTugasSpeaking')->name('fasil.raporTugasSpeaking');

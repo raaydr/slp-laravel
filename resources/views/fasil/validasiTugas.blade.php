@@ -1,4 +1,4 @@
-@extends('topnav.topnavAdmin')
+@extends('topnav.topnavFasil')
 @section('content')
 @include('master.validasiTugas')
 @endsection
@@ -10,7 +10,7 @@
                      processing:true,
                      serverSide:true,
                      ajax : {
-                        url : "{{route('admin.tabelTugasWriting')}}",
+                        url : "{{route('fasil.tabelTugasWriting')}}",
                         type : 'GET'
                      },
                      columns:[
@@ -54,7 +54,7 @@
                      processing:true,
                      serverSide:true,
                      ajax : {
-                        url : "{{route('admin.tabelTugasSpeaking')}}",
+                        url : "{{route('fasil.tabelTugasSpeaking')}}",
                         type : 'GET'
                      },
                      columns:[
@@ -98,7 +98,7 @@
                      processing:true,
                      serverSide:true,
                      ajax : {
-                        url : "{{route('admin.tabelTugasEntrepreneur')}}",
+                        url : "{{route('fasil.tabelTugasEntrepreneur')}}",
                         type : 'GET'
                      },
                      columns:[

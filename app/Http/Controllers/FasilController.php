@@ -408,7 +408,7 @@ class FasilController extends Controller
     public function grup_peserta(Request $request)
     {
         $title = 'Grup Peserta';
-        $title = 'Admin Peserta ';
+        
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
