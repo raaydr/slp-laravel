@@ -90,6 +90,12 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/test-table', 'TugasController@testTabel')->name('admin.testTabel');
     Route::get('/test-table1', 'TugasController@testTabel1')->name('admin.testTabel1');
     Route::get('/tes-btn', 'TugasController@testbtn')->name('admin.testbtn');
+    Route::get('/Rapor-Tugas/Writing/{id}', 'TugasController@raporTugasWriting')->name('admin.raporTugasWriting');
+    Route::get('/Rapor-Tugas/Entrepreneur/{id}', 'TugasController@raporTugasEntrepreneur')->name('admin.raporTugasEntrepreneur');
+    Route::get('/Rapor-Tugas/Speaking/{id}', 'TugasController@raporTugasSpeaking')->name('admin.raporTugasSpeaking');
+    Route::get('/Tabel-Writing/{id}', 'TugasController@tabelTugasWritingPeserta')->name('admin.tabelTugasWritingPeserta');
+    Route::get('/Tabel-Entrepreneur/{id}', 'TugasController@tabelTugasEntrepreneurPeserta')->name('admin.tabelTugasEntrepreneurPeserta');
+    Route::get('/Tabel-Speaking/{id}', 'TugasController@tabelTugasSpeakingPeserta')->name('admin.tabelTugasSpeakingPeserta');
 
     
     //Laporan

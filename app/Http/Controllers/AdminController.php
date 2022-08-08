@@ -677,19 +677,21 @@ class AdminController extends Controller
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')
                     //->join('peserta', 'peserta.user_id', '=', 'users.id')
                     ->where('users.level', 2)->orWhere('users.level', 4)
-                    ->where('users.gen', $gen)->get();
+                    ->where('users.gen', 2)->get();
         
         
         if($request->ajax()){
                 return datatables()->of($data)
                     ->addIndexColumn()
-                    ->addColumn('Umur', function($row){
-                        $bd = $row->tanggal_lahir;
-                        $date = new DateTime($bd);
-                        $now = new DateTime();
-                        $interval = $now->diff($date);
-                        $umur= $interval->y;
-                        return $umur;
+                    ->addColumn('Rapor', function($row){
+                        $detail = route('admin.userprofile', $row->user_id);
+                        $writing = route('admin.raporTugasWriting', $row->user_id);
+                        $speaking = route('admin.raporTugasSpeaking', $row->user_id);
+                        $entrepreneur = route('admin.raporTugasEntrepreneur', $row->user_id);
+                        return '<a type="button"  href='.$writing.' class="btn btn-sm btn-outline-primary m-2 " target="_blank"><i class="fa fa-edit"></i>Writing</a>
+                        <a type="button"  href='.$speaking.' class="btn btn-sm btn-outline-info m-2" target="_blank"><i class="fa fa-edit"></i>Speaking</a>
+                        <a type="button"  href='.$entrepreneur.' class="btn btn-sm btn-outline-danger m-2" target="_blank"><i class="fa fa-edit"></i>Entrepreneur</a>
+                        ';
                         
     
                     })
@@ -732,7 +734,9 @@ class AdminController extends Controller
                     ->addColumn('action', function($row){
                     $check = $row->aktif;
                     $detail = route('admin.userprofile', $row->user_id);
-                    
+                    $writing = route('admin.raporTugasWriting', $row->user_id);
+                    $speaking = route('admin.raporTugasSpeaking', $row->user_id);
+                    $entrepreneur = route('admin.raporTugasEntrepreneur', $row->user_id);
                     $id = $row->user_id;
                     $nama = $row->nama;
                     
@@ -749,7 +753,8 @@ class AdminController extends Controller
                             <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" >
                             <i class="fas ion-person"> </i>
                             Aktif
-                            </a>';  
+                            </a>
+                            ';  
                                 
                             break;
                         case '1':
@@ -764,7 +769,8 @@ class AdminController extends Controller
                             <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" >
                             <i class="fas ion-person"> </i>
                             Gugur
-                            </a>';  
+                            </a>
+                            ';  
                             break;   
                             default:
                             echo "SLP INDONESIA";
@@ -773,7 +779,7 @@ class AdminController extends Controller
                     
                         
                     })
-                    ->rawColumns(['Umur','Gender', 'Grup', 'Status', 'action'])
+                    ->rawColumns(['Rapor','Gender', 'Grup', 'Status', 'action'])
                     ->make(true);
             }
         return view('admin.pengelompokPeserta', compact('title'));

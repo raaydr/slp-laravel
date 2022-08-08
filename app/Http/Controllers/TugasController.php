@@ -951,8 +951,22 @@ class TugasController extends Controller
             }
         }
         
-        //dd($rapor);
-        return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                return view('admin.raporTugasWriting',compact('target','rapor','id','biodata'));
+                break;
+            case '4':
+                return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
+                break;
+            case '5':
+                return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
+                break;                               
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+
     }
     public function raporTugasSpeaking($id)
     {
@@ -1022,8 +1036,22 @@ class TugasController extends Controller
             }
         }
         
-        //dd($rapor);
-        return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                return view('admin.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                break;
+            case '4':
+                return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                break;
+            case '5':
+                return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                break;                               
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
+        
     }
     public function raporTugasEntrepreneur($id)
     {
@@ -1082,8 +1110,22 @@ class TugasController extends Controller
                 
             }
         }
+        $level = Auth::user()->level;
+        switch ($level) {
+            case '0':
+                return view('admin.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                break;
+            case '4':
+                return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                break;
+            case '5':
+                return view('fasil.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                break;                               
+                default:
+                echo "SLP INDONESIA";
+                break;
+        }
         
-        return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
     }
     public function testTabel1(Request $request)
     {

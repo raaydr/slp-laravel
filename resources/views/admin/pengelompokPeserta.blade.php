@@ -110,12 +110,12 @@
                                  <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Umur</th>
                                     <th>Gender</th>
                                     <th>Domisili</th>
                                     <th>Peminatan</th>
                                     <th>Grup</th>
                                     <th>status</th>
+                                    <th>Rapor</th>
                                     <th>action</th>
                                  </tr>
                               </thead>
@@ -123,12 +123,12 @@
                                  <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Umur</th>
                                     <th>Gender</th>
                                     <th>Domisili</th>
                                     <th>Peminatan</th>
                                     <th>Grup</th>
                                     <th>status</th>
+                                    <th>Rapor</th>
                                     <th>action</th>
                                  </tr>
                               </tfoot>
@@ -163,12 +163,12 @@
                      columns:[            
                         { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                         {data:'nama',name:'nama'},
-                        {data:'Umur',name:'Umur'},
                         {data:'Gender',name:'Gender'},
                         {data:'domisili',name:'Domisili'},
                         {data:'minatprogram',name:'Peminatan'},
                         {data:'Grup',name:'Grup'},
                         {data:'Status',name:'Status'},
+                        {data:'Rapor',name:'Rapor'},
                         {data: 'action', name: 'action'},
                         
                      ],
