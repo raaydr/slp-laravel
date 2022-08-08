@@ -668,7 +668,7 @@ class AdminController extends Controller
     }
 
     public function pengelompok_peserta(Request $request){
-        $title = 'Admin Peserta Pengelompokkan';
+        $title = 'Admin Peserta ';
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
@@ -676,8 +676,8 @@ class AdminController extends Controller
                     ->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')
                     //->join('peserta', 'peserta.user_id', '=', 'users.id')
-                    ->where('users.level', 2)->orWhere('users.level', 4)
-                    ->where('users.gen', 2)->get();
+                    ->where('users.gen', $gen)->where('users.level', 4)
+                    ->get();
         
         
         if($request->ajax()){
@@ -2651,5 +2651,78 @@ class AdminController extends Controller
         }else{
             return redirect()->route('admin.control')->with('error', 'Tidak Bisa Membuka Generasi Baru');
         }   
+    }
+
+    public function ListSemuaPeserta(Request $request){
+        $title = 'Admin Peserta Pengelompokkan';
+        $gen = DB::table('control')
+            ->where('nama', 'gen')
+            ->value('integer');
+        $data = DB::table('users')
+                    ->join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    //->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    ->where('users.level', 2)->orWhere('users.level', 4)
+                    ->where('users.gen', 2)->get();
+        
+        
+        if($request->ajax()){
+                return datatables()->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('Rapor', function($row){
+                        $detail = route('admin.userprofile', $row->user_id);
+                        $writing = route('admin.raporTugasWriting', $row->user_id);
+                        $speaking = route('admin.raporTugasSpeaking', $row->user_id);
+                        $entrepreneur = route('admin.raporTugasEntrepreneur', $row->user_id);
+                        return '<a type="button"  href='.$writing.' class="btn btn-sm btn-outline-primary m-2 " target="_blank"><i class="fa fa-edit"></i>Writing</a>
+                        <a type="button"  href='.$speaking.' class="btn btn-sm btn-outline-info m-2" target="_blank"><i class="fa fa-edit"></i>Speaking</a>
+                        <a type="button"  href='.$entrepreneur.' class="btn btn-sm btn-outline-danger m-2" target="_blank"><i class="fa fa-edit"></i>Entrepreneur</a>
+                        ';
+                        
+    
+                    })
+                    ->addColumn('Gender', function($row){
+                        $check = $row->jenis_kelamin;
+                        if(($check)== 'Pria'){
+                            return '<p class="text-primary">Pria</p>';
+                        }
+                        if(($check)== 'Wanita'){
+                            return '<p class="text-success">Wanita</p>';
+                        }
+                        
+                    })
+                    ->addColumn('Status', function($row){
+                        $v = $row->aktif;
+                        if (($v)== '0'){
+    
+                            return '<p class="text-danger">non-aktif</p>';    
+                        }else{
+    
+                            return '<p class="text-success">aktif</p>';  
+                        }
+                        return 'test';
+                    })
+                    ->addColumn('action', function($row){
+                    $check = $row->aktif;
+                    $detail = route('admin.userprofile', $row->user_id);
+                    $id = $row->user_id;
+                    $nama = $row->nama;
+                    
+                
+                            return '
+                            <a class="btn btn-primary btn-sm m-2"  href='.$detail.'>
+                            <i class="fas fa-folder"> </i>
+                            Detail
+                            </a>
+                            ';  
+                                
+                   
+                    
+                        
+                    })
+                    ->rawColumns(['Rapor','Gender', 'Status', 'action'])
+                    ->make(true);
+            }
+        return view('admin.ListSemuaPeserta', compact('title'));
     }
 }
