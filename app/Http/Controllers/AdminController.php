@@ -174,7 +174,7 @@ class AdminController extends Controller
                 }
                 $minat = $biodata->minatprogram;
                 switch ($minat) {
-                    case 'Writing':
+                    case 'Creative Writing':
                         $writing++;
                         $writingman++;
                         break;
