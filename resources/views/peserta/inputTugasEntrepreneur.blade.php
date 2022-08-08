@@ -213,7 +213,7 @@
                                                 @if ($start == 1)
                                                    <button type="submit" class="btn btn-primary btn-block">Input</button>
                                                 @else
-                                                <h3 class="col-12 text-center ">Belum di mulai</h3>
+                                                <h3 class="col-12 text-center ">Bukan Waktunya</h3>
                                                 @endif
                                                 </div>
                                                 <!-- /.col -->

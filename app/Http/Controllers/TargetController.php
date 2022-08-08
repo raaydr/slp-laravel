@@ -93,7 +93,14 @@ class TargetController extends Controller
         if ($now <= $mulai ) {
             $start = 0;
           } else {
-            $start = 1;
+            $genAdmin = User::where('id', 1)->value('gen');
+            $gen =  Auth::user()->gen;
+            if($gen==$genAdmin){
+                $start = 1;
+            }else{
+                $start = 0;
+            }
+            
           }
         
         
@@ -109,7 +116,13 @@ class TargetController extends Controller
         if ($now <= $mulai ) {
             $start = 0;
           } else {
-            $start = 1;
+            $genAdmin = User::where('id', 1)->value('gen');
+            $gen =  Auth::user()->gen;
+            if($gen==$genAdmin){
+                $start = 1;
+            }else{
+                $start = 0;
+            }
           }
 
         return view('peserta.inputTugasSpeaking', compact('target','start'));
@@ -123,7 +136,13 @@ class TargetController extends Controller
         if ($now <= $mulai ) {
             $start = 0;
           } else {
-            $start = 1;
+            $genAdmin = User::where('id', 1)->value('gen');
+            $gen =  Auth::user()->gen;
+            if($gen==$genAdmin){
+                $start = 1;
+            }else{
+                $start = 0;
+            }
           }
 
         return view('peserta.inputTugasEntrepreneur', compact('target','start'));
