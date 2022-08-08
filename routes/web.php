@@ -69,6 +69,7 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::get('/Pemeriksaan-Tugas/Writing', 'AdminController@PemeriksaanTugasWriting')->name('admin.PemeriksaanTugasWriting');
     Route::get('/Pemeriksaan-Tugas/Writing/ID', 'AdminController@PemeriksaanTugasWritingDetail')->name('admin.PemeriksaanTugasWritingDetail');
     Route::get('/List-Semua-Peserta', 'AdminController@ListSemuaPeserta')->name('admin.ListSemuaPeserta');
+    Route::get('/List-Semua-Pendaftar', 'AdminController@ListSemuaPendaftar')->name('admin.ListSemuaPendaftar');
 
 
     // Rute Target Tugas

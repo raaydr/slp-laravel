@@ -2662,8 +2662,8 @@ class AdminController extends Controller
                     ->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')
                     //->join('peserta', 'peserta.user_id', '=', 'users.id')
-                    ->where('users.level', 2)->orWhere('users.level', 4)
-                    ->where('users.gen', 2)->get();
+                    ->where('users.level', 4)
+                    ->get();
         
         
         if($request->ajax()){
@@ -2724,5 +2724,80 @@ class AdminController extends Controller
                     ->make(true);
             }
         return view('admin.ListSemuaPeserta', compact('title'));
+    }
+
+    public function ListSemuaPendaftar(Request $request)
+    {
+        $title = 'List Semua Pendaftar';
+        $biodata = Biodata::all();
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->where('level', 2)->get();
+        if($request->ajax()){
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('Gender', function($row){
+                    $check = $row->jenis_kelamin;
+                    if(($check)== 'Pria'){
+                        return '<p class="text-primary">Pria</p>';
+                    }
+                    if(($check)== 'Wanita'){
+                        return '<p class="text-success">Wanita</p>';
+                    }
+                    
+                })
+                ->addColumn('Seleksi Berkas', function($row){
+                    $ajaib = $row->seleksi_berkas;
+                    if (($ajaib)== 'LULUS'){
+                        
+                        return '<p class="text-success">LULUS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GAGAL</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Challenge', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'LOLOS'){
+                        
+                        return '<p class="text-success">LOLOS</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">GUGUR</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('Seleksi Interview', function($row){
+                    $ajaib = $row->seleksi_pertama;
+                    if (($ajaib)== 'BERHASIL'){
+                        
+                        return '<p class="text-success">BERHASIL</p>';    
+                    }else{
+                        
+                        return '<p class="text-danger">TERELIMINASI</p>';  
+                    }
+                    
+                    
+                    
+                })
+                ->addColumn('action', function($row){
+                    $detail = route('admin.userprofile', $row->user_id);
+                    $actionBtn = '
+                    <a class="btn btn-primary btn-sm" href='.$detail.'>
+                    <i class="fas fa-folder"></i>Detail</a>';
+                    return $actionBtn;
+                })->rawColumns(['Gender','Seleksi Berkas','Seleksi Challenge','Seleksi Interview', 'action'])
+                ->make(true);
+        }
+
+        return view('admin.ListSemuaPendaftar');
     }
 }
