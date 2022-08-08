@@ -628,6 +628,15 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::get('/dashboard', 'FasilController@index')->name('fasil.dashboard');
+
+
+    //Tugas
+    Route::get('/Rapor-Tugas/Writing/{id}', 'TugasController@raporTugasWriting')->name('fasil.raporTugasWriting');
+    Route::get('/Rapor-Tugas/Entrepreneur/{id}', 'TugasController@raporTugasEntrepreneur')->name('fasil.raporTugasEntrepreneur');
+    Route::get('/Rapor-Tugas/Speaking/{id}', 'TugasController@raporTugasSpeaking')->name('fasil.raporTugasSpeaking');
+    Route::get('/Tabel-Writing/{id}', 'TugasController@tabelTugasWritingPeserta')->name('fasil.tabelTugasWritingPeserta');
+    Route::get('/Tabel-Entrepreneur/{id}', 'TugasController@tabelTugasEntrepreneurPeserta')->name('fasil.tabelTugasEntrepreneurPeserta');
+    Route::get('/Tabel-Speaking/{id}', 'TugasController@tabelTugasSpeakingPeserta')->name('fasil.tabelTugasSpeakingPeserta');
 	});
 });
 Route::group(['middleware' => 'check-permission:fasil'], function () {

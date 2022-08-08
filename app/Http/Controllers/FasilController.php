@@ -405,28 +405,90 @@ class FasilController extends Controller
         'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
     }
     
-    public function grup_peserta()
+    public function grup_peserta(Request $request)
     {
         $title = 'Grup Peserta';
-        $id = Auth::user()->id;
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->first();
-        $grup = DB::table('fasil')
-            ->where('user_id', $id)
-            ->value('grup');
+        $title = 'Admin Peserta ';
         $gen = DB::table('control')
-            ->where('id', 4)
+            ->where('nama', 'gen')
             ->value('integer');
-        if (Peserta::where('gen', $gen)->where('grup', $grup)->where('captain', 1)->exists()) {
-            $captain = 1;
-        }else{
-            $captain = 0;
-        }
-        $fasil = Fasil::where('grup', $grup)->first();
-        $peserta = Peserta::where('gen',$gen)->where('grup',$grup)->get();
-        //dd($fasil);
-        return view('fasil.grup', compact('title', 'user','fasil','peserta','captain'));
+        $data = DB::table('users')
+                    ->join('biodata', 'biodata.user_id', '=', 'users.id')
+                    ->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    //->join('peserta', 'peserta.user_id', '=', 'users.id')
+                    ->where('users.gen', 2)->where('users.level', 4)
+                    ->get();
+        
+        
+        if($request->ajax()){
+                return datatables()->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('Rapor', function($row){
+                        $detail = route('fasil.userprofile', $row->user_id);
+                        $writing = route('fasil.raporTugasWriting', $row->user_id);
+                        $speaking = route('fasil.raporTugasSpeaking', $row->user_id);
+                        $entrepreneur = route('fasil.raporTugasEntrepreneur', $row->user_id);
+                        return '<a type="button"  href='.$writing.' class="btn btn-sm btn-outline-primary m-2 " target="_blank"><i class="fa fa-edit"></i>Writing</a>
+                        <a type="button"  href='.$speaking.' class="btn btn-sm btn-outline-info m-2" target="_blank"><i class="fa fa-edit"></i>Speaking</a>
+                        <a type="button"  href='.$entrepreneur.' class="btn btn-sm btn-outline-danger m-2" target="_blank"><i class="fa fa-edit"></i>Entrepreneur</a>
+                        ';
+                        
+    
+                    })
+                    ->addColumn('Gender', function($row){
+                        $check = $row->jenis_kelamin;
+                        if(($check)== 'Pria'){
+                            return '<p class="text-primary">Pria</p>';
+                        }
+                        if(($check)== 'Wanita'){
+                            return '<p class="text-success">Wanita</p>';
+                        }
+                        
+                    })
+                    ->addColumn('Grup', function($row){
+                        $check = $row->grup;
+                        if(($check)== '0'){
+                            return '<p class="text-danger">Kosong</p>';
+                        }
+                        if(($check)== '1'){
+                            return '<p class="text-primary"><b>Grup 1</b></p>';
+                        }
+                        if(($check)== '2'){
+                            return '<p class="text-success"><b>Grup 2</b></p>';
+                        }
+                        if(($check)== '3'){
+                            return '<p class="text-warning"><b>Grup 3</b></p>';
+                        }
+                        return 'test';
+                    })->addColumn('Status', function($row){
+                        $v = $row->aktif;
+                        if (($v)== '0'){
+    
+                            return '<p class="text-danger">non-aktif</p>';    
+                        }else{
+    
+                            return '<p class="text-success">aktif</p>';  
+                        }
+                        return 'test';
+                    })
+                    ->addColumn('action', function($row){
+                    $check = $row->aktif;
+                    $detail = route('fasil.peserta.profil', Crypt::encrypt($row->user_id));
+                    $id = $row->user_id;
+                    $nama = $row->nama;
+                    return '
+                            <a class="btn btn-primary btn-sm m-2"  href='.$detail.'>
+                            <i class="fas fa-folder"> </i>
+                            Detail
+                            </a>
+                          ';  
+                    
+                        
+                    })
+                    ->rawColumns(['Rapor','Gender', 'Grup', 'Status', 'action'])
+                    ->make(true);
+            }
+        return view('fasil.grup', compact('title'));
     }
 
     public function detailQuest($uid,$id){
