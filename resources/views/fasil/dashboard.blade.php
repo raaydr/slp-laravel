@@ -49,10 +49,7 @@
                               <div class="text-center">
                                  
                                  <a data-toggle="modal" data-target="#modal-password" class="btn btn-success btn-sm m-2">ubah password</a>
-                                 <button class="btn btn-warning btn-sm-2" data-toggle="modal" data-myid="{{$user->Fasil->user_id}}" data-myname="{{$user->Fasil->nama}}" data-phonenumber="{{$user->Fasil->phonenumber}}" data-instagram="{{$user->Fasil->instagram}}" data-quotes="{{$user->Fasil->quotes}}"  data-target="#modal-biodata" href="{{ route('fasil.edit.biodata') }}"  target="_blank">
-                                 <i class="fas fa-info"> </i>
-                                 Ubah Biodata
-                                 </button>
+                                 <a type="button" href="{{route('fasil.editBiodataView')}}" class="btn btn-outline-primary m-2"><i class="fa fa-edit"></i> Edit Bioada</a>
                                  
                               </div>
                               <div class="modal fade" id="modal-foto">

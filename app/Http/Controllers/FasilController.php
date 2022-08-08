@@ -41,6 +41,16 @@ class FasilController extends Controller
         
         return view('fasil.dashboard', compact('title', 'user'));
     }
+
+    public function editBiodataView()
+    {
+        $title = 'Dashboard Fasil';
+        $id = Auth::user()->id;
+        $user = Fasil::where('user_id', $id)->first();
+        
+        
+        return view('fasil.editBiodataView', compact('title', 'user'));
+    }
     public function pengumuman()
     {
         $title = 'Dashboard Peserta';
@@ -101,13 +111,13 @@ class FasilController extends Controller
 
         $validator = Validator::make($request->all(), 
         [   
-            'nama' => 'required|string|max:255',
             
-            'jenis_kelamin' => 'required',
-            'phonenumber' => 'required|numeric|digits_between:11,13',
-            'instagram' => 'required|string',
-            'prestasi' => 'required|string',
-            'quotes' => 'required|string',
+            
+            
+            
+            
+            
+            
             
             
 
@@ -115,11 +125,8 @@ class FasilController extends Controller
 
         $messages = 
         [
-            'nama.required' => 'Nama tidak boleh kosong!',
-            'jenis_kelamin.required' => 'jenis kelamin harus dipilih!',
             
-            'email.unique' => 'E-Mail sudah dipakai',
-            'phonenumber.numeric' => 'Nomor telpon harus berupa angka',
+            
             
 
         ]);     
@@ -128,26 +135,47 @@ class FasilController extends Controller
         {
         return back()->withErrors($validator)->withInput();  
         }
-        
+        $profileBaru = array();
         
 
-        $detail=$request->prestasi;
-        $dom = new \DomDocument();
-        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $detail = $dom->saveHTML();
+       
         $id = Auth::user()->id;
          //Table fasil
-        DB::table('fasil')
-         ->where('user_id', $id)
-         ->update([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'instagram' => $request->instagram,
-            'phonenumber' => $request->phonenumber,
-            'prestasi' => $detail,
-            'quotes' => $request->quotes,
-             'updated_at' => now(),
-         ]);
+
+
+
+
+
+
+         if($request->nama != null){
+            
+            $profileBaru['nama'] = $request->nama;
+        }
+        if($request->jenis_kelamin != null){
+        
+            $profileBaru['jenis_kelamin'] =  $request->jenis_kelamin;
+        }
+        if($request->phonenumber != null){
+        
+            $profileBaru['phonenumber'] =  $request->phonenumber;
+        }
+        if($request->instagram != null){
+        
+            $profileBaru['instagram'] =  $request->instagram;
+        }
+        if($request->quotes != null){
+        
+            $profileBaru['quotes'] =  $request->quotes;
+        }
+        if($request->prestasi != NULL){
+            $detail=$request->prestasi;
+            $dom = new \DomDocument();
+            $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $detail = $dom->saveHTML();
+            $profileBaru['prestasi'] = $detail;
+        }
+         $profileBaru['updated_at'] = now();
+         Fasil::where('user_id', Auth::user()->id )->update($profileBaru);
         
          return redirect()->route('fasil.dashboard')->with('pesan', 'Berhasil ubah biodata');
     }

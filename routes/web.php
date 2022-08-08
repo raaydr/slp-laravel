@@ -628,6 +628,7 @@ Route::group(['middleware' => 'check-permission:peserta'], function () {
 Route::group(['middleware' => 'check-permission:fasil'], function () {
     Route::group(['prefix' => 'fasil'], function () {
 	Route::get('/dashboard', 'FasilController@index')->name('fasil.dashboard');
+    Route::get('/Form-Edit-Biodata', 'FasilController@editBiodataView')->name('fasil.editBiodataView');
 
 
     //Tugas
