@@ -190,7 +190,7 @@
                                              </div>
                                              <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <a href="{{route('admin.checkTugas',[Crypt::encrypt($tugas->id), $target->id,1])}}" type="button" class="btn btn-outline-light">Valid</a>
+                                                <a href="{{route(getMyPermission(Auth::user()->level) .'.checkTugas',[Crypt::encrypt($tugas->id), $target->id,1])}}" type="button" class="btn btn-outline-light">Valid</a>
                                              </div>
                                           </div>
                                           <!-- /.modal-content -->
@@ -213,7 +213,7 @@
                                              </div>
                                              <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                <a href="{{route('admin.checkTugas',[Crypt::encrypt($tugas->id), $target->id,2])}}" type="button" class="btn btn-outline-light">Invalid</a>
+                                                <a href="{{route(getMyPermission(Auth::user()->level) .'.checkTugas',[Crypt::encrypt($tugas->id), $target->id,2])}}" type="button" class="btn btn-outline-light">Invalid</a>
                                              </div>
                                           </div>
                                           <!-- /.modal-content -->
@@ -230,7 +230,7 @@
                                              <span aria-hidden="true">&times;</span>
                                              </button>
                                           </div>
-                                          <form method="POST" action="{{route('admin.noteTugas',[Crypt::encrypt($tugas->id), $target->id])}}" enctype="multipart/form-data" class="was-validated">
+                                          <form method="POST" action="{{route(getMyPermission(Auth::user()->level) .'.noteTugas',[Crypt::encrypt($tugas->id), $target->id])}}" enctype="multipart/form-data" class="was-validated">
                                           @csrf  
                                              <div class="modal-body">
                                                 <div class="form-group row">
