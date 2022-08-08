@@ -44,7 +44,7 @@
                               <ul class="list-group list-group-unbordered mb-3">
                                  <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Fasil->jenis_kelamin}}</a></li>
                                  <li class="list-group-item"><b>No.Telp</b> <a class="float-right">{{$user->Fasil->phonenumber}}</a></li>
-                                 <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="{{$user->Fasil->instagram}}" target="_blank">lihat</a></li>
+                                 <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="https://www.instagram.com/{{$user->Fasil->instagram}}" target="_blank">lihat</a></li>
                               </ul>
                               <div class="text-center">
                                  

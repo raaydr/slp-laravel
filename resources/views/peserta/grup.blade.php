@@ -52,7 +52,7 @@
                                  <b>No.Telp</b>
                                  <p class="float-right">{{$fasil->phonenumber}}</p>
                               </li>
-                              <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="{{$fasil->instagram}}" target="_blank">check</a></li>
+                              <li class="list-group-item"><b>Instagram</b> <a class="float-right" href="https://www.instagram.com/{{$fasil->instagram}}" target="_blank">check</a></li>
                               <li class="list-group-item">
                                  <b>Quotes</b>
                                  <p class="float-right">{{$fasil->quotes}}</p>
