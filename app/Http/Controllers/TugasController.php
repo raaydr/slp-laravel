@@ -960,7 +960,7 @@ class TugasController extends Controller
                 return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
                 break;
             case '5':
-                return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
+                return view('fasil.raporTugasWriting',compact('target','rapor','id','biodata'));
                 break;                               
                 default:
                 echo "SLP INDONESIA";
@@ -1045,7 +1045,7 @@ class TugasController extends Controller
                 return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
                 break;
             case '5':
-                return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                return view('fasil.raporTugasSpeaking',compact('target','rapor','id','biodata'));
                 break;                               
                 default:
                 echo "SLP INDONESIA";

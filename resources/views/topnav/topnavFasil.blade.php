@@ -18,11 +18,11 @@
       <link rel="stylesheet" href="{{asset('template')}}/plugins/summernote/summernote-bs4.min.css">
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
+      <link rel="stylesheet" href="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.css">
       <link href="{{asset('develop')}}/img/slp.png" rel="icon" />
-      <style>.note-group-select-from-files {
-         display: none;
-         }
-      </style>
+      <link href="{{asset('iziToast')}}/dist/css/iziToast.min.css" rel="stylesheet" />
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
    </head>
    <body class="hold-transition sidebar-mini">
       <!-- Site wrapper -->
@@ -109,6 +109,7 @@
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
       <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+      <script src="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
       <!-- jQuery Knob -->
       <script src="{{asset('template')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
       <!-- Sparkline -->
@@ -119,6 +120,10 @@
       <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes --> 
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
+      <script src="{{asset('iziToast')}}/dist/js/iziToast.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/dist/additional-methods.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
       @yield('script') 
    </body>
 </html>
