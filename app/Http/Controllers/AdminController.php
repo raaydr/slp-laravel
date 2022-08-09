@@ -2824,4 +2824,15 @@ class AdminController extends Controller
 
         return view('admin.ListSemuaPendaftar');
     }
+
+    public function welcome()
+    {
+        $title = 'Welcome Admin';
+        
+        $gen =  Auth::user()->gen;
+
+        $now = Carbon::now(); // today
+        $date = Carbon::parse($now)->isoFormat('D MMMM Y');
+        return view('admin.welcome', compact('gen','date'));
+    }
 }

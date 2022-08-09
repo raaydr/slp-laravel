@@ -60,6 +60,7 @@ Route::group(['prefix' => 'shop'], function () {
 // ROUTES ADMIN
 Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+    Route::get('/welcome', 'AdminController@welcome')->name('admin.welcome');
 	Route::get('/list-pendaftar', 'AdminController@listPendaftar')->name('admin.listPendaftar');
     Route::get('/lain-lain/buat-blog', 'AdminController@buatBlog')->name('admin.buatBlog');
     Route::post('/lain-lain/create-blog', 'AdminController@createBlog')->name('admin.createBlog');

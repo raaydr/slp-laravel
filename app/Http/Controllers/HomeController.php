@@ -33,7 +33,7 @@ class HomeController extends Controller
         $level = Auth::user()->level;
         switch ($level) {
             case '0':
-                return redirect()->action('\App\Http\Controllers\AdminController@informasiPendaftar');
+                return redirect()->route('admin.welcome');
                 break;
             case '1':
                 return redirect()->action('\App\Http\Controllers\PendaftarController@index');
