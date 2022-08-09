@@ -192,14 +192,11 @@
                               @endif
                               <ul class="nav nav-pills">
                                  <li class="nav-item"><a class="nav-link active" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
-                                 @if(!empty($user->Biodata->seleksi_berkas))
+                                 @if (!empty($user->seleksiPertama))
                                  <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Seleksi Pertama</a></li>
                                  @endif
-                                 @if(!empty($user->Antrian->antrian))
+                                 @if(!empty($user->Antrian))
                                  <li class="nav-item"><a class="nav-link" href="#Ketiga" data-toggle="tab">Seleksi Kedua</a></li>
-                                 @endif
-                                 @if(!empty($user->Peserta->id))
-                                 <li class="nav-item"><a class="nav-link" href="#Keempat" data-toggle="tab">Quest</a></li>
                                  @endif
                               </ul>
                            </div>
@@ -247,7 +244,7 @@
                                     </div>
                                     <!-- /.post -->
                                     <div class="input-group-append">
-                                    @if ((!empty($user->Biodata->seleksi_berkas)) && (empty($user->Biodata->seleksi_pertama)))
+                                    @if ( (empty($user->Biodata->seleksi_pertama)))
                                        <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
                                        <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
                                     @endif
@@ -298,7 +295,7 @@
                                     <!-- /.modal -->
                                  </div>
                                  <!-- /.tab-pane -->
-                                 @if (!empty($user->Biodata->seleksi_berkas))
+                                 @if (!empty($user->seleksiPertama))
                                  <div class="tab-pane" id="Kedua">
                                     <!-- Post -->
                                     <div class="post">
@@ -560,7 +557,7 @@
                                  </div>
                                  <!-- /.tab-pane -->
                                  @endif
-                                 @if(!empty($user->Antrian->antrian))
+                                 @if(!empty($user->Antrian))
                                  <div class="tab-pane" id="Ketiga">
                                     <div class="row">
                                        <div class="col-12">
@@ -728,13 +725,6 @@
                                     </div>
                                     <!-- /.row -->
                                  </div>
-                                 <!-- /.tab-pane -->
-                                 @endif
-                                 @if(!empty($user->Peserta->id))
-                                 <div class="tab-pane " id="Keempat">
-                                    
-                                 </div>
-                                 <!-- /.row -->
                                  <!-- /.tab-pane -->
                                  @endif
                               </div>

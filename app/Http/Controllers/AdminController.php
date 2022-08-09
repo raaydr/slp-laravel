@@ -364,42 +364,66 @@ class AdminController extends Controller
                 })
                 ->addColumn('Seleksi Berkas', function($row){
                     $ajaib = $row->seleksi_berkas;
-                    if (($ajaib)== 'LULUS'){
-                        
-                        return '<p class="text-success">LULUS</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">GAGAL</p>';  
-                    }
+                    switch ($ajaib) {
+                        case "LULUS":
+                            //admin
+                            return '<p class="text-success">LULUS</p>';    
+                            break;
+                        case "GAGAL":
+                            //peserta
+                            return '<p class="text-danger">GAGAL</p>';
+                            break;   
+                        case NULL:
+                            //fasil
+                            return '<p class="text-danger">KOSONG</p>';
+                            break;   
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    } 
                     
                     
                     
                 })
                 ->addColumn('Seleksi Challenge', function($row){
                     $ajaib = $row->seleksi_pertama;
-                    if (($ajaib)== 'LOLOS'){
-                        
-                        return '<p class="text-success">LOLOS</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">GUGUR</p>';  
-                    }
-                    
-                    
-                    
+                    switch ($ajaib) {
+                        case "LOLOS":
+                            //admin
+                            return '<p class="text-success">LOLOS</p>';     
+                            break;
+                        case "GUGUR":
+                            //peserta
+                            return '<p class="text-danger">GUGUR</p>';  
+                            break;   
+                        case NULL:
+                            //fasil
+                            return '<p class="text-danger">KOSONG</p>';
+                            break;   
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }                    
                 })
                 ->addColumn('Seleksi Interview', function($row){
                     $ajaib = $row->seleksi_kedua;
-                    if (($ajaib)== 'BERHASIL'){
-                        
-                        return '<p class="text-success">BERHASIL</p>';    
-                    }else{
-                        
-                        return '<p class="text-danger">TERELIMINASI</p>';  
-                    }
-                    
-                    
-                    
+                    switch ($ajaib) {
+                        case "BERHASIL":
+                            //admin
+                            return '<p class="text-success">BERHASIL</p>';     
+                            break;
+                        case "TERELIMINASI":
+                            //peserta
+                            return '<p class="text-danger">TERELIMINASI</p>';  
+                            break;   
+                        case NULL:
+                            //fasil
+                            return '<p class="text-danger">KOSONG</p>';
+                            break;   
+                            default:
+                            echo "SLP INDONESIA";
+                            break;
+                    }  
                 })
                 ->addColumn('action', function($row){
                     $detail = route('admin.userprofile', $row->user_id);
