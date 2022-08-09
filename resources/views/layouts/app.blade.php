@@ -22,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('develop')}}/img/slp.png" rel="icon">
 </head>
-<body style ="background-image: url('{{asset('develop')}}/img/LostSphear.jpg')";>
+<body style ="background-image: url('{{asset('develop')}}/img/rsz_bg-img.jpg')";>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-blue shadow-sm">
             <div class="container">
