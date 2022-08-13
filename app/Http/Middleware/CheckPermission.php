@@ -21,7 +21,8 @@ class CheckPermission
         if(checkPermission($permission)){
             return $next($request);
         }
-
-        return response()->view('errors.check-permission');
+        
+        return redirect()->route('home');
+        //return response()->view('errors.check-permission');
     }
 }
