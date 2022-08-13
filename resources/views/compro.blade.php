@@ -339,22 +339,17 @@
 
         <div class="row counters">
 
-  				<div class="col-lg-3 col-6 text-center">
+  				<div class="col-lg-4 col-4 text-center">
             <span data-toggle="counter-up">1120</span>
             <p>Pendaftar</p>
   				</div>
 
-          <div class="col-lg-3 col-6 text-center">
+          <div class="col-lg-4 col-4 text-center">
             <span data-toggle="counter-up">114</span>
             <p>Lolos seleksi</p>
   				</div>
 
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">80</span>
-            <p>Gugur</p>
-  				</div>
-
-          <div class="col-lg-3 col-6 text-center">
+          <div class="col-lg-4 col-4 text-center">
             <span data-toggle="counter-up">34</span>
             <p>Graduate</p>
   				</div>
