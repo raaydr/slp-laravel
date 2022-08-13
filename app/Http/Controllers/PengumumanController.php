@@ -48,7 +48,7 @@ class PengumumanController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = Pengumuman::where('gen', $gen)->where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $data = Pengumuman::where('status', 1)->orderBy('created_at', 'DESC')->get();
             if($request->ajax()){
     
                 return datatables()->of($data)
