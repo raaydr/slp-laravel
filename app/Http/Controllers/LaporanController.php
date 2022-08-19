@@ -329,50 +329,40 @@ class LaporanController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'url_foto' => 'required',
-                'url_foto.*' => 'image|mimes:jpeg,png,jpg,pdf|max:5120'
+                'file' => 'required',
+                'file.*' => 'image|mimes:jpeg,png,jpg,pdf|max:5120'
             ],
-
+        
             $messages = [
-                'url_foto.required' => 'foto tidak boleh kosong!',
-                'url_foto.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
-                'url_foto.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
+                'file.required' => 'foto tidak boleh kosong!',
+                'file.image' => 'Format file tidak mendukung! Gunakan jpg, jpeg, png, pdf.',
+                'file.max' => 'Ukuran file terlalu besar, maksimal file 5Mb !',
             ]
         );
-
+        
         if ($validator->fails()) {
             $error = $validator->errors()->all();
             
-            return Redirect::back()->with('error','Format harus jpg,jpeg,png, pdf dan maksimal size file 5mb');
-            //return response()->json(['status'=>0, 'msg'=>'tolong sesuai format','error'=>$validator->errors()->all()]);
-            //return back()->withErrors($validator->errors()->all())->withInput();
-            //return $error;
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
         $namaFile = Laporan::where('id', $id)->value('judul');
-        $count=0;
-        if ($gambar = $request->hasFile('url_foto')) {
-            
-            foreach($request->file('url_foto') as $image)
-            {
-
-                $namaFileRILL = $namaFile.$count.'_'.time().'.'.$image->getClientOriginalExtension() ;
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+                $namaFileRILL = $namaFile.'_'.time().'.'.$image->getClientOriginalExtension() ;
                 $fileName = preg_replace("/\s+/", "", $namaFileRILL);
                 $destinationPath = public_path().'/dokumentasi-kegiatan/' ;
                 $image->move($destinationPath,$fileName);
                 
-
+        
                 $dokumentasi = new Dokumentasi;
                 $dokumentasi->url_foto = $namaFileRILL;
                 $dokumentasi->laporan_id = $id;
                 $dokumentasi->status = 1;
                 $dokumentasi->save();  
-                $count++;
-            }
-        }
 
         
-        return Redirect::back()->with('pesan','Berhasil Upload Dokumentasi Kegiatan');
-        //return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+        return response()->json(['success'=>'Berhasil Upload Foto '.$imageName, 'msg'=>$dokumentasi->id]);
+        
     }
 
     public function dokumentasiPembayaran(Request $request,$id)
@@ -435,15 +425,22 @@ class LaporanController extends Controller
                     
                         return $pembayaran;
                 })
-                ->addColumn('action', function($row){
+                ->addColumn('image', function($row){
                     $b = $row->url_foto;
                     $a = $row->judul;
                     $asset= "/dokumentasi-pembayaran/";
                     $detail=  $asset.$b;
                     $id = $row->id;
-                    $b = '<a href='.$detail.' class="btn btn-outline-primary" target="_blank">detail</a>';
-                    $c = '<img src='.$detail.' alt="tes" width=50 class="img-thumbnail">';
-                    $actionBtn =$b.' 
+                    $image = '<a href='.$detail.' data-toggle="lightbox" data-title='.$a.' data-gallery="gallery">
+                    <img src='.$detail.' width="100"  class="img-fluid mb-1" alt="white sample"/>
+                    </a>';
+                    
+                    
+                        return $image;
+                })
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn =' 
                         <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-outline-danger">Hapus</a></dl>
                                                         <div class="modal fade" id="modal-danger">
                                                             <div class="modal-dialog">
@@ -469,12 +466,65 @@ class LaporanController extends Controller
                                                         </div>
                                                         <!-- /.modal -->';
                     return $actionBtn;
-                })->rawColumns(['Pembayaran','action'])
+                })->rawColumns(['Pembayaran','action','image'])
                 ->make(true);
         }
         
     }
 
+    public function tabelDokumentasiKegiatan(Request $request, $id)
+    {
+        $data = Dokumentasi::where('laporan_id', $id)->where('status', 1)->orderBy('created_at', 'DESC')->get();
+        if($request->ajax()){
+    
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('image', function($row){
+                    $b = $row->url_foto;
+                    $a = $row->judul;
+                    $asset= "/dokumentasi-kegiatan/";
+                    $detail=  $asset.$b;
+                    $id = $row->id;
+                    $image = '<a href='.$detail.' data-toggle="lightbox" data-title='.$a.'>
+                    <img src='.$detail.' width="100"  class="img-fluid mb-1" alt="white sample"/>
+                    </a>';
+                    
+                    
+                        return $image;
+                })
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn =' 
+                        <a id="hapus" data-toggle="modal" data-target="#upload-foto" class="btn btn-outline-danger">Hapus</a></dl>
+                                                        <div class="modal fade" id="upload-foto">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content bg-danger">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Penolakan</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">    
+                                                                            <p>Apa anda yakin ingin menghapus Dokumentasi ini ?</p>
+                                                                            <div class="modal-footer justify-content-between">
+                                                                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                            <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-dismiss="modal" data-original-title="Delete" class="btn btn-outline-light deleteFoto">Delete</a>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->';
+                    return $actionBtn;
+                })->rawColumns(['action','image'])
+                ->make(true);
+        }
+        
+    }
     public function DeleteDokumentasiPembayaran($id)
     {
         $file = DokumentasiPembayaran::where('id', $id)->value('url_foto');
@@ -488,9 +538,9 @@ class LaporanController extends Controller
         return response()->json(['success'=>'Hapus Bukti Pembayaran ']);
         
     }
-    public function DeleteDokumentasiKegiatan(Request $request)
+    public function DeleteDokumentasiKegiatan($id)
     {
-        $id = $request->dokumen_id;
+        
         $file = Dokumentasi::where('id', $id)->value('url_foto');
         File::delete('dokumentasi-kegiatan/' . $file);
         Dokumentasi::where('id', $id)->update([
@@ -499,7 +549,7 @@ class LaporanController extends Controller
             'updated_at' => now(),
             ]
         );
-        return Redirect::back()->with('pesan','Berhasil Delete Dokumentasi Kegiatan');
+        return response()->json(['success'=>'Hapus Dokumentasi ']);
         
     }
 

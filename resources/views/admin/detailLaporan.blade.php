@@ -1,4 +1,7 @@
 @extends('topnav.topnavAdmin')
+@section('head')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
+@endsection
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -123,7 +126,7 @@
       </div>
    </div>
    <div class="row">
-      <div class="col-7">
+      <div class="col-12">
          <div class="card">
             <div class="card-header">
                <h3 class="card-title">Bukti Pembayaran</h3>
@@ -136,6 +139,7 @@
                         <th>no</th>
                         <th>Judul</th>
                         <th>Pembayaran</th>
+                        <th>image</th>
                         <th>action</th>
                      </tr>
                   </thead>
@@ -146,6 +150,7 @@
                         <th>no</th>
                         <th>Judul</th>
                         <th>Pembayaran</th>
+                        <th>image</th>
                         <th>action</th>
                      </tr>
                   </tfoot>
@@ -155,54 +160,35 @@
          </div>
          <!-- /.card -->
       </div>
-      <div class="col-5"id="accordion1">
-         <div class="card card-primary">
-            <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
-               <div class="card-header">
-                  <h4 class="card-title">Dokumentasi Kegiatan</h4>
-               </div>
-            </a>
-            <div id="collapseTwo" class="collapse show" data-parent="#accordion1">
-               <div class="card-body">
-                  <div class="row">
-                     @foreach($dokumentasi as $image)
-                     <div class="col-sm-6">
-                        <a href="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" data-toggle="lightbox" data-title="{{$laporan->judul}}" data-gallery="gallery">
-                        <img src="{{ asset('/dokumentasi-kegiatan/'.$image->url_foto) }}" width="100"  class="img-fluid mb-1" alt="white sample"/>
-                        </a>
-                        <a data-toggle="modal" data-target="#modal-delete" data-myid="{{$image->id}}"  class="btn btn-outline-danger btn-sm">Hapus</a></dl>
-                                                        <div class="modal fade" id="modal-delete">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content bg-danger">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Penolakan</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <form method="GET" action="{{route('admin.DeleteDokumentasiKegiatan')}}" enctype="multipart/form-data">
-                                                                    <div class="modal-body">    
-                                                                            <p>Apa anda yakin ingin menghapus Dokumentasi ini ?</p>
-                                                                            <input type="hidden" id="dokumen_id" name="dokumen_id" >
-                                                                            <div class="modal-footer justify-content-between">
-                                                                              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                              <button type="submit" class="btn btn-outline-light">Delete</button>
-                                                                            </div>
-                                                                        
-                                                                    </div>
-                                                                    </form>
-                                                                </div>
-                                                                <!-- /.modal-content -->
-                                                            </div>
-                                                            <!-- /.modal-dialog -->
-                                                        </div>
-                                                        <!-- /.modal -->
-                     </div>
-                     @endforeach
-                  </div>
-               </div>
+      <div class="col-12">
+         <div class="card">
+            <div class="card-header">
+               <h3 class="card-title">Dokumentasi Kegiatan</h3>
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+               <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                     <tr>
+                        <th>no</th>
+                        <th>image</th>
+                        <th>action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th>no</th>
+                        <th>image</th>
+                        <th>action</th>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+            <!-- /.card-body -->
          </div>
+         <!-- /.card -->
       </div>
    </div>
    <!-- /.row -->
@@ -252,41 +238,22 @@
                <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <form method="POST" action="{{route('admin.dokumentasiKegiatanLaporan',$laporan->id)}}" enctype="multipart/form-data" class="was-validated">
-               @csrf  
-               <div class="modal-body">
-                  <div class="row">
+            <div class="modal-body">
+                  <div class="col-md-12">
                      <div class="form-group row">
-                        <label for="url_foto" class="col-md-3 col-form-label ">{{ __('Upload Foto') }}</label>
-                        <div class="col-md-9">
-                           <div class="input-group control-group increment" >
-                              <input type="file" name="url_foto[]" class="form-control" required autofocus>
-                              <div class="input-group-btn"> 
-                                 <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                              </div>
-                           </div>
-                           <div class="clone">
-                              <div class="control-group input-group" style="margin-top:10px">
-                                 <input type="file" name="url_foto[]" class="form-control">
-                                 <div class="input-group-btn"> 
-                                    <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                 </div>
-                              </div>
-                           </div>
-                           @error('url_foto')
-                           <span class="invalid-feedback" role="alert">
-                           <strong>{{ $errors->first('url_foto') }}</strong>
-                           </span>
-                           @enderror
-                           <small class="text">format harus jpeg,jpg,png berukuran maksimal 5 mb</small>
+                        <label for="keterangan" class="col-md-4 col-form-label ">{{ __('Upload Foto') }}</label>
+                        <div class="col-md-12">
+                        <form method="post" action="{{route('admin.dokumentasiKegiatanLaporan',$laporan->id)}}" enctype="multipart/form-data" 
+                              class="dropzone" id="dropzone">
+                              @csrf
+                        </form>
+                        <small id="passwordHelpBlock" class="form-text text-sucess"><a>Drag file atau Klik Kolom diatas</a></small>
+                        <small id="passwordHelpBlock" class="form-text text-sucess">Format harus jpg,png,jpeg dan ukuran 5 mb</small>   
                         </div>
                      </div>
                   </div>
-                  <div class="modal-footer justify-content-between">
-                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                     <button type="submit" class="btn btn-outline-light">Submit</button>
-                  </div>
-            </form>
+               </div>
+               
             </div>
             <!-- /.modal-content -->
          </div>
@@ -381,6 +348,7 @@
 </section>
 @endsection
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
 <script>
@@ -402,7 +370,7 @@
                  {data: 'DT_RowIndex', name: 'DT_RowIndex' },
                  {data:'judul',name:'judul',orderable: true,searchable: true},
                  {data: 'Pembayaran', name: 'Pembayaran', orderable: true, searchable: true},
-                 
+                 {data: 'image', name: 'image'},
                  {data: 'action', name: 'action'},
                  
                  
@@ -431,6 +399,46 @@
           .container()
           .appendTo("#example1_wrapper .col-md-6:eq(0)");
    });
+   $(function () {
+            $("#example2")
+                 .DataTable({
+                     processing:true,
+                     serverSide:true,
+                     ajax : {
+                        url : "{{route('admin.tabelDokumentasiKegiatan',$laporan->id)}}",
+                        type : 'GET'
+                     },
+                     columns:[
+                        { data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                        {data: 'image', name: 'image'},
+                        {data: 'action', name: 'action'},
+                        
+                        
+                     ],
+                     order:[[0,'asc']],
+                     responsive: true,
+                     lengthChange: false,
+                     autoWidth: false,
+                     buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                     initComplete: function () {
+                           // Apply the search
+                           this.api()
+                              .columns()
+                              .every(function () {
+                                 var that = this;
+               
+                                 $('input', this.footer()).on('keyup change clear', function () {
+                                       if (that.search() !== this.value) {
+                                          that.search(this.value).draw();
+                                       }
+                                 });
+                              });
+                     },
+                 })
+                 .buttons()
+                 .container()
+                 .appendTo("#example1_wrapper .col-md-6:eq(0)");
+         });
    $('#load').hide();
    $(function () {
      $(".datepicker").datepicker({
@@ -486,6 +494,38 @@
                        position: 'bottomRight'
                     });
                     var oTable = $('#example1').dataTable(); //inialisasi datatable
+                    oTable.fnDraw(false); //reset datatable
+              
+                 },
+              
+                 error: function(data) {
+              
+                    console.log('Error:', data);
+              
+                 }
+              
+        });
+              
+     });
+     $('body').on('click', '.deleteFoto', function() {
+     var Item_id = $(this).data("id");
+     var url = '{{ route("admin.DeleteDokumentasiKegiatan",[":id"]) }}';
+     url = url.replace(':id', Item_id);
+     $.ajax({
+   
+                 type: "GET",
+              
+                 url: url,
+              
+                 success: function(data) {
+              
+                    iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                       title: 'Data Berhasil Disimpan',
+                       message: '{{ Session('
+                       success ')}}',
+                       position: 'bottomRight'
+                    });
+                    var oTable = $('#example2').dataTable(); //inialisasi datatable
                     oTable.fnDraw(false); //reset datatable
               
                  },
@@ -628,7 +668,6 @@
         }
    
    });
-   $( ".clone" ).hide();
    $(function () {
                 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
                 event.preventDefault();
@@ -643,28 +682,38 @@
                 $(this).addClass('active');
                 });
             })
-   $(document).ready(function() {
-     
-     $(".btn-success").click(function(){ 
-        
-           var html = $(".clone").html();
-           $(".increment").after(html);
-           
-        
-        
-     });
-     $("body").on("click",".btn-danger",function(){ 
-        $(this).parents(".control-group").remove();
-        
-     });
-   });
-   $('#modal-delete').on('show.bs.modal', function (event) {
-             
-             var button = $(event.relatedTarget) // Button that triggered the modal
-             var id = button.data('myid')
-             var modal = $(this)
-             modal.find('.modal-body #dokumen_id').val(id)
-             
-   });
+   Dropzone.options.dropzone =
+         {
+            maxFilesize: 12,
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+               return time+file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 5000,
+            success: function(file, response) 
+            {
+               console.log('Error:', response);
+               var oTable = $('#example2').dataTable(); //inialisasi datatable
+                    oTable.fnDraw(false); //reset datatable
+               iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                title: 'Data Berhasil Disimpan',
+                                message: response.success,
+                                position: 'bottomRight'
+                            });
+            },
+            error: function(file, response)
+            {
+               console.log('Error:', response);
+               iziToast.error({
+                                       title: 'Error',
+                                       message: response,
+                                    });
+                                    
+               return false;
+            }
+};
 </script>
 @endsection

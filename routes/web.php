@@ -112,8 +112,9 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::post('/Laporan-dokumentasi-kegiatan/add/{id}', 'LaporanController@dokumentasiKegiatanLaporan')->name('admin.dokumentasiKegiatanLaporan');
     Route::post('/Laporan-dokumentasi-Pembayaran/add/{id}', 'LaporanController@dokumentasiPembayaran')->name('admin.dokumentasiPembayaran');
     Route::get('/Laporan/Tabel-Dokumentasi-Pembayaran/{id}', 'LaporanController@tabelDokumentasiPembayaran')->name('admin.tabelDokumentasiPembayaran');
+    Route::get('/Laporan/Tabel-Dokumentasi-Kegiatan/{id}', 'LaporanController@tabelDokumentasiKegiatan')->name('admin.tabelDokumentasiKegiatan');
     Route::get('/Laporan-Dokumentasi-Pembayaran/delete/{id}', 'LaporanController@DeleteDokumentasiPembayaran')->name('admin.DeleteDokumentasiPembayaran');
-    Route::get('/Laporan-Dokumentasi-Kegiatan/delete/', 'LaporanController@DeleteDokumentasiKegiatan')->name('admin.DeleteDokumentasiKegiatan');
+    Route::get('/Laporan-Dokumentasi-Kegiatan/delete/{id}', 'LaporanController@DeleteDokumentasiKegiatan')->name('admin.DeleteDokumentasiKegiatan');
     Route::get('/Laporan-Dokumentasi-Kegiatan/cetak/{id}', 'LaporanController@downloadLaporan')->name('admin.downloadLaporan');
 
     //Absensi
