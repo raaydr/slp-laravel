@@ -1787,6 +1787,7 @@ class AdminController extends Controller
             $namaFile = $user->id;
             $file = $request->file('url_foto') ;
             $fileName = $namaFile.'_'.$file->getClientOriginalName() ;
+            $fileName = preg_replace("/\s+/", "", $fileName);
             $destinationPath = public_path().'/imgfasil/' ;
             $file->move($destinationPath,$fileName);
             $fasil->url_foto = $fileName ;

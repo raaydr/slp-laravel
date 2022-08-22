@@ -187,6 +187,7 @@ class PendaftarController extends Controller
             $namaPdf = $request->nama;
             $pdf = $request->file('url_cv');
             $PDFName = $namaPdf . '_' . time() . '.' . $pdf->getClientOriginalName();
+            $PDFName = preg_replace("/\s+/", "", $PDFName);
             $lokasiPath = public_path() . '/cvPDF/';
             $pdf->move($lokasiPath, $PDFName);
         }
@@ -194,6 +195,7 @@ class PendaftarController extends Controller
             $namaGambar = $request->nama;
             $gambar = $request->file('url_Business');
             $GambarName = $namaGambar . '_' . time() . '.' . $gambar->getClientOriginalName();
+            $GambarName = preg_replace("/\s+/", "", $GambarName);
             $tujuanPath = public_path() . '/imgPembelian/';
             $gambar->move($tujuanPath, $GambarName);
         }
@@ -293,6 +295,7 @@ class PendaftarController extends Controller
             $namaFile = $id;
             $file = $request->file('url_foto');
             $fileName = $namaFile . '_' . $file->getClientOriginalName();
+            $fileName = preg_replace("/\s+/", "", $fileName);
             $destinationPath = public_path() . '/imgdaftar/';
             $file->move($destinationPath, $fileName);
             $biodata->url_foto = $fileName;
@@ -337,6 +340,7 @@ class PendaftarController extends Controller
         if ($gambar = $request->hasFile('url_foto')) {
             $gambar = $request->file('url_foto');
             $GambarName = $id . '_' . $gambar->getClientOriginalName();
+            $GambarName = preg_replace("/\s+/", "", $GambarName);
             $tujuanPath = public_path() . '/imgdaftar/';
             $gambar->move($tujuanPath, $GambarName);
         }
@@ -517,6 +521,7 @@ class PendaftarController extends Controller
             if ($gambar = $request->hasFile('url_kepribadian')) {
                 $gambar = $request->file('url_kepribadian');
                 $GambarName = $id . '_' . $gambar->getClientOriginalName();
+                $GambarName = preg_replace("/\s+/", "", $GambarName);
                 $tujuanPath = public_path() . '/teskepribadian/';
                 $gambar->move($tujuanPath, $GambarName);
             }
@@ -534,6 +539,7 @@ class PendaftarController extends Controller
             if ($gambar = $request->hasFile('url_kepribadian')) {
                 $gambar = $request->file('url_kepribadian');
                 $GambarName = $id . '_' . $gambar->getClientOriginalName();
+                $GambarName = preg_replace("/\s+/", "", $GambarName);
                 $tujuanPath = public_path() . '/teskepribadian/';
                 $gambar->move($tujuanPath, $GambarName);
             }

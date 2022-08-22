@@ -463,6 +463,7 @@ class PesertaController extends Controller
         if ($gambar = $request->hasFile('url_foto')) {
             $gambar = $request->file('url_foto');
             $GambarName = $id . '_' . $gambar->getClientOriginalName();
+            $GambarName = preg_replace("/\s+/", "", $GambarName);
             $tujuanPath = public_path() . '/imgdaftar/';
             $gambar->move($tujuanPath, $GambarName);
         }
