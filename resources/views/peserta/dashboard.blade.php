@@ -187,10 +187,10 @@
                                                                     </div>
                                                                     <div class="card-body">
                                                                     <div class="row">
-                                                                        @foreach(json_decode($event['foto']) as $image)
+                                                                        @foreach($event['image'] as $image)
                                                                         <div class="col-2">
-                                                                            <a href="{{ asset('/dokumentasi-kegiatan/'.$image) }}" data-toggle="lightbox" data-title="{{  $event['judul'] }}" data-gallery="gallery">
-                                                                            <img src="{{ asset('/dokumentasi-kegiatan/'.$image) }}" class="img-fluid m-1" width="50" alt="white sample"/>
+                                                                            <a href="{{ asset('/dokumentasi-kegiatan/'.$image['foto']) }}" data-toggle="lightbox" data-title="{{  $event['judul'] }}" data-gallery="gallery">
+                                                                            <img src="{{ asset('/dokumentasi-kegiatan-thumbnail/'.$image['thumbnail']) }}" class="img-fluid"alt="white sample"/>
                                                                             </a>
                                                                         
                                                                         </div>

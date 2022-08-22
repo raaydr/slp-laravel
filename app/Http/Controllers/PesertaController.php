@@ -421,13 +421,17 @@ class PesertaController extends Controller
 
                 $dokumentasi = Dokumentasi::where('laporan_id', $laporan_id)->where('status', 1)->get();
                 $jumlah_dokumentasi = count($dokumentasi);
-                $foto = [];
+                $image = [];
                 for ($j = 0; $j <= $jumlah_dokumentasi-1; $j++) {
                     $fileName = $dokumentasi[$j]['url_foto'];
-                    $foto[$j] = $fileName;
-                    
+                    $filethumbnail = $dokumentasi[$j]['url_thumbnail'];
+                    $foto = [];
+                    $foto['foto'] = $fileName;
+                    $foto['thumbnail'] = $filethumbnail;
+                    $image[$j] = $foto;
                 }
-                $laporan['foto']=json_encode($foto);
+                $laporan['image']=$image;
+                
                 $laporan['judul']=$data[$i]['judul'];
                 $laporan['tanggal_kegiatan']=$tanggal_kegiatan;
                 $kegiatan[$i] = $laporan;
