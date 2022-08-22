@@ -563,9 +563,12 @@ class LaporanController extends Controller
     {
         
         $file = Dokumentasi::where('id', $id)->value('url_foto');
+        $thumbnail = Dokumentasi::where('id', $id)->value('url_thumbnail');
         File::delete('dokumentasi-kegiatan/' . $file);
+        File::delete('dokumentasi-kegiatan-thumbnail/' . $thumbnail);
         Dokumentasi::where('id', $id)->update([
             'url_foto' => "kosong",
+            'url_thumbnail' => "kosong",
             'status' => 0,
             'updated_at' => now(),
             ]
