@@ -49,18 +49,7 @@
                                  </div>
                               </div>
                               <div class="form-group row">
-                                 <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Kegiatan') }}</label>
-                                 <div class="col-md-4">
-                                    <div class="input-group date">
-                                       <div class="input-group-addon">
-                                          <span class="glyphicon glyphicon-th"></span>
-                                       </div>
-                                       <input placeholder="Tanggal Kegiatan" type="text" class="form-control datepicker" name="date"   />
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="time_start" class="col-md-4 col-form-label text-md-right">{{ __('Mulai Kegiatan') }}</label>
+                                 <label for="time_start" class="col-md-4 col-form-label text-md-right">{{ __('Mulai Kegiatan Jam :') }}</label>
                                  <div class="col-md-6">
                                     <input id="time_start" type="time" class="form-control" name="time_start" value="{{ old('time_start') }}"  />
                                     @if ($errors->has('time_start'))
@@ -71,7 +60,7 @@
                                  </div>
                               </div>
                               <div class="form-group row">
-                                 <label for="time_end" class="col-md-4 col-form-label text-md-right">{{ __('Kegiatan Berakhir') }}</label>
+                                 <label for="time_end" class="col-md-4 col-form-label text-md-right">{{ __('Kegiatan Berakhir Jam:') }}</label>
                                  <div class="col-md-6">
                                     <input id="time_end" type="time" class="form-control" name="time_end" value="{{ old('time_end') }}"  />
                                     @if ($errors->has('time_end'))
@@ -79,6 +68,17 @@
                                     <strong>{{ $errors->first('time_end') }}</strong>
                                     </span>
                                     @endif
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Kegiatan') }}</label>
+                                 <div class="col-md-4">
+                                    <div class="input-group date">
+                                       <div class="input-group-addon">
+                                          <span class="glyphicon glyphicon-th"></span>
+                                       </div>
+                                       <input placeholder="Tanggal Kegiatan" type="text" class="form-control datepicker" name="date"   />
+                                    </div>
                                  </div>
                               </div>
                               <div class="form-group row">

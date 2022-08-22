@@ -16,6 +16,7 @@ class CreateTabelDokumentasiKegiatan extends Migration
         Schema::create('dokumentasi_kegiatan', function (Blueprint $table) {
             $table->increments('id');
             $table->text('url_foto');
+            $table->text('url_thumbnail');
             $table->integer('laporan_id');
             $table->boolean('status');
             $table->timestamps();

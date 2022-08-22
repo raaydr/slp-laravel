@@ -15,6 +15,7 @@ class Dokumentasi extends Model
 	}
     protected $fillable = [
         'url_foto',
+        'url_foto',
         'laporan_id',
         'status',
 

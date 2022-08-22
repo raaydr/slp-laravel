@@ -14,7 +14,7 @@ class DokumentasiPembayaran extends Model
 		return $this->belongsTo('App\Models\Laporan');
 	}
     protected $fillable = [
-        'judul',
+        'keterangan',
         'pembayaran',
         'url_foto',
         'laporan_id',

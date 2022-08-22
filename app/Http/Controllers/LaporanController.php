@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use PDF;
+use Image;
 use Redirect;
 use DataTables;
 use DateTime;
@@ -153,7 +154,7 @@ class LaporanController extends Controller
 
         //Absensi
 
-        $peserta = User::where('level', 1)->orWhere('level', 4)->orWhere('gen', $laporan->gen)->get();
+        $peserta = User::where('gen', $laporan->gen)->where('level', 1)->orWhere('level', 4)->get();
         $jumlah_peserta = count($peserta);
         for ($i = 0; $i <= $jumlah_peserta - 1; $i++) {
             
@@ -347,15 +348,29 @@ class LaporanController extends Controller
         }
         $namaFile = Laporan::where('id', $id)->value('judul');
         $image = $request->file('file');
+        $imageThumbnail = Image::make($image);
         $imageName = $image->getClientOriginalName();
-                $namaFileRILL = $namaFile.'_'.time().'.'.$image->getClientOriginalExtension() ;
-                $fileName = preg_replace("/\s+/", "", $namaFileRILL);
+        $namaFile = $namaFile.'_'.time();
+        $namaFileRILL = $namaFile.'.'.$image->getClientOriginalExtension();
+                $namaFileRILL = preg_replace("/\s+/", "", $namaFileRILL);
                 $destinationPath = public_path().'/dokumentasi-kegiatan/' ;
-                $image->move($destinationPath,$fileName);
+                $image->move($destinationPath,$namaFileRILL);
+
+
+                
+                $imageThumbnail->resize(255,255, function($constraint)
+                {
+                    $constraint->aspectRatio();
+                });
+                $namaFileFake = $namaFile.'_thumbnail'.'.'.$image->getClientOriginalExtension();
+                $namaFileFake = preg_replace("/\s+/", "", $namaFileFake);
+                $destinationPathFake = public_path().'/dokumentasi-kegiatan-thumbnail/' ;
+                $imageThumbnail->save($destinationPathFake . $namaFileFake, 30);
                 
         
                 $dokumentasi = new Dokumentasi;
                 $dokumentasi->url_foto = $namaFileRILL;
+                $dokumentasi->url_thumbnail = $namaFileFake;
                 $dokumentasi->laporan_id = $id;
                 $dokumentasi->status = 1;
                 $dokumentasi->save();  
@@ -370,7 +385,7 @@ class LaporanController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'judul' => 'required|string|max:255',
+                'keterangan' => 'required',
                 'pembayaran' => 'required',
                 'url_foto' => 'required|mimes:jpeg,png,jpg,pdf|max:5120',
             ],
@@ -387,21 +402,25 @@ class LaporanController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $laporan = new DokumentasiPembayaran;
-        $laporan->judul = $request->judul;
+        $detail=$request->keterangan;
+        $dom = new \DomDocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $detail = $dom->saveHTML();
         $laporan->laporan_id = $id;
         $laporan->status = 1;
+        $laporan->keterangan = $detail;
         $pembayaran = $request->pembayaran;
         $harga_str = preg_replace("/[^0-9]/", "", $pembayaran);
         $pembayaran = (int) $harga_str;
         $laporan->pembayaran = $pembayaran;
         if ($gambar = $request->hasFile('url_foto')) {
                 $image = $request->file('url_foto');
-                $namaFile = $request->judul;
+                $namaFile = Laporan::where('id', $id)->value('judul');
                 $namaFile = $namaFile.'_'.time().'.'.$image->getClientOriginalExtension() ;
                 $fileName = preg_replace("/\s+/", "", $namaFile);
                 $destinationPath = public_path().'/dokumentasi-pembayaran/' ;
                 $image->move($destinationPath,$fileName);
-                $laporan->url_foto = $namaFile;
+                $laporan->url_foto = $fileName;
                 
                 $laporan->save();  
                 
@@ -425,22 +444,22 @@ class LaporanController extends Controller
                     
                         return $pembayaran;
                 })
-                ->addColumn('image', function($row){
+                ->addColumn('Keterangan', function($row){
+                    $keterangan =  $row->keterangan ;
+
+                    return $keterangan;
+
+                })
+                ->addColumn('action', function($row){
+                    $id = $row->id;
                     $b = $row->url_foto;
                     $a = $row->judul;
                     $asset= "/dokumentasi-pembayaran/";
                     $detail=  $asset.$b;
-                    $id = $row->id;
-                    $image = '<a href='.$detail.' data-toggle="lightbox" data-title='.$a.' data-gallery="gallery">
-                    <img src='.$detail.' width="100"  class="img-fluid mb-1" alt="white sample"/>
+                    $image = '<a class="btn btn-outline-primary m-1" href='.$detail.' data-toggle="lightbox" data-title='.$a.'>
+                    detail
                     </a>';
-                    
-                    
-                        return $image;
-                })
-                ->addColumn('action', function($row){
-                    $id = $row->id;
-                    $actionBtn =' 
+                    $actionBtn =$image.' 
                         <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-outline-danger">Hapus</a></dl>
                                                         <div class="modal fade" id="modal-danger">
                                                             <div class="modal-dialog">
@@ -466,7 +485,7 @@ class LaporanController extends Controller
                                                         </div>
                                                         <!-- /.modal -->';
                     return $actionBtn;
-                })->rawColumns(['Pembayaran','action','image'])
+                })->rawColumns(['Pembayaran','Keterangan','action'])
                 ->make(true);
         }
         
@@ -481,14 +500,16 @@ class LaporanController extends Controller
                 ->addIndexColumn()
                 ->addColumn('image', function($row){
                     $b = $row->url_foto;
+                    $c = $row->url_thumbnail;
                     $a = $row->judul;
                     $asset= "/dokumentasi-kegiatan/";
                     $detail=  $asset.$b;
+                    $assetThumbnail= "/dokumentasi-kegiatan-thumbnail/";
+                    $thumbnail=  $assetThumbnail.$c;
                     $id = $row->id;
                     $image = '<a href='.$detail.' data-toggle="lightbox" data-title='.$a.'>
-                    <img src='.$detail.' width="100"  class="img-fluid mb-1" alt="white sample"/>
+                    <img src='.$thumbnail.' class="img-fluid" alt="white sample"/>
                     </a>';
-                    
                     
                         return $image;
                 })
@@ -520,7 +541,7 @@ class LaporanController extends Controller
                                                         </div>
                                                         <!-- /.modal -->';
                     return $actionBtn;
-                })->rawColumns(['action','image'])
+                })->rawColumns(['image','action'])
                 ->make(true);
         }
         

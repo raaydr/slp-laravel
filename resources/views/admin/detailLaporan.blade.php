@@ -117,6 +117,9 @@
             </a>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                <div class="card-body">
+                  @if($laporan->keterangan == NULL)
+                  <h3 class="text-danger">Kosong, silahkan isi</h3>
+                  @endif
                   <?php
                      echo $laporan->keterangan ;
                      ?>
@@ -137,9 +140,8 @@
                   <thead>
                      <tr>
                         <th>no</th>
-                        <th>Judul</th>
                         <th>Pembayaran</th>
-                        <th>image</th>
+                        <th>Keterangan</th>
                         <th>action</th>
                      </tr>
                   </thead>
@@ -148,9 +150,8 @@
                   <tfoot>
                      <tr>
                         <th>no</th>
-                        <th>Judul</th>
                         <th>Pembayaran</th>
-                        <th>image</th>
+                        <th>Keterangan</th>
                         <th>action</th>
                      </tr>
                   </tfoot>
@@ -231,8 +232,8 @@
    </div>
    <div class="modal fade" id="modal-foto">
       <div class="modal-dialog">
-         <div class="modal-content bg-info">
-            <div class="modal-header">
+         <div class="modal-content">
+            <div class="modal-header bg-danger">
                <h4 class="modal-title">Dokumentasi Kegiatan</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -253,7 +254,6 @@
                      </div>
                   </div>
                </div>
-               
             </div>
             <!-- /.modal-content -->
          </div>
@@ -262,8 +262,8 @@
    </div>
    <div class="modal fade" id="modal-bukti">
       <div class="modal-dialog">
-         <div class="modal-content bg-primary">
-            <div class="modal-header">
+         <div class="modal-content">
+            <div class="modal-header bg-primary">
                <h4 class="modal-title">Dokumentasi Pembayaran</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -272,28 +272,21 @@
             <form id="formMedia" enctype="multipart/form-data" class="was-validated">
                @csrf     
                <div class="modal-body">
-                  <div class="form-group row">
-                     <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('Judul Pembayaran') }}</label>
-                     <div class="col-md-8">
-                        <input
-                           id="judul"
-                           type="text"
-                           class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}"
-                           name="judul"
-                           value="{{ old('judul') }}"
-                           required
-                           autofocus
-                           /></input>
-                        @if ($errors->has('judul'))
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('judul') }}</strong>
-                        </span>
-                        @endif
+               <div class="form-group row">
+                        <label for="keterangan" class="col-md-4 col-form-label ">{{ __('Detail Pengeluaran') }}</label>
+                        <div class="col-md-12">
+                           <textarea id="summernote1"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"    autofocus></textarea>
+                           <small id="passwordHelpBlock" class="form-text text-sucess">Laporan saat kegiatan berlangsung</small> 
+                           @if ($errors->has('keterangan'))
+                           <span class="invalid-feedback" role="alert">
+                           <strong>{{ $errors->first('keterangan') }}</strong>
+                           </span>
+                           @endif
+                        </div>
                      </div>
-                  </div>
                   <div class="form-group row">
-                     <label for="pembayaran" class="col-md-4 col-form-label text-md-right">{{ __('Pembayaran') }}</label>
-                     <div class="col-md-8">
+                     <label for="pembayaran" class="col-md-4 col-form-label text-md-left">{{ __('Total Pengeluaran') }}</label>
+                     <div class="col-md-12">
                         <input
                            id="pembayaran"
                            type="text"
@@ -311,8 +304,8 @@
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label for="url_foto" class="col-md-4 col-form-label text-md-right">{{ __('Upload Foto') }}</label>
-                     <div class="col-md-8">
+                     <label for="url_foto" class="col-md-4 col-form-label text-md-left">{{ __('Upload Foto') }}</label>
+                     <div class="col-md-12">
                         <input
                            id="url_foto"
                            type="file"
@@ -334,8 +327,8 @@
                   </div>
                </div>
                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                  <button class="btn btn-outline-light btn-submit" id="simpanBTN">Submit</button>
+                  <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                  <button class="btn btn-outline-primary btn-submit" id="simpanBTN">Submit</button>
                   <div id="load" class="spinner-border text-primary"></div>
                </div>
             </form>
@@ -368,9 +361,8 @@
               },
               columns:[
                  {data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                 {data:'judul',name:'judul',orderable: true,searchable: true},
                  {data: 'Pembayaran', name: 'Pembayaran', orderable: true, searchable: true},
-                 {data: 'image', name: 'image'},
+                 {data:'Keterangan',name:'Keterangan',orderable: true,searchable: true},
                  {data: 'action', name: 'action'},
                  
                  
@@ -471,7 +463,8 @@
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
          }
      // Summernote
-     $('#summernote').summernote()
+     $('#summernote').summernote();
+     $('#summernote1').summernote();
    
    })     
    $(document).ready(function() {

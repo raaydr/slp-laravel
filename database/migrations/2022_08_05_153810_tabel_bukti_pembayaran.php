@@ -15,7 +15,7 @@ class TabelBuktiPembayaran extends Migration
     {
         Schema::create('dokumentasi_pembayaran', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('judul');
+            $table->text('keterangan');
             $table->integer('pembayaran');
             $table->text('url_foto');
             $table->integer('laporan_id');
