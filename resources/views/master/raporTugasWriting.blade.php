@@ -33,6 +33,7 @@
                   <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$biodata->domisili}}</a></li>
                   <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$biodata->jenis_kelamin}}</a></li>
                   <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$biodata->tanggal_lahir}}</a></li>
+                  <li class="list-group-item"><b>Grup</b> <a class="float-right">{{$user->Peserta->grup}}</a></li>
                </ul>
             </div>
             <!-- /.card-body -->
@@ -43,17 +44,13 @@
          <div class="card card-primary">
             <div class="card-header">
                <h3 class="card-title">Rapor</h3>
-               <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                  </button>
-               </div>
+               
             </div>
             <div class="card-body">
                <div class="row">
                   @foreach ($rapor as $hasil)
                   @if(($hasil['boolean'])==0)
-                  <div class="col-md-4 col-sm-6 col-12">
+                  <div class="col-12">
                      <!-- small card -->
                      <div class="small-box bg-success">
                         <div class="inner">
@@ -71,9 +68,9 @@
                   @endif
                   @if(($hasil['boolean'])==1)
                   <!-- ./col -->
-                  <div class="col-md-4 col-sm-6 col-12">
+                  <div class="col-12">
                      <div class="info-box bg-primary">
-                        <span class="info-box-icon"><i class="fas fa-book"></i></span>
+                        <span class="info-box-icon"><i class="fas fa-pen"></i></span>
                         <div class="info-box-content">
                            <span class="info-box-text">{{$hasil['judul']}}</span>
                            <span class="info-box-number">{{$hasil['jumlah']}}</span>
@@ -87,6 +84,8 @@
                            </span>
                         </div>
                         <!-- /.info-box-content -->
+                        <div class="info-box-footer">
+                        </div>
                      </div>
                      <!-- /.info-box -->
                   </div>

@@ -1058,13 +1058,13 @@ class TugasController extends Controller
         $level = Auth::user()->level;
         switch ($level) {
             case '0':
-                return view('admin.raporTugasWriting',compact('target','rapor','id','biodata'));
+                return view('admin.raporTugasWriting',compact('target','rapor','id','biodata','user'));
                 break;
             case '4':
-                return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata'));
+                return view('peserta.raporTugasWriting',compact('target','rapor','id','biodata','user'));
                 break;
             case '5':
-                return view('fasil.raporTugasWriting',compact('target','rapor','id','biodata'));
+                return view('fasil.raporTugasWriting',compact('target','rapor','id','biodata','user'));
                 break;                               
                 default:
                 echo "SLP INDONESIA";
@@ -1143,13 +1143,13 @@ class TugasController extends Controller
         $level = Auth::user()->level;
         switch ($level) {
             case '0':
-                return view('admin.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                return view('admin.raporTugasSpeaking',compact('target','rapor','id','biodata','user'));
                 break;
             case '4':
-                return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                return view('peserta.raporTugasSpeaking',compact('target','rapor','id','biodata','user'));
                 break;
             case '5':
-                return view('fasil.raporTugasSpeaking',compact('target','rapor','id','biodata'));
+                return view('fasil.raporTugasSpeaking',compact('target','rapor','id','biodata','user'));
                 break;                               
                 default:
                 echo "SLP INDONESIA";
@@ -1217,13 +1217,13 @@ class TugasController extends Controller
         $level = Auth::user()->level;
         switch ($level) {
             case '0':
-                return view('admin.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                return view('admin.raporTugasEntrepreneur',compact('target','rapor','id','biodata','user'));
                 break;
             case '4':
-                return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                return view('peserta.raporTugasEntrepreneur',compact('target','rapor','id','biodata','user'));
                 break;
             case '5':
-                return view('fasil.raporTugasEntrepreneur',compact('target','rapor','id','biodata'));
+                return view('fasil.raporTugasEntrepreneur',compact('target','rapor','id','biodata','user'));
                 break;                               
                 default:
                 echo "SLP INDONESIA";

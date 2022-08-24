@@ -33,6 +33,7 @@
                <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$biodata->domisili}}</a></li>
                <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$biodata->jenis_kelamin}}</a></li>
                <li class="list-group-item"><b>Tanggal Lahir</b> <a class="float-right">{{$biodata->tanggal_lahir}}</a></li>
+               <li class="list-group-item"><b>Grup</b> <a class="float-right">{{$user->Peserta->grup}}</a></li>
             </ul>
          </div>
          <!-- /.card-body -->
@@ -43,18 +44,13 @@
       <div class="card card-primary">
          <div class="card-header">
             <h3 class="card-title">Rapor</h3>
-            <div class="card-tools">
-               <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-               <i class="fas fa-minus"></i>
-               </button>
-            </div>
          </div>
          <div class="card-body">
             <div class="row">
                @foreach ($rapor as $hasil)
-               <div class="col-md-3 col-sm-6 col-12">
+               <div class="col-sm-6 col-12">
                   <div class="info-box bg-info">
-                     <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
+                     <span class="info-box-icon"><i class="fas fa-money-bill"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">{{$hasil['judul']}}</span>
                         <span class="info-box-number">{{$hasil['capai']}}</span>
@@ -70,7 +66,7 @@
                   <!-- /.info-box -->
                </div>
                <!-- /.col -->
-               @endforeach                                   
+               @endforeach                          
             </div>
             <!-- /.row -->
          </div>
