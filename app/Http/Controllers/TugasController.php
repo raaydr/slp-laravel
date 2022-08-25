@@ -1005,10 +1005,16 @@ class TugasController extends Controller
     
                 if ($target_jumlah == 0){
                     $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
-                    $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
-                    latest('created_at')->first();
-                    $terakhir= $last->created_at;
-                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+
+                    if ((Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id))->exists()){
+
+                        $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                        latest('created_at')->first();
+                        $terakhir= $last->created_at;
+                        $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    } else{
+                        $tanggal_akhir= "Belum Mengerjakan";
+                    }
                     $dalam['terakhir'] = $tanggal_akhir;
                     $jumlah_clear=count($tugas_clear);
                     $dalam['judul'] = $target[$i]['judul'];
@@ -1022,10 +1028,15 @@ class TugasController extends Controller
                     
                     $tugas_clear = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
                     $jumlah_clear=count($tugas_clear);
-                    $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
-                    latest('created_at')->first();
-                    $terakhir= $last->created_at;
-                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    if ((Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id))->exists()){
+
+                        $last = Writing::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                        latest('created_at')->first();
+                        $terakhir= $last->created_at;
+                        $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    } else{
+                        $tanggal_akhir= "Belum Mengerjakan";
+                    }
                     $dalam['terakhir'] = $tanggal_akhir;
     
                     if ($jumlah_clear >= $target_jumlah){
@@ -1090,10 +1101,15 @@ class TugasController extends Controller
     
                 if ($target_jumlah == 0){
                     $tugas_clear = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
-                    $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->  
-                    latest('created_at')->first();
-                    $terakhir= $last->created_at;
-                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    if ((Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id))->exists()){
+
+                        $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                        latest('created_at')->first();
+                        $terakhir= $last->created_at;
+                        $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    } else{
+                        $tanggal_akhir= "Belum Mengerjakan";
+                    }
                     $dalam['terakhir'] = $tanggal_akhir;
                     $jumlah_clear=count($tugas_clear);
                     $dalam['judul'] = $target[$i]['judul'];
@@ -1107,12 +1123,16 @@ class TugasController extends Controller
                     
                     $tugas_clear = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->get();
                     $jumlah_clear=count($tugas_clear);
-                    $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
-                    latest('created_at')->first();
-                    $terakhir= $last->created_at;
-                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    if ((Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id))->exists()){
+
+                        $last = Speaking::where('user_id', $user_id)->where('valid', 1)->where('target_tugasID', $target_id)->
+                        latest('created_at')->first();
+                        $terakhir= $last->created_at;
+                        $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    } else{
+                        $tanggal_akhir= "Belum Mengerjakan";
+                    }
                     $dalam['terakhir'] = $tanggal_akhir;
-    
                     if ($jumlah_clear >= $target_jumlah){
     
                         $dalam['judul'] = $target[$i]['judul'];
