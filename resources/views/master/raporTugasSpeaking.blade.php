@@ -115,9 +115,9 @@
                      <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Grup</th>
                         <th>Target Tugas</th>
                         <th>Judul</th>
+                        <th>Tanggal</th>
                         <th>Status</th>
                         <th></th>
                      </tr>
@@ -126,7 +126,7 @@
                      <tr>
                         <th></th>
                         <th><input type="text" placeholder="Search"  style="width: 100%"  /></th>
-                        <th><input type="text" style="width: 30%" /></th>
+                        <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
                         <th><input type="text" placeholder="Search"  style="width: 70%"/></th>
                         <th><input type="text" style="width: 100%"/></th>
                         <th><input type="text" placeholder="Search"  style="width: 70%"/></th>

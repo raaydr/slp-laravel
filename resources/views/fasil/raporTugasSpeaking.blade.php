@@ -20,9 +20,9 @@
                      columns:[
                         { data: 'DT_RowIndex', name: 'DT_RowIndex'},
                         {data:'nama',name:'nama',searchable: true},
-                        {data: 'Grup', name: 'Grup', orderable: true, searchable: true},
                         {data: 'target_tugas', name: 'target_tugas', orderable: true, searchable: true},
                         {data: 'judul', name: 'judul', orderable: true, searchable: true},
+                        {data: 'Tanggal', name: 'Tanggal', orderable: true, searchable: true},
                         {data: 'Status', name: 'Status', orderable: true, searchable: true},
                         {data: 'action', name: 'action'},
                         

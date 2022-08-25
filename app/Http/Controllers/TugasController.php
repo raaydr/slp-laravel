@@ -227,21 +227,10 @@ class TugasController extends Controller
 
             return datatables()->of($data)
                 ->addIndexColumn()
-                ->addColumn('Grup', function($row){
-                    $check = $row->grup;
-                    if(($check)== '0'){
-                        return '<p class="text-danger">Kosong</p>';
-                    }
-                    if(($check)== '1'){
-                        return '<p class="text-primary"><b>Grup 1</b></p>';
-                    }
-                    if(($check)== '2'){
-                        return '<p class="text-success"><b>Grup 2</b></p>';
-                    }
-                    if(($check)== '3'){
-                        return '<p class="text-warning"><b>Grup 3</b></p>';
-                    }
-                    return 'test';
+                ->addColumn('Tanggal', function($row){
+                    $terakhir = $row->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    return $tanggal_akhir;
                 })
                 ->addColumn('Status', function($row){
                     $status = $row->valid;
@@ -267,7 +256,7 @@ class TugasController extends Controller
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';
                     return $actionBtn;
-                })->rawColumns(['Status','Grup', 'action'])
+                })->rawColumns(['Status','Tanggal', 'action'])
                 ->make(true);
         }
         
@@ -643,21 +632,10 @@ class TugasController extends Controller
 
             return datatables()->of($data)
                 ->addIndexColumn()
-                ->addColumn('Grup', function($row){
-                    $check = $row->grup;
-                    if(($check)== '0'){
-                        return '<p class="text-danger">Kosong</p>';
-                    }
-                    if(($check)== '1'){
-                        return '<p class="text-primary"><b>Grup 1</b></p>';
-                    }
-                    if(($check)== '2'){
-                        return '<p class="text-success"><b>Grup 2</b></p>';
-                    }
-                    if(($check)== '3'){
-                        return '<p class="text-warning"><b>Grup 3</b></p>';
-                    }
-                    return 'test';
+                ->addColumn('Tanggal', function($row){
+                    $terakhir = $row->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    return $tanggal_akhir;
                 })
                 ->addColumn('Status', function($row){
                     $status = $row->valid;
@@ -683,7 +661,7 @@ class TugasController extends Controller
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';
                     return $actionBtn;
-                })->rawColumns(['Status','Grup', 'action'])
+                })->rawColumns(['Status','Tanggal', 'action'])
                 ->make(true);
         }
         
@@ -942,21 +920,10 @@ class TugasController extends Controller
 
             return datatables()->of($data)
                 ->addIndexColumn()
-                ->addColumn('Grup', function($row){
-                    $check = $row->grup;
-                    if(($check)== '0'){
-                        return '<p class="text-danger">Kosong</p>';
-                    }
-                    if(($check)== '1'){
-                        return '<p class="text-primary"><b>Grup 1</b></p>';
-                    }
-                    if(($check)== '2'){
-                        return '<p class="text-success"><b>Grup 2</b></p>';
-                    }
-                    if(($check)== '3'){
-                        return '<p class="text-warning"><b>Grup 3</b></p>';
-                    }
-                    return 'test';
+                ->addColumn('Tanggal', function($row){
+                    $terakhir = $row->created_at;
+                    $tanggal_akhir=Carbon::parse($terakhir)->isoFormat('D MMMM Y');
+                    return $tanggal_akhir;
                 })
                 ->addColumn('Status', function($row){
                     $status = $row->valid;
@@ -982,7 +949,7 @@ class TugasController extends Controller
                     <a class="btn btn-primary btn-sm" href='.$detail.'>
                     <i class="fas fa-folder"></i>Detail</a>';
                     return $actionBtn;
-                })->rawColumns(['Status','Grup', 'action'])
+                })->rawColumns(['Status','Tanggal', 'action'])
                 ->make(true);
         }
         
