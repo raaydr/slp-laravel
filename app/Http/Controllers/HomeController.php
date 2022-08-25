@@ -36,7 +36,7 @@ class HomeController extends Controller
                 return redirect()->route('admin.welcome');
                 break;
             case '1':
-                return redirect()->action('\App\Http\Controllers\PendaftarController@index');
+                return redirect()->route('pendaftar.pengumuman');
                 break;   
             case '2':
                 $title = 'Calon Siswa Gugur';
