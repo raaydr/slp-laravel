@@ -215,7 +215,8 @@
                || Route::currentRouteName() == "admin.PembuatanLaporan"
                || Route::currentRouteName() == "admin.PembuatanPengumuman" 
                ||Route::currentRouteName() == "admin.ListSemuaPeserta"
-               || Route::currentRouteName() == "admin.ListSemuaPendaftar")
+               || Route::currentRouteName() == "admin.ListSemuaPendaftar"
+               || Route::currentRouteName() == "admin.PembuatanAlurPendaftaran" )
                   <a href="../widgets.html" class="nav-link active">
                @else
                   <a href="../widgets.html" class="nav-link ">
@@ -256,6 +257,16 @@
                      @endif
                            <i class="far fa-circle nav-icon"></i>
                            <p>Laporan</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                     @if ( Route::currentRouteName() == "admin.PembuatanAlurPendaftaran" )
+                        <a href="{{ route('admin.PembuatanAlurPendaftaran') }}" class="nav-link active">
+                     @else
+                        <a href="{{ route('admin.PembuatanAlurPendaftaran') }}" class="nav-link ">
+                     @endif
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Alur Pendaftaran</p>
                         </a>
                   </li>
                   <li class="nav-item">

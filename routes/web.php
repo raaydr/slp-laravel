@@ -132,6 +132,13 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
 
     //NEW GATE
     Route::get('/Control/New-Gate', 'AdminController@NewGate')->name('admin.NewGate');
+
+
+    //Alur Pendaftaran
+    Route::get('/Alur-Pendaftaran', 'AlurPendaftaranController@PembuatanAlurPendaftaran')->name('admin.PembuatanAlurPendaftaran');
+    Route::post('/Alur-Pendaftaran/add', 'AlurPendaftaranController@AddAlurPendaftaran')->name('admin.AddAlurPendaftaran');
+    Route::get('/Alur-Pendaftaran/delete/{id}', 'AlurPendaftaranController@DeleteAlur')->name('admin.DeleteAlur');
+    Route::post('/Alur-Pendaftaran/edit', 'AlurPendaftaranController@EditAlur')->name('admin.EditAlur');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
