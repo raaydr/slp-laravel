@@ -98,8 +98,8 @@ class PengumumanController extends Controller
                                                         </div>
                                                         <!-- /.modal -->';
                         $actionBtn = $b.' 
-                            <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-danger btn-sm">Hapus</a></dl>
-                                                            <div class="modal fade" id="modal-danger">
+                            <a id="hapus" data-toggle="modal" data-target="#modal-danger'.$id.'" class="btn btn-danger btn-sm">Hapus</a></dl>
+                                                            <div class="modal fade" id="modal-danger'.$id.'">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content bg-danger">
                                                                         <div class="modal-header">

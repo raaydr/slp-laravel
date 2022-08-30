@@ -790,7 +790,7 @@ class AdminController extends Controller
                             <i class="fas fa-folder"> </i>
                             Detail
                             </a>                         
-                            <a class="btn btn-primary btn-sm m-2 deleteItem" data-id="'.$id.'" >
+                            <a class="btn btn-danger btn-sm m-2 deleteItem" data-id="'.$id.'" >
                             <i class="fas ion-person"> </i>
                             Gugur
                             </a>
