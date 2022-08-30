@@ -67,8 +67,8 @@ class LaporanController extends Controller
                         <a class="btn btn-primary btn-sm" href='.$detail.'>
                         <i class="fas fa-folder"></i>detail</a>';
                         $actionBtn = $b.' 
-                            <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-danger btn-sm">Hapus</a></dl>
-                                                            <div class="modal fade" id="modal-danger">
+                            <a id="hapus" data-toggle="modal" data-target="#modal-danger'.$id.'" class="btn btn-danger btn-sm">Hapus</a></dl>
+                                                            <div class="modal fade" id="modal-danger'.$id.'">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content bg-danger">
                                                                         <div class="modal-header">
@@ -460,8 +460,8 @@ class LaporanController extends Controller
                     detail
                     </a>';
                     $actionBtn =$image.' 
-                        <a id="hapus" data-toggle="modal" data-target="#modal-danger" class="btn btn-outline-danger">Hapus</a></dl>
-                                                        <div class="modal fade" id="modal-danger">
+                        <a id="hapus" data-toggle="modal" data-target="#modal-danger'.$id.'" class="btn btn-outline-danger">Hapus</a></dl>
+                                                        <div class="modal fade" id="modal-danger'.$id.'">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content bg-danger">
                                                                     <div class="modal-header">
@@ -516,8 +516,8 @@ class LaporanController extends Controller
                 ->addColumn('action', function($row){
                     $id = $row->id;
                     $actionBtn =' 
-                        <a id="hapus" data-toggle="modal" data-target="#upload-foto" class="btn btn-outline-danger">Hapus</a></dl>
-                                                        <div class="modal fade" id="upload-foto">
+                        <a id="hapus" data-toggle="modal" data-target="#upload-foto'.$id.'" class="btn btn-outline-danger">Hapus</a></dl>
+                                                        <div class="modal fade" id="upload-foto'.$id.'">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content bg-danger">
                                                                     <div class="modal-header">
