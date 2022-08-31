@@ -561,6 +561,6 @@ $('#modal-edit').on('show.bs.modal', function (event) {
              modal.find('.modal-body #judul').val(judul)
              modal.find('.modal-body #urutan').val(urutan)
              modal.find('.modal-body #isi').val(isi)
-         }); 
+}); 
 </script>
 @endsection

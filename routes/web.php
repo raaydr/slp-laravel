@@ -139,6 +139,13 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::post('/Alur-Pendaftaran/add', 'AlurPendaftaranController@AddAlurPendaftaran')->name('admin.AddAlurPendaftaran');
     Route::get('/Alur-Pendaftaran/delete/{id}', 'AlurPendaftaranController@DeleteAlur')->name('admin.DeleteAlur');
     Route::post('/Alur-Pendaftaran/edit', 'AlurPendaftaranController@EditAlur')->name('admin.EditAlur');
+
+    //Benefi dan Persyaratan
+    Route::get('/Benefit-Persyaratan', 'AlurPendaftaranController@pembuatanBenefitPersyaratan')->name('admin.pembuatanBenefitPersyaratan');
+    Route::get('/Benefit-Persyaratan/Tabel-Benefit', 'AlurPendaftaranController@tabelBenefit')->name('admin.tabelBenefit');
+    Route::post('/Benefit-Persyaratan/add', 'AlurPendaftaranController@AddBenefit')->name('admin.AddBenefit');
+    Route::get('/Benefit-Persyaratan/delete/{id}', 'AlurPendaftaranController@DeleteBenefit')->name('admin.DeleteBenefit');
+    Route::post('/Benefit-Persyaratan/edit', 'AlurPendaftaranController@EditBenefit')->name('admin.EditBenefit');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
