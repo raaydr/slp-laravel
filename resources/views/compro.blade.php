@@ -56,8 +56,7 @@
           <li class="menu-active"><a href="#intro">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Pendaftaran</a></li>
-          <li><a href="#portfolio">News</a></li>
-          <li><a href="#blog">Blog</a></li>
+          <li><a href="#portfolio">Alasan</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
@@ -301,31 +300,7 @@
     ============================-->
     <section id="facts"  class="wow fadeIn">
       <div class="container">
-
-        <header class="section-header">
-          <h3>Facts</h3>
-          <p>Jumlah Pendaftar pada Beasiswa Batch Pertama</p>
-        </header>
-
-        <div class="row counters">
-
-  				<div class="col-lg-4 col-4 text-center">
-            <span data-toggle="counter-up">1120</span>
-            <p>Pendaftar</p>
-  				</div>
-
-          <div class="col-lg-4 col-4 text-center">
-            <span data-toggle="counter-up">114</span>
-            <p>Lolos seleksi</p>
-  				</div>
-
-          <div class="col-lg-4 col-4 text-center">
-            <span data-toggle="counter-up">34</span>
-            <p>Graduate</p>
-  				</div>
-
-  			</div>
-
+        
         <div class="facts-img">
           <img src="{{asset('develop')}}/img/lolos.jpg" alt="" class="img-fluid">
         </div>
@@ -340,7 +315,7 @@
       <div class="container">
 
         <header class="section-header">
-          <h3 class="section-title">Our News Feed</h3>
+          <h3 class="section-title">Alasan</h3></h3>
         </header>
 
         <div class="row">
@@ -493,55 +468,7 @@
 
       </div>
     </section><!-- #portfolio -->
-    <!--==========================
-      blog Section
-    ============================-->
-    <section id="blog"  class="section-bg" >
-      <div class="container">
-
-        <header class="section-header">
-          <h3 class="section-title">Our Blog Feed</h3>
-        </header>
-
-        <div class="row">
-          <div class="col-lg-12">
-           
-          </div>
-        </div>
-
-        <div class="row portfolio-container">
-        @foreach ($blog as $blogs)
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-            <div class="portfolio-wrap">
-              <figure>
-              <div class="card flex-md-row mb-4 ">
-            <div class="card-body d-flex flex-column align-items-start">
-              
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">{{$blogs->judul}}</a>
-              </h3>
-              
-              <p class="card-text mb-auto">{{$blogs->awalan}}</p>
-              <?php
-                                    $judul = str_replace(' ', '_', $blogs->judul);
-                                    ?>
-              <a href="{{ route('detailBlog',$judul) }}">Continue reading</a>
-                
-              </figure>
-            </div>
-          </div>
-
-          @endforeach
-          </div>
-
-          
-
-
-          
-
-      </div>
-    </section><!-- #blog -->
-
+    
     <!--==========================
       Clients Section
     ============================-->
@@ -553,21 +480,22 @@
         </header>
         <div class="container-fluid">
           <div class="row">
-              <div class="col-sm">
-                  <a href="#" target="_blank">
+              <div class="col-sm-4">
+                  <a href="#" >
                       <img src="{{asset('develop')}}/img/Youth-Care-ID.jpg" class="img-fluid" alt="Responsive image">
                   </a>
               </div>
-              <div class="col-sm">
-                  <a href="#" target="_blank">
+              <div class="col-sm-4">
+                  <a href="#">
+                      <img src="{{asset('develop')}}/img/silmee.png" class="img-fluid" alt="Responsive image" >
+                  </a>
+              </div>
+              <div class="col-sm-4">
+                  <a href="#" >
                       <img src="{{asset('develop')}}/img/shieraki.jpg" class="img-fluid" alt="Responsive image">
                   </a>
               </div>
-              <div class="col-sm">
-                  <a href="https://slpindonesia.com/" target="_blank">
-                      <img src="{{asset('develop')}}/img/silmee.png" class="img-fluid" alt="Responsive image">
-                  </a>
-              </div>
+              
           </div>
       </div>
       </div>
@@ -743,8 +671,8 @@
           <div class="col-lg-6 col-md-6 footer-contact">
             <h4>Contact Us</h4>
             <p>
-            Jl. Merdeka Raya No.7, RT.1/RW.7, Abadijaya,  <br>
-            Kec. Sukmajaya, Kota Depok,<br>
+            jl. Pemuda No.87, Depok, <br>
+            Kec. Pancoran Mas, Kota Depok,<br>
             Jawa Barat 16417 <br>
               <strong>Phone:</strong>-<br>
               <strong>Email:</strong> slpyouthcareid@gmail.com<br>
