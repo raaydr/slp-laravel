@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Jualan;
+use App\Models\Alur;
+use App\Models\Benefit;
+use App\Models\Persyaratan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class LandingPageController extends Controller
@@ -22,7 +25,10 @@ class LandingPageController extends Controller
 
     public function compro(){
         $blog = Blog::latest()->take(3)->get();
-        return view('compro',compact('blog'));
+        $Alur = Alur::where('status', 1)->orderBy('urutan', 'ASC')->get();
+        $Benefit = Benefit::where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $Persyaratan = Persyaratan::where('status', 1)->orderBy('created_at', 'ASC')->get();
+        return view('compro',compact('blog','Alur','Benefit','Persyaratan'));
     }
 
     public function penjualan($nama){
