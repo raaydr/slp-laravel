@@ -143,9 +143,13 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     //Benefi dan Persyaratan
     Route::get('/Benefit-Persyaratan', 'AlurPendaftaranController@pembuatanBenefitPersyaratan')->name('admin.pembuatanBenefitPersyaratan');
     Route::get('/Benefit-Persyaratan/Tabel-Benefit', 'AlurPendaftaranController@tabelBenefit')->name('admin.tabelBenefit');
-    Route::post('/Benefit-Persyaratan/add', 'AlurPendaftaranController@AddBenefit')->name('admin.AddBenefit');
-    Route::get('/Benefit-Persyaratan/delete/{id}', 'AlurPendaftaranController@DeleteBenefit')->name('admin.DeleteBenefit');
-    Route::post('/Benefit-Persyaratan/edit', 'AlurPendaftaranController@EditBenefit')->name('admin.EditBenefit');
+    Route::post('/Benefit-Persyaratan/Benefit/add', 'AlurPendaftaranController@AddBenefit')->name('admin.AddBenefit');
+    Route::get('/Benefit-Persyaratan/Benefit/delete/{id}', 'AlurPendaftaranController@DeleteBenefit')->name('admin.DeleteBenefit');
+    Route::post('/Benefit-Persyaratan/Benefit/edit', 'AlurPendaftaranController@EditBenefit')->name('admin.EditBenefit');
+    Route::get('/Benefit-Persyaratan/Tabel-Persyaratan', 'AlurPendaftaranController@tabelPersyaratan')->name('admin.tabelPersyaratan');
+    Route::post('/Benefit-Persyaratan/Persyaratan/add', 'AlurPendaftaranController@AddPersyaratan')->name('admin.AddPersyaratan');
+    Route::get('/Benefit-Persyaratan/Persyaratan/delete/{id}', 'AlurPendaftaranController@DeletePersyaratan')->name('admin.DeletePersyaratan');
+    Route::post('/Benefit-Persyaratan/Persyaratan/edit', 'AlurPendaftaranController@EditPersyaratan')->name('admin.EditPersyaratan');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {
