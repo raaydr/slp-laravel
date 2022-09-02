@@ -93,16 +93,13 @@
 						</div>
 					</div>
                     </form>
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>asdasdasd</strong>
-                                    </span>
 					<div class="flex-col-c p-t-50">
 						<span class="txt1 p-b-17">
-							Or Sign Up Using
+							Belum Mendaftar ?
 						</span>
 
-						<a href="#" class="txt2">
-							Sign Up
+						<a href="{{ route('register') }}" class="txt2 text-primary">
+							Daftar Sekarang
 						</a>
 					</div>
 			</div>

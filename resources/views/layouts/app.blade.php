@@ -21,8 +21,28 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('develop')}}/img/slp.png" rel="icon">
+    <style>
+        .bg { 
+  /* The image used */
+  background-image: url("{{asset('login-form')}}/images/bg.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  .card-header{
+    padding:.75rem 1.25rem;
+    margin-bottom:0;
+    background-color:#007bff;
+    border-color: #007bff;
+    border-bottom:1px solid rgba(0,0,0,.125)}
+  </style>
 </head>
-<body style ="background-image: url('{{asset('develop')}}/img/rsz_bg-img.jpg')";>
+<body class="bg">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-blue shadow-sm">
             <div class="container">

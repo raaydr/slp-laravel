@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header text-center">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
+                <div class="card-header text-center text-light">{{ __('Form Pedaftaran SLP Indonesia') }}</div>
                <!--<a class="text-center m-2"><b>Semua Form Harus Dilengkapi </b></a>-->
                 
                 <div class="card-body">
@@ -307,7 +307,7 @@
                         @if(($pendaftaran)== TRUE)
                             <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
                                     {{ __('Daftar') }}
                                 </button>
                             </div>
