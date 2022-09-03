@@ -1,4 +1,13 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('head')
+<link href="{{asset('colorlib-reg')}}/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{{asset('colorlib-reg')}}/css/main.css" rel="stylesheet" media="all">
+
+@endsection
+
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
@@ -104,7 +113,7 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
-                                    <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir" required autofocus />
+                                    <input class="form-control js-datepicker" type="text"  name="tanggal_lahir" required autofocus />
                                 </div>
                             </div>
                             <small id="passwordHelpBlock" class="form-text text-sucess">
@@ -319,4 +328,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+
+<script src="{{asset('colorlib-reg')}}/vendor/datepicker/moment.min.js"></script>
+    <script src="{{asset('colorlib-reg')}}/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="{{asset('colorlib-reg')}}/js/global.js"></script>
+
 @endsection
