@@ -178,138 +178,28 @@
                                             <div class="tab-pane active" id="timeline">
                                                 <!-- The timeline -->
                                                 <div class="timeline timeline-inverse">
+                                                    @foreach($data as $alur)
                                                     <!-- timeline time label -->
                                                     <div class="time-label">
                                                         <span class="bg-danger">
-                                                            15 April 2021
+                                                            Urutan {{$alur->urutan}}
                                                         </span>
                                                     </div>
                                                     <!-- /.timeline-label -->
                                                     <!-- timeline item -->
                                                     <div>
-                                                        <i class="fas fa-envelope bg-primary"></i>
+                                                        <i class="fas fa-check-circle bg-success"></i>
 
                                                         <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">Pembukaan Pendaftaran</a></h3>
+                                                            <h3 class="timeline-header"><a href="#">{{$alur->judul}}</a></h3>
 
                                                             <div class="timeline-body">
-                                                                Mengisi Form Pendaftaran dengan benar dan sesuai. Setelah itu <b>LOGIN</b> dan <b>join link grup WA</b>
-                                                                <a href="https://chat.whatsapp.com/GAZV0KBBI8T6a6kfYSnKWZ" target="”_blank”"><b>Join disini</b></a>
-                                                                <br />
-                                                                Jika Grup WA sudah penuh, join Grup WA lainnya <a href="https://chat.whatsapp.com/ElhCuc6irdn2HtGNnoJAMf" target="”_blank”"><b>Disini</b></a> dan
-                                                                <a href="https://chat.whatsapp.com/KEM8zlDzYsZFG1BcGPW4ct" target="”_blank”"><b>Disini</b></a> <br />
-                                                                Cukup join salah satu grup WA saja dari ketiga grup tersebut
+                                                               {{$alur->isi}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            25 April 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-user bg-info"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header border-0"><a href="#">Seleksi Pertama</a></h3>
-                                                            <div class="timeline-body">
-                                                                Selanjutnya bagi yang lulus dari seleksi pendaftaran, akan masuk ke tahap selanjutnya yaitu melakukan semua challenge yang diberikan. Writing, Bussines, dan Video Challenge.
-                                                                (Pengumuman dapat di check saat login di web ini).
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            2 Mei 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-camera bg-purple"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">Pengisian Form Challenge</a></h3>
-
-                                                            <div class="timeline-body">
-                                                                Jangan lupa untuk mengisi form sebagai laporan kamu telah menyelesaikan challenge sebelumnya.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            22 Mei 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-comments bg-warning"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">In Depth Interview</a></h3>
-
-                                                            <div class="timeline-body">
-                                                                Bagi yang lulus pada tahap challenge, akan lanjut ke tahap interview yang dilaksanakan secara offline.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            23 Mei 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-danger">
-                                                            28 Mei 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-envelope bg-green"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">Pengumuman Tahap Akhir</a></h3>
-
-                                                            <div class="timeline-body">
-                                                                Setelah melewati semua tahapan seleksi, akan diumumkan hasil akhir penerima beasiswa SLP. Semoga mendapatkan hasil yang terbaik!
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-                                                    <!-- timeline time label -->
-                                                    <div class="time-label">
-                                                        <span class="bg-success">
-                                                            5 Juni 2021
-                                                        </span>
-                                                    </div>
-                                                    <!-- /.timeline-label -->
-                                                    <!-- timeline item -->
-                                                    <div>
-                                                        <i class="fas fa-envelope bg-primary"></i>
-
-                                                        <div class="timeline-item">
-                                                            <h3 class="timeline-header"><a href="#">Stadium General</a></h3>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END timeline item -->
-
+                                                    @endforeach
                                                     <div>
                                                         <i class="far fa-clock bg-gray"></i>
                                                     </div>

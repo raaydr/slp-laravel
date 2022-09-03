@@ -9,6 +9,7 @@ use App\Models\seleksiPertama;
 use App\Models\Penilaian;
 use App\Models\Antrian;
 use App\Models\Kepribadian;
+use App\Models\Alur;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,8 @@ class PendaftarController extends Controller
             ->where('user_id', $id)
             ->first();
         $seleksiPertama = User::find($id)->seleksiPertama;
-        return view('user.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama'));
+        $data = Alur::where('status', 1)->orderBy('urutan', 'ASC')->get();
+        return view('user.dashboard', compact('title', 'user', 'biodata', 'seleksiPertama','data'));
     }
     public function pengumuman()
     {
