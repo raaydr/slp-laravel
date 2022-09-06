@@ -165,7 +165,7 @@
                                 <div class="card">
                                     <div class="card-header p-2">
                                         <ul class="nav nav-pills">
-                                            <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                            <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline Pendaftaran</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#Pertama" data-toggle="tab">More about Me</a></li>
                                             @if (!empty($biodata->seleksi_berkas))
                                             <li class="nav-item"><a class="nav-link" href="#Kedua" data-toggle="tab">Challenge</a></li>

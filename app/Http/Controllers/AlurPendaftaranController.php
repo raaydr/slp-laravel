@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Alur;
+use App\Models\Jadwal;
 use App\Models\Benefit;
 use App\Models\Persyaratan;
+use App\Models\Interview;
 use Auth;
 use PDF;
 use Image;
@@ -416,5 +418,281 @@ class AlurPendaftaranController extends Controller
         return response()->json(['status'=>1,'success'=>'Edit saved successfully.']);
         
     }
+
+    public function tabelJadwal(Request $request)
+    {
+        
+        $data = Jadwal::where('status', 1)->orderBy('awal', 'desc')->get();
+            if($request->ajax()){
     
+                return datatables()->of($data)
+                ->addColumn('Antrian', function($row){
+                    $awal = $row->awal;
+                    $akhir = $row->akhir;
+
+                    $antrian= $awal.'  s.d. '.$akhir;
+
+                    return $antrian;
+                })
+                ->addColumn('Jam', function($row){
+                    $awal = $row->time_start;
+                    $akhir = $row->time_end;
+
+                    $antrian= $awal.'  s.d. '.$akhir;
+
+                    return $antrian;
+                })
+                ->addColumn('Tanggal', function($row){
+                    $tanggal = $row->tanggal;
+                    $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
+
+                    return $tanggal;
+                })                    
+                    ->addColumn('action', function($row){
+                        $id = $row->id;
+                        $awal = $row->awal;
+                        $akhir = $row->akhir;
+                        $tanggal = $row->tanggal;
+                        $tanggal = Carbon::parse($tanggal)->isoFormat('YYYY-MM-DD');
+                        $time_start = $row->time_start;
+                        $time_end = $row->time_end;
+                        $b = '
+                        <a class="btn btn-outline-primary m-1" data-toggle="modal" data-myid="'.$id.'" 
+                        data-awal="'.$awal.'"  
+                        data-akhir="'.$akhir.'"  
+                        data-tanggal="'.$tanggal.'"  
+                        data-time_start="'.$time_start.'"  
+                        data-time_end="'.$time_end.'"  
+                        data-target="#modal-edit-jadwal"  target="_blank">
+                        edit</a>
+                        ';
+                        $actionBtn = $b.'  
+                            <button data-toggle="modal" data-target="#modal-deletes'.$id.'"  data-myid='.$id.' class="btn btn-outline-danger m-1">Hapus</button></dl>
+                                                            <div class="modal fade" id="modal-deletes'.$id.'">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content bg-danger">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Konfirmasi</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">    
+                                                                                <p>Apa anda yakin ingin menghapus jadwal ini ?</p>
+                                                                                <div class="modal-footer justify-content-between">
+                                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'" data-dismiss="modal" data-original-title="Delete" class="btn btn-outline-light deleteJadwal">Delete</a>
+                                                                                </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /.modal-content -->
+                                                                </div>
+                                                                <!-- /.modal-dialog -->
+                                                            </div>
+                                                            <!-- /.modal -->';
+                        return $actionBtn;
+                    })->rawColumns(['Antrian','Jam','Tanggal','action'])
+                    ->make(true);
+            }
+    }
+
+    public function AddInterview(Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+         
+            
+            
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            
+            
+            
+            
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+            return back()->withErrors($validator)->withInput();    
+        }
+    
+        $lokasi=$request->lokasi;
+        $dom = new \DomDocument();
+        $dom->loadHtml($lokasi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $lokasi = $dom->saveHTML();
+
+        $psikotes = $request->psikotes;
+        $dom1 = new \DomDocument();
+        $dom1->loadHtml($psikotes, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $psikotes = $dom1->saveHTML();
+
+        $interview = new Interview;
+        $interview->lokasi = $lokasi;
+        $interview->psikotes = $psikotes;
+        $interview->status = 1;
+
+        if ((Interview::where('id', 1))->exists()){
+            
+            Interview::where('id', 1 )->update([
+                'lokasi' => $lokasi,
+                'psikotes' => $psikotes,
+                'updated_at' => now(),
+                ]
+            );
+        }else{
+            $interview->save();
+        }
+
+        
+        
+
+        //Absensi
+
+        return redirect()->route('admin.control')->with('berhasil', 'Ubah Lokasi dan Psikotes');
+    }
+
+    public function AddJadwal(Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            'awal' => 'required',
+            'akhir' => 'required',
+            'tanggal' => 'required',
+            'time_start' => 'required',
+            'time_end' => 'required',
+
+            
+            
+            
+
+        ],
+
+        $messages = 
+        [
+          
+            'awal.required' => 'Antrian awal tidak boleh kosong!',
+            'akhir.required' => 'Antrian akhir tidak boleh kosong !',
+            'tanggal.required' => 'Jadwal tidak boleh kosong',
+            'time_start.required' => 'Isi jam dimulai acara tidak boleh kosong',
+            'time_end.required' => 'Isi jam berakhir acara tidak boleh kosong',
+            
+            
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+            return response()->json(['status'=>0, 'msg'=>'periksa input','error'=>$validator->errors()->all()]);
+        }
+    
+        $data = Jadwal::where('status', 1)->orderBy('awal', 'ASC')->get();
+        $jumlah_data = count($data);
+        $min = $request->awal;
+        $max = $request->akhir;
+
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {
+                $awal = $data[$i]['awal'];
+                $akhir = $data[$i]['akhir'];
+
+                if (($awal <= $min) && ($min <= $akhir)){
+                    $break = 0;
+                    break;
+                }else{
+                    $break = 1;
+                }                
+            }
+        
+        $jadwal = New Jadwal;
+        $jadwal->awal = $request->awal;
+        $jadwal->akhir = $request->akhir;
+        $jadwal->tanggal = $request->tanggal;
+        $jadwal->time_start = $request->time_start;
+        $jadwal->time_end = $request->time_end;
+        $jadwal->status = 1;
+
+        if($break == 0){
+            return response()->json(['status'=>2,'warning'=>'jadwal antrian sudah ada']);
+        }else{
+            $jadwal->save();
+
+            return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+        }
+        
+    }
+
+    public function DeleteJadwal($id)
+    {
+        
+        Jadwal::where('id', $id)->update([
+            'status' => 0,
+            'updated_at' => now(),
+            ]
+        );
+        return response()->json(['success'=>'Hapus Jadwal']);
+        
+        
+    }
+
+    public function EditJadwal(Request $request){
+
+        $data = Jadwal::where('status', 1)->orderBy('awal', 'ASC')->get();
+        $jumlah_data = count($data);
+        $min = $request->awal;
+        $max = $request->akhir;
+
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {
+                $awal = $data[$i]['awal'];
+                $akhir = $data[$i]['akhir'];
+                $id = $data[$i]['id'];
+
+                if($id == $request->id){
+                    $break = 1;
+                }else{
+                    if (($awal <= $min) && ($min <= $akhir)){
+                        $break = 0;
+                        break;
+                    }else{
+                        $break = 1;
+                    }              
+                }
+                  
+            }
+
+        $jadwal = array();
+        
+        if($request->awal != null){
+            $jadwal['awal'] = $request->awal;
+        }
+        if($request->akhir != null){
+            $jadwal['akhir'] = $request->akhir;
+        }
+        if($request->tanggal != null){
+            $jadwal['tanggal'] = $request->tanggal;
+        }
+        if($request->time_start != null){
+            $jadwal['time_start'] = $request->time_start;
+        }
+        if($request->time_end != null){
+            $jadwal['time_end'] = $request->time_end;
+        }
+        $jadwal['updated_at'] = now();
+
+        if($break == 0){
+            return response()->json(['status'=>2,'warning'=>'jadwal antrian sudah ada']);
+        }else{
+            Jadwal::where('id', $request->id )->update($jadwal);
+
+
+            return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+        }
+    }
 }

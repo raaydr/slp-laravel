@@ -281,7 +281,7 @@ class LaporanController extends Controller
 
         Laporan::where('id', $id )->update($laporanBaru);
 
-        return Redirect::back()->with('pesan','Laporan Baru Tersimpan');;
+        return Redirect::back()->with('pesan','Laporan Baru Tersimpan');
         
     }
 

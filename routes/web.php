@@ -150,6 +150,13 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::post('/Benefit-Persyaratan/Persyaratan/add', 'AlurPendaftaranController@AddPersyaratan')->name('admin.AddPersyaratan');
     Route::get('/Benefit-Persyaratan/Persyaratan/delete/{id}', 'AlurPendaftaranController@DeletePersyaratan')->name('admin.DeletePersyaratan');
     Route::post('/Benefit-Persyaratan/Persyaratan/edit', 'AlurPendaftaranController@EditPersyaratan')->name('admin.EditPersyaratan');
+
+    //Antrian Interview
+    Route::get('/Control-Interview/Tabel-Jadwal', 'AlurPendaftaranController@tabelJadwal')->name('admin.tabelJadwal');
+    Route::post('/Control-Interview/add', 'AlurPendaftaranController@AddInterview')->name('admin.AddInterview');
+    Route::post('/Control-Jadwal/add', 'AlurPendaftaranController@AddJadwal')->name('admin.AddJadwal');
+    Route::get('/Control-Jadwal/delete/{id}', 'AlurPendaftaranController@DeleteJadwal')->name('admin.DeleteJadwal');
+    Route::post('/Control-Jadwal/edit', 'AlurPendaftaranController@EditJadwal')->name('admin.EditJadwal');
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

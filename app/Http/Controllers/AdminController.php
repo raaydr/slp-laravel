@@ -14,6 +14,7 @@ use App\Models\Blog;
 use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Models\Target;
+use App\Models\Interview;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -65,10 +66,19 @@ class AdminController extends Controller
             ->get();
         $interview = DB::table('control')
             ->where('id', 5)
-            ->get();            
+            ->get();
+        $antrian = Antrian::where('gen', 2)->max('antrian');            
+        if(Interview::where('id', 1)->exists()){
+            $wawancara = Interview::where('id', 1)->first();
+        }else{
+            $wawancara = new Interview;
+            $wawancara->lokasi = "kosong";
+            $wawancara->psikotes = "kosong";
+        }
         
 
-        return view('admin.control', compact('title', 'pendaftaran', 'quest', 'seleksiPertama', 'gen', 'interview'));
+        return view('admin.control', compact('title', 'pendaftaran', 'quest', 'seleksiPertama', 'gen', 'interview','wawancara'
+    ,'antrian'));
     }
     public function view_create_controller()
     {
@@ -2836,4 +2846,6 @@ class AdminController extends Controller
         $date = Carbon::parse($now)->isoFormat('D MMMM Y');
         return view('admin.welcome', compact('gen','date'));
     }
+
+    
 }
