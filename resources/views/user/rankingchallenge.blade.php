@@ -83,14 +83,11 @@
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-sm-5 col-form-label">Tempat : </label>
                                     <div class="col-sm-5">
-                                    Jl. Merdeka Raya No.7, RT.1/RW.7, Abadijaya,Kec. Sukmajaya, Kota Depok,Jawa Barat 16417 
-                                    (<a href="https://maps.app.goo.gl/LWU3T1yT3Xbc18uz7" target="_blank">Disini</a>)
+                                    {!! $wawancara->lokasi !!}
                                     </div>
                                 </div>
                             </form>
-                            Oh ya, sebelum wawancara berlangsung kamu <b>DIWAJIBKAN</b> untuk mengisi link Tes Kepribadian disini <a href="https://www.16personalities.com/id" target="_blank">16personalities</a>
-                            <br />
-                            Untuk hasilnya, silahkan upload Screenshot bagian Conclusion/Kesimpulan dari Kepribadian kamu dan Upload disini yaa 😋
+                            {!! $wawancara->psikotes !!}
                             <br />
                             @if ($absen == "Tidak Hadir")
                            <button
@@ -113,8 +110,7 @@
                         <div class="card-footer">
                             Selamat berjuang, Salam Leader, Luar Biasa!
                             <br />
-                            Admin SLP, 20 Mei 2021
-                        </div>
+                            Admin SLP
                         <!-- /.card-footer-->
                     </div>
                     <!-- /.card -->

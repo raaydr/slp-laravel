@@ -10,6 +10,8 @@ use App\Models\Penilaian;
 use App\Models\Antrian;
 use App\Models\Kepribadian;
 use App\Models\Alur;
+use App\Models\Interview;
+use App\Models\Jadwal;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Carbon\Carbon;
 
 class PendaftarController extends Controller
 {
@@ -466,30 +469,29 @@ class PendaftarController extends Controller
             ->value('antrian');
         $absen = Antrian::where('user_id', $id)
             ->value('absen');
-        $waktu = "";
-            if ((1 <= $antrian) && ($antrian <= 6)){
-                $waktu = "Sabtu 22 mei, jam 10.30 - 11.15";
-            }else if((7 <= $antrian) && ($antrian <= 12)){
-                $waktu = "Sabtu 22 mei, jam 11.15 - 12.00";
-            }else if((12 <= $antrian) && ($antrian <= 18)){
-                $waktu = "Sabtu 22 mei, jam 13.00 - 13.45";
-            }else if((19 <= $antrian) && ($antrian <= 25)){
-                $waktu = "Sabtu 22 mei, jam 13.45 - 14.30";
-            }else if((26 <= $antrian) && ($antrian <= 30)){
-                $waktu = "Sabtu 22 mei, jam 14.30 - 15.15";
-            }else if((31 <= $antrian) && ($antrian <= 36)){
-                $waktu = "Minggu 23 mei, jam 10.30 - 11.15";
-            }else if((37 <= $antrian) && ($antrian <= 42)){
-                $waktu = "Minggu 23 mei, jam 11.15 - 12.00";
-            }else if((42 <= $antrian) && ($antrian <= 48)){
-                $waktu = "Minggu 23 mei, jam 13.00 - 13.45";
-            }else if((49 <= $antrian) && ($antrian <= 55)){
-                $waktu = "Minggu 23 mei, jam 13.45 - 14.30";
-            }else if((56 <= $antrian) && ($antrian <= 80)){
-                $waktu = "Minggu 23 mei, jam  14.30 - 15.15";
-            }
+        $wawancara = Interview::where('id', 1)->first();
+        $data = Jadwal::where('status', 1)->orderBy('awal', 'ASC')->get();
+        $jumlah_data = count($data);
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {
+                $awal = $data[$i]['awal'];
+                $akhir = $data[$i]['akhir'];
+                $id = $data[$i]['id'];
+                $tanggal = $data[$i]['tanggal'];
+                $time_start = $data[$i]['time_start'];
+                $time_end = $data[$i]['time_end'];
+                if (($awal <= $antrian) && ($antrian <= $akhir)){
+                    $break = 0;
+                
 
-        return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu','biodata','absen'));
+                    $jadwal = $time_start.'  s.d. '.$time_end;
+                    $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
+                    $waktu = $tanggal.', jam'.$jadwal;
+                    break;
+                } 
+            }
+        
+
+        return view('user.rankingchallenge', compact('title', 'ranking', 'users', 'nilai', 'kepribadian','antrian','waktu','biodata','absen','wawancara'));
     }
 
     public function uploadKepribadian(Request $request)
