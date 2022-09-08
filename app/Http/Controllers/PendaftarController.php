@@ -12,6 +12,7 @@ use App\Models\Kepribadian;
 use App\Models\Alur;
 use App\Models\Interview;
 use App\Models\Jadwal;
+use App\Models\Challenge;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
@@ -93,9 +94,10 @@ class PendaftarController extends Controller
         $seleksi_pertama = DB::table('control')
             ->where('nama', 'seleksiPertama')
             ->value('boolean');
+        $rule = Challenge::where('status', 1)->orderBy('created_at', 'ASC')->get();
         $check = $biodata->seleksi_berkas ;
         if ($check == "LULUS"){
-            return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama'));
+            return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama','rule'));
         } else {
             $title = 'Pengumuman Calon Siswa';
             return view('user.pengumuman', compact('title', 'user', 'biodata'));

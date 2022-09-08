@@ -22,148 +22,31 @@
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-12" id="accordion">
-                        <div class="card card-primary card-outline">
-                           <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                     <?php $i = 0; ?>
+                        @foreach ($rule as $challenge)
+                     <?php $i++ ;?>
+
+                        <div class="card card-orange card-outline">
+                           
+                           <a class="d-block w-100" data-toggle="collapse" href="#collapse{{$i}}">
                               <div class="card-header">
                                  <h4 class="card-title w-100">
-                                    <b>1. WRITING CHALLENGE!</b>
+                                    <b>{{$challenge->judul}}</b>
                                  </h4>
                               </div>
                            </a>
-                           <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                           @if($i == 1)
+                           <div id="collapse{{$i}}" class="collapse show" data-parent="#accordion">
+                           @else
+                           <div id="collapse{{$i}}" class="collapse " data-parent="#accordion">
+                           @endif
+                           
                               <div class="card-body">
-                                 <a>Ikuti tantangan ini sesuai ketentuan berikut!</a>
-                                 <ol>
-                                    <li>Setiap peserta wajib menulis sebuah tulisan dengan judul "Kontribusiku untuk Negeri" di upload ke instagram menggunakan foto pribadi.</li>
-                                    <li>Jumlah kata pada tulisan minimal 200 kata.</li>
-                                    <li>3.	Tag akun instagram @slp.indonesia dan gunakan hashtag #SmartLeaderPreneur, #WritingChallenge, dan #(kode unik) di postingan kalian.</li>
-                                    <li>Akun instagram dilarang di <b>private.</b> Agar memudahkan kami dalam proses penilaian karya tulis yang kamu buat.</li>
-                                    <li>Poin penilaian dari challenge ini dinilai dari jumlah kata, keaslian karya, dan kualitas isi.</li>
-                                 </ol>
-                                 <a>Periode challenge ini yaitu 26-29 April 2021. Mengerjakan lebih cepat lebih baik.</a>
-                                 <br>
-                                 <b>Note :</b>
-                                 <ol>
-                                    <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
-                                    <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
-                                 </ol>
+                              {!! $challenge->rule !!}
                               </div>
                            </div>
                         </div>
-                        <div class="card card-warning card-outline">
-                           <a class="d-block w-100" data-toggle="collapse" href="#collapseFour">
-                              <div class="card-header">
-                                 <h4 class="card-title w-100">
-                                    <b>2. INSPIRATION VIDEO CHALLENGE!</b> 
-                                 </h4>
-                              </div>
-                           </a>
-                           <div id="collapseFour" class="collapse" data-parent="#accordion">
-                              <div class="card-body">
-                                 <a>Ikuti tantangan ini sesuai ketentuan berikut :</a>
-                                 <ol>
-                                    <li>Membuat video Inspirasi dengan tema <b>"Pemuda Indonesia Berani Berubah"</b></li>
-                                    <li>Video harus berisi rekaman diri kamu saat kamu melakukan public speaking, jadi bukan hanya tulisan tapi praktik bicara secara langsung</li>
-                                    <li>Upload ke feed instagram/IGTV, video yang sudah kalian buat.</li>
-                                    <li>Akun  instagram  dilarang  di  <b>private.</b>  Agar  memudahkan  kami  dalam  proses  penilaian  video yang kamu buat.</li>
-                                    <li>5.	Tag akun instagram @slp.indonesia dan gunakan hashtag #SmartLeaderPreneur, #VideoChallenge, dan #(kode unik) di postingan kalian.</li>
-                                    <li>Poin penilaian dari challenge ini dinilai dari isi, kekreativitasan, dan penyampaian konten.</li>
-                                 </ol>
-                                 <a>Periode challenge ini yaitu mulai tanggal 26 – 30 April 2021. </a>
-                                 <br>
-                                 <b>Note :</b>
-                                 <ol>
-                                    <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
-                                    <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
-                                 </ol>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="card card-danger card-outline">
-                           <a class="d-block w-100" data-toggle="collapse" href="#collapseSeven">
-                              <div class="card-header">
-                                 <h4 class="card-title w-100">
-                                    <b>3. BUSSINESS CHALLENGE!</b> 
-                                 </h4>
-                              </div>
-                           </a>
-                           <div id="collapseSeven" class="collapse" data-parent="#accordion">
-                              <div class="card-body">
-                                 <a>Di Challenge kali ini kamu di haruskan memberanikan diri untuk berjualan dengan target omzet <b>pembelian</b> yang sudah kami tentukan, yaitu sebesar <b>LIMA RATUS RIBU RUPIAH</b></a>
-                                 <a>Nah, gimana sih teknis challenge ini? </a>
-                                 <a>Panitia sudah menyediakan produk untuk kalian jual.</a>
-                                 <ol>
-                                    <li>SUSCO BITE</li>
-                                    <ul>
-                                       <li>Susco bite ini adalah kue sus kering isi coklat, vanilla, dan strawberry yang rasanya enak dan nagih banget.</li>
-                                       <li>Harga dari SLP Rp 20.000</li>
-                                       <li>Harga jual Rp 25.000 </li>
-                                    </ul>
-                                    <li>Pempek Asli Jambi.</li>
-                                    <ul>
-                                       <li>1kg	    : Harga dari SLP Rp 65.000 -> Harga Jual Rp 75.000 – Rp 85.000</li>
-                                       <li>½kg     : Harga dari SLP Rp 35.000 -> Harga Jual Rp 40.000 – Rp 50.000</li>
-                                       <li>KSB	    : Harga dari SLP Rp 60.000 -> Harga Jual Rp 65.000 – Rp 75.000</li>
-                                       <li>Tekwan  : Harga dari SLP Rp 65.000 -> Harga Jual Rp 75.000 – Rp 85.000</li>
-                                    </ul>
-                                    <li>Buku SHINEBRIDE</li>
-                                    <ul>
-                                       <li>Berat : 1kg/2 buah buku</li>
-                                       <li>Harga dari SLP Rp 60.000</li>
-                                       <li>Harga jual Rp 75.000 – Rp 90.000</li>
-                                    </ul>
-                                 </ol>
-                                 <a>▶ Sistem pemesanan </a>
-                                 <br>
-                                 <ol>
-                                    <li>Teman-teman pesan produk dengan menghubungi admin SLP via link berikut : </li>
-                                    <ul>
-                                       <li>Pemesanan SUSCO  <a href="http://bit.ly/PesenSUSCOdong">di sini</a></li>
-                                       <li>Pemesanan Pempek Asli Jambi   <a href="http://bit.ly/PesenPEMPEK">di sini</a></li>
-                                       <li>Pemesanan Buku SHINEBRIDE   <a href="http://bit.ly/PesenSHINEBRIDE">di sini</a></li>
-                                    </ul>
-                                    <li>Pembayaran dilakukan dengan cara transfer ke rekening <b>BNI Syariah, 0691552012 an. Aprillia Lusiana</b> dan tidak menerima <b>CASH</b>.
-                                       <br>
-                                       *Gunakan aplikasi flip.id bila beda bank.
-                                    </li>
-                                    <li>Melakukan pembayaran sesuai dengan panduan admin. Menyertakan <b>KODE UNIK</b> di tiga angka terakhir jumlah transfer.</li>
-                                    <ul>
-                                       <li>Contoh Kasus 1 : Ari dengan kode unik 48. Ari membeli 10 buah SUSCO dengan akses pengiriman Jabodetabek (Rp 9.000,00/kg). Maka Ari wajib membayar pesanannya senilai Rp 209.048,00.</li>
-                                       <li>•	Contoh Kasus 2 : Hani bernomor absen 76. Hani membeli 10kg pempek (1kg) dengan akses pengiriman Jabodetabek (Medium - Rp 20.000,00/5kg). Maka Hani wajib membayar pesanannya senilai Rp .670.076,00.</li>
-                                    </ul>
-                                    <li>Setelah melakukan pembayaran, admin akan merekap dan tim akan membantu mengirimkan pesanannya.</li>
-                                 </ol>
-                                 <a>▶ Rules of Business Challenge: </a>
-                                 <ol>
-                                    <li>Mencapai target OMZET <b>PEMBELIAN</b> senilai <b>LIMA RATUS RIBU RUPIAH</b> Contoh target keberhasilan Bussiness Challenge : </li>
-                                    <ul>
-                                       <li>Berhasil meraih pemesanan SUSCO sebanyak 25pcs, atau</li>
-                                       <li>Berhasil meraih pemesanan Pempek (1kg) sebanyak 8pcs , atau</li>
-                                       <li>Berhasil meraih pemesanan Pempek (½kg) sebanyak 15pcs, atau</li>
-                                       <li>Berhasil meraih pemesanan Pempek (KSB) sebanyak 9pcs, atau</li>
-                                       <li>Berhasil meraih pemesanan Tekwan sebanyak 8pcs, atau</li>
-                                       <li>Berhasil meraih pemesanan Buku SHINEBRIDE sebanyak 9pcs, atau</li>
-                                       <li>Berhasil meraih pemesanan produk random dengan omzet pembelian senilai Lima Ratus Ribu Rupiah. </li>
-                                    </ul>
-                                    <li>Peserta wajib klik link pemesanan yang telah disediakan untuk melakukan pemesanan dan mengisi lengkap format yang telah disiapkan. </li>
-                                    <li>Sistem pembayaran hanya melalui transfer yang terpusat pada satu rekening, yaitu rekening 
-                                       <br>
-                                       <b>BNI Syariah, 0691552012 an. Aprillia Lusiana</b>
-                                    </li>
-                                    <li>Marketing Tools berupa poster penjualan telah di lampirkan oleh TIM Smart Leader Preneur, silakan kalian edit info pemesanan dengan nomor WA aktif kalian masing-masing menggunakan aplikasi edit foto/gambar di smartphone dan buat copywriting/broadcast penjualan sekreatif mungkin. </li>
-                                    <li>Seluruh keuntungan yang kalian dapatkan dari hasil penjualan bisa kalian nikmati sepenuhnya. Seluruh keuntungan yang didapatkan oleh TIM Smart Leader Preneur akan dialokasikan untuk kebutuhan administrasi program beasiswa selama 6 bulan dan di sedekahkan kepada Rumah Qur’an Youthcare. </li>
-                                 </ol>
-                                 <a>Periode challenge ini yaitu mulai tanggal 26 April – 5 Mei 2021. </a>
-                                 <br>
-                                 <b>Note :</b>
-                                 <ol>
-                                    <li><b>Jika challenge ini belum selesai pada rentang waktu yang sudah ditentukan, maka otomatis gugur dalam seleksi.</b></li>
-                                    <li><b>Kode Unik bisa di cek di profil pendaftaran.</b></li>
-                                    <li>Budayakan BACA sebelum BERTANYA.</li>
-                                 </ol>
-                              </div>
-                           </div>
-                        </div>
+                        @endforeach
                      </div>
                   </div>
                   <!-- left column -->
