@@ -2,6 +2,7 @@
 @section('head')
 <link href="{{asset('colorlib-reg')}}/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
+
     <!-- Main CSS-->
     
 @endsection
@@ -97,7 +98,7 @@
                         <!-- /.card -->
                      </div>
                      <!-- /.col (left) -->
-                     <!-- /.col (left) -->
+                     
                      <div class="col-md-6">
                         @foreach($seleksiPertama as $control)
                         <div class="card card-primary">
@@ -133,6 +134,149 @@
                         </div>
                         <!-- /.card -->
                      </div>
+                        <!-- /.col (left) -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        
+                        <div class="card card-success">
+                           <div class="card-header">
+                              <h3 class="card-title">Peraturan Challenge</h3>
+                           </div>
+                           <div class="card-body">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        <h3 class="card-title">Pembuatan Peraturan</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                        <form id="formChallenge" enctype="multipart/form-data" class="was-validated">
+                                          @csrf
+                                          <div class="form-group row">
+                                                <label for="judul" class="col-md-2 col-form-label text-md-left">{{ __('Judul') }}</label>
+                                                <div class="col-md-10">
+                                                    <input id="judul" type="text" class="form-control" name="judul" value="{{ old('judul') }}" required autofocus >
+                                                    <small id="passwordHelpBlock" class="form-text text-sucess">
+                                                    </small>
+                                                    @if ($errors->has('judul'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('judul') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="judul" class="col-md-4 col-form-label text-md-left">{{ __('Peraturan Challenge') }}</label>
+                                            </div>
+                                            <textarea id="summernote2"  class="form-control{{ $errors->has('rule') ? ' is-invalid' : '' }}" name="rule"    required autofocus></textarea>
+                                            <small id="rule" class="form-text text-sucess"></small> 
+                                            @if ($errors->has('rule'))
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('rule') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="modal-footer justify-content-center">
+                                             <button class="btn btn-outline-primary btn-b" type="addBTN">Submit</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                    <!-- /.card -->
+
+                                </div>
+                                <div class="modal fade" id="modal-edit-challenge">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                <h4 class="modal-title">Edit Jadwal Interview</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <form id="formEditChallenge" enctype="multipart/form-data" class="was-validated">
+                                                @csrf     
+                                                
+                                                <div class="modal-body">
+                                                <input type="hidden" id="id" name="id" >
+                                                <div class="form-group row m-1">
+                                                            <label for="judul" class="col-md-4 col-form-label text-md-left">{{ __('Judul') }}</label>
+                                                            <div class="col-md-8">
+                                                                <input
+                                                                id="judul"
+                                                                type="text"
+                                                                class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}"
+                                                                name="judul"
+                                                                value="{{ old('judul') }}"
+                                                                required
+                                                                autofocus
+                                                                /></input>
+                                                                @if ($errors->has('judul'))
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $errors->first('judul') }}</strong>
+                                                                </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    <div class="form-group row m-1">
+                                                                <label for="rule" class="col-md-4 col-form-label text-md-left">{{ __('Peraturan') }}</label>
+                                                                <div class="col-md-12">
+                                                                <textarea id="summernote3"  class="form-control{{ $errors->has('rule') ? ' is-invalid' : '' }}" name="rule"    required autofocus></textarea>
+                                                                    @if ($errors->has('rule'))
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $errors->first('rule') }}</strong>
+                                                                    </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between ">
+                                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                                    <button class="btn btn-outline-primary btn-submit" id="simpan1BTN">Submit</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                <div class="col-md-12">
+                                 <div class="card">
+                                    <div class="card-header">
+                                       <h3 class="card-title">List Challenge</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                       <table id="example2" class="table table-bordered table-striped">
+                                          <thead>
+                                             <tr>
+                                                <th>Judul</th>
+                                                <th>Rule</th>
+                                                <th></th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                          </tbody>
+                                          <tfoot>
+                                             <tr>
+                                             <th>Judul</th>
+                                                <th>Rule</th>
+                                                <th></th>
+                                             </tr>
+                                          </tfoot>
+                                       </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                 </div>
+                                 <!-- /.card -->
+                              </div>
+                              <!-- /.col -->
+                        </div>
+                        <!-- /.card -->
+                     </div>
+                    </div>
+                    <div class="row">
                      <div class="col-md-5">
                         <!-- iCheck -->
                         <div class="card card-warning">
@@ -165,7 +309,7 @@
                                  </div>
                               </div>
                               <div class="modal fade" id="modal-interview">
-                                 <div class="modal-dialog">
+                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                        <div class="modal-header bg-primary">
                                           <h4 class="modal-title">Interview</h4>
@@ -572,8 +716,87 @@ $(function() {
         .container()
         .appendTo("#example1_wrapper .col-md-6:eq(0)");
 });
+$(function() {
+$("#example2")
+        .DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{route('admin.tabelChallenge')}}",
+                type: 'GET'
+            },
+            columns: [
+
+                        
+                        {data: 'judul', name: 'judul', orderable: true, searchable: true},
+                        {data: 'Rule', name: 'Rule', orderable: true, searchable: true},
+                        {data: 'action', name: 'action'},
+
+
+
+            ],
+            order: [
+                [0, 'asc']
+            ],
+            responsive: true,
+            lengthChange: false,
+            autoWidth: false,
+            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                // Apply the search
+                this.api()
+                    .columns()
+                    .every(function() {
+                        var that = this;
+
+                        $('input', this.footer()).on('keyup change clear', function() {
+                            if (that.search() !== this.value) {
+                                that.search(this.value).draw();
+                            }
+                        });
+                    });
+            },
+        })
+        .buttons()
+        .container()
+        .appendTo("#example2_wrapper .col-md-6:eq(0)");
+});
 
 $(document).ready(function() {
+    $('body').on('click', '.deleteChallenge', function() {
+        var Item_id = $(this).data("id");
+        var url = '{{ route("admin.DeleteChallenge",[":id"]) }}';
+        url = url.replace(':id', Item_id);
+        $.ajax({
+
+            type: "GET",
+
+            url: url,
+
+            success: function(data) {
+
+                iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                    title: 'Data Berhasil Disimpan',
+                    message: '{{ Session('
+                    success ')}}',
+                    position: 'bottomRight'
+                });
+                var oTable = $('#example2').dataTable(); //inialisasi datatable
+                oTable.fnDraw(false); //reset datatable
+
+            },
+
+            error: function(data) {
+
+                console.log('Error:', data);
+
+            }
+
+        });
+
+
+
+    });
     $('body').on('click', '.deleteJadwal', function() {
         var Item_id = $(this).data("id");
         var url = '{{ route("admin.DeleteJadwal",[":id"]) }}';
@@ -618,6 +841,7 @@ $(document).ready(function() {
             //set the content to summernote using `code` attribute.
             $('#summernote').summernote('code', content);
             $('#summernote1').summernote('code', content1);
+            $('#summernote2').summernote();
 
          }) 
     $('body').on('click', '.deletePersyaratan', function() {
@@ -944,6 +1168,209 @@ $(document).ready(function() {
         })
     }
 
+    if ($("#formChallenge").length > 0) {
+        $("#formChallenge").validate({
+            rules: {
+                judul: {
+                    required:true,
+                    
+
+                },
+                rule: {
+                    required: true,
+                    
+
+                },
+            },
+            messages: {
+                Judul: {
+                    
+                    required: 'Judul tolong diisi',
+                },
+                rule: {
+                    
+                    required: 'tolong diisi',
+                    
+                },
+
+            },
+            submitHandler: function(form) {
+                var actionType = $('#addBTN').val();
+                $('#addBTN').html('Sending..');
+                var form = $("#formChallenge").closest("form");
+                var formData = new FormData(form[0]);
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = Math.round(((evt.loaded / evt.total) * 100));
+                                $(".progress-bar").width(percentComplete + '%');
+                                $(".progress-bar").html(percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    data: formData,
+                    url: "{{ route('admin.AddRuleChallenge') }}", //url simpan data
+                    type: "POST", //karena simpan kita pakai method POST
+                    dataType: 'json', //data tipe kita kirim berupa JSON
+                    processData: false,
+                    contentType: false,
+                    success: function(data) { //jika berhasil
+                        switch (data.status) {
+                            case 0:
+                                $('#addBTN').html('Submit');
+                                $('#addBTN').show();
+                                var oTable = $('#example2').dataTable(); //inialisasi datatable
+                                oTable.fnDraw(false); //reset datatable
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.error,
+                                });
+                                console.log('Error:', "periksa");
+                                break;
+                            case 1:
+
+                                $('#addBTN').html('Submit'); //tombol simpan
+                                $('#addBTN').show();
+                                document.getElementById("formChallenge").reset();
+                                $('#summernote2').summernote('code', '');
+                                var oTable = $('#example2').dataTable(); //inialisasi datatable
+                                oTable.fnDraw(false); //reset datatable
+                                //$('#uploadStatus').html('<p style="color:#28A74B;">File Berhasil diupload!</p>');
+                                iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                    title: 'Data Berhasil Disimpan',
+                                    message: '{{ Session('
+                                    success ')}}',
+                                    position: 'bottomRight'
+                                });
+                                break;
+                            default:
+                                // code block
+
+                        }
+
+                    },
+                    error: function(data) { //jika error tampilkan error pada console
+
+                        $('#manfaat').val("");
+
+
+                        $('#simpanBTN').html('Submit'); //tombol simpan
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'Illegal operation',
+                        });
+                        console.log('Error:', "Data kosong");
+
+                    }
+                });
+            }
+        })
+    }
+    if ($("#formEditChallenge").length > 0) {
+    $("#formEditChallenge").validate({
+        rules: {
+            judul: {
+                required:true,
+                
+
+            },
+            rule: {
+                required: true,
+                
+
+            },
+        },
+        messages: {
+            Judul: {
+                
+                required: 'Judul tolong diisi',
+            },
+            rule: {
+                
+                required: 'tolong diisi',
+                
+            },
+
+        },
+        submitHandler: function(form) {
+            var actionType = $('#simpan1BTN').val();
+            $('#simpan1BTN').html('Sending..');
+            var form = $("#formEditChallenge").closest("form");
+            var formData = new FormData(form[0]);
+            $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = Math.round(((evt.loaded / evt.total) * 100));
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                data: formData,
+                url: "{{ route('admin.EditChallenge') }}", //url simpan data
+                type: "POST", //karena simpan kita pakai method POST
+                dataType: 'json', //data tipe kita kirim berupa JSON
+                processData: false,
+                contentType: false,
+                success: function(data) { //jika berhasil
+                    switch (data.status) {
+                        case 0:
+                            $('#simpan1BTN').html('Submit');
+                            $('#simpan1BTN').show();
+                            var oTable = $('#example2').dataTable(); //inialisasi datatable
+                            oTable.fnDraw(false); //reset datatable
+                            iziToast.error({
+                                title: 'Error',
+                                message: data.error,
+                            });
+                            console.log('Error:', "periksa");
+                            break;
+                        case 1:
+
+                            $('#simpan1BTN').html('Submit'); //tombol simpan
+                            $('#simpan1BTN').show();
+                            document.getElementById("formEditChallenge").reset();
+                            $('#modal-edit-challenge').modal('hide'); //modal hide
+                            $('#summernote2').summernote('code', '');
+                            var oTable = $('#example2').dataTable(); //inialisasi datatable
+                            oTable.fnDraw(false); //reset datatable
+                            //$('#uploadStatus').html('<p style="color:#28A74B;">File Berhasil diupload!</p>');
+                            iziToast.success({ //tampilkan iziToast dengan notif data berhasil disimpan pada posisi kanan bawah
+                                title: 'Data Berhasil Disimpan',
+                                message: '{{ Session('
+                                success ')}}',
+                                position: 'bottomRight'
+                            });
+                            break;
+                        default:
+                            // code block
+
+                    }
+
+                },
+                error: function(data) { //jika error tampilkan error pada console
+
+                    
+
+
+                    $('#simpan1BTN').html('Submit'); //tombol simpan
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Illegal operation',
+                    });
+                    console.log('Error:', "Data kosong");
+
+                }
+            });
+        }
+    })
+}
     function printErrorMsg(msg) {
 
         $(".print-error-msg").find("ul").html('');
@@ -978,14 +1405,17 @@ $('#modal-edit-jadwal').on('show.bs.modal', function(event) {
     modal.find('.modal-body #time_end').val(time_end)
 
 });
-$('#modal-edit-persyaratan').on('show.bs.modal', function(event) {
+$('#modal-edit-challenge').on('show.bs.modal', function(event) {
 
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('myid')
-    var syarat = button.data('syarat')
-    var modal = $(this)
-    modal.find('.modal-body #id').val(id)
-    modal.find('.modal-body #syarat').val(syarat)
+var button = $(event.relatedTarget) // Button that triggered the modal
+var id = button.data('myid')
+var judul = button.data('judul')
+var rule = button.data('rule')
+//var content1 = JSON.stringify(rule)
+var modal = $(this)
+modal.find('.modal-body #id').val(id)
+modal.find('.modal-body #judul').val(judul)
+$('#summernote3').summernote('code', rule);
 
 });
 </script>

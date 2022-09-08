@@ -157,6 +157,15 @@ Route::group(['middleware' => 'check-permission:admin'], function () {
     Route::post('/Control-Jadwal/add', 'AlurPendaftaranController@AddJadwal')->name('admin.AddJadwal');
     Route::get('/Control-Jadwal/delete/{id}', 'AlurPendaftaranController@DeleteJadwal')->name('admin.DeleteJadwal');
     Route::post('/Control-Jadwal/edit', 'AlurPendaftaranController@EditJadwal')->name('admin.EditJadwal');
+
+    //Rule Challenge
+    Route::get('/Control-Challenge/Tabel-Challenge', 'AlurPendaftaranController@tabelChallenge')->name('admin.tabelChallenge');
+    Route::post('/Control-Challenge/add', 'AlurPendaftaranController@AddRuleChallenge')->name('admin.AddRuleChallenge');
+    Route::post('/Control-Challenge/edit', 'AlurPendaftaranController@EditChallenge')->name('admin.EditChallenge');
+    Route::get('/Control-Challenge/delete/{id}', 'AlurPendaftaranController@DeleteChallenge')->name('admin.DeleteChallenge');
+    
+
+    
     });
 });
 Route::group(['middleware' => 'check-permission:admin'], function () {

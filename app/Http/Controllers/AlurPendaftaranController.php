@@ -20,6 +20,7 @@ use App\Models\Jadwal;
 use App\Models\Benefit;
 use App\Models\Persyaratan;
 use App\Models\Interview;
+use App\Models\Challenge;
 use Auth;
 use PDF;
 use Image;
@@ -694,5 +695,148 @@ class AlurPendaftaranController extends Controller
 
             return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
         }
+    }
+
+    public function tabelChallenge(Request $request)
+    {
+        $title = 'Pembuatan Rule Challenge';
+        $data = Challenge::where('status', 1)->orderBy('created_at', 'ASC')->get();
+            if($request->ajax()){
+    
+                return datatables()->of($data)
+                ->addColumn('Rule', function($row){
+                    $id = $row->awal;
+                    $isi = $row->rule;
+                    $judul = $row->judul;
+
+                    return $isi;
+                })                    
+                    ->addColumn('action', function($row){
+                        $id = $row->id;
+                        
+                        $judul = $row->judul;
+                        $rule = $row->rule;
+                        //$rule=json_decode($rule);
+                        $b = '
+                        <a class="btn btn-outline-primary m-1" data-toggle="modal" data-myid="'.$id.'" 
+                        data-judul="'.$judul.'"  data-rule="'.$rule.'" 
+                        data-target="#modal-edit-challenge"  target="_blank">
+                        edit</a>
+                        ';
+                        $actionBtn = $b.'  
+                            <button data-toggle="modal" data-target="#modal-deleted'.$id.'"  data-myid='.$id.' class="btn btn-outline-danger m-1">Hapus</button></dl>
+                                                            <div class="modal fade" id="modal-deleted'.$id.'">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content bg-danger">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Konfirmasi</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">    
+                                                                                <p>Apa anda yakin ingin menghapus  '.$judul.' ?</p>
+                                                                                <div class="modal-footer justify-content-between">
+                                                                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$id.'"  data-dismiss="modal" data-original-title="Delete" class="btn btn-outline-light deleteChallenge">Delete</a>
+                                                                                </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /.modal-content -->
+                                                                </div>
+                                                                <!-- /.modal-dialog -->
+                                                            </div>
+                                                            <!-- /.modal -->';
+                        return $actionBtn;
+                    })->rawColumns(['Rule','action'])
+                    ->make(true);
+            }
+    }
+    public function AddRuleChallenge(Request $request){
+        $validator = Validator::make($request->all(), 
+        [   
+            'judul' => 'required|string|max:255',
+            'rule' => 'required',
+            
+            
+            
+
+        ],
+
+        $messages = 
+        [
+            'judul.required' => 'Judul tidak boleh kosong!',
+            'rule.required' => 'Tolong diisi, tidak boleh kosong',
+            
+            
+            
+            
+            
+
+
+        ]);     
+
+        if($validator->fails())
+        {
+            return response()->json(['status'=>0, 'msg'=>'periksa input','error'=>$validator->errors()->all()]);
+        }
+    
+
+        $rule = new Challenge;
+        $rule->judul = $request->judul;
+        $isi = $request->rule;
+        $pattern = '/"/i';
+        $isi= preg_replace($pattern, '-', $isi);
+        //$dom = new \DomDocument();
+        //$dom->loadHtml($isi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        //$isi = $dom->saveHTML();
+        $rule->rule = $isi;
+
+        $rule->status = 1;
+        $rule->save();
+
+        //Absensi
+
+        return response()->json(['status'=>1,'success'=>'Item saved successfully.']);
+    }
+
+    public function DeleteChallenge($id)
+    {
+        
+        Challenge::where('id', $id)->update([
+            'status' => 0,
+            'updated_at' => now(),
+            ]
+        );
+        return response()->json(['success'=>'Hapus challenge ']);
+        
+        
+    }
+
+    public function EditChallenge(Request $request){
+       
+        $rule = array();
+        
+        if($request->judul != null){
+            $judul = $request->judul;
+            $rule['judul'] = $judul;
+        }
+       
+        if($request->rule != null){
+            
+            $isi = $request->rule;
+            $pattern = '/"/i';
+            $isi= preg_replace($pattern, '-', $isi);
+            $rule['rule'] = $isi;
+        }
+
+        
+        $rule['updated_at'] = now();
+
+        Challenge::where('id', $request->id )->update($rule);
+
+        return response()->json(['status'=>1,'success'=>'Edit saved successfully.']);
+        
     }
 }
