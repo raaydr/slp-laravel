@@ -224,6 +224,7 @@ class AdminController extends Controller
                 $meanman = $meanman + $umur;
             }else{
                 $Wanita++;
+                $dom = $biodata->domisili;
                 switch ($dom) {
                     case 'Jakarta':
                         $domJak++;
@@ -279,8 +280,9 @@ class AdminController extends Controller
                         echo "SLP INDONESIA";
                         break;
                 }
+                $minat = $biodata->minatprogram;
                 switch ($minat) {
-                    case 'Writing':
+                    case 'Creative Writing':
                         $writing++;
                         $writingwoman++;
                         break;

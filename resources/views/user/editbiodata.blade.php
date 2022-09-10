@@ -128,7 +128,7 @@
                             <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama Lengkap') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama" value="{{$biodata->nama}}" required autofocus>
+                                <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama" value="{{$biodata->nama}}"  autofocus>
 
                                 @if ($errors->has('nama'))
                                     <span class="invalid-feedback" role="alert">
@@ -175,7 +175,7 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
-                                    <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir" required autofocus />
+                                    <input placeholder="masukkan tanggal Lahir" type="text" class="form-control datepicker" name="tanggal_lahir"  autofocus />
                                 </div>
                             </div>
                             <small id="passwordHelpBlock" class="form-text text-sucess">
@@ -230,7 +230,7 @@
                             <label for="phonenumber" class="col-md-4 col-form-label text-md-right">{{ __('No Handphone (terhubung dengan Whatsapp)') }}</label>
 
                             <div class="col-md-4">
-                                <input id="phonenumber" type="text" class="form-control{{ $errors->has('phonenumber') ? ' is-invalid' : '' }}" name="phonenumber" value="{{$biodata->phonenumber}}" required autofocus>
+                                <input id="phonenumber" type="text" class="form-control{{ $errors->has('phonenumber') ? ' is-invalid' : '' }}" name="phonenumber" value="{{$biodata->phonenumber}}"  autofocus>
 
                                 @if ($errors->has('phonenumber'))
                                     <span class="invalid-feedback" role="alert">

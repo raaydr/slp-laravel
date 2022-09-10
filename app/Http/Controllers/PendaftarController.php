@@ -371,33 +371,17 @@ class PendaftarController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => 'required|string|max:255',
+                'nama' => '|string|max:255',
 
-                'jenis_kelamin' => 'required',
-                'tanggal_lahir' => 'required',
-                'domisili' => 'required',
-                'alamat_domisili' => 'required|string',
-                'phonenumber' => 'required|string|max:13',
+                
+                'alamat_domisili' => 'string',
+                'phonenumber' => 'max:13',
 
-                'aktivitas' => 'required',
-                'minatprogram' => 'required',
-                'alasanBeasiswa' => 'required|string',
-                'five_pros' => 'required|string',
-                'five_cons' => 'required|string',
+            
             ],
 
             $messages = [
-                'nama.required' => 'Nama tidak boleh kosong!',
-                'jenis_kelamin.required' => 'jenis kelamin harus dipilih!',
-                'tanggal_lahir.required' => 'tanggal lahir tidak boleh kosong!',
-
-                'domisili.required' => 'Domisili harus dipilih!',
-                'alamat_domisili.required' => 'alamat tidak boleh kosong!',
-                'phonenumber.required' => 'Nomor telpon tidak boleh kosong!',
-                'aktivitas.required' => 'Aktivitas harus dipilih!',
-                'alasanBeasiswa.required' => 'Alasan Beasiswa tidak boleh kosong!',
-                'five_pros.required' => '5 kelebihan tidak boleh kosong!!',
-                'five_cons.required' => '5 kekurangan tidak boleh kosong!!',
+              
             ]
         );
 
@@ -408,30 +392,59 @@ class PendaftarController extends Controller
         }
         $title = 'Dashboard Calon Siswa';
         $id = Auth::user()->id;
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->first();
+            $profileBaru = array();
+        
+            if($request->nama != null){
+                $nameNew = $request->nama;
+                $profileBaru['nama'] = $nameNew;
+            }
+            
+            if($request->jenis_kelamin != null){
+                
+                $profileBaru['jenis_kelamin'] = $request->jenis_kelamin;
+            }
+            if($request->tanggal_lahir != null){
+                
+                $profileBaru['tanggal_lahir'] = $request->tanggal_lahir;
+            }
+            if($request->domisili != null){
+                
+                $profileBaru['domisili'] = $request->domisili;
+            }
+            if($request->alamat_domisili != null){
+                
+                $profileBaru['alamat_domisili'] = $request->alamat_domisili;
+            }
+            if($request->aktivitas != null){
+                
+                $profileBaru['aktivitas'] = $request->aktivitas;
+            }
+            if($request->minatprogram != null){
+                
+                $profileBaru['minatprogram'] = $request->minatprogram;
+            }
+            if($request->alasanbeasiswa != null){
+                
+                $profileBaru['alasanbeasiswa'] = $request->alasanbeasiswa;
+            }
+            if($request->five_pros != null){
+                
+                $profileBaru['five_pros'] = $request->five_pros;
+            }
+            if($request->five_cons != null){
+                
+                $profileBaru['five_cons'] = $request->five_cons;
+            }
 
-        DB::table('biodata')
-            ->where('user_id', $id)
-            ->update([
-                'nama' => $request->nama,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'domisili' => $request->domisili,
-                'alamat_domisili' => $request->alamat_domisili,
-                'aktivitas' => $request->aktivitas,
-                'minatprogram' => $request->minatprogram,
-                'alasanbeasiswa' => $request->alasanBeasiswa,
-                'five_pros' => $request->five_pros,
-                'five_cons' => $request->five_cons,
-            ]);
+            
+            
+            $profileBaru['updated_at'] = now();
+            
+            
+            Biodata::where('id', Auth::user()->id )->update($profileBaru);
+            
 
-        $biodata = DB::table('biodata')
-            ->where('user_id', $id)
-            ->first();
-
-        return view('user.dashboard', compact('title', 'user', 'biodata'));
+            return redirect()->route('pendaftar.dashboard')->with('pesan', 'Berhasil ubah');
     }
 
     public function editbiodata(Request $request)
