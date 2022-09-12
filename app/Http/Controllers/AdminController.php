@@ -534,7 +534,6 @@ class AdminController extends Controller
 
         return view('admin.seleksi2', compact('title', 'users'));
     }
-
     public function userProfile($user_id)
     {
         $title = 'Admin User Profile';
@@ -551,6 +550,26 @@ class AdminController extends Controller
         
         
         return view('admin.userProfile', compact('title', 'user','penjualan'));
+    }
+    public function edit_biodata($user_id)
+    {
+        Biodata::where('user_id', $user_id )->update(['edit' => '1']);
+        
+        return Redirect::back()->with('pesan','Memberikan akses edit biodata');
+    }
+
+    public function editbiodata(Request $request)
+    {
+        $title = 'Ubah Biodata';
+        $id = Auth::user()->id;
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        $biodata = DB::table('biodata')
+            ->where('user_id', $id)
+            ->first();
+
+        return view('user.editbiodata', compact('title', 'user', 'biodata'));
     }
     public function challenge(){
         $title = 'Admin Seleksi Challenge';

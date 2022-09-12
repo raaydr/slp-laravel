@@ -44,6 +44,9 @@
                                         <p class="text-muted text-center">{{ $biodata->aktivitas}}</p>
                                         <div class="text-center">
                                             <a data-toggle="modal" data-target="#modal-foto" class="btn btn-primary btn-sm m-2">ubah foto</a>
+                                            @if($biodata->edit == 1)
+                                            <a href="{{route('pendaftar.edit.biodata')}}" class="btn btn-warning btn-sm m-2">Edit Biodata</a>
+                                            @endif
                                         </div>
                                         <div class="modal fade" id="modal-foto">
                                             <div class="modal-dialog">

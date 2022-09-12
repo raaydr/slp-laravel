@@ -439,10 +439,11 @@ class PendaftarController extends Controller
             
             
             $profileBaru['updated_at'] = now();
+            $profileBaru['edit'] = 0;
             
             
-            Biodata::where('id', Auth::user()->id )->update($profileBaru);
-            
+            Biodata::where('user_id', $id )->update($profileBaru);
+            //dd($profileBaru);
 
             return redirect()->route('pendaftar.dashboard')->with('pesan', 'Berhasil ubah');
     }
@@ -458,7 +459,13 @@ class PendaftarController extends Controller
             ->where('user_id', $id)
             ->first();
 
-        return view('user.editbiodata', compact('title', 'user', 'biodata'));
+        if ($biodata->edit == 1){
+            return view('user.editbiodata', compact('title', 'user', 'biodata'));
+        }else{
+            return redirect()->route('pendaftar.pengumuman');
+        }
+        
+        
     }
 
     public function ranking()

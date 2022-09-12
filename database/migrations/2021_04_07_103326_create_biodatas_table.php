@@ -31,6 +31,7 @@ class CreateBiodatasTable extends Migration
             $table->string('seleksi_berkas')->nullable();
             $table->string('seleksi_pertama')->nullable();
             $table->string('seleksi_kedua')->nullable();
+            $table->boolean('edit')->nullable();
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();   

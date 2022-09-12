@@ -55,6 +55,34 @@
                               </div>
                               <h4 class="profile-username text-center">{{$user->Biodata->nama}}</h4>
                               <p class="text-muted text-center">{{$user->Biodata->aktivitas}}</p>
+                              <div class="text-center">
+                                 @if(($user->level == 1)&&($user->Biodata->edit == 0))
+                                            <a data-toggle="modal" data-target="#modal-foto" class="btn btn-primary btn-sm m-2">Edit Biodata</a>
+                              @endif
+                              </div>
+                                        <div class="modal fade" id="modal-foto">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-primary">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Biodata</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    
+                                                        <div class="modal-body">
+                                                        <p>Apa anda yakin ingin memberikan akses edit biodata pada peserta ?</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                            <a href="{{route('admin.AksesEditBiodata', $user->id)}}" class="btn btn-outline-light">Setuju</a>
+                                                        </div>
+                                                    
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
                               <ul class="list-group list-group-unbordered mb-3">
                                  <li class="list-group-item"><b>Domisili</b> <a class="float-right">{{$user->Biodata->domisili}}</a></li>
                                  <li class="list-group-item"><b>Jenis Kelamin</b> <a class="float-right">{{$user->Biodata->jenis_kelamin}}</a></li>
