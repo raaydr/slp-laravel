@@ -248,6 +248,9 @@
                               class="dropzone" id="dropzone">
                               @csrf
                         </form>
+                        <div class="row d-flex justify-content-center">   
+                              <button id ="btn_save" class="btn btn-outline-success m-2 ">Upload</button>
+                           </div>
                         <small id="passwordHelpBlock" class="form-text text-sucess"><a>Drag file atau Klik Kolom diatas</a></small>
                         <small id="passwordHelpBlock" class="form-text text-sucess">Format harus jpg,png,jpeg dan ukuran 5 mb</small>   
                         </div>
@@ -707,6 +710,22 @@
                                     
                return false;
             }
-};
+         }
+         Dropzone.autoDiscover = false
+         const myDropzone = new Dropzone('#dropzone', {
+            autoProcessQueue: false
+         })
+
+         // Submit
+         const $button = document.getElementById('btn_save')
+         $button.addEventListener('click', function () {
+            // Retrieve selected files
+            const acceptedFiles = myDropzone.getAcceptedFiles()
+            for (let i = 0; i < acceptedFiles.length; i++) {
+            setTimeout(function () {
+               myDropzone.processFile(acceptedFiles[i])
+            }, i * 2000)
+            }
+         });
 </script>
 @endsection

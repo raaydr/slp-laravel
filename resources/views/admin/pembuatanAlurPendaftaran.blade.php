@@ -49,6 +49,27 @@
                                  </div>
                               </div>
                               <div class="form-group row">
+                                 <label for="mulai" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Mulai') }}</label>
+                                 <div class="col-md-6">
+                                                <div class="input-group date">
+                                                   <div class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-th"></span>
+                                                   </div>
+                                                   <input placeholder="masukkan tanggal pembuatan" type="text" class="form-control datepicker" name="mulai" required autofocus />
+                                                   <div class="input-group-append">
+                                                      <div class="input-group-text">
+                                                         <span class="far fa-calendar-alt"></span>
+                                                      </div>
+                                                   </div>
+                                                   @error('tanggal_pembuatan')
+                                                   <span class="invalid-feedback" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                                   </span>
+                                                   @enderror
+                                                </div>
+                                             </div>
+                                          </div>
+                              <div class="form-group row">
                                  <label for="Urutan" class="col-md-4 col-form-label text-md-right">{{ __('Urutan') }}</label>
                                  <div class="col-md-6">
                                     <input id="urutan" type="text" class="form-control" name="urutan" value='{{$urut}}'readonly />
@@ -120,6 +141,27 @@
                      </div>
                   </div>
                   <div class="form-group row">
+                                 <label for="mulai" class="col-md-4 col-form-label text-md-left">{{ __('Tanggal Mulai') }}</label>
+                                 <div class="col-md-12">
+                                                <div class="input-group date">
+                                                   <div class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-th"></span>
+                                                   </div>
+                                                   <input id="mulai" placeholder="masukkan tanggal pembuatan" type="text" class="form-control datepicker" name="mulai" required autofocus />
+                                                   <div class="input-group-append">
+                                                      <div class="input-group-text">
+                                                         <span class="far fa-calendar-alt"></span>
+                                                      </div>
+                                                   </div>
+                                                   @error('tanggal_pembuatan')
+                                                   <span class="invalid-feedback" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                                   </span>
+                                                   @enderror
+                                                </div>
+                                             </div>
+                                          </div>
+                  <div class="form-group row">
                      <label for="urutan" class="col-md-4 col-form-label text-md-left">Urutan</label>
                      <div class="col-md-12">
                         <input
@@ -168,6 +210,7 @@
                                              <tr>
                                                    <th>Urutan</th>
                                                    <th>Judul</th>
+                                                   <th>Mulai</th>
                                                    <th>Isi</th>
                                                    <th>action</th>
                                              </tr>
@@ -178,6 +221,7 @@
                                              <tr>
                                                 <th>Urutan</th>
                                                    <th>Judul</th>
+                                                   <th>Mulai</th>
                                                    <th>Isi</th>
                                                    <th>action</th>
                                              </tr>
@@ -218,6 +262,12 @@ $(function() {
                 {
                     data: 'judul',
                     name: 'judul',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'Tanggal',
+                    name: 'Tanggal',
                     orderable: true,
                     searchable: true
                 },
@@ -321,6 +371,10 @@ $(document).ready(function() {
         $("#formTarget").validate({
             rules: {
                 judul: {
+                    required: true
+
+                },
+                mulai: {
                     required: true
 
                 },
@@ -549,18 +603,20 @@ $(document).ready(function() {
     }
 
 });
-$('#modal-edit').on('show.bs.modal', function (event) {
+$('#modal-edit').on('shown.bs.modal', function (event) {
              
              var button = $(event.relatedTarget) // Button that triggered the modal
              var id = button.data('myid')
              var judul = button.data('judul') 
              var urutan = button.data('urutan') 
-             var isi = button.data('isi') 
+             var isi = button.data('isi')
+             var mulai = button.data('mulai') 
              var modal = $(this)
              modal.find('.modal-body #id').val(id)
              modal.find('.modal-body #judul').val(judul)
              modal.find('.modal-body #urutan').val(urutan)
              modal.find('.modal-body #isi').val(isi)
+             modal.find('.modal-body #mulai').val(mulai)
 }); 
 </script>
 @endsection

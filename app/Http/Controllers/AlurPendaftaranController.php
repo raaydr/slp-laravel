@@ -54,15 +54,22 @@ class AlurPendaftaranController extends Controller
         $data = Alur::where('status', 1)->orderBy('created_at', 'ASC')->get();
             if($request->ajax()){
     
-                return datatables()->of($data)                    
+                return datatables()->of($data)  
+                ->addColumn('Tanggal', function($row){
+                    $tanggal = $row->mulai;
+                    $tanggal = Carbon::parse($tanggal)->isoFormat('D MMMM Y');
+
+                    return $tanggal;
+                })                   
                     ->addColumn('action', function($row){
                         $id = $row->id;
                         $urutan = $row->urutan;
                         $judul = $row->judul;
                         $isi = $row->isi;
+                        $mulai = $row->mulai;
                         $b = '
                         <a class="btn btn-outline-primary m-1" data-toggle="modal" data-myid="'.$id.'" 
-                        data-judul="'.$judul.'" data-urutan="'.$urutan.'" data-isi="'.$isi.'" 
+                        data-judul="'.$judul.'" data-urutan="'.$urutan.'" data-isi="'.$isi.'"data-mulai="'.$mulai.'" 
                         data-target="#modal-edit"  target="_blank">
                         edit</a>
                         ';
@@ -104,7 +111,7 @@ class AlurPendaftaranController extends Controller
             'judul' => 'required|string|max:255',
             'urutan' => 'required',
             'isi' => 'required',
-            
+            'mulai' => 'required|date',
             
             
 
@@ -115,7 +122,7 @@ class AlurPendaftaranController extends Controller
             'judul.required' => 'Judul tidak boleh kosong!',
             'urutan.required' => 'urutan tidak boleh kosong !',
             'isi.required' => 'Tolong diisi, tidak boleh kosong',
-            
+            'mulai.required' => 'Tanggal tidak boleh kosong!',
             'urutan.numeric' => 'Urutan haru berupa angka',
             
             
@@ -132,6 +139,7 @@ class AlurPendaftaranController extends Controller
 
         $alur = new Alur;
         $alur->judul = $request->judul;
+        $alur->mulai = $request->mulai;
         $alur->urutan = $request->urutan;
         $alur->isi = $request->isi;
         $alur->status = 1;
@@ -167,6 +175,11 @@ class AlurPendaftaranController extends Controller
         if($request->isi != null){
             $isi = $request->isi;
             $alur['isi'] = $isi;
+        }
+
+        if($request->mulai != null){
+            $mulai = $request->mulai;
+            $alur['mulai'] = $mulai;
         }
 
         

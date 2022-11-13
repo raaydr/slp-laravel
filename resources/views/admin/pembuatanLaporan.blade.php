@@ -60,7 +60,15 @@
                                  </div>
                               </div>
                               <div class="form-group row">
-                           x
+                              <label for="time_end" class="col-md-4 col-form-label text-md-right">{{ __('Kegiatan Berakhir Jam:') }}</label>
+                                 <div class="col-md-6">
+                                    <input id="time_end" type="time" class="form-control" name="time_end" value="{{ old('time_end') }}"  />
+                                    @if ($errors->has('time_end'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('time_end') }}</strong>
+                                    </span>
+                                    @endif
+                                 </div>
                               </div>
                               <div class="form-group row">
                                  <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Kegiatan') }}</label>

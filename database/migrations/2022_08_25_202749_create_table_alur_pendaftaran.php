@@ -15,6 +15,7 @@ class CreateTableAlurPendaftaran extends Migration
     {
         Schema::create('alur_pendaftaran', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('mulai');
             $table->string('judul');
             $table->text('isi');
             $table->integer('urutan');

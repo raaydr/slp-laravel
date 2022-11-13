@@ -185,7 +185,8 @@
                                                     <!-- timeline time label -->
                                                     <div class="time-label">
                                                         <span class="bg-danger">
-                                                            Urutan {{$alur->urutan}}
+                                                        {{\Carbon\Carbon::parse($alur->mulai)->toFormattedDateString()}}
+                                                        
                                                         </span>
                                                     </div>
                                                     <!-- /.timeline-label -->

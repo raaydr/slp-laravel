@@ -14,6 +14,7 @@ class Alur extends Model
         'isi',
         'urutan',
         'status',
+        'mulai',
 
         
         
