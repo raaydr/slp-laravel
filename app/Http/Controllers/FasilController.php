@@ -437,7 +437,8 @@ class FasilController extends Controller
     public function grup_peserta(Request $request)
     {
         $title = 'Grup Peserta';
-        
+        $id = Auth::user()->id;
+        $grup  = Fasil::where('user_id', $id)->value('grup');        
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
@@ -445,7 +446,7 @@ class FasilController extends Controller
                     ->join('biodata', 'biodata.user_id', '=', 'users.id')
                     ->join('peserta', 'peserta.user_id', '=', 'users.id')
                     //->join('peserta', 'peserta.user_id', '=', 'users.id')
-                    ->where('users.gen', 2)->where('users.level', 4)
+                    ->where('users.gen', $gen)->where('users.level', 4)->where('peserta.grup', $grup)
                     ->get();
         
         
