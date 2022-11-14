@@ -16,6 +16,7 @@ use App\Models\Laporan;
 use App\Models\Absensi;
 use App\Models\Dokumentasi;
 use App\Models\Jualan;
+use App\Models\Pengumuman;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -48,14 +49,17 @@ class PesertaController extends Controller
     {
         $title = 'Dashboard Peserta';
         $id = Auth::user()->id;
+        $gen= Auth::user()->gen;
+        $level= Auth::user()->level;
         $user = DB::table('users')
             ->where('id', $id)
             ->first();
         $biodata = DB::table('users')
             ->where('id', $id)
             ->get();
-        
-        return view('peserta.pengumuman', compact('title', 'user','biodata'));
+            $data = Pengumuman::where('gen', $gen)->where('level', $level)
+            ->where('status', 1)->whereDate('tanggal_diumumkan', '<=', Carbon::today())->orderBy('tanggal_diumumkan', 'DESC')->get();
+        return view('peserta.pengumuman', compact('title', 'user','biodata','data'));
     }
     public function grup_peserta()
     {
