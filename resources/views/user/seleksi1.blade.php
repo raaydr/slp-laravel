@@ -68,6 +68,7 @@
                         <form action="{{ route('pendaftar.upload.seleksi1') }}" method="POST" enctype="multipart/form-data" class="was-validated">
                            @csrf
                            <div class="card-body">
+                           <label for="exampleInputEmail1">Silahkan input ulang jika ingin mengubah data Challenge</label>
                               <div class="row">
                                  <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">ID</label>

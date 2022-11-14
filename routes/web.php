@@ -523,7 +523,7 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 // ROUTES Peserta
 Route::group(['middleware' => 'check-permission:peserta'], function () {
     Route::group(['prefix' => 'peserta'], function () {
-	Route::get('/pengumuman', 'PesertaController@index')->name('peserta.pengumuman');
+	Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('peserta.pengumuman');
     Route::get('/penjualan', 'PesertaController@jualan')->name('peserta.jualan');
     Route::post('/link-penjualan', 'PesertaController@linkJualan')->name('peserta.linkJualan');
     Route::get('/ubah-password', 'PesertaController@ubah_password')->name('peserta.ubah.password');
