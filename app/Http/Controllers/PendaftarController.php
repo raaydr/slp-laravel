@@ -97,7 +97,14 @@ class PendaftarController extends Controller
         $rule = Challenge::where('status', 1)->orderBy('created_at', 'ASC')->get();
         $check = $biodata->seleksi_berkas ;
         if ($check == "LULUS"){
-            return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama','rule'));
+
+            if(seleksiPertama::where('user_id', $id)->exists()){
+                $data = seleksiPertama::where('user_id', $id)->first();
+            
+                
+            }
+
+            return view('user.seleksi1', compact('title', 'biodata', 'user', 'seleksi','seleksi_pertama','rule','data'));
         } else {
             $title = 'Pengumuman Calon Siswa';
             return view('user.pengumuman', compact('title', 'user', 'biodata'));
