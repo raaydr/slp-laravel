@@ -26,7 +26,7 @@
                            <h3 class="card-title">List Pendaftar Tahap Challenge</h3>
                            <div class="modal fade" id="modal-penilaian">
                                     <div class="modal-dialog">
-                                       <div class="modal-content bg-warning">
+                                       <div class="modal-content bg-info">
                                           <div class="modal-header">
                                              <h4 class="modal-title">Penilaian</h4>
                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">

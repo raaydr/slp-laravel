@@ -287,7 +287,7 @@
                               <div class="form-group row">
                                  <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('Generate Antrian') }}</label>
                                  <div class="col-md-7">
-                                 <a type="button" href="{{ route('admin.generate.antrian') }}" class="btn btn-outline-primary" >{{ __(' Buat') }}</a>
+                                 <a type="button" href="{{ route('admin.generate.antrian') }}" class="btn d-md-block btn-outline-primary" >{{ __(' Buat') }}</a>
                                  </div>
                               </div>
                               <div class="form-group row">
@@ -451,6 +451,7 @@
                                                                 <input
                                                                 id="time_start"
                                                                 type="time"
+                                                                
                                                                 class="form-control{{ $errors->has('time_start') ? ' is-invalid' : '' }}"
                                                                 name="time_start"
                                                                 value="{{ old('time_start') }}"
@@ -761,7 +762,14 @@ $("#example2")
         .container()
         .appendTo("#example2_wrapper .col-md-6:eq(0)");
 });
-
+$(function () {
+             $('#time_start').datetimepicker({
+                 format: 'LT'
+             });
+             $('#time_end').datetimepicker({
+                 format: 'LT'
+             });
+         });
 $(document).ready(function() {
     $('body').on('click', '.deleteChallenge', function() {
         var Item_id = $(this).data("id");
