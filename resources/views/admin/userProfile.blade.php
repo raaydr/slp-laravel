@@ -96,7 +96,7 @@
                                  @if(!empty($user->Biodata->seleksi_kedua))
                                  <li class="list-group-item"><b>Seleksi Kedua</b> <a class="float-right">{{$user->Biodata->seleksi_kedua}}</a></li>
                                  @endif
-                                 @if((($user->Biodata->seleksi_kedua)=="BERHASIL")&&(($user->level)==1)== 1)
+                                 @if((($user->Biodata->seleksi_kedua)=="BERHASIL")&&(($user->level)!=4)== 1)
                                  <div class="form-group row">
                                     <label  class="col-md-12 col-form-label text-md-center">Terima Awardee</label>
                                     <div class="offset-sm-2 col-sm-10">
@@ -692,7 +692,7 @@
                                                    </div>
                                                    <div class="form-group row">
                                                       <div class="offset-sm-2 col-sm-10">
-                                                      @if ((!empty($user->Biodata->seleksi_kedua)) && (($user->level) == 1))
+                                                      @if((($user->Biodata->seleksi_pertama)=="LOLOS")&&(($user->level)!=4)== 1)
                                                          <a  data-toggle="modal" data-target="#modal-primary2" class="btn btn-primary" >Lulus</a>
                                                          <a data-toggle="modal" data-target="#modal-danger2" class="btn btn-danger">Gagal</a>
                                                       @endif
