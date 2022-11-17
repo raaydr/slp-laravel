@@ -1436,7 +1436,9 @@ class AdminController extends Controller
                         seleksiPertama::where('user_id', $user_id)->update(['checked' => 1]);
                         
                     }
-                    $penilaian_challenge = new Penilaian;
+
+                    if(!(penilaian::where('user_id',$user_id)->exists())){
+                        $penilaian_challenge = new Penilaian;
                         $penilaian_challenge->user_id = $user_id;
                         $penilaian_challenge->nama = $nama;
                         $penilaian_challenge->writing = 0;
@@ -1447,6 +1449,8 @@ class AdminController extends Controller
                         $penilaian_challenge->point = 0;
                         $penilaian_challenge->gen = $gen;
                         $penilaian_challenge->save();
+                    }
+                    
                     }
                     
                 break;
