@@ -1693,7 +1693,7 @@ class AdminController extends Controller
         }else{
 
             if ((Peserta::where('user_id', $user_id))->exists()){
-                Peserta::where('user_id', $user_id)->update(['aktif' => '4']);
+                Peserta::where('user_id', $user_id)->update(['aktif' => '1']);
             } else{
                 $data = User::where('id', $user_id)->first();
                 $biodata = Biodata::where('user_id', $user_id)->first();

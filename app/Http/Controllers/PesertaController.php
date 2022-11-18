@@ -71,11 +71,16 @@ class PesertaController extends Controller
         $grup = DB::table('peserta')
             ->where('user_id', $id)
             ->value('grup');
-        $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->orWhere('status',3)->where('grup',$grup)->value('user_id');
-        $fasil = Fasil::where('user_id', $fasil_id)->first();
-        $peserta = Peserta::where('grup',$grup)->get();
-        //dd($fasil);
-        return view('peserta.grup', compact('title', 'user','fasil','peserta'));
+        if($grup != NULL){
+
+            $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->orWhere('status',3)->where('grup',$grup)->value('user_id');
+            $fasil = Fasil::where('user_id', $fasil_id)->first();
+            $peserta = Peserta::where('grup',$grup)->get();
+            //dd($fasil);
+            return view('peserta.grup', compact('title', 'user','fasil','peserta'));
+        }else{
+            return redirect()->route('peserta.Pengumuman');
+        }
     }
 
     public function userProfile($user_id)
