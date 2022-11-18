@@ -73,7 +73,7 @@ class PesertaController extends Controller
             ->value('grup');
         if($grup != NULL){
 
-            $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->orWhere('status',3)->where('grup',$grup)->value('user_id');
+            $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->where('grup',$grup)->value('user_id');
             $fasil = Fasil::where('user_id', $fasil_id)->first();
             $peserta = Peserta::where('grup',$grup)->get();
             //dd($fasil);

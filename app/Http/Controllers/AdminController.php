@@ -1693,7 +1693,7 @@ class AdminController extends Controller
         }else{
 
             if ((Peserta::where('user_id', $user_id))->exists()){
-                Peserta::where('user_id', $user_id)->update(['aktif' => '1']);
+                Peserta::where('user_id', $user_id)->update(['aktif' => '4']);
             } else{
                 $data = User::where('id', $user_id)->first();
                 $biodata = Biodata::where('user_id', $user_id)->first();
@@ -1906,21 +1906,33 @@ class AdminController extends Controller
             ->where('nama', 'gen')
             ->value('integer');
         
-        DB::table('fasil')->where('user_id',$id)->update([
-                
-                'grup' => $request->grup,
-                'updated_at'=> now(),
-        ]);
+       
         if (FasilRecord::where('gen', $gen)->where('user_id', $id)->where('status', 1)->exists()) {
-            FasilRecord::where('user_id',$id)->update([
+            
+            if(FasilRecord::where('gen', $gen)->where('grup', $request->grup)->where('status', 1)->exists()){
+                return Redirect::back()->with('challenge','Tidak bisa ubah grup karena sudah ada');
+            }
+            else{
+                DB::table('fasil')->where('user_id',$id)->update([
+                
+                    'grup' => $request->grup,
+                    'updated_at'=> now(),
+                ]);
+                FasilRecord::where('user_id',$id)->update([
+                
+                    'grup' => $request->grup,
+                    'updated_at'=> now(),
+                    
+                ]);
+                return Redirect::back()->with('pesan','Operation Successful !');
+            }
+            
+        }else{
+            DB::table('fasil')->where('user_id',$id)->update([
                 
                 'grup' => $request->grup,
                 'updated_at'=> now(),
-                
             ]);
-            return Redirect::back()->with('pesan','Operation Successful !');
-        }else{
-
             $record = new FasilRecord;
         $record->nama = $request->nama;
         $record->status =  1;
