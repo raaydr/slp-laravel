@@ -47,7 +47,7 @@ class LaporanController extends Controller
         $gen = DB::table('control')
             ->where('nama', 'gen')
             ->value('integer');
-        $data = Laporan::where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $data = Laporan::where('status', 1)->orderBy('created_at', 'DESC')->get();
             if($request->ajax()){
     
                 return datatables()->of($data)

@@ -726,6 +726,8 @@
                myDropzone.processFile(acceptedFiles[i])
             }, i * 2000)
             }
+            
+            
          });
 </script>
 @endsection
