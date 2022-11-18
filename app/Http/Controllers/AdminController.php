@@ -1909,7 +1909,7 @@ class AdminController extends Controller
        
         if (FasilRecord::where('gen', $gen)->where('user_id', $id)->where('status', 1)->exists()) {
             
-            if(FasilRecord::where('gen', $gen)->where('grup', $request->grup)->where('status', 1)->exists()){
+            if(FasilRecord::where('gen', $gen)->where('grup', $request->grup)->where('status', 1)->orWhere('status', 3)->exists()){
                 return Redirect::back()->with('challenge','Tidak bisa ubah grup karena sudah ada');
             }
             else{
@@ -2683,7 +2683,7 @@ class AdminController extends Controller
                 for ($i = 0; $i <= $jumlah_data-1; $i++) {                
                     $id = $data[$i]['id'];
                     FasilRecord::where('id', $id)->update([
-                
+                        // 1 = aktive, 2 = berhenti, 3 = selesai
                         'status' => 3,
                         'akhir'=> now(),
                         'updated_at'=> now(),
