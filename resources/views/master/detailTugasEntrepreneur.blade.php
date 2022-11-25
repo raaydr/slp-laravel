@@ -133,7 +133,7 @@
                                           @else
                                              <div class="card card-primary">
                                                 <div class="card-header">
-                                                   <h4 class="card-title">File Speaking</h4>
+                                                   <h4 class="card-title">Bukti Entrepreneur</h4>
                                                 </div>
                                                 <div class="card-body">
                                                    <div class="row">
