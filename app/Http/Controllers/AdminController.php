@@ -15,6 +15,9 @@ use App\Models\FasilRecord;
 use App\Models\Quest;
 use App\Models\Target;
 use App\Models\Interview;
+use App\Models\Laporan;
+use App\Models\Absensi;
+use App\Models\Dokumentasi;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -539,7 +542,10 @@ class AdminController extends Controller
         $title = 'Admin User Profile';
         
         $user = User::where('id', $user_id)->first();
-       
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
+        
         
         if ((Penilaian::where('user_id', $user_id))->exists()){
             $penjualan = Penilaian::where('user_id', $user_id)->value('penjualan');
@@ -548,8 +554,37 @@ class AdminController extends Controller
             $penjualan = 0;
         }
         
+        $data = Laporan::where('status', 1)->where('gen', $gen)->orderBy('created_at', 'ASC')->get();
+        $kegiatan =[];
+        $jumlah_data = count($data);
+    
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {                
+                $laporan_id = $data[$i]['id'];
+                $tanggal_kegiatan = $data[$i]['tanggal_kegiatan'];
+                $tanggal_kegiatan=Carbon::parse($tanggal_kegiatan)->isoFormat('D MMMM Y');
+                $kehadiran = Absensi::where('laporan_id', $laporan_id)->where('user_id', $user_id)->value('absen');
+                switch ($kehadiran) {
+                    case '0':
+                        $laporan['absen'] = "Belum Hadir";
+                        break;
+                    case '1':
+                        $laporan['absen'] = "Hadir";
+                        break;
+                    case '2':
+                        $laporan['absen'] = "Tidak Hadir";
+                        break;                               
+                }
+                $note = Absensi::where('laporan_id', $laporan_id)->where('user_id', $user_id)->value('note');
+                $laporan['note'] = $note;
+                $laporan['judul']=$data[$i]['judul'];
+                $laporan['tanggal_kegiatan']=$tanggal_kegiatan;
+                $kegiatan[$i] = $laporan;
+
+                
+            }
+
         
-        return view('admin.userProfile', compact('title', 'user','penjualan'));
+        return view('admin.userProfile', compact('title', 'user','penjualan','kegiatan'));
     }
     public function edit_biodata($user_id)
     {
