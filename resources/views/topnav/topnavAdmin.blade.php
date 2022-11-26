@@ -128,7 +128,7 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('template')}}/dist/js/demo.js"></script>
       <script src="{{asset('iziToast')}}/dist/js/iziToast.min.js" crossorigin="anonymous"></script>
-      <script src="{{asset('jquery-validation')}}/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
-      <script src="{{asset('jquery-validation')}}/dist/additional-methods.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/jquery.validate.min.js" crossorigin="anonymous"></script>
+      <script src="{{asset('jquery-validation')}}/additional-methods.min.js" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
       @yield('script') 
