@@ -54,6 +54,14 @@
                      {{session('pesan')}}.
                   </div>
                   @endif
+                  @if($errors->any())
+                  <div class="alert alert-danger alert-dismissable">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <h4><i class="icon fa fa-danger"></i>Error</h4>
+                     {!! implode('', $errors->all('<div>:message</div>')) !!}
+                  </div>
+                  @endif
+                  
                   <div class="col-md-12">
                      <!-- general form elements -->
                      

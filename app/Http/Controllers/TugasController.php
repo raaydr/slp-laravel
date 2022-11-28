@@ -53,15 +53,16 @@ class TugasController extends Controller
             $messages = [
                 'judul.required' => 'judul tidak boleh kosong!',
                 'keterangan.required' => 'awalan tidak boleh kosong!',
+
+                'url_file.mimes' => 'format file salah',
+                'url_file.max' => 'file maksimal 10mb',
                 
                 
             ]
         );
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            return back()->withErrors($validator)->withInput();
         }
         $user_id = Auth::user()->id;
 
@@ -476,8 +477,8 @@ class TugasController extends Controller
         );
 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->with('error','Format harus jpg,jpeg,png, pdf dan maksimal size file 5 mb');
-            //return back()->withErrors($validator)->withInput();
+            
+            return back()->withErrors($validator)->withInput();
         }
        
         $user_id = Auth::user()->id;
