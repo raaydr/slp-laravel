@@ -475,6 +475,8 @@ Route::group(['middleware' => 'check-permission:pendaftar'], function () {
 
     //pengumuman
     Route::get('/Pengumuman', 'PengumumanController@Pengumuman')->name('pendaftar.pengumuman');
+    Route::get('/ubah-password', 'PendaftarController@ubah_password')->name('pendaftar.ubah.password');
+    Route::post('/change-password', 'PendaftarController@change_password')->name('pendaftar.change.password');
 	});
 });
 Route::group(['middleware' => 'check-permission:pendaftar'], function () {

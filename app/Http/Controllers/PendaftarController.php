@@ -14,6 +14,7 @@ use App\Models\Interview;
 use App\Models\Jadwal;
 use App\Models\Challenge;
 use Illuminate\Support\Facades\Input;
+use App\Rules\MatchOldPassword;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -586,5 +587,38 @@ class PendaftarController extends Controller
 
         
         return redirect()->route('pendaftar.ranking.challenge')->with('pesan', 'Berhasil upload');
+    }
+
+    public function ubah_password(){
+        $title = 'peserta ubah password';
+        $id = Auth::user()->id;
+        $biodata = DB::table('biodata')
+        ->where('user_id', $id)
+        ->first();
+
+        return view('user.ubahpassword', compact('title','biodata'));
+    }
+    public function change_password(Request $request)
+
+    {
+
+        $request->validate([
+
+            'current_password' => ['required', new MatchOldPassword],
+
+            'new_password' => ['required'],
+
+            'new_confirm_password' => ['same:new_password'],
+
+        ]);
+
+   
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+   
+        return redirect()->route('pendaftar.ubah.password')->with('berhasil', 'berhasil ubah password');
+        
+
     }
 }
