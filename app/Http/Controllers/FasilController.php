@@ -5,6 +5,11 @@ use App\Models\User;
 use App\Models\Fasil;
 use App\Models\Quest;
 use App\Models\Peserta;
+use App\Models\Penilaian;
+use App\Models\Interview;
+use App\Models\Laporan;
+use App\Models\Absensi;
+
 use Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Providers\RouteServiceProvider;
@@ -19,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Carbon\Carbon;
 
 class FasilController extends Controller
 {
@@ -393,45 +399,51 @@ class FasilController extends Controller
     public function pesertaProfil($user_id)
     {
         $title = 'Peserta Profile';
-        $id = Crypt::decrypt($user_id);  
-        $user = User::where('id', $id)->first();
-        $quest = DB::table('control')
-            ->where('id', 2)
-            ->value('integer');
-        $video_challenge = 0;
-        $writing_challenge = 0;
-        $business_challenge = 0;
-        $hasil_business = 0;
-        $record = Quest::where('user_id', $id)->where('status', 1)->get();
-        $daily_quest = Quest::where('user_id', $id)->get();
-        $jumlah=count($record);
-        for ($i = 0; $i <= $jumlah-1; $i++) {
-            $v = $record[$i]['video_check'];
-            if($v==1){
-                $video_challenge = $video_challenge + $v;
-            }
-            $w = $record[$i]['writing_check'];
-            if($w==1){
-                $writing_challenge = $writing_challenge + $w;
-            }
-            $b = $record[$i]['business_check'];
-            if($b==1){
-                $business_challenge = $business_challenge + $b;
-                $h = $record[$i]['hasil'];
-                $hasil_business = $hasil_business + $h;
-            }
-            
-            
-
-          }
-        $rate_video = ($video_challenge / $quest) *100;
-        $rate_writing = ($writing_challenge / $quest) *100;
-        $rate_business = ($business_challenge / $quest) *100;
-        $rate_hasil = ($hasil_business / 2000000) *100;
-      
+        $user_id = Crypt::decrypt($user_id);  
+        $user = User::where('id', $user_id)->first();
+        $gen = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
         
-        return view('fasil.pesertaProfile', compact('title', 'user','daily_quest','quest','rate_video', 'rate_writing', 'rate_business', 'rate_hasil', 
-        'video_challenge', 'writing_challenge', 'business_challenge', 'hasil_business'));
+        
+        if ((Penilaian::where('user_id', $user_id))->exists()){
+            $penjualan = Penilaian::where('user_id', $user_id)->value('penjualan');
+            
+        }else {
+            $penjualan = 0;
+        }
+        
+        $data = Laporan::where('status', 1)->where('gen', $gen)->orderBy('created_at', 'ASC')->get();
+        $kegiatan =[];
+        $jumlah_data = count($data);
+    
+            for ($i = 0; $i <= $jumlah_data-1; $i++) {                
+                $laporan_id = $data[$i]['id'];
+                $tanggal_kegiatan = $data[$i]['tanggal_kegiatan'];
+                $tanggal_kegiatan=Carbon::parse($tanggal_kegiatan)->isoFormat('D MMMM Y');
+                $kehadiran = Absensi::where('laporan_id', $laporan_id)->where('user_id', $user_id)->value('absen');
+                switch ($kehadiran) {
+                    case '0':
+                        $laporan['absen'] = "Belum Hadir";
+                        break;
+                    case '1':
+                        $laporan['absen'] = "Hadir";
+                        break;
+                    case '2':
+                        $laporan['absen'] = "Tidak Hadir";
+                        break;                               
+                }
+                $note = Absensi::where('laporan_id', $laporan_id)->where('user_id', $user_id)->value('note');
+                $laporan['note'] = $note;
+                $laporan['judul']=$data[$i]['judul'];
+                $laporan['tanggal_kegiatan']=$tanggal_kegiatan;
+                $kegiatan[$i] = $laporan;
+
+                
+            }
+
+        
+        return view('fasil.pesertaProfile', compact('title', 'user','penjualan','kegiatan'));
     }
     
     public function grup_peserta(Request $request)
