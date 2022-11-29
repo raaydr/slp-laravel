@@ -99,23 +99,84 @@ class AdminController extends Controller
         ->value('integer');
         $users = User::where('gen', $gen)->whereBetween('level', [1,2])->get();
         $jumlah=count($users);
-        $Pria = 0;
-        $Wanita = 0;
-        $childboy=0;$oldman=0;$dewasaman=0;$meanman=0;$meanrataman=0;
-        $childgirl=0;$oldwoman=0;$dewasawoman=0;$meanwoman=0;$meanratawoman=0;
-        $child=0;$old=0;$dewasa=0;$mean=0;$meanrata=0;
-        $domJak=0;$domBog=0;$domDep=0;$domTang=0;$domBek=0;$domLain=0;
-        $domJakman=0;$domBogman=0;$domDepman=0;$domTangman=0;$domBekman=0;$domLainman=0;
-        $domJakwoman=0;$domBogwoman=0;$domDepwoman=0;$domTangwoman=0;$domBekwoman=0;$domLainwoman=0;
-        $mahasiswa=0;$karyawan=0;$pengusaha=0;$pelajar=0;$lainnya=0;
-        $mahasiswaman=0;$karyawanman=0;$pengusahaman=0;$pelajarman=0;$lainnyaman=0;
-        $mahasiswawoman=0;$karyawanwoman=0;$pengusahawoman=0;$pelajarwoman=0;$lainnyawoman=0;
-        $writing=0;$speaking=0;
-        $writingman=0;$speakingman=0;
-        $writingwoman=0;$speakingwoman=0;
-        $berkas=0;$pertama=0;$kedua=0;
-        $berkasman=0;$pertamaman=0;$keduaman=0;
-        $berkaswoman=0;$pertamawoman=0;$keduawoman=0;
+
+        $Pria = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('jenis_kelamin', 'Pria')->get();
+        $Pria=count($Pria);
+
+        $Wanita = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('jenis_kelamin', 'Wanita')->get();
+        $Wanita=count($Wanita);
+
+        $domJak = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Jakarta')->get();
+        $domJak=count($domJak);
+
+        $domBog = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Bogor')->get();
+        $domBog=count($domBog);
+
+        $domDep = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Depok')->get();
+        $domDep=count($domDep);
+
+        $domTang = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Tangerang')->get();
+        $domTang=count($domTang);
+
+        $domBek = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Bekasi')->get();
+        $domBek=count($domBek);
+
+        $domLain = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('domisili', 'Lainnya')->get();
+        $domLain=count($domLain);
+
+        $mahasiswa = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('aktivitas', 'Mahasiswa')->get();
+        $mahasiswa=count($mahasiswa);
+
+        $karyawan = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('aktivitas', 'Karyawan')->get();
+        $karyawan=count($karyawan);
+
+        $pengusaha = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('aktivitas', 'Pengusaha')->get();
+        $pengusaha=count($pengusaha);
+
+        $pelajar = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('aktivitas', 'Pelajar')->get();
+        $pelajar=count($pelajar);
+
+        $lainnya = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('aktivitas', 'Yang lain')->get();
+        $lainnya=count($lainnya);
+
+        
+
+        $writing = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('minatprogram', 'Creative Writing')->get();
+        $writing=count($writing);
+
+        $speaking = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('minatprogram', 'Public Speaking')->get();
+        $speaking=count($speaking);
+
+        $berkas = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('seleksi_berkas', 'LULUS')->get();
+        $berkas=count($berkas);
+
+        $pertama = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('seleksi_pertama', 'LOLOS')->get();
+        $pertama=count($pertama);
+
+        $kedua = User::where('gen',$gen)->join('biodata', 'biodata.user_id', '=', 'users.id')
+        ->whereBetween('level', [1,2])->where('seleksi_kedua', 'BERHASIL')->get();
+        $kedua=count($kedua);
+    
+        $old =0;
+        $child=0;
+        $dewasa=0;
         for ($i = 0; $i <= $jumlah-1; $i++) {
             $user_id = $users[$i]['id'];
             $biodata = Biodata::where('user_id', $user_id)->first();
@@ -125,233 +186,24 @@ class AdminController extends Controller
             $now = new DateTime();
             $interval = $now->diff($date);
             $umur= $interval->y;
-            $mean= $mean + $umur;
+            
             $gender = $biodata->jenis_kelamin;
-            if ($gender == "Pria"){
-                $Pria++;
-                $dom = $biodata->domisili;
-                switch ($dom) {
-                    case 'Jakarta':
-                        $domJak++;
-                        $domJakman++;
-                        break;
-                    case 'Bogor':
-                        $domBog++;
-                        $domBogman++;
-                        break;   
-                    case 'Depok':
-                        $domDep++;
-                        $domDepman++;
-                        break;   
-                    case 'Tangerang':
-                        $domTang++;
-                        $domTangman++;
-                        break;
-                    case 'Bekasi':
-                        $domBek++;
-                        $domBekman++;
-                        break;   
-                    case 'Lainnya':
-                        $domLain++;
-                        $domLainman++;
-                        break;      
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $aktivitas = $biodata->aktivitas;
-                switch ($aktivitas) {
-                    case 'Mahasiswa':
-                        $mahasiswa++;
-                        $mahasiswaman++;
-                        break;
-                    case 'Karyawan':
-                        $karyawan++;
-                        $karyawanman++;
-                        break;   
-                    case 'Pengusaha':
-                        $pengusaha++;
-                        $pengusahaman++;
-                        break;   
-                    case 'Pelajar':
-                        $pelajar++;
-                        $pelajarman++;
-                        break;
-                    case 'Yang lain':
-                        $lainnya++;
-                        $lainnyaman++;
-                        break;                         
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $minat = $biodata->minatprogram;
-                switch ($minat) {
-                    case 'Creative Writing':
-                        $writing++;
-                        $writingman++;
-                        break;
-                    case 'Public Speaking':
-                        $speaking++;
-                        $speakingman++;
-                        break;                    
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $seleksi_berkas = $biodata->seleksi_berkas;
-                if($seleksi_berkas == "LULUS"){
-                    $berkas++;
-                    $berkasman++;
-                }
-                $seleksi_pertama = $biodata->seleksi_pertama;
-                if($seleksi_pertama == "LOLOS"){
-                    $pertama++;
-                    $pertamaman++;
-                }
-                $seleksi_kedua = $biodata->seleksi_kedua;
-                if($seleksi_kedua == "BERHASIL"){
-                    $kedua++;
-                    $keduaman++;
-                }
                 if($umur < 17){
-                    $childboy++;
                     $child++;
                 }else if($umur>22){
-                    $oldman++;
                     $old++;
                 }else{
-                    $dewasaman++;
                     $dewasa++;
                 }
-                $meanman = $meanman + $umur;
-            }else{
-                $Wanita++;
-                $dom = $biodata->domisili;
-                switch ($dom) {
-                    case 'Jakarta':
-                        $domJak++;
-                        $domJakwoman++;
-                        break;
-                    case 'Bogor':
-                        $domBog++;
-                        $domBogwoman++;
-                        break;   
-                    case 'Depok':
-                        $domDep++;
-                        $domDepwoman++;
-                        break;   
-                    case 'Tangerang':
-                        $domTang++;
-                        $domTangwoman++;
-                        break;
-                    case 'Bekasi':
-                        $domBek++;
-                        $domBekwoman++;
-                        break;   
-                    case 'Lainnya':
-                        $domLain++;
-                        $domLainwoman++;
-                        break;      
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $aktivitas = $biodata->aktivitas;
-                switch ($aktivitas) {
-                    case 'Mahasiswa':
-                        $mahasiswa++;
-                        $mahasiswawoman++;
-                        break;
-                    case 'Karyawan':
-                        $karyawan++;
-                        $mahasiswawoman++;
-                        break;   
-                    case 'Pengusaha':
-                        $pengusaha++;
-                        $pengusahawoman++;
-                        break;   
-                    case 'Pelajar':
-                        $pelajar++;
-                        $pelajarwoman++;
-                        break;
-                    case 'Yang lain':
-                        $lainnya++;
-                        $lainnyawoman++;
-                        break;                         
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $minat = $biodata->minatprogram;
-                switch ($minat) {
-                    case 'Creative Writing':
-                        $writing++;
-                        $writingwoman++;
-                        break;
-                    case 'Public Speaking':
-                        $speaking++;
-                        $speakingwoman++;
-                        break;                    
-                        default:
-                        echo "SLP INDONESIA";
-                        break;
-                }
-                $seleksi_berkas = $biodata->seleksi_berkas;
-                if($seleksi_berkas == "LULUS"){
-                    $berkas++;
-                    $berkaswoman++;
-                }
-                $seleksi_pertama = $biodata->seleksi_pertama;
-                if($seleksi_pertama == "LOLOS"){
-                    $pertama++;
-                    $pertamawoman++;
-                }
-                $seleksi_kedua = $biodata->seleksi_kedua;
-                if($seleksi_kedua == "BERHASIL"){
-                    $kedua++;
-                    $keduawoman++;
-                }
-                if($umur < 17){
-                    $childgirl++;
-                    $child++;
-                }else if($umur>22){
-                    $oldwoman++;
-                    $old++;
-                }else{
-                    $dewasawoman++;
-                    $dewasa++;
-                }
-                $meanwoman = $meanwoman + $umur;
+             
             }
-            
-            
-        }
-        if ($jumlah != 0){$meanrata = $mean / $jumlah ;}
-        if ($Pria != 0){$meanrataman = $meanman / $Pria ;}
-        if ($Wanita != 0){$meanratawoman = $meanwoman / $Wanita ;}
-        
-        
-        
         $informasi = array("pendaftar"=>$jumlah,"Pria"=>$Pria, "Wanita"=>$Wanita,
-        "child"=>$child,"old"=>$old,"dewasa"=>$dewasa,"meanrata"=>$meanrata,
-        "childboy"=>$childboy,"oldman"=>$oldman,"dewasaman"=>$dewasaman,"meanrataman"=>$meanrataman,
-        "childgirl"=>$childgirl,"oldwoman"=>$oldwoman,"dewasawoman"=>$dewasawoman,"meanratawoman"=>$meanratawoman, 
+        "child"=>$child,"old"=>$old,"dewasa"=>$dewasa,
         "domJak"=>$domJak,"domBog"=>$domBog,"domDep"=>$domDep,"domTang"=>$domTang,
         "domBek"=>$domBek,"domLain"=>$domLain,
-        "domJakman"=>$domJakman,"domBogman"=>$domBogman,"domDepman"=>$domDepman,"domTangman"=>$domTangman,
-        "domBekman"=>$domBekman,"domLainman"=>$domLainman,
-        "domJakwoman"=>$domJakwoman,"domBogwoman"=>$domBogwoman,"domDepwoman"=>$domDepwoman,"domTangwoman"=>$domTangwoman,
-        "domBekwoman"=>$domBekwoman,"domLainwoman"=>$domLainwoman,
         "mahasiswa"=>$mahasiswa,"karyawan"=>$karyawan,"pengusaha"=>$pengusaha,"pelajar"=>$pelajar,"lainnya"=>$lainnya,
-        "mahasiswaman"=>$mahasiswaman,"karyawanman"=>$karyawanman,"pengusahaman"=>$pengusahaman,"pelajarman"=>$pelajarman,"lainnyaman"=>$lainnyaman,
-        "mahasiswawoman"=>$mahasiswawoman,"karyawanwoman"=>$karyawanwoman,"pengusahawoman"=>$pengusahawoman,"pelajarwoman"=>$pelajarwoman,"lainnyawoman"=>$lainnyawoman,
         "writing"=>$writing,"speaking"=>$speaking,
-        "writingman"=>$writingman,"speakingman"=>$speakingman,
-        "writingwoman"=>$writingwoman,"speakingwoman"=>$speakingwoman,
-        "berkas"=>$berkas,"pertama"=>$pertama,"kedua"=>$kedua,
-        "berkasman"=>$berkasman,"pertamaman"=>$pertamaman,"keduaman"=>$keduaman,
-        "berkaswoman"=>$berkaswoman,"pertamawoman"=>$pertamawoman,"keduawoman"=>$keduawoman,);
+        "berkas"=>$berkas,"pertama"=>$pertama,"kedua"=>$kedua,);
         //return dd($informasi);
         return view('admin.informasiPendaftar', compact('title', 'users','informasi'));
     }
