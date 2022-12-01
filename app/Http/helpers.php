@@ -1,8 +1,16 @@
 <?php
-
+use App\Providers\RouteServiceProvider;
 
   function checkPermission($permissions){
-    $userAccess = getMyPermission(auth()->user()->level);
+
+    if (!empty($_SESSION['blah'])){
+      // do some thing if the key is exist
+      $userAccess = getMyPermission(auth()->user()->level);
+    }else{
+      //the key does not exist in the session
+      return redirect()->route('login');
+    }
+    
     foreach ($permissions as $key => $value) {
       if($value == $userAccess){
         return true;

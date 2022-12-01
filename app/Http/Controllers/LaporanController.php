@@ -507,9 +507,9 @@ class LaporanController extends Controller
                     $assetThumbnail= "/dokumentasi-kegiatan-thumbnail/";
                     $thumbnail=  $assetThumbnail.$c;
                     $id = $row->id;
-                    $image = '<a href='.$detail.' data-toggle="lightbox" data-title='.$a.'>
+                    $image = '<div class="col-md-2"><a href='.$detail.' data-toggle="lightbox" data-title='.$a.'>
                     <img src='.$thumbnail.' class="img-fluid" alt="white sample"/>
-                    </a>';
+                    </a></div>';
                     
                         return $image;
                 })

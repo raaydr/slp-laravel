@@ -103,13 +103,13 @@
                         @foreach($seleksiPertama as $control)
                         <div class="card card-primary">
                            <div class="card-header">
-                              <h3 class="card-title">Tahap Challenge</h3>
+                              <h3 class="card-title">Seleksi Pertama</h3>
                            </div>
                            <div class="card-body">
                               <form method="POST" action="{{ route('admin.ubah.challenge') }}" enctype="multipart/form-data">
                                  {{csrf_field()}}
                                  <div class="form-group row">
-                                    <label for="seleksiPertama" class="col-md-4 col-form-label text-md-right">{{ __('Tahap Challenge') }}</label>
+                                    <label for="seleksiPertama" class="col-md-4 col-form-label text-md-right">{{ __('Seleksi Pertama') }}</label>
                                     <div class="col-md-7">
                                        <div class="custom-control custom-radio custom-control-inline mt-2">
                                           <input type="radio" id="customRadioInline5" name="seleksiPertama" class="custom-control-input" value="1" {{ ($control->boolean== True)? "checked" : "" }}>

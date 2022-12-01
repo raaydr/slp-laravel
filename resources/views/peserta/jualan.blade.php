@@ -38,7 +38,7 @@
                            @csrf
                            <div class="card-body">
                               <div class="form-group row">
-                                 <label for="link" class="col-md-4 col-form-label text-md-right">{{ __('Link WA') }}</label>
+                                 <label for="link" class="col-md-4 col-form-label text-md-right">{{ __('Nomor WA') }}</label>
                                  <div class="col-md-6">
                                     <input id="link" type="text" class="form-control" name="link" value="{{ old('link') }}" required autofocus />
                                     @if ($errors->has('link'))

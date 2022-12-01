@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
+      <title>Laporan Kegiatan SLP</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
    </head>
    <body>
@@ -405,7 +405,7 @@
                 <thead>
                     <tr>
                     <th>No</th>
-                    <th>Judul</th>
+                    <th>Keterangan</th>
                     <th>Pengeluaran</th>
                     <th>Bukti</th>
                     
@@ -416,7 +416,7 @@
                     @foreach($pembayaran as $p)
                     <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{$p->judul}}</td>
+                    <td><?php echo $p->keterangan;?></td>
                     <td>Rp. {{$p->pembayaran}}</td>
                     <td><img width="400"  src="{{ public_path() . $p->url_foto }}"></td>
                     
