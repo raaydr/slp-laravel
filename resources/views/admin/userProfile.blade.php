@@ -269,6 +269,98 @@
                      @endif
                      @if (empty($user->Peserta))
                      <div class="active tab-pane" id="Pertama">
+                     
+                        <!-- Post -->
+                        <div class="post">
+                           <div class="user-block">
+                              <span class="username">
+                              <a href="#">Alasan Beasiswa</a>
+                              </span>
+                           </div>
+                           <!-- /.user-block -->
+                           <p>
+                              {{$user->Biodata->alasanbeasiswa}}
+                           </p>
+                        </div>
+                        <!-- /.post -->
+                        <!-- Post -->
+                        <div class="post">
+                           <div class="user-block">
+                              <span class="username">
+                              <a href="#">5 Kelebihan</a>
+                              </span>
+                           </div>
+                           <!-- /.user-block -->
+                           <p>
+                              {{$user->Biodata->five_pros}}
+                           </p>
+                        </div>
+                        <!-- /.post -->
+                        <!-- Post -->
+                        <div class="post">
+                           <div class="user-block">
+                              <span class="username">
+                              <a href="#">5 Kekurangan</a>
+                              </span>
+                           </div>
+                           <!-- /.user-block -->
+                           <p>
+                              {{$user->Biodata->five_cons}}
+                           </p>
+                        </div>
+                        <!-- /.post -->
+                        <div class="input-group-append">
+                           @if ( (empty($user->Biodata->seleksi_pertama)))
+                           <a data-toggle="modal" data-target="#modal-primary" class="btn btn-primary m-2">Lulus</a>
+                           <a data-toggle="modal" data-target="#modal-danger" class="btn btn-danger m-2">Gagal</a>
+                           @endif
+                        </div>
+                        <div class="modal fade" id="modal-primary">
+                           <div class="modal-dialog">
+                              <div class="modal-content bg-primary">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p>Anda yakin ingin meloloskan peserta ?</p>
+                                 </div>
+                                 <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                    <a href="{{ route('admin.seleksi1.lulus', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Lulus</a>
+                                 </div>
+                              </div>
+                              <!-- /.modal-content -->
+                           </div>
+                           <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <div class="modal fade" id="modal-danger">
+                           <div class="modal-dialog">
+                              <div class="modal-content bg-danger">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title">Tahap Seleksi Berkas</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p>Anda yakin ingin mengeliminasi peserta ?</p>
+                                 </div>
+                                 <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                    <a href="{{ route('admin.seleksi1.gagal', $user->Biodata->user_id) }}" type="button" class="btn btn-outline-light">Gagal</a>
+                                 </div>
+                              </div>
+                              <!-- /.modal-content -->
+                           </div>
+                           <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                     </div>
+                     <!-- /.tab-pane -->
                      @else
                      <div class="tab-pane" id="Pertama">
                         <!-- Post -->

@@ -274,7 +274,9 @@ class AlurPendaftaranController extends Controller
     
 
         $benefit = new Benefit;
-        $benefit->manfaat = $request->manfaat;
+        $pattern = '/"/i';
+        $manfaat= preg_replace($pattern, '-', $request->manfaat);
+        $benefit->manfaat = $manfaat;
         $benefit->status = 1;
         $benefit->save();
 
@@ -397,7 +399,9 @@ class AlurPendaftaranController extends Controller
     
 
         $persyaratan = new Persyaratan;
-        $persyaratan->syarat = $request->syarat;
+        $pattern = '/"/i';
+        $syarat= preg_replace($pattern, '-', $request->syarat);
+        $persyaratan->syarat = $syarat;
         $persyaratan->status = 1;
         $persyaratan->save();
 
