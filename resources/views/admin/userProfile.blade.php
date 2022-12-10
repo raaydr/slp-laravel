@@ -216,7 +216,7 @@
                   </div>
                   @endif
                   <ul class="nav nav-pills">
-                     @if (!empty($user->Peserta))
+                  @if ($kegiatan != null)
                      <li class="nav-item"><a class="nav-link active" href="#Zero" data-toggle="tab">Dashboard</a></li>
                      <li class="nav-item"><a class="nav-link" href="#Pertama" data-toggle="tab">Seleksi Berkas</a></li>
                      @else
@@ -233,7 +233,7 @@
                <!-- /.card-header -->
                <div class="card-body">
                   <div class="tab-content">
-                     @if (!empty($user->Peserta))
+                     @if ($kegiatan != null)
                      <div class="tab-pane active" id="Zero">
                         <!-- The timeline -->
                         <div class="timeline timeline-inverse">
@@ -267,7 +267,7 @@
                      </div>
                      <!-- /.tab-pane -->
                      @endif
-                     @if (empty($user->Peserta))
+                     @if ($kegiatan == null)
                      <div class="active tab-pane" id="Pertama">
                      
                         <!-- Post -->

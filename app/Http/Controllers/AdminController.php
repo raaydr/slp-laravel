@@ -397,7 +397,7 @@ class AdminController extends Controller
         $gen = DB::table('control')
         ->where('nama', 'gen')
         ->value('integer');
-        
+        $peserta = $user->level;
         
         if ((Penilaian::where('user_id', $user_id))->exists()){
             $penjualan = Penilaian::where('user_id', $user_id)->value('penjualan');
@@ -406,9 +406,12 @@ class AdminController extends Controller
             $penjualan = 0;
         }
         
-        $data = Laporan::where('status', 1)->where('gen', $gen)->orderBy('created_at', 'ASC')->get();
-        $kegiatan =[];
-        $jumlah_data = count($data);
+
+        if($peserta == 4){
+
+            $data = Laporan::where('status', 1)->where('gen', $gen)->orderBy('created_at', 'ASC')->get();
+            $kegiatan =[];
+            $jumlah_data = count($data);
     
             for ($i = 0; $i <= $jumlah_data-1; $i++) {                
                 $laporan_id = $data[$i]['id'];
@@ -434,8 +437,12 @@ class AdminController extends Controller
 
                 
             }
-
+        }else{
+            $kegiatan =[];    
+        }
         
+
+
         return view('admin.userProfile', compact('title', 'user','penjualan','kegiatan'));
     }
     public function edit_biodata($user_id)
@@ -2693,7 +2700,7 @@ class AdminController extends Controller
         ->where('nama', 'gen')
         ->value('integer');
         $data = User::join('biodata', 'biodata.user_id', '=', 'users.id')
-                    ->where('level', 2)->get();
+                    ->where('level', 2)->orWhere('level', 1)->get();
         if($request->ajax()){
 
             return datatables()->of($data)
