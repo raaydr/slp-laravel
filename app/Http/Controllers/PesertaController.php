@@ -75,7 +75,7 @@ class PesertaController extends Controller
 
             $fasil_id = FasilRecord::where('gen',$user->gen)->where('status',1)->where('grup',$grup)->value('user_id');
             $fasil = Fasil::where('user_id', $fasil_id)->first();
-            $peserta = Peserta::where('grup',$grup)->get();
+            $peserta = Peserta::where('gen',$user->gen)->where('grup',$grup)->get();
             //dd($fasil);
             return view('peserta.grup', compact('title', 'user','fasil','peserta'));
         }else{
