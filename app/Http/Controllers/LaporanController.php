@@ -154,7 +154,12 @@ class LaporanController extends Controller
 
         //Absensi
 
-        $peserta = User::where('gen', $laporan->gen)->where('level', 1)->orWhere('level', 4)->get();
+        $peserta = User::where('gen', $laporan->gen)
+        ->where(function($q) {
+            $q->where('level', 1)->orWhere('level', 4);
+
+        })
+        ->get();
         $jumlah_peserta = count($peserta);
         for ($i = 0; $i <= $jumlah_peserta - 1; $i++) {
             
