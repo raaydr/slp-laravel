@@ -176,6 +176,7 @@
                                  </div>
                               </div>
                               @endif
+                              @if ((Auth::user()->level) != 4)
                                  <div class="modal fade" id="modal-primary">
                                        <div class="modal-dialog">
                                           <div class="modal-content bg-primary">
@@ -264,7 +265,7 @@
                                     <!-- /.modal-dialog -->
                                  </div>
                                  <!-- /.modal -->
-
+                                 @endif
                            <!-- /.card-body -->
                            <div class="card-footer">
                               
