@@ -63,7 +63,7 @@ class HomeController extends Controller
                         }else{
                             $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
                             $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
-                            return view('user.gugur2', compact('title', 'user', 'ranking','nilai'));
+                            return view('user.gugur2', compact('title', 'user', 'ranking','nilai','biodata'));
                         }
                     } else {
                         return view('user.gugur', compact('title', 'user', 'biodata'));
