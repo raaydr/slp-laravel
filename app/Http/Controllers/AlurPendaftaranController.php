@@ -616,7 +616,7 @@ class AlurPendaftaranController extends Controller
         $jumlah_data = count($data);
         $min = $request->awal;
         $max = $request->akhir;
-
+        if($jumlah_data != 0){
             for ($i = 0; $i <= $jumlah_data-1; $i++) {
                 $awal = $data[$i]['awal'];
                 $akhir = $data[$i]['akhir'];
@@ -628,6 +628,10 @@ class AlurPendaftaranController extends Controller
                     $break = 1;
                 }                
             }
+        }else{
+            $break = 1;
+        }
+            
         
         $jadwal = New Jadwal;
         $jadwal->awal = $request->awal;

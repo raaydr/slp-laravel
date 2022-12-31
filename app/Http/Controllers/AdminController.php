@@ -67,10 +67,13 @@ class AdminController extends Controller
         $gen = DB::table('control')
             ->where('id', 4)
             ->get();
+        $gennow = DB::table('control')
+        ->where('nama', 'gen')
+        ->value('integer');
         $interview = DB::table('control')
             ->where('id', 5)
             ->get();
-        $antrian = Antrian::where('gen', 2)->max('antrian');            
+        $antrian = Antrian::where('gen', $gennow)->max('antrian');            
         if(Interview::where('id', 1)->exists()){
             $wawancara = Interview::where('id', 1)->first();
         }else{
