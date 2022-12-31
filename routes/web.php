@@ -25,16 +25,14 @@ Route::get('/program-beasiswa/post', function () {
 Route::get('/program-beasiswa/detail-blog/{judul}', 'LandingPageController@detailBlog')->name('detailBlog');
 Route::get('/program-beasiswa', 'LandingPageController@compro')->name('compro');
 Route::post('/program-beasiswa/load-blog', 'LandingPageController@load_data')->name('loadMoreData');
-Route::get('/home', function () {
-    return view('home');
-})->name('rumah');
+Route::get('/home', 'HomeController@index')->name('rumah');
 
     Route::group(['prefix' => 'pendaftar'], function () {
 	Route::post('/daftar-ulang', 'PendaftarController@daftarUlang')->name('register.ulang');
 
 	});
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/b', [App\Http\Controllers\PendaftarController::class, 'insertSeleksi1']);
 
 //Routes Toko
