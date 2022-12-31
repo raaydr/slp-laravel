@@ -5,7 +5,7 @@
                     <img src="{{asset('develop')}}/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 0.8;" />
                     <span class="brand-text font-weight-light">Pendaftar</span>
                 </a>
-
+@if( Auth::user()->level != 2 )
                 <!-- Sidebar -->
                 <div class="sidebar">
                     
@@ -109,4 +109,5 @@
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
+                @endif
             </aside>
