@@ -51,7 +51,7 @@ class AbsensiController extends Controller
         
         
         
-        return view('admin.DetailAbsensi', compact('laporan','tanggal_mulai','mulai','akhir'));
+        return view('admin.detailAbsensi', compact('laporan','tanggal_mulai','mulai','akhir'));
         
     }
     
