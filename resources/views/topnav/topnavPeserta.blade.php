@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{asset('template')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- Theme style -->
         @yield('head') 
+        <link rel="stylesheet" href="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.css">
         <link rel="stylesheet" href="{{asset('template')}}/dist/css/adminlte.min.css" />
         <script src="{{asset('jquery')}}/jquery.js"></script>
         
@@ -122,6 +123,7 @@
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
         <script src="{{asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+        <script src="{{asset('template')}}/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
         <!-- AdminLTE App -->
         <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
