@@ -1159,7 +1159,7 @@ class TugasController extends Controller
             $jumlah_tugas_clear=count($tugas_clear);
             $jumlah_tugas = Entrepreneur::where('user_id', $user_id)->where('valid', 1)->sum('profit');
             $sum = 0;
-            for ($i = 0; $i <= $jumlah_target-1; $i++) {
+            for ($i = 0; $i <= $jumlah_tugas_clear-1; $i++) {
                 $jumlah = $tugas_clear[$i]['profit'];
                 $sum = $sum + $jumlah;
             }
@@ -1172,7 +1172,7 @@ class TugasController extends Controller
                 $dalam['judul'] = $target[$i]['judul'];
                 $dalam['jumlah'] = number_format($target_profit, 0, '', '.');
     
-                if ($jumlah_tugas > $target_profit){
+                if ($jumlah_tugas >= $target_profit){
     
                     $dalam['target'] = 0;
                     $dalam['target_tercapai'] = 100;
@@ -1181,6 +1181,7 @@ class TugasController extends Controller
                     $jumlah_tugas = $jumlah_tugas - $target_profit;
                     number_format($jumlah_tugas, 0, '', '.');
                     $dalam['sisa_profit'] = $jumlah_tugas;
+                    $rapor[$i] = $dalam;
                 }else{
                     
     
@@ -1196,9 +1197,12 @@ class TugasController extends Controller
                     $dalam['target_tercapai'] = $a;
                     
                     $dalam['sisa_profit'] = 0;
+                    //$jumlah_tugas = $sisa;
+                    $rapor[$i] = $dalam;
+                    break;
                 }
                 
-                $rapor[$i] = $dalam;
+                
                 
             }
         }
