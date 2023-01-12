@@ -402,17 +402,25 @@ class TugasController extends Controller
             if($val == 2){
                 $file = Speaking::where('id', $tugas_id)->value('speaking');
                 $data = json_decode($file);
-                
-                foreach($data as $image)
-                {
-                    File::delete('speaking/' . $image);
+                if ($data != null){
+                    foreach($data as $image)
+                    {
+                        File::delete('speaking/' . $image);
+                    }
+                    Speaking::where('id',$tugas_id)->update([
+                        'speaking' => "kosong",
+                        'valid' => $val,
+                        'check_id' => $id,
+                        'updated_at'=> now(),
+                    ]);
+                }else{
+                    Speaking::where('id',$tugas_id)->update([
+                        'valid' => $val,
+                        'check_id' => $id,
+                        'updated_at'=> now(),
+                    ]);
                 }
-                Speaking::where('id',$tugas_id)->update([
-                    'speaking' => "kosong",
-                    'valid' => $val,
-                    'check_id' => $id,
-                    'updated_at'=> now(),
-                ]);
+                
             } else {
                 Speaking::where('id',$tugas_id)->update([    
                     'valid' => $val,
