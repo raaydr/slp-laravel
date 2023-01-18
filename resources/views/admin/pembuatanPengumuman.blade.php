@@ -81,7 +81,7 @@
                                     <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('keterangan') }}</label>
                                     <div class="col-md-6">
                                         <textarea id="summernote"  class="form-control{{ $errors->has('keterangan') ? ' is-invalid' : '' }}" name="keterangan"   required autofocus></textarea>
-                                            <small id="passwordHelpBlock" class="form-text text-sucess">Penjelasan pengumuman</small> 
+                                            <small id="passwordHelpBlock" class="form-text text-sucess">tolong hindari dari penggunaan " (petik 2)</small> 
                                             @if ($errors->has('keterangan'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('keterangan') }}</strong>
