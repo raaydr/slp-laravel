@@ -486,7 +486,7 @@ class PendaftarController extends Controller
         $biodata = DB::table('biodata')
             ->where('user_id', $id)
             ->first();
-        $ranking = Penilaian::where('total', '!=', 0)
+        $ranking = Penilaian::where('total', '!=', 0)->where('gen',$users->gen)
             ->orderBy('total', 'DESC')
             ->get();
         $nilai = DB::table('penilaian_challenge')

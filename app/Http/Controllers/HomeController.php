@@ -41,7 +41,7 @@ class HomeController extends Controller
             case '2':
                 $title = 'Calon Siswa Gugur';
                 $id =  Auth::user()->id;
-                $user = User::where('id', $id)->get();
+                $user = User::where('id', $id)->first();
                 $biodata = DB::table('biodata')->where('user_id', $id)->first();
                 $berkas = DB::table('biodata')->where('user_id', $id)->value('seleksi_berkas');
                 $pertama = DB::table('biodata')->where('user_id', $id)->value('seleksi_pertama');
@@ -61,7 +61,7 @@ class HomeController extends Controller
                         if($check == 0){
                             return view('user.gugur', compact('title', 'user', 'biodata'));
                         }else{
-                            $ranking = Penilaian::where('total','!=' , 0)->orderBy('total', 'DESC')->get();
+                            $ranking = Penilaian::where('total','!=' , 0)->where('gen',$user->gen)->orderBy('total', 'DESC')->get();
                             $nilai = DB::table('penilaian_challenge')->where('user_id', $id)->first();
                             return view('user.gugur2', compact('title', 'user', 'ranking','nilai','biodata'));
                         }
