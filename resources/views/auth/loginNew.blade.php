@@ -32,11 +32,11 @@
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('{{asset('login-form')}}/images/bg.jpg');">
-        @if(session()->has('success'))
-                        <div class="alert alert-success">{{ session()->get('success') }}</div>
-                    @endif
+        
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-30 p-b-54">
-				
+			@if(session()->has('success'))
+                        <div class="alert alert-success">{{ session()->get('success') }}</div>
+                    @endif		
 					<span class="login100-form-title p-b-49">
 						<img src="{{asset('login-form')}}/images/logo.png" class="img-fluid" width="150" alt="">
 					</span>
