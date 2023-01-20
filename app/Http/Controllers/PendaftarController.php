@@ -128,7 +128,7 @@ class PendaftarController extends Controller
 
     public function seleksiPertama(Request $request)
     {
-        $seleksi_1 = new seleksiPertama();
+        $seleksi_1 = new seleksiPertama;
 
         $validator = Validator::make(
             $request->all(),
@@ -243,7 +243,8 @@ class PendaftarController extends Controller
                 
             ]);
 
-        return redirect('pendaftar/seleksi-pertama')->with('pesan', 'Terima Kasih telah mengisi form Challenge');
+        return Redirect::back()->with('pesan','Terima Kasih telah mengisi form Challenge');
+        
     }
 
     public function daftarUlang(Request $request)
