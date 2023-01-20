@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Redirect;
 use Carbon\Carbon;
 
 class PendaftarController extends Controller
