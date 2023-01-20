@@ -216,33 +216,33 @@ class PendaftarController extends Controller
             $gambar->move($tujuanPath, $GambarName);
         }
 
-        DB::table('seleksiPertama')
-            ->where('user_id', $id)
-            ->update([
-                'url_cv' => $PDFName,
-                'url_writing' => $request->url_writing,
-                'url_video' => $request->url_video,
-                'url_Business' => $GambarName,
-                'mentoring' => $request->mentoring,
-                'mentoring_rutin' => $request->mentoring_rutin,
-                'futur' => $request->futur,
-                'faith' => $request->faith,
-                'ethic' => $request->ethic,
-                'question1' => $request->question1,
-                'question2' => $request->question2,
-                'question3' => $request->question3,
-                'question4' => $request->question4,
-                'organisasi' => $request->organisasi,
-                'aktif_organisasi' => $request->aktif_organisasi,
-                'question5' => $request->question5,
-                'question6' => $request->question6,
-                'entrepreneurship' => $request->entrepreneurship,
-                'alasan_wirausaha' => $request->alasan_wirausaha,
-                'pernah_wirausaha' => $request->pernah_wirausaha,
-                'exp_wirausaha' => $request->exp_wirausaha,
-                'omset' => $request->omset,
-                
-            ]);
+        $update['url_cv'] = $PDFName;
+        $update['url_writing'] = $request->url_writing;
+        $update['url_video'] =  $request->url_video;
+        $update['url_Business'] = $GambarName;
+        $update['mentoring'] = $request->mentoring;
+        $update['mentoring_rutin'] = $request->mentoring_rutin;
+        $update['futur'] = $request->futur;
+        $update['faith'] = $request->faith;
+        $update['ethic'] = $request->ethic;
+        $update['question1'] = $request->question1;
+        $update['question2'] = $request->question2;
+        $update['question3'] = $request->question3;
+        $update['question4'] = $request->question4;
+        $update['organisasi'] = $request->organisasi;
+        $update['aktif_organisasi'] = $request->aktif_organisasi;
+        $update['question5'] = $request->question5;
+        $update['question6'] = $request->question6;
+        $update['entrepreneurship'] = $request->entrepreneurship;
+        $update['alasan_wirausaha'] = $request->alasan_wirausaha;
+        $update['exp_wirausaha'] = $request->exp_wirausaha;
+        $update['pernah_wirausaha'] = $request->pernah_wirausaha;
+        $update['omset'] = $request->omset;
+
+        seleksiPertama::updateOrInsert(
+            ['user_id' => $id], $update
+        );
+        
 
         return Redirect::back()->with('pesan','Terima Kasih telah mengisi form Challenge');
         
