@@ -268,7 +268,7 @@
                                                     <a type="text" href="{{$seleksiPertama->url_video}}" target="_blank">{{$seleksiPertama->url_video}}</a>
                                                     <br />
                                                     <label for="exampleInputEmail1">Link Writing Challenge :</label>
-                                                    <a type="text" href="{{$seleksiPertama->url_Writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
+                                                    <a type="text" href="{{$seleksiPertama->url_writing}}" target="_blank">{{$seleksiPertama->url_writing}}</a>
                                                     <br />
                                                     <label for="exampleInputEmail1">Link Bussines Challenge :</label>
                                                     <a class="btn btn-success" href="{{asset('imgPembelian')}}/{{$seleksiPertama->url_Business}}" target="_blank">foto</a>
