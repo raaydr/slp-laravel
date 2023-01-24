@@ -792,19 +792,19 @@
                                        <div class="form-group row">
                                           <label for="inputName" class="col-sm-4 col-form-label">No Antrian</label>
                                           <div class="col-sm-8">
-                                             <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->antrian}}" readyonly/>
+                                             <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->antrian}}" readonly/>
                                           </div>
                                        </div>
                                        <div class="form-group row">
                                           <label for="inputEmail" class="col-sm-4 col-form-label">Absensi</label>
                                           <div class="col-sm-8">
-                                             <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{$user->Antrian->absen}}"  readyonly/>
+                                             <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{$user->Antrian->absen}}"  readonly/>
                                           </div>
                                        </div>
                                        <div class="form-group row">
                                           <label for="inputName" class="col-sm-4 col-form-label">Waktu</label>
                                           <div class="col-sm-8">
-                                             <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->updated_at}}" readyonly/>
+                                             <input type="email" class="form-control" id="inputName" value="{{$user->Antrian->updated_at}}" readonly/>
                                           </div>
                                        </div>
                                        @if(!empty($user->Kepribadian->url_kepribadian))
