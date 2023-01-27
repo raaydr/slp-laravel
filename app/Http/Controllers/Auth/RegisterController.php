@@ -170,34 +170,6 @@ class RegisterController extends Controller
         }
         $biodata->save();
         
-        $seleksiPertama = new seleksiPertama;
-            $seleksiPertama->user_id =  $user->id;
-            $seleksiPertama->url_cv = '#';
-            $seleksiPertama->url_writing = '#';
-            $seleksiPertama->url_video = '#';
-            $seleksiPertama->url_Business = '#';
-            $seleksiPertama->mentoring = 'Tolong diisi';
-            $seleksiPertama->mentoring_rutin = 'Tolong diisi';
-            $seleksiPertama->futur = 'Tolong diisi';
-            $seleksiPertama->faith = 'Tolong diisi';
-            $seleksiPertama->ethic = 'Tolong diisi';
-            $seleksiPertama->question1 = 'Tolong diisi';
-            $seleksiPertama->question2 = 'Tolong diisi';
-            $seleksiPertama->question3 = 'Tolong diisi';
-            $seleksiPertama->question4 = 'Tolong diisi';
-            $seleksiPertama->organisasi = 'Belum pernah';
-            $seleksiPertama->aktif_organisasi = 'Belum pernah';
-            $seleksiPertama->question5 = 'Tolong diisi';
-            $seleksiPertama->question6 = 'Tolong diisi';
-            $seleksiPertama->question7 = 'Tolong diisi';
-            $seleksiPertama->entrepreneurship = 'Tolong diisi';
-            $seleksiPertama->alasan_wirausaha = 'Tolong diisi';
-            $seleksiPertama->pernah_wirausaha = 'Belum pernah';
-            $seleksiPertama->exp_wirausaha = 'Belum pernah';
-            $seleksiPertama->omset = 'Tolong diisi';
-            $seleksiPertama->nama = $request->nama;
-            $seleksiPertama->checked = 0;
-            $seleksiPertama->save();
         
         return redirect('/login')->with('success', 'Registrasi Anda telah berhasil!. Silakan login dengan menggunakan email dan password Anda.');
     }
